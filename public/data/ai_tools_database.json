@@ -4,7 +4,7 @@
       "id": 394,
       "name": "百度AI探索版",
       "description": "百度推出的深度AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/28907.html",
+      "link": "https://think.baidu.com",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 123307,
@@ -21,7 +21,7 @@
       "id": 479,
       "name": "腾讯混元大模型",
       "description": "腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力",
-      "link": "https://ai-bot.cn/sites/4558.html",
+      "link": "https://hunyuan.tencent.com",
       "category": "AI训练模型",
       "popularity": {
         "views": 121360,
@@ -38,7 +38,7 @@
       "id": 387,
       "name": "SearchGPT",
       "description": "OpenAI最新推出的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/14609.html",
+      "link": "https://chatgpt.com",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 106756,
@@ -55,7 +55,7 @@
       "id": 435,
       "name": "阿里云百炼",
       "description": "一站式大模型开发与应用构建平台",
-      "link": "https://ai-bot.cn/sites/50019.html",
+      "link": "https://www.aliyun.com/product/bailian",
       "category": "AI开发平台",
       "popularity": {
         "views": 113075,
@@ -72,7 +72,7 @@
       "id": 219,
       "name": "Luca面壁露卡",
       "description": "面壁智能推出的千亿多模态大模型免费智能对话助手",
-      "link": "https://ai-bot.cn/sites/4362.html",
+      "link": "https://luca.cn",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 137018,
@@ -89,7 +89,7 @@
       "id": 242,
       "name": "通义灵码",
       "description": "阿里推出的免费AI编程工具，基于通义大模型",
-      "link": "https://ai-bot.cn/sites/5269.html",
+      "link": "https://tongyi.aliyun.com/lingma",
       "category": "AI编程工具",
       "popularity": {
         "views": 94075,
@@ -106,7 +106,7 @@
       "id": 315,
       "name": "魔力工作室",
       "description": "Canva可画推出的一站式AI创作套件",
-      "link": "https://ai-bot.cn/sites/15196.html",
+      "link": "https://www.canva.cn/magic",
       "category": "AI设计工具",
       "popularity": {
         "views": 85499,
@@ -123,7 +123,7 @@
       "id": 472,
       "name": "GPT-4o",
       "description": "OpenAI最新发布的多模态AI大模型，可自然流畅地进行语音对话",
-      "link": "https://ai-bot.cn/openai-gpt-4o/",
+      "link": "https://openai.com/index/hello-gpt-4o",
       "category": "AI训练模型",
       "popularity": {
         "views": 118869,
@@ -140,7 +140,7 @@
       "id": 129,
       "name": "remove.bg",
       "description": "强大的AI图片背景移除工具",
-      "link": "https://ai-bot.cn/sites/6.html",
+      "link": "https://www.remove.bg",
       "category": "AI图像工具",
       "popularity": {
         "views": 84704,
@@ -157,7 +157,7 @@
       "id": 177,
       "name": "DeepSeek",
       "description": "幻方量化推出的AI智能助手和开源大模型",
-      "link": "https://ai-bot.cn/sites/54501.html",
+      "link": "https://www.deepseek.com",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 135581,
@@ -174,7 +174,7 @@
       "id": 211,
       "name": "Cici",
       "description": "豆包国际版，字节跳动面向海外市场推出的AI助手",
-      "link": "https://ai-bot.cn/sites/14574.html",
+      "link": "https://cici.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 91774,
@@ -191,7 +191,7 @@
       "id": 386,
       "name": "Perplexity",
       "description": "强大的对话式AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11895.html",
+      "link": "https://www.perplexity.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 96502,
@@ -208,7 +208,7 @@
       "id": 389,
       "name": "AMiner",
       "description": "智谱AI推出的大模型学术平台",
-      "link": "https://ai-bot.cn/sites/14355.html",
+      "link": "https://www.aminer.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 130757,
@@ -225,7 +225,7 @@
       "id": 50,
       "name": "WriteWise",
       "description": "喜马拉雅推出的免费网文和小说AI写作工具",
-      "link": "https://ai-bot.cn/sites/5577.html",
+      "link": "https://web.writewise.io/",
       "category": "AI写作工具",
       "popularity": {
         "views": 130727,
@@ -242,7 +242,7 @@
       "id": 143,
       "name": "IconGen",
       "description": "免费的icon图标AI生成器",
-      "link": "https://ai-bot.cn/sites/15972.html",
+      "link": "https://www.icongen.io/",
       "category": "AI图像工具",
       "popularity": {
         "views": 96469,
@@ -259,7 +259,7 @@
       "id": 214,
       "name": "百度AI伙伴",
       "description": "百度最新上线的AI搜索对话工具",
-      "link": "https://ai-bot.cn/sites/2198.html",
+      "link": "https://ai.baidu.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 126530,
@@ -276,7 +276,7 @@
       "id": 161,
       "name": "Freepik AI Image Generator",
       "description": "Freepik最新推出的AI图片生成工具",
-      "link": "https://ai-bot.cn/sites/2762.html",
+      "link": "https://jp.freepik.com/ai/%E7%94%BB%E5%83%8F-%E7%94%9F%E6%88%90",
       "category": "AI图像工具",
       "popularity": {
         "views": 87618,
@@ -293,7 +293,7 @@
       "id": 222,
       "name": "魔搭GPT（ModelScopeGPT）",
       "description": "阿里达摩院推出的大小模型协同的智能助手，具备作诗、绘画、视频生成、语音播放等多模态能力",
-      "link": "https://ai-bot.cn/sites/3403.html",
+      "link": "https://modelscope.cn/studios/damo/ModelScopeGPT/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 75107,
@@ -310,7 +310,7 @@
       "id": 279,
       "name": "JetBrains AI",
       "description": "JetBrains推出的AI编程开发助手",
-      "link": "https://ai-bot.cn/sites/6557.html",
+      "link": "https://www.jetbrains.com/ja-jp/ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 77028,
@@ -327,7 +327,7 @@
       "id": 366,
       "name": "AIDesign",
       "description": "腾讯推出的免费AI Logo在线设计工具",
-      "link": "https://ai-bot.cn/sites/1957.html",
+      "link": "https://www.aidesign.co.jp/",
       "category": "AI设计工具",
       "popularity": {
         "views": 122283,
@@ -344,7 +344,7 @@
       "id": 390,
       "name": "心流",
       "description": "阿里旗下推出的AI搜索助手",
-      "link": "https://ai-bot.cn/sites/14200.html",
+      "link": "https://iflow.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 94178,
@@ -361,7 +361,7 @@
       "id": 188,
       "name": "书生大模型",
       "description": "上海人工智能实验室推出的系列AI模型",
-      "link": "https://ai-bot.cn/sites/53308.html",
+      "link": "https://intern-ai.org.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 90602,
@@ -378,7 +378,7 @@
       "id": 267,
       "name": "CodeFuse",
       "description": "蚂蚁集团推出的AI代码编程助手",
-      "link": "https://ai-bot.cn/sites/5256.html",
+      "link": "https://codefuse.alipay.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 95145,
@@ -395,7 +395,7 @@
       "id": 288,
       "name": "Imgcook",
       "description": "阿里推出的免费设计稿智能生成前端代码",
-      "link": "https://ai-bot.cn/sites/2325.html",
+      "link": "https://www.imgcook.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 83216,
@@ -412,7 +412,7 @@
       "id": 405,
       "name": "CuspAI",
       "description": "剑桥大学推出的材料学专业AI搜索工具",
-      "link": "https://ai-bot.cn/sites/15220.html",
+      "link": "https://www.cusp.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 84697,
@@ -429,7 +429,7 @@
       "id": 489,
       "name": "MiracleVision奇想智能",
       "description": "美图推出的AI视觉大模型，支持AI图像、设计和视频创作",
-      "link": "https://ai-bot.cn/sites/6279.html",
+      "link": "https://www.miraclevision.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 108473,
@@ -443,27 +443,10 @@
       ]
     },
     {
-      "id": 110,
-      "name": "堆友AI反应堆",
-      "description": "阿里旗下堆友推出的多风格AI绘画生成器",
-      "link": "https://ai-bot.cn/sites/3382.html",
-      "category": "AI图像工具",
-      "popularity": {
-        "views": 106100,
-        "favorites": 3036
-      },
-      "vpn_required": false,
-      "hot_score": 85,
-      "hot": true,
-      "tags": [
-        "图像工具"
-      ]
-    },
-    {
       "id": 309,
       "name": "Pic Copilot",
       "description": "阿里国际推出的AI电商设计工具",
-      "link": "https://ai-bot.cn/sites/32344.html",
+      "link": "https://www.piccopilot.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 102677,
@@ -477,27 +460,10 @@
       ]
     },
     {
-      "id": 313,
-      "name": "蚂上有创意",
-      "description": "支付宝推出的AI设计工具，面向商家提供电商设计服务",
-      "link": "https://ai-bot.cn/sites/28903.html",
-      "category": "AI设计工具",
-      "popularity": {
-        "views": 105452,
-        "favorites": 3102
-      },
-      "vpn_required": false,
-      "hot_score": 85,
-      "hot": true,
-      "tags": [
-        "设计工具"
-      ]
-    },
-    {
       "id": 490,
       "name": "Gradio",
       "description": "开源的搭建机器学习模型UI界面的Python库",
-      "link": "https://ai-bot.cn/sites/2147.html",
+      "link": "https://gradio.app/",
       "category": "AI训练模型",
       "popularity": {
         "views": 105052,
@@ -514,7 +480,7 @@
       "id": 235,
       "name": "Pi",
       "description": "DeepMind联创新公司推出的AI聊天机器人",
-      "link": "https://ai-bot.cn/sites/2122.html",
+      "link": "https://minepi.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 121035,
@@ -531,7 +497,7 @@
       "id": 441,
       "name": "文心智能体平台",
       "description": "百度推出的智能体构建平台",
-      "link": "https://ai-bot.cn/sites/11229.html",
+      "link": "https://agents.baidu.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 86771,
@@ -548,7 +514,7 @@
       "id": 26,
       "name": "迅捷AI写作",
       "description": "迅捷办公团队推出的AI写作工具",
-      "link": "https://ai-bot.cn/sites/16451.html",
+      "link": "https://www.xunjiepdf.com/xunjieaixiezuo",
       "category": "AI写作工具",
       "popularity": {
         "views": 81873,
@@ -565,7 +531,7 @@
       "id": 53,
       "name": "Verse",
       "description": "印象笔记旗下团队推出的AI写作和文档工具",
-      "link": "https://ai-bot.cn/sites/2940.html",
+      "link": "https://www.verse.com.tw/",
       "category": "AI写作工具",
       "popularity": {
         "views": 76272,
@@ -582,7 +548,7 @@
       "id": 112,
       "name": "可灵AI",
       "description": "快手推出的AI图像和视频创作平台",
-      "link": "https://ai-bot.cn/sites/13002.html",
+      "link": "https://app.klingai.com/cn/",
       "category": "AI图像工具",
       "popularity": {
         "views": 87344,
@@ -599,7 +565,7 @@
       "id": 116,
       "name": "秒画",
       "description": "商汤科技推出的免费AI作画和图片生成平台",
-      "link": "https://ai-bot.cn/sites/4749.html",
+      "link": "https://miaohua.sensetime.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 100675,
@@ -616,7 +582,7 @@
       "id": 170,
       "name": "问小白",
       "description": "元石科技推出的AI智能助手，支持DeepSeek满血版",
-      "link": "https://ai-bot.cn/sites/14215.html",
+      "link": "https://www.wenxiaobai.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 119130,
@@ -633,7 +599,7 @@
       "id": 196,
       "name": "Meta AI助手",
       "description": "Meta推出的免费AI聊天助手",
-      "link": "https://ai-bot.cn/sites/11358.html",
+      "link": "https://www.meta.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 100034,
@@ -650,7 +616,7 @@
       "id": 121,
       "name": "Canva AI图像生成",
       "description": "在线设计工具Canva推出的AI图像生成工具",
-      "link": "https://ai-bot.cn/sites/58.html",
+      "link": "https://www.canva.com/ja_jp/ai-image-generator/",
       "category": "AI图像工具",
       "popularity": {
         "views": 92211,
@@ -667,7 +633,7 @@
       "id": 179,
       "name": "通义",
       "description": "阿里推出的自研大模型，通情、达义，你的全能AI助手！",
-      "link": "https://ai-bot.cn/sites/1338.html",
+      "link": "https://www.tongyi.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 83364,
@@ -684,7 +650,7 @@
       "id": 180,
       "name": "MiniMax",
       "description": "MiniMax推出的AI智能问答助手",
-      "link": "https://ai-bot.cn/sites/8835.html",
+      "link": "https://www.minimaxi.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 92350,
@@ -701,7 +667,7 @@
       "id": 202,
       "name": "CueMe",
       "description": "夸克推出的AI智能对话助手，支持2万字长文写作",
-      "link": "https://ai-bot.cn/sites/20683.html",
+      "link": "https://cueme.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 68293,
@@ -718,7 +684,7 @@
       "id": 285,
       "name": "JamGPT",
       "description": "AI Debug调试助手",
-      "link": "https://ai-bot.cn/sites/2192.html",
+      "link": "https://chatgpt.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 119404,
@@ -735,7 +701,7 @@
       "id": 476,
       "name": "Gemma",
       "description": "谷歌推出的新一代轻量级开放模型",
-      "link": "https://ai-bot.cn/sites/8623.html",
+      "link": "https://github.com/genetics-statistics/GEMMA",
       "category": "AI训练模型",
       "popularity": {
         "views": 86966,
@@ -752,7 +718,7 @@
       "id": 153,
       "name": "Exactly.ai",
       "description": "专业的AI绘画和艺术创作平台",
-      "link": "https://ai-bot.cn/sites/12987.html",
+      "link": "https://exactly.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 106752,
@@ -769,7 +735,7 @@
       "id": 240,
       "name": "应事AI",
       "description": "MiniMax推出的AI对话助理，已免费开放",
-      "link": "https://ai-bot.cn/sites/4655.html",
+      "link": "https://hailuoai.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 82534,
@@ -786,7 +752,7 @@
       "id": 248,
       "name": "Firebase Studio",
       "description": "谷歌推出的AI编程工具，一站式开发全栈应用",
-      "link": "https://ai-bot.cn/firebase-studio/",
+      "link": "https://firebase.studio/",
       "category": "AI编程工具",
       "popularity": {
         "views": 111629,
@@ -803,7 +769,7 @@
       "id": 326,
       "name": "Magic Design",
       "description": "在线设计工具Canva推出的AI设计工具",
-      "link": "https://ai-bot.cn/sites/1087.html",
+      "link": "https://www.canva.com/ja_jp/magic-design/",
       "category": "AI设计工具",
       "popularity": {
         "views": 75651,
@@ -820,7 +786,7 @@
       "id": 526,
       "name": "Runway",
       "description": "AI视频工具，绿幕抠除、视频生成、动态捕捉等功能",
-      "link": "https://ai-bot.cn/sites/240.html",
+      "link": "https://runwayml.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 88691,
@@ -837,7 +803,7 @@
       "id": 98,
       "name": "范文喵",
       "description": "面向大学生的AI论文写作工具",
-      "link": "https://ai-bot.cn/sites/7364.html",
+      "link": "https://ai.wolian.chat/",
       "category": "AI写作工具",
       "popularity": {
         "views": 108623,
@@ -854,7 +820,7 @@
       "id": 152,
       "name": "摩笔马良",
       "description": "摩尔线程推出的AI图像绘画创作平台",
-      "link": "https://ai-bot.cn/sites/11123.html",
+      "link": "https://maliang.mthreads.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 89174,
@@ -871,7 +837,7 @@
       "id": 162,
       "name": "Stockimg AI",
       "description": "AI生成各种类型的图像和插画",
-      "link": "https://ai-bot.cn/sites/151.html",
+      "link": "https://stockimg.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 119193,
@@ -888,7 +854,7 @@
       "id": 190,
       "name": "阶跃AI",
       "description": "阶跃星辰推出的支持多模态的AI聊天机器人",
-      "link": "https://ai-bot.cn/sites/9802.html",
+      "link": "https://www.stepfun.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 111104,
@@ -905,7 +871,7 @@
       "id": 347,
       "name": "Framer AI",
       "description": "Framer推出的AI网站自动设计、生成和上线",
-      "link": "https://ai-bot.cn/sites/2891.html",
+      "link": "https://www.framer.com/features/ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 109569,
@@ -922,7 +888,7 @@
       "id": 395,
       "name": "Lumina",
       "description": "完全免费的AI学术搜索引擎",
-      "link": "https://ai-bot.cn/sites/16684.html",
+      "link": "https://www.lumina.it/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 70420,
@@ -939,7 +905,7 @@
       "id": 496,
       "name": "阿里巴巴M6",
       "description": "阿里巴巴达摩院推出的超大规模中文预训练模型(M6)",
-      "link": "https://ai-bot.cn/sites/1079.html",
+      "link": "https://m6.aliyun.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 109476,
@@ -956,7 +922,7 @@
       "id": 5,
       "name": "笔灵AI小说",
       "description": "笔灵推出的AI小说生成和创作工具",
-      "link": "https://ai-bot.cn/sites/22626.html",
+      "link": "https://ibiling.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 93142,
@@ -973,7 +939,7 @@
       "id": 28,
       "name": "深言达意",
       "description": "免费的词句查询智能写作辅助工具，输入模糊描述即可查找词句",
-      "link": "https://ai-bot.cn/sites/6044.html",
+      "link": "https://www.shenyandayi.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 94479,
@@ -990,7 +956,7 @@
       "id": 120,
       "name": "造梦日记",
       "description": "AI一下，妙笔生画",
-      "link": "https://ai-bot.cn/sites/2382.html",
+      "link": "https://zmrj.art/",
       "category": "AI图像工具",
       "popularity": {
         "views": 80405,
@@ -1007,7 +973,7 @@
       "id": 132,
       "name": "Cutout.Pro",
       "description": "AI在线处理图片",
-      "link": "https://ai-bot.cn/sites/305.html",
+      "link": "https://www.cutout.pro/ja",
       "category": "AI图像工具",
       "popularity": {
         "views": 72593,
@@ -1024,7 +990,7 @@
       "id": 145,
       "name": "百度智能云一念",
       "description": "基于百度文心大模型的多模态内容创作平台",
-      "link": "https://ai-bot.cn/sites/24248.html",
+      "link": "https://yinian.cloud.baidu.com/creativity/index",
       "category": "AI图像工具",
       "popularity": {
         "views": 89717,
@@ -1041,7 +1007,7 @@
       "id": 185,
       "name": "Grok",
       "description": "马斯克旗下xAI推出的人工智能助手",
-      "link": "https://ai-bot.cn/sites/5368.html",
+      "link": "https://grok.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 75688,
@@ -1058,7 +1024,7 @@
       "id": 186,
       "name": "智谱清言",
       "description": "智谱推出的全能AI助手",
-      "link": "https://ai-bot.cn/sites/2005.html",
+      "link": "https://chatglm.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 112024,
@@ -1075,7 +1041,7 @@
       "id": 296,
       "name": "Mutable AI",
       "description": "人工智能加速软件开发",
-      "link": "https://ai-bot.cn/sites/1490.html",
+      "link": "https://gptonline.ai/ja/mutable/",
       "category": "AI编程工具",
       "popularity": {
         "views": 78804,
@@ -1089,27 +1055,10 @@
       ]
     },
     {
-      "id": 335,
-      "name": "Wegic",
-      "description": "AI网页设计和建站开发工具",
-      "link": "https://ai-bot.cn/sites/12503.html",
-      "category": "AI设计工具",
-      "popularity": {
-        "views": 81056,
-        "favorites": 2884
-      },
-      "vpn_required": false,
-      "hot_score": 79,
-      "hot": true,
-      "tags": [
-        "设计工具"
-      ]
-    },
-    {
       "id": 358,
       "name": "Galileo AI",
       "description": "AI高保真原型设计",
-      "link": "https://ai-bot.cn/sites/150.html",
+      "link": "https://www.usegalileo.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 116093,
@@ -1126,7 +1075,7 @@
       "id": 505,
       "name": "Imagen",
       "description": "Google AI文字到图像生成模型",
-      "link": "https://ai-bot.cn/sites/55.html",
+      "link": "https://imagen-ai.com/ja/",
       "category": "AI训练模型",
       "popularity": {
         "views": 102489,
@@ -1143,7 +1092,7 @@
       "id": 49,
       "name": "文思助手",
       "description": "强大的AI写作智能体，支持生成专业报告和科研论文",
-      "link": "https://ai-bot.cn/sites/16171.html",
+      "link": "https://wensi.sodabot.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 85353,
@@ -1157,27 +1106,10 @@
       ]
     },
     {
-      "id": 56,
-      "name": "万彩AI",
-      "description": "全能型AI内容和文案创作助手",
-      "link": "https://ai-bot.cn/sites/2388.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 72857,
-        "favorites": 2194
-      },
-      "vpn_required": false,
-      "hot_score": 78,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 91,
       "name": "LongShot",
       "description": "AI长文章写作工具",
-      "link": "https://ai-bot.cn/sites/776.html",
+      "link": "https://longshot.chitaner.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 105109,
@@ -1194,7 +1126,7 @@
       "id": 118,
       "name": "奇域AI",
       "description": "中式审美国风AI绘画创作平台",
-      "link": "https://ai-bot.cn/sites/12769.html",
+      "link": "https://www.qiyuai.net/",
       "category": "AI图像工具",
       "popularity": {
         "views": 98345,
@@ -1211,7 +1143,7 @@
       "id": 125,
       "name": "万相营造",
       "description": "阿里旗下推出的多模态AI创意生成平台",
-      "link": "https://ai-bot.cn/sites/29264.html",
+      "link": "https://www.wanxiang.art/",
       "category": "AI图像工具",
       "popularity": {
         "views": 111641,
@@ -1228,7 +1160,7 @@
       "id": 154,
       "name": "画宇宙",
       "description": "人工智能AI作画网站",
-      "link": "https://ai-bot.cn/sites/2505.html",
+      "link": "https://www.nolibox.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 78420,
@@ -1245,7 +1177,7 @@
       "id": 328,
       "name": "135 AI排版",
       "description": "公众号AI图文排版和智能文案生成工具",
-      "link": "https://ai-bot.cn/sites/10754.html",
+      "link": "https://www.135editor.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 113904,
@@ -1262,7 +1194,7 @@
       "id": 478,
       "name": "Sora",
       "description": "OpenAI推出的AI视频生成模型",
-      "link": "https://ai-bot.cn/sites/8613.html",
+      "link": "https://openai.com/sora/",
       "category": "AI训练模型",
       "popularity": {
         "views": 116657,
@@ -1279,7 +1211,7 @@
       "id": 491,
       "name": "DeepFloyd IF",
       "description": "StabilityAI旗下的DeepFloyd团队推出的图片生成模型",
-      "link": "https://ai-bot.cn/sites/2141.html",
+      "link": "https://github.com/deep-floyd/IF",
       "category": "AI训练模型",
       "popularity": {
         "views": 112354,
@@ -1296,7 +1228,7 @@
       "id": 40,
       "name": "Jenni",
       "description": "AI研究文章和博客写作辅助工具",
-      "link": "https://ai-bot.cn/sites/2304.html",
+      "link": "https://www.jenni.jp/",
       "category": "AI写作工具",
       "popularity": {
         "views": 97204,
@@ -1313,7 +1245,7 @@
       "id": 122,
       "name": "超能画布",
       "description": "百度网盘推出的AI创意图像写真创作平台",
-      "link": "https://ai-bot.cn/sites/10982.html",
+      "link": "https://photo.baidu.com/photasy/home",
       "category": "AI图像工具",
       "popularity": {
         "views": 105299,
@@ -1330,7 +1262,7 @@
       "id": 140,
       "name": "Kacha AI",
       "description": "专业的AI写真工具，媲美专业摄影",
-      "link": "https://ai-bot.cn/sites/18081.html",
+      "link": "https://www.kacha.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 79309,
@@ -1347,7 +1279,7 @@
       "id": 169,
       "name": "Upscayl",
       "description": "免费开源的AI图片无损放大工具",
-      "link": "https://ai-bot.cn/sites/1531.html",
+      "link": "https://upscayl.org/",
       "category": "AI图像工具",
       "popularity": {
         "views": 74474,
@@ -1364,7 +1296,7 @@
       "id": 218,
       "name": "MChat",
       "description": "基于孟子GPT大模型的AI对话机器人",
-      "link": "https://ai-bot.cn/sites/5533.html",
+      "link": "https://www.mchat.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 94471,
@@ -1381,7 +1313,7 @@
       "id": 340,
       "name": "笔魂AI",
       "description": "AI设计工具，支持AI抠图、消除、无损放大",
-      "link": "https://ai-bot.cn/sites/33149.html",
+      "link": "https://ibihun.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 70981,
@@ -1398,7 +1330,7 @@
       "id": 1,
       "name": "讯飞绘文",
       "description": "免费AI写作工具，5分钟生成一篇原创稿！",
-      "link": "https://ai-bot.cn/sites/6242.html",
+      "link": "https://turbodesk.xfyun.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 93985,
@@ -1415,7 +1347,7 @@
       "id": 11,
       "name": "千笔AI论文",
       "description": "全网首家论文无限改稿平台",
-      "link": "https://ai-bot.cn/sites/7358.html",
+      "link": "https://www.aipasspaper.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 85952,
@@ -1432,7 +1364,7 @@
       "id": 84,
       "name": "Sudowrite",
       "description": "AI故事写作工具，多种风格选择",
-      "link": "https://ai-bot.cn/sites/961.html",
+      "link": "https://www.sudowrite.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 85347,
@@ -1449,7 +1381,7 @@
       "id": 437,
       "name": "百宝箱",
       "description": "蚂蚁集团推出的一站式 AI 原生应用开发平台",
-      "link": "https://ai-bot.cn/sites/16414.html",
+      "link": "https://tbox.alipay.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 67437,
@@ -1466,7 +1398,7 @@
       "id": 25,
       "name": "ReadPo",
       "description": "AI读写助手，支持内容聚合快速阅读并总结",
-      "link": "https://ai-bot.cn/readpo/",
+      "link": "https://readpo.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 64666,
@@ -1480,27 +1412,10 @@
       ]
     },
     {
-      "id": 73,
-      "name": "字符狂飙",
-      "description": "全方位AI文档生成工具，快速生成专业文档",
-      "link": "https://ai-bot.cn/sites/1459.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 109887,
-        "favorites": 2865
-      },
-      "vpn_required": false,
-      "hot_score": 75,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 97,
       "name": "Writer",
       "description": "企业级AI内容创作工具",
-      "link": "https://ai-bot.cn/sites/170.html",
+      "link": "https://writer.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 114473,
@@ -1517,7 +1432,7 @@
       "id": 139,
       "name": "DeepSwapper",
       "description": "免费的在线AI换脸工具，支持图片、视频多种格式",
-      "link": "https://ai-bot.cn/sites/15075.html",
+      "link": "https://www.deepswapper.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 111897,
@@ -1534,7 +1449,7 @@
       "id": 198,
       "name": "Koko AI",
       "description": "Seele公司推出的「AI+3D」情感陪伴产品",
-      "link": "https://ai-bot.cn/sites/14989.html",
+      "link": "https://kokoai.app/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 86571,
@@ -1551,7 +1466,7 @@
       "id": 221,
       "name": "ChitChop",
       "description": "字节旗下面向海外用户推出的免费大模型产品和AI助手工具箱",
-      "link": "https://ai-bot.cn/sites/6101.html",
+      "link": "https://36kr.jp/266366/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 99624,
@@ -1568,7 +1483,7 @@
       "id": 271,
       "name": "Duo Chat",
       "description": "GitLab推出的AI编程助手",
-      "link": "https://ai-bot.cn/sites/11414.html",
+      "link": "https://gitlab-docs.creationline.com/ee/development/ai_features/duo_chat.html",
       "category": "AI编程工具",
       "popularity": {
         "views": 116400,
@@ -1585,7 +1500,7 @@
       "id": 360,
       "name": "千图设计室AI海报",
       "description": "免费批量生成在线可编辑的AI海报工具",
-      "link": "https://ai-bot.cn/sites/9943.html",
+      "link": "https://hihaibao.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 86247,
@@ -1619,7 +1534,7 @@
       "id": 54,
       "name": "Moonbeam",
       "description": "长文章AI内容创作助手",
-      "link": "https://ai-bot.cn/sites/1325.html",
+      "link": "https://moonbeam.network/",
       "category": "AI写作工具",
       "popularity": {
         "views": 95443,
@@ -1636,7 +1551,7 @@
       "id": 61,
       "name": "Spell.tools",
       "description": "高颜值AI内容营销创作工具",
-      "link": "https://ai-bot.cn/sites/575.html",
+      "link": "https://www.aig123.com/sites/296.html",
       "category": "AI写作工具",
       "popularity": {
         "views": 97180,
@@ -1653,7 +1568,7 @@
       "id": 93,
       "name": "Reword",
       "description": "AI文章写作",
-      "link": "https://ai-bot.cn/sites/127.html",
+      "link": "https://reword.app/",
       "category": "AI写作工具",
       "popularity": {
         "views": 69609,
@@ -1670,7 +1585,7 @@
       "id": 111,
       "name": "炉米Lumi",
       "description": "字节跳动推出的AIGC图像创作平台",
-      "link": "https://ai-bot.cn/lumi/",
+      "link": "https://artistrylab.net/",
       "category": "AI图像工具",
       "popularity": {
         "views": 74043,
@@ -1684,27 +1599,10 @@
       ]
     },
     {
-      "id": 144,
-      "name": "言之画",
-      "description": "AI图像内容创作平台，由出门问问推出",
-      "link": "https://ai-bot.cn/sites/1936.html",
-      "category": "AI图像工具",
-      "popularity": {
-        "views": 103179,
-        "favorites": 1777
-      },
-      "vpn_required": false,
-      "hot_score": 74,
-      "hot": true,
-      "tags": [
-        "图像工具"
-      ]
-    },
-    {
       "id": 175,
       "name": "Claude",
       "description": "Anthropic公司推出的对话式AI智能助手",
-      "link": "https://ai-bot.cn/sites/460.html",
+      "link": "https://claude.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 66026,
@@ -1721,7 +1619,7 @@
       "id": 458,
       "name": "NumPy",
       "description": "Python科学计算必备的包",
-      "link": "https://ai-bot.cn/sites/780.html",
+      "link": "https://numpy.org/ja/",
       "category": "AI开发平台",
       "popularity": {
         "views": 88289,
@@ -1738,7 +1636,7 @@
       "id": 468,
       "name": "Ollama",
       "description": "本地运行Llama和其他大语言模型",
-      "link": "https://ai-bot.cn/sites/5973.html",
+      "link": "https://ollama.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 96197,
@@ -1752,27 +1650,10 @@
       ]
     },
     {
-      "id": 44,
-      "name": "魔撰写作",
-      "description": "出门问问旗下推出的AI智能写作工具",
-      "link": "https://ai-bot.cn/sites/2009.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 94316,
-        "favorites": 2414
-      },
-      "vpn_required": false,
-      "hot_score": 73,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 127,
       "name": "360智图",
       "description": "360推出的AI作图平台，支持智能抠图、智能消除、智能放大、智能配图",
-      "link": "https://ai-bot.cn/sites/4177.html",
+      "link": "https://pic.360.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 102754,
@@ -1789,7 +1670,7 @@
       "id": 157,
       "name": "Visual Electric",
       "description": "专业的高质量AI图像创作工具",
-      "link": "https://ai-bot.cn/sites/6463.html",
+      "link": "https://visualelectric.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 69708,
@@ -1806,7 +1687,7 @@
       "id": 231,
       "name": "Replika",
       "description": "AI对话陪伴工具",
-      "link": "https://ai-bot.cn/sites/138.html",
+      "link": "https://replika.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 89889,
@@ -1823,7 +1704,7 @@
       "id": 236,
       "name": "Inworld",
       "description": "开发和创建AI虚拟角色并与其互动",
-      "link": "https://ai-bot.cn/sites/1710.html",
+      "link": "https://inworld.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 61596,
@@ -1840,7 +1721,7 @@
       "id": 291,
       "name": "Codiga",
       "description": "AI代码实时分析",
-      "link": "https://ai-bot.cn/sites/791.html",
+      "link": "https://www.codiga.io/",
       "category": "AI编程工具",
       "popularity": {
         "views": 94807,
@@ -1857,7 +1738,7 @@
       "id": 351,
       "name": "Logo Diffusion",
       "description": "AI驱动的Logo和标志生成工具",
-      "link": "https://ai-bot.cn/sites/6622.html",
+      "link": "https://logodiffusion.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 85732,
@@ -1874,7 +1755,7 @@
       "id": 383,
       "name": "PhotoMagic",
       "description": "AI快速生成商拍图片",
-      "link": "https://ai-bot.cn/sites/8641.html",
+      "link": "https://www.photomagic.cn/",
       "category": "AI设计工具",
       "popularity": {
         "views": 88197,
@@ -1891,7 +1772,7 @@
       "id": 21,
       "name": "QuillBot",
       "description": "AI英/德语写作润色和改进工具",
-      "link": "https://ai-bot.cn/sites/597.html",
+      "link": "https://quillbot.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 107199,
@@ -1908,7 +1789,7 @@
       "id": 36,
       "name": "文状元",
       "description": "AI公文写作助手，提供大量范文库",
-      "link": "https://ai-bot.cn/sites/26114.html",
+      "link": "https://www.wenzhuangyuan.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 94286,
@@ -1925,7 +1806,7 @@
       "id": 167,
       "name": "Facet",
       "description": "AI图片修图和优化工具",
-      "link": "https://ai-bot.cn/sites/976.html",
+      "link": "https://facet.shop-pro.jp/",
       "category": "AI图像工具",
       "popularity": {
         "views": 97558,
@@ -1942,7 +1823,7 @@
       "id": 191,
       "name": "百小应",
       "description": "百川智能推出的免费AI助手",
-      "link": "https://ai-bot.cn/sites/12663.html",
+      "link": "https://www.baichuan-ai.com/chat",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 83306,
@@ -1976,7 +1857,7 @@
       "id": 297,
       "name": "Debuild",
       "description": "低代码快速开发网页应用",
-      "link": "https://ai-bot.cn/sites/1493.html",
+      "link": "https://www.debian.org/doc/maint-guide/build.ja.html",
       "category": "AI编程工具",
       "popularity": {
         "views": 95878,
@@ -1993,7 +1874,7 @@
       "id": 316,
       "name": "Microsoft Designer",
       "description": "微软推出的在线设计海报和宣传图工具",
-      "link": "https://ai-bot.cn/sites/945.html",
+      "link": "https://designer.microsoft.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 71438,
@@ -2010,7 +1891,7 @@
       "id": 436,
       "name": "模力方舟",
       "description": "AI应用共创平台，提供开发到部署一站式服务",
-      "link": "https://ai-bot.cn/sites/48043.html",
+      "link": "https://ai.gitee.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 105546,
@@ -2024,61 +1905,10 @@
       ]
     },
     {
-      "id": 500,
-      "name": "DeepSpeed",
-      "description": "微软开源的低成本实现类似ChatGPT的模型训练",
-      "link": "https://ai-bot.cn/sites/1520.html",
-      "category": "AI训练模型",
-      "popularity": {
-        "views": 100963,
-        "favorites": 1712
-      },
-      "vpn_required": false,
-      "hot_score": 72,
-      "hot": true,
-      "tags": [
-        "训练模型"
-      ]
-    },
-    {
-      "id": 506,
-      "name": "StableVicuna",
-      "description": "大规模开源聊天机器人",
-      "link": "https://ai-bot.cn/sites/2113.html",
-      "category": "AI训练模型",
-      "popularity": {
-        "views": 74936,
-        "favorites": 1220
-      },
-      "vpn_required": false,
-      "hot_score": 72,
-      "hot": true,
-      "tags": [
-        "训练模型"
-      ]
-    },
-    {
-      "id": 37,
-      "name": "晓语台",
-      "description": "智能AI写作工具，内置500+创作模板",
-      "link": "https://ai-bot.cn/sites/6316.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 69882,
-        "favorites": 2072
-      },
-      "vpn_required": false,
-      "hot_score": 71,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 89,
       "name": "Smodin AI Research Paper",
       "description": "Smodin推出的AI研究论文写作工具",
-      "link": "https://ai-bot.cn/sites/7510.html",
+      "link": "https://smodin.io/writer/research-paper",
       "category": "AI写作工具",
       "popularity": {
         "views": 109634,
@@ -2095,7 +1925,7 @@
       "id": 166,
       "name": "Skybox AI",
       "description": "AI生成和合成360°全景图像插画",
-      "link": "https://ai-bot.cn/sites/2571.html",
+      "link": "https://skybox.blockadelabs.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 62348,
@@ -2112,7 +1942,7 @@
       "id": 223,
       "name": "Forefront",
       "description": "提供GPT-3.5、GPT-4、Claude的AI聊天机器人",
-      "link": "https://ai-bot.cn/sites/2034.html",
+      "link": "https://forefront.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 81296,
@@ -2129,7 +1959,7 @@
       "id": 250,
       "name": "Bolt.new",
       "description": "StackBlitz 推出的全栈AI代码工具，可以看作 Artfacts、V0 和 Replit 的结合体",
-      "link": "https://ai-bot.cn/bolt%E2%80%A4new/",
+      "link": "https://bolt.new/",
       "category": "AI编程工具",
       "popularity": {
         "views": 73835,
@@ -2143,27 +1973,10 @@
       ]
     },
     {
-      "id": 287,
-      "name": "AirOps",
-      "description": "AI SQL语句生成和修改",
-      "link": "https://ai-bot.cn/sites/772.html",
-      "category": "AI编程工具",
-      "popularity": {
-        "views": 64527,
-        "favorites": 1194
-      },
-      "vpn_required": false,
-      "hot_score": 71,
-      "hot": true,
-      "tags": [
-        "编程工具"
-      ]
-    },
-    {
       "id": 302,
       "name": "HTTPie AI",
       "description": "AI API开发工具",
-      "link": "https://ai-bot.cn/sites/480.html",
+      "link": "https://httpie.io/ai",
       "category": "AI编程工具",
       "popularity": {
         "views": 109321,
@@ -2180,7 +1993,7 @@
       "id": 303,
       "name": "AI Code Reviewer",
       "description": "AI代码检查",
-      "link": "https://ai-bot.cn/sites/479.html",
+      "link": "https://coderabbit.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 80357,
@@ -2197,7 +2010,7 @@
       "id": 353,
       "name": "Vectorizer.AI",
       "description": "AI一键将位图转换为矢量图片",
-      "link": "https://ai-bot.cn/sites/3713.html",
+      "link": "https://ja.vectorizer.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 94036,
@@ -2214,7 +2027,7 @@
       "id": 392,
       "name": "知乎直答",
       "description": "知乎推出的AI搜索引擎，直达问题答案",
-      "link": "https://ai-bot.cn/sites/13966.html",
+      "link": "https://zhida.zhihu.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 64633,
@@ -2231,7 +2044,7 @@
       "id": 418,
       "name": "ThinkAny",
       "description": "新时代的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11855.html",
+      "link": "https://thinkany.ai/ja",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 93088,
@@ -2248,7 +2061,7 @@
       "id": 507,
       "name": "Watsonx.ai",
       "description": "IBM推出的企业级生成式人工智能和机器学习平台",
-      "link": "https://ai-bot.cn/sites/2240.html",
+      "link": "https://www.ibm.com/jp-ja/products/watsonx-ai",
       "category": "AI训练模型",
       "popularity": {
         "views": 68005,
@@ -2265,7 +2078,7 @@
       "id": 76,
       "name": "讯飞智检",
       "description": "讯飞推出的智能写作SaaS工具，支持智能写作后的校对与合规审核",
-      "link": "https://ai-bot.cn/sites/1515.html",
+      "link": "https://zj.xfyun.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 88419,
@@ -2282,7 +2095,7 @@
       "id": 78,
       "name": "ContentBot",
       "description": "AI快速写作工具",
-      "link": "https://ai-bot.cn/sites/782.html",
+      "link": "https://contentbot.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 62934,
@@ -2299,7 +2112,7 @@
       "id": 195,
       "name": "J1 Assistant",
       "description": "罗永浩旗下 Jarvis 项目推出的 AI 智能助手",
-      "link": "https://ai-bot.cn/j1-assistant/",
+      "link": "https://matter.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 105303,
@@ -2316,7 +2129,7 @@
       "id": 233,
       "name": "MOSS",
       "description": "复旦大学团队开发的对话式大型语言模型",
-      "link": "https://ai-bot.cn/sites/1858.html",
+      "link": "https://mosssnowboards.co.jp/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 101557,
@@ -2333,7 +2146,7 @@
       "id": 407,
       "name": "Glean",
       "description": "专为职场人设计的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/16367.html",
+      "link": "https://www.glean.com/jp",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 103700,
@@ -2350,7 +2163,7 @@
       "id": 412,
       "name": "iAsk AI",
       "description": "快速准确的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11849.html",
+      "link": "https://iask.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 83993,
@@ -2364,27 +2177,10 @@
       ]
     },
     {
-      "id": 63,
-      "name": "Typeface AI",
-      "description": "AI创意内容创作助手",
-      "link": "https://ai-bot.cn/sites/580.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 73078,
-        "favorites": 1650
-      },
-      "vpn_required": false,
-      "hot_score": 69,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 101,
       "name": "吐司AI",
       "description": "AI绘画模型社区和在线生图平台",
-      "link": "https://ai-bot.cn/tusiart/",
+      "link": "https://tusiart.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 106020,
@@ -2401,7 +2197,7 @@
       "id": 165,
       "name": "行者AI美术",
       "description": "AI图片生成和美术创作工具箱",
-      "link": "https://ai-bot.cn/sites/2803.html",
+      "link": "https://xingzheai.cn/",
       "category": "AI图像工具",
       "popularity": {
         "views": 105193,
@@ -2418,7 +2214,7 @@
       "id": 258,
       "name": "CodeGeeX",
       "description": "智谱AI推出的免费AI编程助手",
-      "link": "https://ai-bot.cn/sites/1131.html",
+      "link": "https://codegeex.cn/",
       "category": "AI编程工具",
       "popularity": {
         "views": 81708,
@@ -2435,7 +2231,7 @@
       "id": 511,
       "name": "Evidently AI",
       "description": "开源的机器学习模型监测和测试工具",
-      "link": "https://ai-bot.cn/sites/778.html",
+      "link": "https://www.evidentlyai.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 68122,
@@ -2449,27 +2245,10 @@
       ]
     },
     {
-      "id": 123,
-      "name": "Photoroom",
-      "description": "在线AI图片编辑工具",
-      "link": "https://ai-bot.cn/sites/18077.html",
-      "category": "AI图像工具",
-      "popularity": {
-        "views": 62723,
-        "favorites": 1355
-      },
-      "vpn_required": false,
-      "hot_score": 68,
-      "hot": true,
-      "tags": [
-        "图像工具"
-      ]
-    },
-    {
       "id": 171,
       "name": "豆包",
       "description": "字节跳动推出的免费AI智能助手",
-      "link": "https://ai-bot.cn/sites/4189.html",
+      "link": "https://www.doubao.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 67464,
@@ -2486,7 +2265,7 @@
       "id": 172,
       "name": "讯飞星火",
       "description": "AI智能助手，支持PPT生成、深度推理",
-      "link": "https://ai-bot.cn/sites/1909.html",
+      "link": "https://xinghuo.xfyun.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 67108,
@@ -2503,7 +2282,7 @@
       "id": 243,
       "name": "文心快码",
       "description": "百度推出的AI编程助手，基于文心大模型",
-      "link": "https://ai-bot.cn/sites/4099.html",
+      "link": "https://comate.baidu.com/en",
       "category": "AI编程工具",
       "popularity": {
         "views": 74130,
@@ -2520,7 +2299,7 @@
       "id": 356,
       "name": "Dora AI",
       "description": "AI在线生成精美3D动画的网站",
-      "link": "https://ai-bot.cn/sites/2462.html",
+      "link": "https://www.dora.run/ai",
       "category": "AI设计工具",
       "popularity": {
         "views": 61330,
@@ -2537,7 +2316,7 @@
       "id": 402,
       "name": "链企AI",
       "description": "链企智能推出的AI商业搜索工具",
-      "link": "https://ai-bot.cn/sites/15865.html",
+      "link": "https://apps.apple.com/cn/app/%E9%93%BE%E4%BC%81ai-%E5%95%86%E4%B8%9A%E6%99%BA%E8%83%BD%E5%8A%A9%E6%89%8B/id6474017569",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 89757,
@@ -2554,7 +2333,7 @@
       "id": 403,
       "name": "问问小宇宙",
       "description": "小宇宙推出的AI搜索产品",
-      "link": "https://ai-bot.cn/sites/14818.html",
+      "link": "https://www.sohu.com/a/801016336_647985",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 69371,
@@ -2571,7 +2350,7 @@
       "id": 244,
       "name": "豆包AI编程",
       "description": "豆包推出的AI编程新功能",
-      "link": "https://ai-bot.cn/doubao-aicoding/",
+      "link": "https://www.doubao.com/chat/coding",
       "category": "AI编程工具",
       "popularity": {
         "views": 61938,
@@ -2588,7 +2367,7 @@
       "id": 253,
       "name": "Clacky AI",
       "description": "AI编程工具，打造L3级的Coding Studio",
-      "link": "https://ai-bot.cn/clacky-ai/",
+      "link": "https://clacky.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 90255,
@@ -2602,27 +2381,10 @@
       ]
     },
     {
-      "id": 7,
-      "name": "火山写作",
-      "description": "字节推出的免费AI写作助手（已合并至豆包）",
-      "link": "https://ai-bot.cn/sites/957.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 84069,
-        "favorites": 2208
-      },
-      "vpn_required": false,
-      "hot_score": 66,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 13,
       "name": "稿定AI文案",
       "description": "小红书、公众号、短视频AI文案生成工具",
-      "link": "https://ai-bot.cn/sites/49483.html",
+      "link": "https://www.gaoding.com/create-design",
       "category": "AI写作工具",
       "popularity": {
         "views": 77774,
@@ -2639,7 +2401,7 @@
       "id": 124,
       "name": "Ribbet.ai",
       "description": "免费的多功能AI图片处理工具箱",
-      "link": "https://ai-bot.cn/sites/693.html",
+      "link": "https://ribbet.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 83401,
@@ -2656,7 +2418,7 @@
       "id": 200,
       "name": "Saylo",
       "description": "AI驱动的故事角色扮演游戏应用，沉浸式的剧本互动体验",
-      "link": "https://ai-bot.cn/sites/21956.html",
+      "link": "https://www.sayloai.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 60505,
@@ -2673,7 +2435,7 @@
       "id": 275,
       "name": "Plandex",
       "description": "免费开源的基于终端的AI编程引擎",
-      "link": "https://ai-bot.cn/sites/10880.html",
+      "link": "https://plandex.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 79985,
@@ -2690,7 +2452,7 @@
       "id": 370,
       "name": "Eva Design System",
       "description": "基于深度学习的色彩生成工具",
-      "link": "https://ai-bot.cn/sites/168.html",
+      "link": "https://eva.design/",
       "category": "AI设计工具",
       "popularity": {
         "views": 68755,
@@ -2707,7 +2469,7 @@
       "id": 376,
       "name": "Appicons AI",
       "description": "AI生成精美App图标",
-      "link": "https://ai-bot.cn/sites/108.html",
+      "link": "https://appicons.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 73896,
@@ -2724,7 +2486,7 @@
       "id": 442,
       "name": "SkyAgents",
       "description": "昆仑万维推出的 AI Agent 开发平台",
-      "link": "https://ai-bot.cn/sites/24351.html",
+      "link": "https://sso.tiangong.cn/",
       "category": "AI开发平台",
       "popularity": {
         "views": 77854,
@@ -2741,7 +2503,7 @@
       "id": 497,
       "name": "Lamini",
       "description": "低门槛快速定制大语言模型的引擎",
-      "link": "https://ai-bot.cn/sites/2038.html",
+      "link": "https://www.lamini.ai/",
       "category": "AI训练模型",
       "popularity": {
         "views": 64939,
@@ -2775,7 +2537,7 @@
       "id": 108,
       "name": "Stable Diffusion",
       "description": "StabilityAI推出的文本到图像生成AI",
-      "link": "https://ai-bot.cn/sites/123.html",
+      "link": "https://stablediffusionweb.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 95484,
@@ -2792,7 +2554,7 @@
       "id": 178,
       "name": "腾讯元宝",
       "description": "腾讯推出的免费AI智能助手",
-      "link": "https://ai-bot.cn/sites/12946.html",
+      "link": "https://yuanbao.tencent.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 98620,
@@ -2809,7 +2571,7 @@
       "id": 182,
       "name": "Z.ai",
       "description": "智谱面向全球推出的最新模型体验平台",
-      "link": "https://ai-bot.cn/z-ai/",
+      "link": "https://z.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 96670,
@@ -2826,7 +2588,7 @@
       "id": 257,
       "name": "CodiumAI",
       "description": "免费的AI代码测试和分析工具",
-      "link": "https://ai-bot.cn/sites/789.html",
+      "link": "https://windsurf.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 61071,
@@ -2843,7 +2605,7 @@
       "id": 268,
       "name": "Tabby",
       "description": "免费开源的自托管AI编程助手",
-      "link": "https://ai-bot.cn/sites/9382.html",
+      "link": "https://tabby.sh/",
       "category": "AI编程工具",
       "popularity": {
         "views": 85819,
@@ -2860,7 +2622,7 @@
       "id": 342,
       "name": "Kittl",
       "description": "AI驱动的平面图形设计工具",
-      "link": "https://ai-bot.cn/sites/7993.html",
+      "link": "https://www.kittl.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 68823,
@@ -2877,7 +2639,7 @@
       "id": 343,
       "name": "Dzine",
       "description": "一站式AI图像编辑和设计工具",
-      "link": "https://ai-bot.cn/sites/12132.html",
+      "link": "https://www.dzine.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 97146,
@@ -2894,7 +2656,7 @@
       "id": 398,
       "name": "天工AI搜索",
       "description": "昆仑万维最新推出的结合大模型的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/4257.html",
+      "link": "https://www.tiangong.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 86808,
@@ -2911,7 +2673,7 @@
       "id": 482,
       "name": "文心大模型",
       "description": "百度推出的产业级知识增强大模型",
-      "link": "https://ai-bot.cn/sites/1078.html",
+      "link": "https://wenxin.baidu.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 97169,
@@ -2928,7 +2690,7 @@
       "id": 117,
       "name": "WHEE",
       "description": "美图推出的AI图片和绘画创作生成平台",
-      "link": "https://ai-bot.cn/sites/2976.html",
+      "link": "https://www.whee.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 62150,
@@ -2942,27 +2704,10 @@
       ]
     },
     {
-      "id": 210,
-      "name": "冒泡鸭",
-      "description": "阶跃星辰推出的AI聊天机器人和智能体平台",
-      "link": "https://ai-bot.cn/sites/9412.html",
-      "category": "AI聊天机器人",
-      "popularity": {
-        "views": 77555,
-        "favorites": 2060
-      },
-      "vpn_required": false,
-      "hot_score": 64,
-      "hot": true,
-      "tags": [
-        "聊天机器人"
-      ]
-    },
-    {
       "id": 274,
       "name": "Devin",
       "description": "首个全自主的AI软件工程师智能体",
-      "link": "https://ai-bot.cn/sites/9533.html",
+      "link": "https://devin.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 88204,
@@ -2979,7 +2724,7 @@
       "id": 298,
       "name": "Warp",
       "description": "21世纪的终端工具（内置AI命令搜索）",
-      "link": "https://ai-bot.cn/sites/116.html",
+      "link": "https://www.warp.dev/",
       "category": "AI编程工具",
       "popularity": {
         "views": 59950,
@@ -2996,7 +2741,7 @@
       "id": 350,
       "name": "Pimento",
       "description": "人工智能驱动的设计创意和视觉参考平台",
-      "link": "https://ai-bot.cn/sites/6797.html",
+      "link": "https://www.pimento.design/",
       "category": "AI设计工具",
       "popularity": {
         "views": 61565,
@@ -3013,7 +2758,7 @@
       "id": 440,
       "name": "智谱清流",
       "description": "智谱推出的企业级AI智能体开发平台",
-      "link": "https://ai-bot.cn/sites/29524.html",
+      "link": "https://www.zhipuai.cn/",
       "category": "AI开发平台",
       "popularity": {
         "views": 89832,
@@ -3047,7 +2792,7 @@
       "id": 155,
       "name": "6pen Art",
       "description": "面包多团队推出的从文本描述生成绘画艺术作品",
-      "link": "https://ai-bot.cn/sites/2342.html",
+      "link": "https://6pen.art/",
       "category": "AI图像工具",
       "popularity": {
         "views": 75830,
@@ -3064,7 +2809,7 @@
       "id": 176,
       "name": "Kimi智能助手",
       "description": "月之暗面推出的AI智能助手",
-      "link": "https://ai-bot.cn/sites/53747.html",
+      "link": "https://www.kimi.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 88754,
@@ -3081,7 +2826,7 @@
       "id": 225,
       "name": "TigerBot",
       "description": "虎博科技推出的AI对话聊天机器人，基于TigerBot开源大模型",
-      "link": "https://ai-bot.cn/sites/2771.html",
+      "link": "https://tigerbot.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 80156,
@@ -3098,7 +2843,7 @@
       "id": 365,
       "name": "阿里云智能logo设计",
       "description": "阿里云推出的智能Logo设计",
-      "link": "https://ai-bot.cn/sites/1989.html",
+      "link": "https://developer.aliyun.com/article/1173884",
       "category": "AI设计工具",
       "popularity": {
         "views": 81589,
@@ -3115,7 +2860,7 @@
       "id": 423,
       "name": "Coze",
       "description": "海量AI智能体免费用，已接入DeepSeek满血版",
-      "link": "https://ai-bot.cn/sites/6791.html",
+      "link": "https://www.coze.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 63171,
@@ -3132,7 +2877,7 @@
       "id": 428,
       "name": "秒哒",
       "description": "百度推出的零代码AI开发平台，一句话生成应用",
-      "link": "https://ai-bot.cn/miaoda/",
+      "link": "https://cloud.baidu.com/product-s/miaoda_home",
       "category": "AI开发平台",
       "popularity": {
         "views": 73318,
@@ -3149,7 +2894,7 @@
       "id": 453,
       "name": "MLX",
       "description": "苹果推出的开源机器学习框架，专为Apple Silicon芯片设计",
-      "link": "https://ai-bot.cn/sites/6853.html",
+      "link": "https://ml-explore.github.io/mlx/",
       "category": "AI开发平台",
       "popularity": {
         "views": 56407,
@@ -3166,7 +2911,7 @@
       "id": 481,
       "name": "DALL·E 3",
       "description": "OpenAI旗下最新的图像生成模型",
-      "link": "https://ai-bot.cn/sites/50.html",
+      "link": "https://openai.com/dall-e-3/",
       "category": "AI训练模型",
       "popularity": {
         "views": 88102,
@@ -3183,7 +2928,7 @@
       "id": 106,
       "name": "阿贝智能",
       "description": "一站式AI绘本创作平台，副业变现必备",
-      "link": "https://ai-bot.cn/sites/17330.html",
+      "link": "https://abeiai.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 94179,
@@ -3200,7 +2945,7 @@
       "id": 206,
       "name": "商量SenseChat",
       "description": "商汤科技推出的免费AI聊天助手",
-      "link": "https://ai-bot.cn/sites/11529.html",
+      "link": "https://chat.sensetime.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 65246,
@@ -3217,7 +2962,7 @@
       "id": 213,
       "name": "Le Chat",
       "description": "Mistral推出的AI对话聊天助手",
-      "link": "https://ai-bot.cn/sites/8874.html",
+      "link": "https://chat.mistral.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 85898,
@@ -3234,7 +2979,7 @@
       "id": 261,
       "name": "Genie",
       "description": "Cosine AI推出的AI编程助手",
-      "link": "https://ai-bot.cn/genie/",
+      "link": "https://www.genielift.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 66445,
@@ -3251,7 +2996,7 @@
       "id": 293,
       "name": "Fronty",
       "description": "AI智能将图片转换成HTML和CSS代码",
-      "link": "https://ai-bot.cn/sites/928.html",
+      "link": "https://fronty.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 82249,
@@ -3268,7 +3013,7 @@
       "id": 304,
       "name": "Visual Studio IntelliCode",
       "description": "Visual Studio AI辅助开发",
-      "link": "https://ai-bot.cn/sites/112.html",
+      "link": "https://visualstudio.microsoft.com/ja/services/intellicode/",
       "category": "AI编程工具",
       "popularity": {
         "views": 95206,
@@ -3285,7 +3030,7 @@
       "id": 311,
       "name": "创客贴AI",
       "description": "AI辅助的智能在线设计工具",
-      "link": "https://ai-bot.cn/sites/13019.html",
+      "link": "https://aiart.chuangkit.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 83944,
@@ -3302,7 +3047,7 @@
       "id": 345,
       "name": "酷家乐AI",
       "description": "功能强大的AI家居设计软件",
-      "link": "https://ai-bot.cn/sites/6309.html",
+      "link": "https://www.kujiale.com/activities/AI-kujiale",
       "category": "AI设计工具",
       "popularity": {
         "views": 82060,
@@ -3319,7 +3064,7 @@
       "id": 375,
       "name": "Magician",
       "description": "Figma插件，AI生成图标、图片和UX文案",
-      "link": "https://ai-bot.cn/sites/148.html",
+      "link": "https://semiconductor.samsung.com/consumer-storage/magician/",
       "category": "AI设计工具",
       "popularity": {
         "views": 72858,
@@ -3336,7 +3081,7 @@
       "id": 439,
       "name": "无问芯穹",
       "description": "AI大模型服务平台，提供从算力、模型到应用一站式服务",
-      "link": "https://ai-bot.cn/sites/34774.html",
+      "link": "https://cloud.infini-ai.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 71606,
@@ -3353,7 +3098,7 @@
       "id": 484,
       "name": "Auto-GPT",
       "description": "爆火的实现GPT-4完全自主的实验性开源项目",
-      "link": "https://ai-bot.cn/sites/1626.html",
+      "link": "https://autogpt.net/",
       "category": "AI训练模型",
       "popularity": {
         "views": 53054,
@@ -3367,27 +3112,10 @@
       ]
     },
     {
-      "id": 504,
-      "name": "HuggingFace",
-      "description": "AI模型开发社区",
-      "link": "https://ai-bot.cn/sites/52.html",
-      "category": "AI训练模型",
-      "popularity": {
-        "views": 73664,
-        "favorites": 1054
-      },
-      "vpn_required": false,
-      "hot_score": 62,
-      "hot": true,
-      "tags": [
-        "训练模型"
-      ]
-    },
-    {
       "id": 20,
       "name": "Notion AI",
       "description": "Notion推出的AI内容创作助手",
-      "link": "https://ai-bot.cn/sites/189.html",
+      "link": "https://www.notion.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 73046,
@@ -3404,7 +3132,7 @@
       "id": 24,
       "name": "笔目鱼",
       "description": "AI英文论文写作工具",
-      "link": "https://ai-bot.cn/sites/53972.html",
+      "link": "https://m.bmysci.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 68942,
@@ -3421,7 +3149,7 @@
       "id": 57,
       "name": "WritingPal",
       "description": "面向留学生的AI英文写作工具",
-      "link": "https://ai-bot.cn/sites/9744.html",
+      "link": "https://writingpalai.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 56057,
@@ -3455,7 +3183,7 @@
       "id": 174,
       "name": "ChatGPT",
       "description": "OpenAI旗下AI对话工具",
-      "link": "https://ai-bot.cn/sites/30.html",
+      "link": "https://chatgpt.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 85172,
@@ -3472,7 +3200,7 @@
       "id": 251,
       "name": "Replit Agent",
       "description": "AI初创公司Replit推出的AI编程工具",
-      "link": "https://ai-bot.cn/replit-agent/",
+      "link": "https://docs.replit.com/replitai/agent",
       "category": "AI编程工具",
       "popularity": {
         "views": 78022,
@@ -3489,7 +3217,7 @@
       "id": 265,
       "name": "CodeArts Doer",
       "description": "华为推出的一站式AI编程助手",
-      "link": "https://ai-bot.cn/sites/55229.html",
+      "link": "https://www.huaweicloud.com/product/codeartside/snap.html",
       "category": "AI编程工具",
       "popularity": {
         "views": 53152,
@@ -3506,7 +3234,7 @@
       "id": 277,
       "name": "BLACKBOX AI",
       "description": "黑箱AI编程助理，快速代码生成",
-      "link": "https://ai-bot.cn/sites/1908.html",
+      "link": "https://www.blackbox.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 74166,
@@ -3523,7 +3251,7 @@
       "id": 282,
       "name": "Boxy",
       "description": "CodeSandbox推出的AI编程助手",
-      "link": "https://ai-bot.cn/sites/2610.html",
+      "link": "https://toyota.jp/voxy/",
       "category": "AI编程工具",
       "popularity": {
         "views": 51215,
@@ -3540,7 +3268,7 @@
       "id": 380,
       "name": "Alpaca",
       "description": "将生成式AI集成到Photoshop图像设计中",
-      "link": "https://ai-bot.cn/sites/1825.html",
+      "link": "https://alpaca.markets/",
       "category": "AI设计工具",
       "popularity": {
         "views": 57710,
@@ -3557,7 +3285,7 @@
       "id": 413,
       "name": "Consensus",
       "description": "AI科研学术搜索引擎",
-      "link": "https://ai-bot.cn/sites/11848.html",
+      "link": "https://consensus.app/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 93129,
@@ -3574,7 +3302,7 @@
       "id": 438,
       "name": "BigModel",
       "description": "智谱推出的大模型开发平台",
-      "link": "https://ai-bot.cn/sites/15446.html",
+      "link": "https://bigmodel.cn/",
       "category": "AI开发平台",
       "popularity": {
         "views": 54702,
@@ -3591,7 +3319,7 @@
       "id": 492,
       "name": "Cohere",
       "description": "构建AI产品的大语言模型平台",
-      "link": "https://ai-bot.cn/sites/2452.html",
+      "link": "https://cohere.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 71711,
@@ -3608,7 +3336,7 @@
       "id": 493,
       "name": "Codex",
       "description": "OpenAI旗下AI代码生成训练模型",
-      "link": "https://ai-bot.cn/sites/53.html",
+      "link": "https://openai.com/codex/",
       "category": "AI训练模型",
       "popularity": {
         "views": 87160,
@@ -3622,27 +3350,10 @@
       ]
     },
     {
-      "id": 10,
-      "name": "稿易AI论文",
-      "description": "AI论文写作助手，免费生成2000字大纲",
-      "link": "https://ai-bot.cn/sites/36409.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 61476,
-        "favorites": 2431
-      },
-      "vpn_required": false,
-      "hot_score": 60,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 207,
       "name": "小悟空",
       "description": "字节跳动推出的免费AI对话助手和个人助理",
-      "link": "https://ai-bot.cn/sites/4841.html",
+      "link": "https://wukong.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 72704,
@@ -3659,7 +3370,7 @@
       "id": 215,
       "name": "超级助理",
       "description": "百度智能云发布的基于文心一言的AI原生应用和Copilot“超级助理”",
-      "link": "https://ai-bot.cn/sites/6290.html",
+      "link": "https://superagent.cloud.baidu.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 77857,
@@ -3676,7 +3387,7 @@
       "id": 373,
       "name": "ColorMagic",
       "description": "AI调色板生成工具",
-      "link": "https://ai-bot.cn/sites/162.html",
+      "link": "https://colormagic.app/ja",
       "category": "AI设计工具",
       "popularity": {
         "views": 56212,
@@ -3693,7 +3404,7 @@
       "id": 378,
       "name": "Khroma",
       "description": "AI调色盘生成工具",
-      "link": "https://ai-bot.cn/sites/106.html",
+      "link": "https://www.khroma.co/",
       "category": "AI设计工具",
       "popularity": {
         "views": 66631,
@@ -3710,7 +3421,7 @@
       "id": 397,
       "name": "360AI搜索",
       "description": "360推出的新一代AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11897.html",
+      "link": "https://ai.360.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 63935,
@@ -3727,7 +3438,7 @@
       "id": 400,
       "name": "Reddo",
       "description": "全球产品信息AI搜索引擎，能语义化搜索任何公开的产品与公司",
-      "link": "https://ai-bot.cn/sites/16039.html",
+      "link": "https://www.rockstargames.com/jp/reddeadonline",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 67007,
@@ -3744,7 +3455,7 @@
       "id": 480,
       "name": "GPT-4",
       "description": "OpenAI旗下最新的GPT-4模型",
-      "link": "https://ai-bot.cn/sites/49.html",
+      "link": "https://openai.com/ja-JP/index/gpt-4/",
       "category": "AI训练模型",
       "popularity": {
         "views": 59615,
@@ -3761,7 +3472,7 @@
       "id": 55,
       "name": "Cohesive",
       "description": "人工智能文案内容创作和编辑工具",
-      "link": "https://ai-bot.cn/sites/2195.html",
+      "link": "https://getcohesiveai.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 59273,
@@ -3778,7 +3489,7 @@
       "id": 95,
       "name": "AISEO",
       "description": "AI创作SEO优化友好的文案和文章",
-      "link": "https://ai-bot.cn/sites/409.html",
+      "link": "https://aiseo.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 56110,
@@ -3795,7 +3506,7 @@
       "id": 158,
       "name": "360智绘",
       "description": "360推出的AI图片和绘画生成工具",
-      "link": "https://ai-bot.cn/sites/6840.html",
+      "link": "https://aigc.360.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 80542,
@@ -3812,7 +3523,7 @@
       "id": 160,
       "name": "Imagine with Meta",
       "description": "Meta最新推出的在线AI图像生成器",
-      "link": "https://ai-bot.cn/sites/6492.html",
+      "link": "https://www.meta.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 54984,
@@ -3829,7 +3540,7 @@
       "id": 204,
       "name": "Museland",
       "description": "沉浸式AI角色扮演产品",
-      "link": "https://ai-bot.cn/sites/15123.html",
+      "link": "https://museland.net/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 81529,
@@ -3846,7 +3557,7 @@
       "id": 234,
       "name": "Open Assistant",
       "description": "免费开源的对话式AI，GitHub星标超3万",
-      "link": "https://ai-bot.cn/sites/1656.html",
+      "link": "https://github.com/LAION-AI/Open-Assistant",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 85684,
@@ -3863,7 +3574,7 @@
       "id": 278,
       "name": "Solo",
       "description": "Mozilla推出的零编程无代码AI网站建设工具",
-      "link": "https://ai-bot.cn/sites/6690.html",
+      "link": "https://us.solo.global/",
       "category": "AI编程工具",
       "popularity": {
         "views": 63180,
@@ -3880,7 +3591,7 @@
       "id": 286,
       "name": "aiXcoder",
       "description": "自然语言到代码的方法级代码生成，以及多行智能代码补全",
-      "link": "https://ai-bot.cn/sites/1774.html",
+      "link": "https://www.aixcoder.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 56663,
@@ -3897,7 +3608,7 @@
       "id": 369,
       "name": "Illustroke",
       "description": "AI SVG矢量插画生成工具",
-      "link": "https://ai-bot.cn/sites/172.html",
+      "link": "https://illustroke.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 59926,
@@ -3914,7 +3625,7 @@
       "id": 424,
       "name": "SiliconFlow",
       "description": "生成式AI计算基础设施平台",
-      "link": "https://ai-bot.cn/sites/35828.html",
+      "link": "https://www.siliconflow.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 87060,
@@ -3931,7 +3642,7 @@
       "id": 427,
       "name": "Dify",
       "description": "开源的生成式AI应用开发平台",
-      "link": "https://ai-bot.cn/dify/",
+      "link": "https://dify.ai/zh",
       "category": "AI开发平台",
       "popularity": {
         "views": 69450,
@@ -3948,7 +3659,7 @@
       "id": 33,
       "name": "Jasper",
       "description": "AI文字内容创作工具",
-      "link": "https://ai-bot.cn/sites/14.html",
+      "link": "https://www.jasper.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 74364,
@@ -3965,7 +3676,7 @@
       "id": 42,
       "name": "Wordvice AI",
       "description": "Wordvice推出的免费AI写作助手",
-      "link": "https://ai-bot.cn/sites/23677.html",
+      "link": "https://wordvice.ai/jp",
       "category": "AI写作工具",
       "popularity": {
         "views": 84366,
@@ -3982,7 +3693,7 @@
       "id": 148,
       "name": "秘塔捉捉猫",
       "description": "秘塔写作猫推出的AI文字到图像生成工具",
-      "link": "https://ai-bot.cn/sites/1607.html",
+      "link": "https://xiezuocat.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 73257,
@@ -4016,7 +3727,7 @@
       "id": 272,
       "name": "CodeRabbit",
       "description": "AI驱动的代码审查平台",
-      "link": "https://ai-bot.cn/sites/12176.html",
+      "link": "https://coderabbit.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 79401,
@@ -4033,7 +3744,7 @@
       "id": 300,
       "name": "CodeSnippets",
       "description": "AI代码生成、补全、分析、重构和调试",
-      "link": "https://ai-bot.cn/sites/113.html",
+      "link": "https://wpcode.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 56156,
@@ -4050,7 +3761,7 @@
       "id": 348,
       "name": "LogoliveryAI",
       "description": "免费的AI Logo生成器，提供SVG矢量格式",
-      "link": "https://ai-bot.cn/sites/3006.html",
+      "link": "https://logolivery.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 48169,
@@ -4067,7 +3778,7 @@
       "id": 498,
       "name": "StableLM",
       "description": "Stability AI推出的开源的类ChatGPT大语言模型",
-      "link": "https://ai-bot.cn/sites/1861.html",
+      "link": "https://ja.stability.ai/blog/stability-ai-launches-the-first-of-its-stablelm-suite-of-language-models",
       "category": "AI训练模型",
       "popularity": {
         "views": 73776,
@@ -4081,27 +3792,10 @@
       ]
     },
     {
-      "id": 501,
-      "name": "PaLM 2",
-      "description": "Google的下一代大语言模型，超过3400亿参数",
-      "link": "https://ai-bot.cn/sites/1077.html",
-      "category": "AI训练模型",
-      "popularity": {
-        "views": 57311,
-        "favorites": 1718
-      },
-      "vpn_required": false,
-      "hot_score": 58,
-      "hot": true,
-      "tags": [
-        "训练模型"
-      ]
-    },
-    {
       "id": 35,
       "name": "Grammarly",
       "description": "AI英语语法和拼写检查写作助手",
-      "link": "https://ai-bot.cn/sites/199.html",
+      "link": "https://www.grammarly.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 51256,
@@ -4115,27 +3809,10 @@
       ]
     },
     {
-      "id": 79,
-      "name": "Bearly",
-      "description": "AI阅读总结、写作和内容生成助手",
-      "link": "https://ai-bot.cn/sites/1061.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 74572,
-        "favorites": 993
-      },
-      "vpn_required": false,
-      "hot_score": 57,
-      "hot": true,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 82,
       "name": "Compose AI",
       "description": "免费的Chrome浏览器自动化写作扩展",
-      "link": "https://ai-bot.cn/sites/973.html",
+      "link": "https://www.compose.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 56797,
@@ -4152,7 +3829,7 @@
       "id": 205,
       "name": "百度AI助手",
       "description": "百度推出的多场景AI智能体助手",
-      "link": "https://ai-bot.cn/sites/23550.html",
+      "link": "https://chat.baidu.com/page/pluginhome.html",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 53872,
@@ -4169,7 +3846,7 @@
       "id": 232,
       "name": "Whispr",
       "description": "免费AI对话回应",
-      "link": "https://ai-bot.cn/sites/163.html",
+      "link": "https://openai.com/ja-JP/index/whisper/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 57560,
@@ -4186,7 +3863,7 @@
       "id": 318,
       "name": "燕雀光年",
       "description": "AI LOGO设计工具",
-      "link": "https://ai-bot.cn/sites/54629.html",
+      "link": "https://www.aitags.cn/",
       "category": "AI设计工具",
       "popularity": {
         "views": 78794,
@@ -4203,7 +3880,7 @@
       "id": 334,
       "name": "Fable Prism",
       "description": "AI动效设计和动画效果制作工具",
-      "link": "https://ai-bot.cn/sites/10172.html",
+      "link": "https://www.melodyshih.com/fable-prism/",
       "category": "AI设计工具",
       "popularity": {
         "views": 54915,
@@ -4220,7 +3897,7 @@
       "id": 410,
       "name": "Reportify",
       "description": "AI投资研究问答搜索引擎",
-      "link": "https://ai-bot.cn/sites/9857.html",
+      "link": "https://reportify.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 69603,
@@ -4237,7 +3914,7 @@
       "id": 431,
       "name": "BASE44",
       "description": "零代码AI应用开发平台",
-      "link": "https://ai-bot.cn/base44/",
+      "link": "https://base44.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 49203,
@@ -4254,7 +3931,7 @@
       "id": 447,
       "name": "昇思MindSpore",
       "description": "华为开源自研AI深度学习框架",
-      "link": "https://ai-bot.cn/sites/2022.html",
+      "link": "https://www.mindspore.cn/",
       "category": "AI开发平台",
       "popularity": {
         "views": 55499,
@@ -4271,7 +3948,7 @@
       "id": 88,
       "name": "Hypotenuse AI",
       "description": "人工智能写作助手和文本生成器",
-      "link": "https://ai-bot.cn/sites/589.html",
+      "link": "https://www.hypotenuse.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 82258,
@@ -4288,7 +3965,7 @@
       "id": 138,
       "name": "Leonardo.ai",
       "description": "免费的AI绘画和图像生成工具和社区",
-      "link": "https://ai-bot.cn/sites/1631.html",
+      "link": "https://leonardo.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 69094,
@@ -4305,7 +3982,7 @@
       "id": 203,
       "name": "造梦次元",
       "description": "AI互动内容平台，虚拟角色逗你开心",
-      "link": "https://ai-bot.cn/sites/17432.html",
+      "link": "https://ciyuan.ideaflow.pro/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 80591,
@@ -4322,7 +3999,7 @@
       "id": 292,
       "name": "Locofy",
       "description": "AI无代码工具将Figma、Adobe XD和Sketch设计转换成前端代码",
-      "link": "https://ai-bot.cn/sites/933.html",
+      "link": "https://www.locofy.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 78257,
@@ -4339,7 +4016,7 @@
       "id": 322,
       "name": "墨刀AI",
       "description": "墨刀推出的AI产品原型设计助手",
-      "link": "https://ai-bot.cn/sites/2648.html",
+      "link": "https://www.modao.cc/",
       "category": "AI设计工具",
       "popularity": {
         "views": 74112,
@@ -4356,7 +4033,7 @@
       "id": 323,
       "name": "居然设计家",
       "description": "居然之家联合阿里推出的AI家装设计平台",
-      "link": "https://ai-bot.cn/design-shejijia/",
+      "link": "https://www.shejijia.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 84292,
@@ -4373,7 +4050,7 @@
       "id": 163,
       "name": "Stable Doodle",
       "description": "StabilityAI最新推出的将手绘草图转换成精美图像的工具",
-      "link": "https://ai-bot.cn/sites/3529.html",
+      "link": "https://stability.ai/news/clipdrop-launches-stable-doodle",
       "category": "AI图像工具",
       "popularity": {
         "views": 57163,
@@ -4390,7 +4067,7 @@
       "id": 224,
       "name": "HuggingChat",
       "description": "HuggingFace推出的在线聊天机器人，基于Open Assistant模型",
-      "link": "https://ai-bot.cn/sites/1978.html",
+      "link": "https://huggingface.co/chat/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 65730,
@@ -4407,7 +4084,7 @@
       "id": 256,
       "name": "Junie",
       "description": "JetBrains 推出的 AI 编程助手",
-      "link": "https://ai-bot.cn/junie/",
+      "link": "https://www.jetbrains.com/junie/",
       "category": "AI编程工具",
       "popularity": {
         "views": 66773,
@@ -4424,7 +4101,7 @@
       "id": 262,
       "name": "iFlyCode",
       "description": "科大讯飞推出的智能编程助手",
-      "link": "https://ai-bot.cn/sites/4055.html",
+      "link": "https://iflycode.xfyun.cn/",
       "category": "AI编程工具",
       "popularity": {
         "views": 65317,
@@ -4441,7 +4118,7 @@
       "id": 266,
       "name": "Sketch2Code",
       "description": "微软AI Lab推出的将手绘草图转换成HTML代码工具",
-      "link": "https://ai-bot.cn/sites/938.html",
+      "link": "https://learn.microsoft.com/en-us/shows/ai-show/sketch2code",
       "category": "AI编程工具",
       "popularity": {
         "views": 51691,
@@ -4458,7 +4135,7 @@
       "id": 354,
       "name": "模袋云AI",
       "description": "建筑AI创作平台，专注于大型建筑、小型住宅、室内设计、景观的出图和AI模型训练",
-      "link": "https://ai-bot.cn/sites/3632.html",
+      "link": "https://www.modaiyun.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 75406,
@@ -4475,7 +4152,7 @@
       "id": 406,
       "name": "XAnswer",
       "description": "支持生成思维导图的免费AI搜索工具",
-      "link": "https://ai-bot.cn/sites/15156.html",
+      "link": "https://www.xanswer.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 73318,
@@ -4492,7 +4169,7 @@
       "id": 449,
       "name": "Gumloop",
       "description": "AI零代码工作流平台，支持用户自定义工作流程",
-      "link": "https://ai-bot.cn/sites/21961.html",
+      "link": "https://www.gumloop.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 54454,
@@ -4509,7 +4186,7 @@
       "id": 487,
       "name": "魔搭社区",
       "description": "阿里达摩院推出的AI模型社区，超过300+开源AI模型",
-      "link": "https://ai-bot.cn/sites/1487.html",
+      "link": "https://www.modelscope.cn/",
       "category": "AI训练模型",
       "popularity": {
         "views": 55830,
@@ -4526,7 +4203,7 @@
       "id": 18,
       "name": "小鱼AI写作",
       "description": "一站式AI写作平台，一键生成高质量原创内容",
-      "link": "https://ai-bot.cn/sites/18646.html",
+      "link": "https://www.xiaoyuxiezuo.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 55222,
@@ -4543,7 +4220,7 @@
       "id": 70,
       "name": "易撰",
       "description": "新媒体AI内容创作助手",
-      "link": "https://ai-bot.cn/sites/36.html",
+      "link": "http://www.yizhuan5.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 77660,
@@ -4560,7 +4237,7 @@
       "id": 102,
       "name": "绘蛙",
       "description": "AI电商营销工具，免费生成商品图和种草文案",
-      "link": "https://ai-bot.cn/sites/9195.html",
+      "link": "https://www.ihuiwa.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 63612,
@@ -4574,27 +4251,10 @@
       ]
     },
     {
-      "id": 114,
-      "name": "AI改图神器",
-      "description": "AI万能图片在线编辑器",
-      "link": "https://ai-bot.cn/sites/1412.html",
-      "category": "AI图像工具",
-      "popularity": {
-        "views": 74810,
-        "favorites": 2098
-      },
-      "vpn_required": false,
-      "hot_score": 54,
-      "hot": true,
-      "tags": [
-        "图像工具"
-      ]
-    },
-    {
       "id": 421,
       "name": "Adot",
       "description": "一个由AI驱动的 Web3 搜索引擎",
-      "link": "https://ai-bot.cn/sites/14712.html",
+      "link": "https://azdot.gov/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 70646,
@@ -4611,7 +4271,7 @@
       "id": 444,
       "name": "魔乐社区",
       "description": "天翼云联合华为推出的AI开发者社区",
-      "link": "https://ai-bot.cn/sites/36421.html",
+      "link": "https://modelers.cn/MindIE",
       "category": "AI开发平台",
       "popularity": {
         "views": 57278,
@@ -4628,7 +4288,7 @@
       "id": 8,
       "name": "墨狐AI",
       "description": "短篇小说AI写作助手，专为网文小说作者设计",
-      "link": "https://ai-bot.cn/sites/15321.html",
+      "link": "https://openi.cn/sites/149491.html",
       "category": "AI写作工具",
       "popularity": {
         "views": 56663,
@@ -4645,7 +4305,7 @@
       "id": 31,
       "name": "Rytr",
       "description": "AI内容生成和写作助手",
-      "link": "https://ai-bot.cn/sites/46.html",
+      "link": "https://rytr.me/",
       "category": "AI写作工具",
       "popularity": {
         "views": 63605,
@@ -4662,7 +4322,7 @@
       "id": 34,
       "name": "库宝AI工作助手",
       "description": "千库网推出的多功能AI创作工具",
-      "link": "https://ai-bot.cn/sites/14618.html",
+      "link": "https://588tool.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 69751,
@@ -4679,7 +4339,7 @@
       "id": 131,
       "name": "ARC",
       "description": "腾讯旗下ARC实验室推出的免费AI图片处理工具",
-      "link": "https://ai-bot.cn/sites/678.html",
+      "link": "https://arc.net/",
       "category": "AI图像工具",
       "popularity": {
         "views": 79319,
@@ -4696,7 +4356,7 @@
       "id": 341,
       "name": "Creatie",
       "description": "AI驱动的UI和UX设计工具",
-      "link": "https://ai-bot.cn/sites/9772.html",
+      "link": "https://creatie.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 59650,
@@ -4713,7 +4373,7 @@
       "id": 388,
       "name": "Devv",
       "description": "面向程序员的新一代AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/7108.html",
+      "link": "https://devv.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 74534,
@@ -4730,7 +4390,7 @@
       "id": 443,
       "name": "言犀智能体平台",
       "description": "京东推出的一站式AI智能体开发平台",
-      "link": "https://ai-bot.cn/sites/14871.html",
+      "link": "https://yanxi.jd.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 57850,
@@ -4747,7 +4407,7 @@
       "id": 452,
       "name": "Scikit-learn",
       "description": "Python机器学习库",
-      "link": "https://ai-bot.cn/sites/60.html",
+      "link": "https://scikit-learn.org/",
       "category": "AI开发平台",
       "popularity": {
         "views": 65790,
@@ -4761,27 +4421,10 @@
       ]
     },
     {
-      "id": 486,
-      "name": "AgentGPT",
-      "description": "在浏览器中组装、配置和部署自主人工智能的开源项目",
-      "link": "https://ai-bot.cn/sites/1623.html",
-      "category": "AI训练模型",
-      "popularity": {
-        "views": 61584,
-        "favorites": 1871
-      },
-      "vpn_required": false,
-      "hot_score": 53,
-      "hot": true,
-      "tags": [
-        "训练模型"
-      ]
-    },
-    {
       "id": 488,
       "name": "悟道",
       "description": "智源“悟道”大模型",
-      "link": "https://ai-bot.cn/sites/1083.html",
+      "link": "https://zennihonbudougu.com/products/detail/1899",
       "category": "AI训练模型",
       "popularity": {
         "views": 69903,
@@ -4798,7 +4441,7 @@
       "id": 22,
       "name": "FlowUs AI",
       "description": "在线文档平台息流推出的AI创作助手，类似于Notion AI",
-      "link": "https://ai-bot.cn/sites/7313.html",
+      "link": "https://flowus.cn/ai",
       "category": "AI写作工具",
       "popularity": {
         "views": 63185,
@@ -4815,7 +4458,7 @@
       "id": 29,
       "name": "彩云小梦",
       "description": "彩云科技推出的智能AI故事写作工具",
-      "link": "https://ai-bot.cn/sites/913.html",
+      "link": "https://www.xiaomengai.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 70250,
@@ -4832,7 +4475,7 @@
       "id": 67,
       "name": "树熊写作",
       "description": "树熊AI推出的AI智能写作工具",
-      "link": "https://ai-bot.cn/sites/24575.html",
+      "link": "https://ai.koalaoffice.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 65254,
@@ -4849,7 +4492,7 @@
       "id": 270,
       "name": "驭码CodeRider",
       "description": "极狐GitLab推出的AI编程与软件智能研发助手",
-      "link": "https://ai-bot.cn/sites/12890.html",
+      "link": "https://gitlab.cn/code-rider/",
       "category": "AI编程工具",
       "popularity": {
         "views": 43982,
@@ -4866,7 +4509,7 @@
       "id": 336,
       "name": "匠紫",
       "description": "一站式AI设计工具",
-      "link": "https://ai-bot.cn/sites/16181.html",
+      "link": "https://jiangziai.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 60421,
@@ -4883,7 +4526,7 @@
       "id": 46,
       "name": "灵构AI笔记",
       "description": "在线安全的灵感收集、思路整理AI笔记工具",
-      "link": "https://ai-bot.cn/sites/5572.html",
+      "link": "https://88lingo.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 66600,
@@ -4900,7 +4543,7 @@
       "id": 379,
       "name": "即时AI",
       "description": "即时设计推出的由文本描述生成可编辑的原型设计稿",
-      "link": "https://ai-bot.cn/sites/1059.html",
+      "link": "https://js.design/ai",
       "category": "AI设计工具",
       "popularity": {
         "views": 71607,
@@ -4917,7 +4560,7 @@
       "id": 408,
       "name": "AlphaSense",
       "description": "专为金融专业人士设计的AI搜索工具",
-      "link": "https://ai-bot.cn/sites/15233.html",
+      "link": "https://www.alpha-sense.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 53229,
@@ -4934,7 +4577,7 @@
       "id": 462,
       "name": "LangChain",
       "description": "开发由语言模型驱动的应用程序的框架",
-      "link": "https://ai-bot.cn/sites/1430.html",
+      "link": "https://www.langchain.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 50048,
@@ -4951,7 +4594,7 @@
       "id": 39,
       "name": "DeepL Write",
       "description": "DeepL推出的AI驱动的写作助手",
-      "link": "https://ai-bot.cn/sites/608.html",
+      "link": "https://www.deepl.com/ja/write",
       "category": "AI写作工具",
       "popularity": {
         "views": 44618,
@@ -4968,7 +4611,7 @@
       "id": 87,
       "name": "Anyword",
       "description": "AI文案写作助手和文本生成器",
-      "link": "https://ai-bot.cn/sites/188.html",
+      "link": "https://www.anyword.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 44116,
@@ -4985,7 +4628,7 @@
       "id": 295,
       "name": "Tabnine",
       "description": "AI代码自动补全编程助手",
-      "link": "https://ai-bot.cn/sites/110.html",
+      "link": "https://www.tabnine.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 69645,
@@ -5002,7 +4645,7 @@
       "id": 454,
       "name": "Label Studio",
       "description": "免费开源的数据标注工具",
-      "link": "https://ai-bot.cn/sites/3969.html",
+      "link": "https://labelstud.io/",
       "category": "AI开发平台",
       "popularity": {
         "views": 72787,
@@ -5019,7 +4662,7 @@
       "id": 465,
       "name": "ChatDev",
       "description": "面壁智能推出的AI智能体软件开发平台，使用自然语言即可创建软件",
-      "link": "https://ai-bot.cn/sites/5581.html",
+      "link": "https://chatdev.toscl.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 47130,
@@ -5036,7 +4679,7 @@
       "id": 473,
       "name": "讯飞星辰MaaS",
       "description": "科大讯飞推出的AI大模型定制训练平台",
-      "link": "https://ai-bot.cn/xunfei-xingchen-maas/",
+      "link": "https://training.xfyun.cn/",
       "category": "AI训练模型",
       "popularity": {
         "views": 75256,
@@ -5053,7 +4696,7 @@
       "id": 512,
       "name": "绘蛙AI视频",
       "description": "绘蛙推出的AI图生视频工具",
-      "link": "https://ai-bot.cn/sites/33687.html",
+      "link": "https://www.ihuiwa.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5070,7 +4713,7 @@
       "id": 513,
       "name": "白日梦",
       "description": "AI视频创作平台，最长可生成六分钟的视频",
-      "link": "https://ai-bot.cn/sites/13065.html",
+      "link": "http://www.brmyx.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5087,7 +4730,7 @@
       "id": 514,
       "name": "讯飞绘镜",
       "description": "科大讯飞推出的AI短视频创作平台",
-      "link": "https://ai-bot.cn/sites/12254.html",
+      "link": "https://typemovie.art/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5104,7 +4747,7 @@
       "id": 515,
       "name": "Vidu",
       "description": "生数科技推出的AI视频生成大模型",
-      "link": "https://ai-bot.cn/sites/14695.html",
+      "link": "https://www.vidu.com/ja/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5121,7 +4764,7 @@
       "id": 516,
       "name": "SoundView",
       "description": "AI视频本地化工具，支持视频配音和翻译",
-      "link": "https://ai-bot.cn/sites/35756.html",
+      "link": "https://soundview.top/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5138,7 +4781,7 @@
       "id": 517,
       "name": "有言",
       "description": "一站式AI视频创作和3D数字人生成平台",
-      "link": "https://ai-bot.cn/sites/10847.html",
+      "link": "https://www.youyan3d.com/platform/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5155,7 +4798,7 @@
       "id": 518,
       "name": "即梦AI",
       "description": "字节跳动推出的一站式AI创作平台",
-      "link": "https://ai-bot.cn/sites/17772.html",
+      "link": "https://jimeng.jianying.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5172,7 +4815,7 @@
       "id": 519,
       "name": "可灵AI",
       "description": "快手推出的AI视频生成工具",
-      "link": "https://ai-bot.cn/sites/13186.html",
+      "link": "https://app.klingai.com/cn/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5189,7 +4832,7 @@
       "id": 520,
       "name": "巨日禄",
       "description": "一站式AI动漫视频创作平台",
-      "link": "https://ai-bot.cn/sites/16162.html",
+      "link": "https://ai.jurilu.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5206,7 +4849,7 @@
       "id": 521,
       "name": "智谱清影",
       "description": "智谱推出的AI视频生成工具",
-      "link": "https://ai-bot.cn/qingying/",
+      "link": "https://www.zhipuai.cn/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5223,7 +4866,7 @@
       "id": 522,
       "name": "Pollo AI",
       "description": "一站式AI图像和视频创作平台",
-      "link": "https://ai-bot.cn/pollo-ai/",
+      "link": "https://x.com/itsPolloAI",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5240,7 +4883,7 @@
       "id": 524,
       "name": "创一AI",
       "description": "AI音视频创作工具，支持AI短片、AI角色和作图配音等",
-      "link": "https://ai-bot.cn/sites/16669.html",
+      "link": "https://www.aiww.com/aitool/chuangyiai",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5257,7 +4900,7 @@
       "id": 525,
       "name": "蝉镜",
       "description": "AI数字人视频生成平台",
-      "link": "https://ai-bot.cn/sites/11290.html",
+      "link": "https://www.chanjing.cc/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5274,7 +4917,7 @@
       "id": 527,
       "name": "海螺视频",
       "description": "MiniMax公司推出的AI视频生成工具",
-      "link": "https://ai-bot.cn/hailuoai-video/",
+      "link": "https://hailuoai.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5291,7 +4934,7 @@
       "id": 528,
       "name": "腾讯混元AI视频",
       "description": "腾讯推出的AI视频生成工具",
-      "link": "https://ai-bot.cn/sites/46196.html",
+      "link": "https://video.hunyuan.tencent.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5308,7 +4951,7 @@
       "id": 529,
       "name": "通义万相AI视频",
       "description": "通义万相AI视频是阿里推出的...",
-      "link": "https://ai-bot.cn/tongyi-wanxvideo/",
+      "link": "https://tongyi.aliyun.com/wanxiang/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5325,7 +4968,7 @@
       "id": 530,
       "name": "JoyPix",
       "description": "AI数字人创作工具，支持声音克隆",
-      "link": "https://ai-bot.cn/sites/45413.html",
+      "link": "https://www.joypix.ai/",
       "category": "AI视频工具",
       "popularity": {
         "views": 60000,
@@ -5342,7 +4985,7 @@
       "id": 135,
       "name": "Faceswapper",
       "description": "AI在线换脸工具",
-      "link": "https://ai-bot.cn/sites/16745.html",
+      "link": "https://faceswapper.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 65694,
@@ -5359,7 +5002,7 @@
       "id": 183,
       "name": "Qwen Chat",
       "description": "阿里通义推出的 Qwen 最新模型体验平台",
-      "link": "https://ai-bot.cn/qwen-chat/",
+      "link": "https://chat.qwen.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 64362,
@@ -5376,7 +5019,7 @@
       "id": 229,
       "name": "YouChat AI",
       "description": "AI搜索对话工具",
-      "link": "https://ai-bot.cn/sites/140.html",
+      "link": "https://you.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 43550,
@@ -5393,7 +5036,7 @@
       "id": 249,
       "name": "Windsurf",
       "description": "Codeium公司推出的AI编程工具",
-      "link": "https://ai-bot.cn/windsurf/",
+      "link": "https://windsurf.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 51045,
@@ -5410,7 +5053,7 @@
       "id": 329,
       "name": "笔格设计",
       "description": "AI设计工具合集，包括文生图、智能消除等",
-      "link": "https://ai-bot.cn/sites/14748.html",
+      "link": "https://bigesj.com/topic/home.html",
       "category": "AI设计工具",
       "popularity": {
         "views": 56743,
@@ -5427,7 +5070,7 @@
       "id": 384,
       "name": "夸克AI",
       "description": "集AI搜索、网盘、文档、创作等功能于一体的应用",
-      "link": "https://ai-bot.cn/sites/15309.html",
+      "link": "https://ai.quark.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 57811,
@@ -5444,7 +5087,7 @@
       "id": 445,
       "name": "BetterYeah AI",
       "description": "企业AI应用和助手构建平台",
-      "link": "https://ai-bot.cn/sites/11786.html",
+      "link": "https://www.betteryeah.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 46519,
@@ -5461,7 +5104,7 @@
       "id": 448,
       "name": "PyTorch",
       "description": "开源机器学习框架",
-      "link": "https://ai-bot.cn/sites/61.html",
+      "link": "https://pytorch.org/",
       "category": "AI开发平台",
       "popularity": {
         "views": 60934,
@@ -5478,7 +5121,7 @@
       "id": 460,
       "name": "JAX",
       "description": "Google推出的用于变换数值函数的机器学习框架",
-      "link": "https://ai-bot.cn/sites/1276.html",
+      "link": "https://docs.jax.dev/",
       "category": "AI开发平台",
       "popularity": {
         "views": 57946,
@@ -5495,7 +5138,7 @@
       "id": 475,
       "name": "Llama 3",
       "description": "Meta最新开源推出的新一代大模型",
-      "link": "https://ai-bot.cn/sites/11341.html",
+      "link": "https://www.llama.com/models/llama-3/",
       "category": "AI训练模型",
       "popularity": {
         "views": 68649,
@@ -5512,7 +5155,7 @@
       "id": 159,
       "name": "网易AI创意工坊",
       "description": "网易云课堂推出的AI作画平台，在线使用Stable Diffusion出图",
-      "link": "https://ai-bot.cn/sites/4212.html",
+      "link": "https://ke.study.163.com/artWorks/painting",
       "category": "AI图像工具",
       "popularity": {
         "views": 67758,
@@ -5529,7 +5172,7 @@
       "id": 230,
       "name": "ChatSonic",
       "description": "WriteSonic出品的ChatGPT竞品",
-      "link": "https://ai-bot.cn/sites/139.html",
+      "link": "https://writesonic.com/chat",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 58281,
@@ -5546,7 +5189,7 @@
       "id": 255,
       "name": "CodeWhisperer",
       "description": "亚马逊推出的免费AI编程助手",
-      "link": "https://ai-bot.cn/sites/1616.html",
+      "link": "https://docs.aws.amazon.com/ja_jp/codewhisperer/",
       "category": "AI编程工具",
       "popularity": {
         "views": 54849,
@@ -5563,7 +5206,7 @@
       "id": 259,
       "name": "Cody",
       "description": "Sourcegraph推出的免费AI编程工具",
-      "link": "https://ai-bot.cn/sites/2613.html",
+      "link": "https://sourcegraph.com/cody",
       "category": "AI编程工具",
       "popularity": {
         "views": 59353,
@@ -5580,7 +5223,7 @@
       "id": 319,
       "name": "Looka",
       "description": "AI在线设计和生成logo",
-      "link": "https://ai-bot.cn/sites/595.html",
+      "link": "https://looka.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 72897,
@@ -5597,7 +5240,7 @@
       "id": 471,
       "name": "Chatbox AI",
       "description": "开源的AI客户端助手，支持多种主流AI模型",
-      "link": "https://ai-bot.cn/chatbox-ai/",
+      "link": "https://chatboxai.app/ja",
       "category": "AI训练模型",
       "popularity": {
         "views": 56425,
@@ -5614,7 +5257,7 @@
       "id": 485,
       "name": "Jan",
       "description": "本地运行大模型并进行AI对话的工具，免费开源",
-      "link": "https://ai-bot.cn/sites/7412.html",
+      "link": "https://jan.ai/",
       "category": "AI训练模型",
       "popularity": {
         "views": 42891,
@@ -5631,7 +5274,7 @@
       "id": 494,
       "name": "序列猴子",
       "description": "出门问问推出的一款超大规模的语言模型",
-      "link": "https://ai-bot.cn/sites/1933.html",
+      "link": "https://openapi.mobvoi.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 44247,
@@ -5648,7 +5291,7 @@
       "id": 59,
       "name": "NovelAI",
       "description": "AI小说故事创作工具",
-      "link": "https://ai-bot.cn/sites/1062.html",
+      "link": "https://novelai.net/",
       "category": "AI写作工具",
       "popularity": {
         "views": 44799,
@@ -5662,27 +5305,10 @@
       ]
     },
     {
-      "id": 113,
-      "name": "通义万相",
-      "description": "阿里最新推出的AI绘画创作模型",
-      "link": "https://ai-bot.cn/sites/3400.html",
-      "category": "AI图像工具",
-      "popularity": {
-        "views": 45344,
-        "favorites": 1645
-      },
-      "vpn_required": false,
-      "hot_score": 47,
-      "hot": false,
-      "tags": [
-        "图像工具"
-      ]
-    },
-    {
       "id": 168,
       "name": "Relight",
       "description": "ClipDrop推出的AI图像打光工具",
-      "link": "https://ai-bot.cn/sites/299.html",
+      "link": "https://relight-borderless.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 56284,
@@ -5699,7 +5325,7 @@
       "id": 184,
       "name": "文心一言",
       "description": "百度推出的基于文心大模型的AI对话互动工具",
-      "link": "https://ai-bot.cn/sites/669.html",
+      "link": "https://yiyan.baidu.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 40299,
@@ -5716,7 +5342,7 @@
       "id": 201,
       "name": "通义星尘",
       "description": "用AI定制属于你自己的IP角色",
-      "link": "https://ai-bot.cn/sites/14310.html",
+      "link": "https://tongyi.aliyun.com/xingchen/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 48224,
@@ -5733,7 +5359,7 @@
       "id": 220,
       "name": "元象XChat",
       "description": "元象XVERSE大模型驱动的AI聊天助手",
-      "link": "https://ai-bot.cn/sites/5678.html",
+      "link": "https://chat.xverse.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 58681,
@@ -5750,7 +5376,7 @@
       "id": 260,
       "name": "DevChat",
       "description": "开源的支持多款大模型的AI编程助手",
-      "link": "https://ai-bot.cn/sites/7582.html",
+      "link": "https://devchat.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 61586,
@@ -5767,7 +5393,7 @@
       "id": 280,
       "name": "AskCodi",
       "description": "你的个人AI编程助手",
-      "link": "https://ai-bot.cn/sites/980.html",
+      "link": "https://www.askcodi.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 72759,
@@ -5784,7 +5410,7 @@
       "id": 294,
       "name": "MarsX",
       "description": "AI无代码软件开发",
-      "link": "https://ai-bot.cn/sites/161.html",
+      "link": "https://marsx.dev/",
       "category": "AI编程工具",
       "popularity": {
         "views": 67691,
@@ -5801,7 +5427,7 @@
       "id": 330,
       "name": "Logoai",
       "description": "AI LOGO创建设计平台，一站式品牌打造",
-      "link": "https://ai-bot.cn/sites/27582.html",
+      "link": "https://www.logoai.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 40545,
@@ -5818,7 +5444,7 @@
       "id": 74,
       "name": "XPaper AI",
       "description": "晓语台旗下的论文写作辅助指导平台",
-      "link": "https://ai-bot.cn/sites/7424.html",
+      "link": "https://todayai.com.cn/sites/3908.html",
       "category": "AI写作工具",
       "popularity": {
         "views": 52183,
@@ -5832,27 +5458,10 @@
       ]
     },
     {
-      "id": 137,
-      "name": "Vmake AI",
-      "description": "AI在线图像和视频编辑平台，专为电商、设计提供服务",
-      "link": "https://ai-bot.cn/sites/18073.html",
-      "category": "AI图像工具",
-      "popularity": {
-        "views": 45563,
-        "favorites": 1017
-      },
-      "vpn_required": false,
-      "hot_score": 46,
-      "hot": false,
-      "tags": [
-        "图像工具"
-      ]
-    },
-    {
       "id": 189,
       "name": "Poe",
       "description": "问答社区Quora推出的问答机器人工具",
-      "link": "https://ai-bot.cn/sites/459.html",
+      "link": "https://poe.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 60762,
@@ -5869,7 +5478,7 @@
       "id": 246,
       "name": "GitHub Copilot",
       "description": "GitHub推出的AI编程工具",
-      "link": "https://ai-bot.cn/sites/45.html",
+      "link": "https://github.com/features/copilot",
       "category": "AI编程工具",
       "popularity": {
         "views": 43758,
@@ -5886,7 +5495,7 @@
       "id": 254,
       "name": "CodeBuddy",
       "description": "腾讯推出的AI编程助手",
-      "link": "https://ai-bot.cn/codebuddy/",
+      "link": "https://www.codebuddy.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 44510,
@@ -5903,7 +5512,7 @@
       "id": 414,
       "name": "Komo Search",
       "description": "简洁直观的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11850.html",
+      "link": "https://komo.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 53620,
@@ -5920,7 +5529,7 @@
       "id": 433,
       "name": "Wordware",
       "description": "零代码构建AI Agent和应用的开发平台",
-      "link": "https://ai-bot.cn/sites/15416.html",
+      "link": "https://www.wordware.ai/",
       "category": "AI开发平台",
       "popularity": {
         "views": 67719,
@@ -5937,7 +5546,7 @@
       "id": 474,
       "name": "无阶未来",
       "description": "AI应用与弹性算网平台",
-      "link": "https://ai-bot.cn/sites/50603.html",
+      "link": "http://www.aivinla.com/datasets",
       "category": "AI训练模型",
       "popularity": {
         "views": 57609,
@@ -5954,7 +5563,7 @@
       "id": 43,
       "name": "AI新媒体文章",
       "description": "夸克推出的AI写作工具",
-      "link": "https://ai-bot.cn/sites/14511.html",
+      "link": "https://taskar.online/8382/",
       "category": "AI写作工具",
       "popularity": {
         "views": 59163,
@@ -5971,7 +5580,7 @@
       "id": 51,
       "name": "百度作家平台",
       "description": "百度免费AI小说写作工具",
-      "link": "https://ai-bot.cn/sites/4430.html",
+      "link": "https://zuojia.baidu.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 45021,
@@ -5988,7 +5597,7 @@
       "id": 86,
       "name": "WPS智能写作",
       "description": "WPS旗下在线智能写作工具",
-      "link": "https://ai-bot.cn/sites/33.html",
+      "link": "https://ai.wps.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 49429,
@@ -6005,7 +5614,7 @@
       "id": 109,
       "name": "Civitai",
       "description": "免费的AI图像绘画作品和模型分享平台和社区",
-      "link": "https://ai-bot.cn/sites/6297.html",
+      "link": "http://civitai.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 65082,
@@ -6022,7 +5631,7 @@
       "id": 119,
       "name": "触手AI绘画",
       "description": "免费专业的AI绘画/模型/分享平台",
-      "link": "https://ai-bot.cn/sites/5198.html",
+      "link": "https://ai.smalld.cn/",
       "category": "AI图像工具",
       "popularity": {
         "views": 51126,
@@ -6039,7 +5648,7 @@
       "id": 325,
       "name": "鹿班",
       "description": "阿里推出的智能设计商品图和海报的平台",
-      "link": "https://ai-bot.cn/sites/1986.html",
+      "link": "https://luban.aliyun.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 57171,
@@ -6056,7 +5665,7 @@
       "id": 352,
       "name": "Realibox AI",
       "description": "AI免费将草图/模型生成3D渲染图",
-      "link": "https://ai-bot.cn/sites/2780.html",
+      "link": "https://official.test.realibox.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 66981,
@@ -6073,7 +5682,7 @@
       "id": 455,
       "name": "Vercel AI SDK",
       "description": "Vercel开源的搭建AI聊天机器人的开发套件，支持React/Svelte/Vue等框架",
-      "link": "https://ai-bot.cn/sites/3013.html",
+      "link": "https://sdk.vercel.ai/docs/introduction",
       "category": "AI开发平台",
       "popularity": {
         "views": 43135,
@@ -6090,7 +5699,7 @@
       "id": 459,
       "name": "DL4J",
       "description": "开源的使用JVM部署和训练深度学习模型的套件",
-      "link": "https://ai-bot.cn/sites/1268.html",
+      "link": "https://deeplearning4j.konduit.ai/",
       "category": "AI开发平台",
       "popularity": {
         "views": 56705,
@@ -6124,7 +5733,7 @@
       "id": 128,
       "name": "像素蛋糕",
       "description": "像甜科技推出的AI图像后期软件",
-      "link": "https://ai-bot.cn/sites/15853.html",
+      "link": "https://www.pixcakeai.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 57691,
@@ -6141,7 +5750,7 @@
       "id": 136,
       "name": "ClipDrop",
       "description": "Stability.ai推出的AI图片处理系列工具",
-      "link": "https://ai-bot.cn/sites/103.html",
+      "link": "https://clipdrop.co/",
       "category": "AI图像工具",
       "popularity": {
         "views": 62661,
@@ -6158,7 +5767,7 @@
       "id": 216,
       "name": "钉钉·个人版",
       "description": "钉钉推出的个人版办公应用程序，内置AI智能助手，可进行AI创作、AI对话、AI绘画",
-      "link": "https://ai-bot.cn/sites/4080.html",
+      "link": "https://workspace.dingtalk.com/welcome",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 47122,
@@ -6175,7 +5784,7 @@
       "id": 227,
       "name": "ColossalChat",
       "description": "Colossal-AI推出的免费开源版ChatGPT聊天机器人替代品",
-      "link": "https://ai-bot.cn/sites/1220.html",
+      "link": "https://chat.colossalai.org/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 50335,
@@ -6209,7 +5818,7 @@
       "id": 344,
       "name": "Ilus AI",
       "description": "AI插画插图生成工具",
-      "link": "https://ai-bot.cn/sites/12026.html",
+      "link": "https://ilus.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 49590,
@@ -6226,7 +5835,7 @@
       "id": 372,
       "name": "Huemint",
       "description": "AI调色生成工具",
-      "link": "https://ai-bot.cn/sites/164.html",
+      "link": "https://huemint.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 55212,
@@ -6243,7 +5852,7 @@
       "id": 396,
       "name": "Felo",
       "description": "免费AI智能搜索引擎，支持社交联网搜索和多语种问答结果",
-      "link": "https://ai-bot.cn/sites/18048.html",
+      "link": "https://felo.ai/ja/search",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 45128,
@@ -6260,7 +5869,7 @@
       "id": 503,
       "name": "Segment Anything（SAM）",
       "description": "Meta最新推出的AI图像分割模型",
-      "link": "https://ai-bot.cn/sites/1351.html",
+      "link": "https://segment-anything.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 49611,
@@ -6277,7 +5886,7 @@
       "id": 509,
       "name": "Scale AI",
       "description": "AI机器学习标注训练平台",
-      "link": "https://ai-bot.cn/sites/525.html",
+      "link": "https://scale.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 44996,
@@ -6294,7 +5903,7 @@
       "id": 32,
       "name": "Copy.ai",
       "description": "人工智能营销文案和内容创作工具",
-      "link": "https://ai-bot.cn/sites/31.html",
+      "link": "https://www.copy.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 46059,
@@ -6311,7 +5920,7 @@
       "id": 164,
       "name": "175FUN",
       "description": "免费AI绘画社区，国货之光",
-      "link": "https://ai-bot.cn/sites/2676.html",
+      "link": "https://www.ai-321.cn/AI/135.html",
       "category": "AI图像工具",
       "popularity": {
         "views": 55098,
@@ -6328,7 +5937,7 @@
       "id": 226,
       "name": "Stable Chat",
       "description": "Stability AI 最新推出的免费聊天对话网站",
-      "link": "https://ai-bot.cn/sites/3973.html",
+      "link": "https://chat.stability.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 53111,
@@ -6345,7 +5954,7 @@
       "id": 238,
       "name": "Neeva",
       "description": "集成了AI问答的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/1890.html",
+      "link": "https://neeva.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 51157,
@@ -6362,7 +5971,7 @@
       "id": 263,
       "name": "Twinny",
       "description": "专为 VS Code 设计的AI代码补全插件",
-      "link": "https://ai-bot.cn/sites/22307.html",
+      "link": "https://twinny.dev/",
       "category": "AI编程工具",
       "popularity": {
         "views": 61445,
@@ -6379,7 +5988,7 @@
       "id": 346,
       "name": "Pixso AI",
       "description": "国产在线设计工具Pixso的内置AI助手，支持AI文生图、AI对话、AI设计等",
-      "link": "https://ai-bot.cn/sites/4435.html",
+      "link": "https://pixso.cn/pixso-ai-generator/",
       "category": "AI设计工具",
       "popularity": {
         "views": 43174,
@@ -6396,7 +6005,7 @@
       "id": 420,
       "name": "Qdrant",
       "description": "开源的向量数据库和向量相似性AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/16377.html",
+      "link": "https://qdrant.tech/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 52430,
@@ -6413,7 +6022,7 @@
       "id": 477,
       "name": "豆包大模型",
       "description": "字节跳动推出的AI大模型家族，包括视频生成、语音视觉、通用语言模型等",
-      "link": "https://ai-bot.cn/sites/22232.html",
+      "link": "https://www.doubao.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 40436,
@@ -6430,7 +6039,7 @@
       "id": 17,
       "name": "讯飞写作",
       "description": "科大讯飞推出的AI智能写作助手",
-      "link": "https://ai-bot.cn/sites/15170.html",
+      "link": "https://huixie.iflyrec.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 39398,
@@ -6447,7 +6056,7 @@
       "id": 209,
       "name": "小黄蕉",
       "description": "字节跳动旗下推出的AI虚拟交友聊天平台",
-      "link": "https://ai-bot.cn/sites/13251.html",
+      "link": "https://laoque.com/tools/119",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 50501,
@@ -6464,7 +6073,7 @@
       "id": 409,
       "name": "Globe Explorer",
       "description": "结构化AI知识搜索引擎",
-      "link": "https://ai-bot.cn/sites/11840.html",
+      "link": "https://explorer.globe.engineer/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 58828,
@@ -6481,7 +6090,7 @@
       "id": 510,
       "name": "Replicate",
       "description": "在线运行开源机器学习模型",
-      "link": "https://ai-bot.cn/sites/155.html",
+      "link": "https://replicate.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 61585,
@@ -6498,7 +6107,7 @@
       "id": 2,
       "name": "蛙蛙写作",
       "description": "AI小说和内容创作工具",
-      "link": "https://ai-bot.cn/sites/8204.html",
+      "link": "https://wawawriter.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 48732,
@@ -6515,7 +6124,7 @@
       "id": 66,
       "name": "火龙果写作",
       "description": "AI驱动的文字生产力工具",
-      "link": "https://ai-bot.cn/sites/12.html",
+      "link": "https://www.mypitaya.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 42728,
@@ -6532,7 +6141,7 @@
       "id": 368,
       "name": "Poly",
       "description": "AI生成3D材质",
-      "link": "https://ai-bot.cn/sites/701.html",
+      "link": "https://www.hp.com/jp-ja/poly.html",
       "category": "AI设计工具",
       "popularity": {
         "views": 58339,
@@ -6549,7 +6158,7 @@
       "id": 60,
       "name": "奇妙文",
       "description": "出门问问推出的AI写作助理",
-      "link": "https://ai-bot.cn/sites/1930.html",
+      "link": "https://todayai.com.cn/sites/3822.html",
       "category": "AI写作工具",
       "popularity": {
         "views": 58846,
@@ -6566,7 +6175,7 @@
       "id": 83,
       "name": "Texta",
       "description": "AI博客和文章一键生成",
-      "link": "https://ai-bot.cn/sites/258.html",
+      "link": "https://texta.cloud/",
       "category": "AI写作工具",
       "popularity": {
         "views": 35942,
@@ -6583,7 +6192,7 @@
       "id": 130,
       "name": "如果相机",
       "description": "仅需1张照片，快速生成AI写真照片",
-      "link": "https://ai-bot.cn/sites/14173.html",
+      "link": "https://ifshot.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 55509,
@@ -6600,7 +6209,7 @@
       "id": 142,
       "name": "Hotpot.ai",
       "description": "AI图片图像处理和生成工具",
-      "link": "https://ai-bot.cn/sites/109.html",
+      "link": "https://hotpot.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 59534,
@@ -6617,7 +6226,7 @@
       "id": 149,
       "name": "Bing Image Creator",
       "description": "微软必应推出的基于DALL·E的AI图像生成工具",
-      "link": "https://ai-bot.cn/sites/912.html",
+      "link": "https://www.bing.com/create",
       "category": "AI图像工具",
       "popularity": {
         "views": 42917,
@@ -6634,7 +6243,7 @@
       "id": 307,
       "name": "美间AI",
       "description": "新一代AI画布式创意设计平台",
-      "link": "https://ai-bot.cn/sites/54633.html",
+      "link": "https://www.meijian.com/ai",
       "category": "AI设计工具",
       "popularity": {
         "views": 42139,
@@ -6651,7 +6260,7 @@
       "id": 417,
       "name": "Songtell",
       "description": "AI驱动的音乐百科搜索引擎",
-      "link": "https://ai-bot.cn/sites/11854.html",
+      "link": "https://m.php.cn/ja/ai/songtell",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 57989,
@@ -6668,7 +6277,7 @@
       "id": 457,
       "name": "Caffe",
       "description": "UC伯克利研究推出的深度学习框架",
-      "link": "https://ai-bot.cn/sites/64.html",
+      "link": "https://caffe.berkeleyvision.org/",
       "category": "AI开发平台",
       "popularity": {
         "views": 48990,
@@ -6685,7 +6294,7 @@
       "id": 463,
       "name": "Lightning AI",
       "description": "快速训练、部署和开发人工智能产品的深度学习框架，由Pytorch Lightning团队推出",
-      "link": "https://ai-bot.cn/sites/1848.html",
+      "link": "https://lightning.ai/",
       "category": "AI开发平台",
       "popularity": {
         "views": 40521,
@@ -6702,7 +6311,7 @@
       "id": 523,
       "name": "HeyGen",
       "description": "AI数字人视频创作平台",
-      "link": "https://ai-bot.cn/heygen/",
+      "link": "https://www.heygen.com/",
       "category": "AI视频工具",
       "popularity": {
         "views": 41475,
@@ -6719,7 +6328,7 @@
       "id": 75,
       "name": "悟智写作",
       "description": "人工智能驱动的自动化写作平台",
-      "link": "https://ai-bot.cn/sites/7575.html",
+      "link": "https://www.wuz.com.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 53907,
@@ -6736,7 +6345,7 @@
       "id": 133,
       "name": "MagicStudio",
       "description": "高颜值AI图像处理工具",
-      "link": "https://ai-bot.cn/sites/282.html",
+      "link": "https://magicstudio.com/ja/",
       "category": "AI图像工具",
       "popularity": {
         "views": 57080,
@@ -6753,7 +6362,7 @@
       "id": 147,
       "name": "Graviti Diffus",
       "description": "开箱即用的 Stable Diffusion WebUI 在线图像生成服务",
-      "link": "https://ai-bot.cn/sites/1688.html",
+      "link": "https://www.diffus.me/",
       "category": "AI图像工具",
       "popularity": {
         "views": 58898,
@@ -6770,7 +6379,7 @@
       "id": 181,
       "name": "Gemini",
       "description": "Google推出的AI聊天对话机器人Gemini",
-      "link": "https://ai-bot.cn/sites/736.html",
+      "link": "https://www.gemini.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 48723,
@@ -6787,7 +6396,7 @@
       "id": 239,
       "name": "对话写作猫",
       "description": "秘塔写作猫推出的AI对话聊天工具",
-      "link": "https://ai-bot.cn/sites/1608.html",
+      "link": "https://xiezuocat.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 45062,
@@ -6804,7 +6413,7 @@
       "id": 276,
       "name": "Fitten Code",
       "description": "非十科技推出的免费AI代码助手",
-      "link": "https://ai-bot.cn/sites/7587.html",
+      "link": "https://code.fittentech.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 55665,
@@ -6821,7 +6430,7 @@
       "id": 281,
       "name": "v0.dev",
       "description": "AI生成前端React/UI组件，由Vercel推出",
-      "link": "https://ai-bot.cn/sites/4794.html",
+      "link": "https://v0.dev/",
       "category": "AI编程工具",
       "popularity": {
         "views": 38833,
@@ -6838,7 +6447,7 @@
       "id": 306,
       "name": "Codeium",
       "description": "免费的AI编程工具，智能生成和补全代码",
-      "link": "https://ai-bot.cn/sites/111.html",
+      "link": "https://windsurf.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 43902,
@@ -6855,7 +6464,7 @@
       "id": 310,
       "name": "Figma AI",
       "description": "Figma推出的原生AI设计工具",
-      "link": "https://ai-bot.cn/sites/13896.html",
+      "link": "https://www.figma.com/ja-jp/ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 39430,
@@ -6872,7 +6481,7 @@
       "id": 393,
       "name": "纳米搜索",
       "description": "360公司推出的AI搜索应用，一切皆可生成视频",
-      "link": "https://ai-bot.cn/namiso/",
+      "link": "https://www.n.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 45439,
@@ -6889,7 +6498,7 @@
       "id": 419,
       "name": "Miku",
       "description": "快速精准的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11851.html",
+      "link": "https://mikuexpo.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 56713,
@@ -6906,7 +6515,7 @@
       "id": 432,
       "name": "Make",
       "description": "AI零代码自动化工作流搭建平台",
-      "link": "https://ai-bot.cn/make/",
+      "link": "https://www.make.com/en",
       "category": "AI开发平台",
       "popularity": {
         "views": 60075,
@@ -6923,7 +6532,7 @@
       "id": 470,
       "name": "AnythingLLM",
       "description": "开源的全栈 AI 客户端，支持本地部署和API集成",
-      "link": "https://ai-bot.cn/anythingllm/",
+      "link": "https://anythingllm.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 52907,
@@ -6940,7 +6549,7 @@
       "id": 19,
       "name": "万能小in",
       "description": "AI知识助手，专业知识库的论文专家",
-      "link": "https://ai-bot.cn/sites/14504.html",
+      "link": "https://xiaoin.com.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 53706,
@@ -6954,27 +6563,10 @@
       ]
     },
     {
-      "id": 27,
-      "name": "橙篇",
-      "description": "百度推出的AI长文理解和内容创作工具",
-      "link": "https://ai-bot.cn/sites/12962.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 48066,
-        "favorites": 1078
-      },
-      "vpn_required": false,
-      "hot_score": 38,
-      "hot": false,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 96,
       "name": "PaperBetter AI",
       "description": "AI论文写作工具，一键生成万字初稿",
-      "link": "https://ai-bot.cn/sites/7418.html",
+      "link": "http://www.ai.paperbetter.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 57265,
@@ -6991,7 +6583,7 @@
       "id": 217,
       "name": "Wanderboat",
       "description": "硅谷初创公司UTA AI推出的AI旅行助手",
-      "link": "https://ai-bot.cn/sites/14297.html",
+      "link": "https://wanderboat.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 52122,
@@ -7008,7 +6600,7 @@
       "id": 324,
       "name": "FigJam AI",
       "description": "Figma推出的AI白板协作设计工具",
-      "link": "https://ai-bot.cn/sites/4487.html",
+      "link": "https://www.figma.com/ja-jp/figjam/ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 47343,
@@ -7025,7 +6617,7 @@
       "id": 422,
       "name": "开搜AI",
       "description": "面向大众的免费AI问答搜索引擎",
-      "link": "https://ai-bot.cn/sites/12880.html",
+      "link": "https://iask.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 47210,
@@ -7042,7 +6634,7 @@
       "id": 15,
       "name": "光速写作",
       "description": "AI写作、PPT生成工具，单篇最长15000字",
-      "link": "https://ai-bot.cn/sites/7244.html",
+      "link": "https://guangsuxie.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 57448,
@@ -7059,7 +6651,7 @@
       "id": 71,
       "name": "智搜",
       "description": "Giiso写作机器人，内容创作AI辅助工具",
-      "link": "https://ai-bot.cn/sites/35.html",
+      "link": "https://www.giiso.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 49819,
@@ -7076,7 +6668,7 @@
       "id": 107,
       "name": "Midjourney",
       "description": "AI图像和插画生成工具",
-      "link": "https://ai-bot.cn/sites/56.html",
+      "link": "https://www.midjourney.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 40288,
@@ -7093,7 +6685,7 @@
       "id": 150,
       "name": "Adobe Firefly",
       "description": "Adobe最新推出的AI图片生成工具",
-      "link": "https://ai-bot.cn/sites/726.html",
+      "link": "https://www.adobe.com/jp/products/firefly.html",
       "category": "AI图像工具",
       "popularity": {
         "views": 41191,
@@ -7110,7 +6702,7 @@
       "id": 151,
       "name": "简单AI",
       "description": "搜狐推出的AI图片生成平台",
-      "link": "https://ai-bot.cn/sites/4009.html",
+      "link": "https://ai.sohu.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 49204,
@@ -7127,7 +6719,7 @@
       "id": 187,
       "name": "华为小艺",
       "description": "华为旗下小艺AI助手网页端，已接入DeepSeek-R1",
-      "link": "https://ai-bot.cn/huawei-xiaoyi/",
+      "link": "https://xiaoyi.huawei.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 37464,
@@ -7144,7 +6736,7 @@
       "id": 192,
       "name": "天工AI",
       "description": "昆仑万维推出的AI智能助手",
-      "link": "https://ai-bot.cn/sites/1784.html",
+      "link": "https://www.tiangong.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 35071,
@@ -7161,7 +6753,7 @@
       "id": 193,
       "name": "Copilot",
       "description": "微软推出的网页版Copilot助手",
-      "link": "https://ai-bot.cn/sites/6019.html",
+      "link": "https://copilot.microsoft.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 49366,
@@ -7178,7 +6770,7 @@
       "id": 321,
       "name": "MasterGo AI",
       "description": "国产产品设计工具MasterGo推出的智能UI设计助手",
-      "link": "https://ai-bot.cn/sites/2733.html",
+      "link": "https://mastergo.com/ai",
       "category": "AI设计工具",
       "popularity": {
         "views": 38607,
@@ -7195,7 +6787,7 @@
       "id": 363,
       "name": "Luma AI",
       "description": "AI 3D捕捉、建模和渲染",
-      "link": "https://ai-bot.cn/sites/923.html",
+      "link": "https://lumalabs.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 55841,
@@ -7212,7 +6804,7 @@
       "id": 382,
       "name": "灵动AI",
       "description": "专业的AI商品图生成工具",
-      "link": "https://ai-bot.cn/sites/6749.html",
+      "link": "https://m.redoon.cn/",
       "category": "AI设计工具",
       "popularity": {
         "views": 37029,
@@ -7229,7 +6821,7 @@
       "id": 429,
       "name": "NoCode",
       "description": "美团推出的零代码AI应用开发平台",
-      "link": "https://ai-bot.cn/nocode/",
+      "link": "https://www.nocode.tech/",
       "category": "AI开发平台",
       "popularity": {
         "views": 40693,
@@ -7246,7 +6838,7 @@
       "id": 499,
       "name": "Gen-2",
       "description": "Runway最新推出的AI视频生成模型",
-      "link": "https://ai-bot.cn/sites/1076.html",
+      "link": "https://runwayml.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 55209,
@@ -7263,7 +6855,7 @@
       "id": 100,
       "name": "笔杆论文",
       "description": "简单高效的AI论文写作平台",
-      "link": "https://ai-bot.cn/sites/7371.html",
+      "link": "https://write.bigan.net/",
       "category": "AI写作工具",
       "popularity": {
         "views": 52749,
@@ -7280,7 +6872,7 @@
       "id": 247,
       "name": "代码小浣熊",
       "description": "商汤科技推出的免费AI编程助手",
-      "link": "https://ai-bot.cn/sites/6519.html",
+      "link": "https://www.sensetime.com/cn/product-detail?categoryId=51134384&gioNav=1",
       "category": "AI编程工具",
       "popularity": {
         "views": 41150,
@@ -7297,7 +6889,7 @@
       "id": 264,
       "name": "Project IDX",
       "description": "谷歌推出的AI云端开发和代码编辑器",
-      "link": "https://ai-bot.cn/sites/12491.html",
+      "link": "https://idx.dev/",
       "category": "AI编程工具",
       "popularity": {
         "views": 36992,
@@ -7314,7 +6906,7 @@
       "id": 289,
       "name": "Deco",
       "description": "京东推出的设计稿一键生成多端代码工具",
-      "link": "https://ai-bot.cn/sites/2051.html",
+      "link": "https://www.tp-link.com/jp/home-networking/deco/",
       "category": "AI编程工具",
       "popularity": {
         "views": 42403,
@@ -7331,7 +6923,7 @@
       "id": 357,
       "name": "Designs.ai",
       "description": "AI设计工具",
-      "link": "https://ai-bot.cn/sites/228.html",
+      "link": "https://designs.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 40793,
@@ -7348,7 +6940,7 @@
       "id": 399,
       "name": "Exa AI",
       "description": "专门为AI模型设计的搜索引擎平台",
-      "link": "https://ai-bot.cn/sites/14411.html",
+      "link": "https://exa.ai/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 55110,
@@ -7365,7 +6957,7 @@
       "id": 461,
       "name": "NLTK",
       "description": "Python自然语言处理工具包",
-      "link": "https://ai-bot.cn/sites/1273.html",
+      "link": "https://www.nltk.org/",
       "category": "AI开发平台",
       "popularity": {
         "views": 40510,
@@ -7382,7 +6974,7 @@
       "id": 508,
       "name": "Lobe",
       "description": "简单免费的机器学习模型训练工具",
-      "link": "https://ai-bot.cn/sites/439.html",
+      "link": "https://equal-love.jp/",
       "category": "AI训练模型",
       "popularity": {
         "views": 36364,
@@ -7399,7 +6991,7 @@
       "id": 48,
       "name": "写作蛙",
       "description": "智谱AI推出的免费智能写作工具",
-      "link": "https://ai-bot.cn/sites/5001.html",
+      "link": "https://wawawriter.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 38405,
@@ -7416,7 +7008,7 @@
       "id": 141,
       "name": "PicTech AI",
       "description": "免费的在线图片翻译工具，支持一键抠图",
-      "link": "https://ai-bot.cn/sites/15479.html",
+      "link": "https://www.pictech.cc/",
       "category": "AI图像工具",
       "popularity": {
         "views": 30950,
@@ -7433,7 +7025,7 @@
       "id": 156,
       "name": "创客贴AI画匠",
       "description": "创客贴推出的AI艺术画生成工具",
-      "link": "https://ai-bot.cn/sites/1818.html",
+      "link": "https://aiart.chuangkit.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 44422,
@@ -7450,7 +7042,7 @@
       "id": 208,
       "name": "紫东太初",
       "description": "中科院与武智院推出的千亿参数全模态大模型和助手",
-      "link": "https://ai-bot.cn/sites/5509.html",
+      "link": "https://taichu-web.ia.ac.cn/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 49902,
@@ -7467,7 +7059,7 @@
       "id": 212,
       "name": "百川大模型",
       "description": "百川智能推出的大模型助手，融合了意图理解、信息检索以及强化学习技术",
-      "link": "https://ai-bot.cn/sites/4453.html",
+      "link": "https://www.baichuan-ai.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 41832,
@@ -7484,7 +7076,7 @@
       "id": 228,
       "name": "Jasper Chat",
       "description": "Jasper针对内容创作者出品的AI聊天工具",
-      "link": "https://ai-bot.cn/sites/141.html",
+      "link": "https://www.jasper.ai/chat",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 45228,
@@ -7501,7 +7093,7 @@
       "id": 305,
       "name": "HeyCLI",
       "description": "自然语言转义为CLI命令",
-      "link": "https://ai-bot.cn/sites/115.html",
+      "link": "https://www.heycli.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 45415,
@@ -7518,7 +7110,7 @@
       "id": 333,
       "name": "Pictographic",
       "description": "AI插图资源库和生成平台",
-      "link": "https://ai-bot.cn/sites/12673.html",
+      "link": "https://www.pictographic.io/",
       "category": "AI设计工具",
       "popularity": {
         "views": 51571,
@@ -7535,7 +7127,7 @@
       "id": 337,
       "name": "Collov AI",
       "description": "AI室内家居设计生成平台",
-      "link": "https://ai-bot.cn/sites/9977.html",
+      "link": "https://collov.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 52415,
@@ -7552,7 +7144,7 @@
       "id": 391,
       "name": "点点",
       "description": "小红书推出的 AI 搜索应用，主打生活场景",
-      "link": "https://ai-bot.cn/diandian/",
+      "link": "https://diandian.com.cn/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 41860,
@@ -7569,7 +7161,7 @@
       "id": 434,
       "name": "PPIO派欧云",
       "description": "AI云端一体化解决方案服务平台",
-      "link": "https://ai-bot.cn/sites/52953.html",
+      "link": "https://ppio.cn/",
       "category": "AI开发平台",
       "popularity": {
         "views": 42671,
@@ -7586,7 +7178,7 @@
       "id": 451,
       "name": "Apache MXNet",
       "description": "免费开源的深度学习框架",
-      "link": "https://ai-bot.cn/sites/62.html",
+      "link": "https://mxnet.apache.org/",
       "category": "AI开发平台",
       "popularity": {
         "views": 37668,
@@ -7603,7 +7195,7 @@
       "id": 495,
       "name": "BLOOM",
       "description": "HuggingFace推出的大型语言模型（LLM）",
-      "link": "https://ai-bot.cn/sites/51.html",
+      "link": "https://www.bloom.co.jp/",
       "category": "AI训练模型",
       "popularity": {
         "views": 47549,
@@ -7620,7 +7212,7 @@
       "id": 126,
       "name": "悟空图像PhotoSir",
       "description": "新一代专业图像处理软件，更智能、更高效、更好用",
-      "link": "https://ai-bot.cn/sites/1418.html",
+      "link": "https://www.photosir.com/",
       "category": "AI图像工具",
       "popularity": {
         "views": 31034,
@@ -7637,7 +7229,7 @@
       "id": 252,
       "name": "Lovable",
       "description": "AI编程工具，用自然对话快速构建网站和Web应用",
-      "link": "https://ai-bot.cn/lovable/",
+      "link": "https://lovable.dev/",
       "category": "AI编程工具",
       "popularity": {
         "views": 34959,
@@ -7654,7 +7246,7 @@
       "id": 374,
       "name": "Logomaster.ai",
       "description": "AI Logo生成工具",
-      "link": "https://ai-bot.cn/sites/160.html",
+      "link": "https://logomaster.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 41928,
@@ -7671,7 +7263,7 @@
       "id": 16,
       "name": "松果AI写作",
       "description": "AI写作工具，支持批量生成文章",
-      "link": "https://ai-bot.cn/sites/40039.html",
+      "link": "https://songguoai.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 38347,
@@ -7688,7 +7280,7 @@
       "id": 68,
       "name": "爱改写",
       "description": "AI改写、纠错、润色辅助工具",
-      "link": "https://ai-bot.cn/sites/592.html",
+      "link": "https://www.aigaixie.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 45451,
@@ -7705,7 +7297,7 @@
       "id": 361,
       "name": "illostrationAI",
       "description": "AI插画生成，low poly、3D、矢量、logo、像素风、皮克斯等风格",
-      "link": "https://ai-bot.cn/sites/176.html",
+      "link": "https://www.illostration.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 39609,
@@ -7722,7 +7314,7 @@
       "id": 450,
       "name": "TensorFlow",
       "description": "Google推出的机器学习和人工智能开源库",
-      "link": "https://ai-bot.cn/sites/48.html",
+      "link": "https://www.tensorflow.org/?hl=ja",
       "category": "AI开发平台",
       "popularity": {
         "views": 51787,
@@ -7739,7 +7331,7 @@
       "id": 456,
       "name": "Keras",
       "description": "Python版本的TensorFlow深度学习API",
-      "link": "https://ai-bot.cn/sites/451.html",
+      "link": "https://keras.io/",
       "category": "AI开发平台",
       "popularity": {
         "views": 46407,
@@ -7756,7 +7348,7 @@
       "id": 467,
       "name": "天壤小白",
       "description": "灵活的AI应用构建和开发平台",
-      "link": "https://ai-bot.cn/sites/8536.html",
+      "link": "https://www.tianrang.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 44616,
@@ -7773,7 +7365,7 @@
       "id": 14,
       "name": "秘塔写作猫",
       "description": "AI写作，文章自成",
-      "link": "https://ai-bot.cn/sites/13.html",
+      "link": "https://xiezuocat.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 29599,
@@ -7807,7 +7399,7 @@
       "id": 237,
       "name": "360智脑",
       "description": "360搜索最新推出的AI对话聊天机器人",
-      "link": "https://ai-bot.cn/sites/1714.html",
+      "link": "https://ai.360.com/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 44314,
@@ -7821,44 +7413,10 @@
       ]
     },
     {
-      "id": 245,
-      "name": "Cursor",
-      "description": "AI代码编辑器，快速进行编程和软件开发",
-      "link": "https://ai-bot.cn/sites/906.html",
-      "category": "AI编程工具",
-      "popularity": {
-        "views": 40310,
-        "favorites": 707
-      },
-      "vpn_required": false,
-      "hot_score": 32,
-      "hot": false,
-      "tags": [
-        "编程工具"
-      ]
-    },
-    {
-      "id": 284,
-      "name": "天工智码Skycode",
-      "description": "AI智能编程助手，轻松生成各种代码",
-      "link": "https://ai-bot.cn/sites/1801.html",
-      "category": "AI编程工具",
-      "popularity": {
-        "views": 43763,
-        "favorites": 1287
-      },
-      "vpn_required": false,
-      "hot_score": 32,
-      "hot": false,
-      "tags": [
-        "编程工具"
-      ]
-    },
-    {
       "id": 364,
       "name": "图宇宙",
       "description": "高品质AI智能设计平台",
-      "link": "https://ai-bot.cn/sites/2515.html",
+      "link": "https://todayai.com.cn/sites/4217.html",
       "category": "AI设计工具",
       "popularity": {
         "views": 40456,
@@ -7875,7 +7433,7 @@
       "id": 381,
       "name": "羚珑",
       "description": "京东推出的商品图智能设计小工具",
-      "link": "https://ai-bot.cn/sites/2048.html",
+      "link": "https://ling.jd.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 41051,
@@ -7892,7 +7450,7 @@
       "id": 52,
       "name": "爱创作",
       "description": "ZAKER新闻推出的AI写作工具",
-      "link": "https://ai-bot.cn/sites/2404.html",
+      "link": "https://ai.zaker.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 36333,
@@ -7909,7 +7467,7 @@
       "id": 58,
       "name": "Magic Write",
       "description": "Canva旗下AI文案生成器",
-      "link": "https://ai-bot.cn/sites/59.html",
+      "link": "https://docodoor.co.jp/staffblog/magicwrite/",
       "category": "AI写作工具",
       "popularity": {
         "views": 37358,
@@ -7926,7 +7484,7 @@
       "id": 62,
       "name": "HyperWrite",
       "description": "AI写作助手帮助你创作内容更自信",
-      "link": "https://ai-bot.cn/sites/577.html",
+      "link": "https://www.hyperwriteai.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 39148,
@@ -7943,7 +7501,7 @@
       "id": 69,
       "name": "HeyFriday",
       "description": "国内团队推出的智能AI写作工具",
-      "link": "https://ai-bot.cn/sites/711.html",
+      "link": "https://m.kuaixiebao.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 45245,
@@ -7960,7 +7518,7 @@
       "id": 134,
       "name": "Booltool",
       "description": "在线AI图像工具箱",
-      "link": "https://ai-bot.cn/sites/677.html",
+      "link": "https://mindsightstudios.com/booltools-2/",
       "category": "AI图像工具",
       "popularity": {
         "views": 42761,
@@ -7977,7 +7535,7 @@
       "id": 269,
       "name": "C知道",
       "description": "CSDN推出的AI技术问答工具",
-      "link": "https://ai-bot.cn/sites/11812.html",
+      "link": "https://ai.csdn.net/",
       "category": "AI编程工具",
       "popularity": {
         "views": 45430,
@@ -7994,7 +7552,7 @@
       "id": 308,
       "name": "Recraft AI",
       "description": "免费无限AI画板，生成高质量矢量艺术画、图标、3D图片和插画",
-      "link": "https://ai-bot.cn/sites/3171.html",
+      "link": "https://www.recraft.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 42517,
@@ -8011,7 +7569,7 @@
       "id": 464,
       "name": "Leap",
       "description": "将AI快速集成到你自己的应用中",
-      "link": "https://ai-bot.cn/sites/2625.html",
+      "link": "https://onegiantleap.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 41033,
@@ -8028,7 +7586,7 @@
       "id": 320,
       "name": "智绘设计",
       "description": "腾讯推出的智能设计平台，让内容更精彩",
-      "link": "https://ai-bot.cn/sites/1954.html",
+      "link": "https://taishan.qq.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 32736,
@@ -8045,7 +7603,7 @@
       "id": 339,
       "name": "易可图",
       "description": "免费的AI图片编辑和海报设计平台",
-      "link": "https://ai-bot.cn/sites/25213.html",
+      "link": "https://www.yiketu.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 46761,
@@ -8062,7 +7620,7 @@
       "id": 12,
       "name": "66AI论文",
       "description": "高质量、低查重、低AIGC率的AI论文写作工具",
-      "link": "https://ai-bot.cn/sites/14679.html",
+      "link": "https://www.lunwen66.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 44046,
@@ -8079,7 +7637,7 @@
       "id": 64,
       "name": "悉语",
       "description": "阿里旗下智能文案工具，一键生成电商营销文案",
-      "link": "https://ai-bot.cn/sites/39.html",
+      "link": "https://chuangyi.taobao.com/pages/aiCopy",
       "category": "AI写作工具",
       "popularity": {
         "views": 42536,
@@ -8096,7 +7654,7 @@
       "id": 81,
       "name": "Peppertype.ai",
       "description": "高质量AI内容生成",
-      "link": "https://ai-bot.cn/sites/65.html",
+      "link": "https://www.peppercontent.io/peppertype-ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 34534,
@@ -8113,7 +7671,7 @@
       "id": 146,
       "name": "艾绘",
       "description": "一键创作故事、绘画、配音，轻松创建高质量的绘本故事",
-      "link": "https://ai-bot.cn/sites/18651.html",
+      "link": "https://www.aiww.com/aitool/aihui",
       "category": "AI图像工具",
       "popularity": {
         "views": 33471,
@@ -8130,7 +7688,7 @@
       "id": 301,
       "name": "Hocoos",
       "description": "无代码AI智能在线快速创建网站",
-      "link": "https://ai-bot.cn/sites/2127.html",
+      "link": "https://hocoos.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 26807,
@@ -8147,7 +7705,7 @@
       "id": 327,
       "name": "简单设计",
       "description": "免费的在线设计、图片处理工具",
-      "link": "https://ai-bot.cn/sites/17815.html",
+      "link": "https://jiandan.link/",
       "category": "AI设计工具",
       "popularity": {
         "views": 28935,
@@ -8164,7 +7722,7 @@
       "id": 349,
       "name": "Motiff 妙多",
       "description": "猿辅导旗下推出的AI界面设计工具",
-      "link": "https://ai-bot.cn/sites/4004.html",
+      "link": "https://motiff.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 42382,
@@ -8181,7 +7739,7 @@
       "id": 359,
       "name": "Spline AI",
       "description": "Spline推出的AI生成3D物体、动画、材质",
-      "link": "https://ai-bot.cn/sites/1202.html",
+      "link": "https://spline.design/ai-generate",
       "category": "AI设计工具",
       "popularity": {
         "views": 30853,
@@ -8198,7 +7756,7 @@
       "id": 362,
       "name": "Uizard",
       "description": "AI网页、App和UI设计，快速生成应用和网站原型",
-      "link": "https://ai-bot.cn/sites/122.html",
+      "link": "https://uizard.io/",
       "category": "AI设计工具",
       "popularity": {
         "views": 37515,
@@ -8215,7 +7773,7 @@
       "id": 377,
       "name": "IconifyAI",
       "description": "AI App图标生成器",
-      "link": "https://ai-bot.cn/sites/107.html",
+      "link": "https://www.iconifyai.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 35988,
@@ -8232,7 +7790,7 @@
       "id": 415,
       "name": "Searcholic",
       "description": "AI驱动的电子书和文档搜索引擎",
-      "link": "https://ai-bot.cn/sites/11853.html",
+      "link": "https://ainavtool.com/sites/1600.html",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 38605,
@@ -8249,7 +7807,7 @@
       "id": 416,
       "name": "Andi",
       "description": "对话式人工智能搜索引擎",
-      "link": "https://ai-bot.cn/sites/11847.html",
+      "link": "https://andisearch.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 47066,
@@ -8266,7 +7824,7 @@
       "id": 425,
       "name": "码上飞",
       "description": "免费生成小程序/APP/网页，一句话生成任意应用",
-      "link": "https://ai-bot.cn/codeflying/",
+      "link": "https://www.codeflying.net/",
       "category": "AI开发平台",
       "popularity": {
         "views": 33208,
@@ -8300,7 +7858,7 @@
       "id": 199,
       "name": "Me.bot",
       "description": "心识宇宙推出的个性化AI伴侣产品",
-      "link": "https://ai-bot.cn/sites/16356.html",
+      "link": "https://www.me.bot/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 33594,
@@ -8317,7 +7875,7 @@
       "id": 290,
       "name": "Ghostwriter",
       "description": "知名在线编程IDE Replit推出的AI编程助手",
-      "link": "https://ai-bot.cn/sites/853.html",
+      "link": "https://ghostwriter-ai.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 35389,
@@ -8334,7 +7892,7 @@
       "id": 331,
       "name": "豆绘AI",
       "description": "AI绘图设计平台，一键生成720°VR全景图",
-      "link": "https://ai-bot.cn/sites/24579.html",
+      "link": "https://www.douhuiai.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 27080,
@@ -8351,7 +7909,7 @@
       "id": 466,
       "name": "Anakin.ai",
       "description": "一站式无代码AI应用构建平台",
-      "link": "https://ai-bot.cn/sites/8970.html",
+      "link": "https://anakin.ai/ja-jp",
       "category": "AI开发平台",
       "popularity": {
         "views": 35186,
@@ -8368,7 +7926,7 @@
       "id": 483,
       "name": "LLaMA",
       "description": "Meta（Facebook）推出的AI大语言模型",
-      "link": "https://ai-bot.cn/sites/54.html",
+      "link": "https://www.llama.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 41573,
@@ -8385,7 +7943,7 @@
       "id": 38,
       "name": "Writesonic",
       "description": "AI写作，文案，释义工具",
-      "link": "https://ai-bot.cn/sites/32.html",
+      "link": "https://writesonic.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 35838,
@@ -8402,7 +7960,7 @@
       "id": 41,
       "name": "有道翻译·AI写作",
       "description": "网易有道推出的智能写作辅助工具，支持100多种语言",
-      "link": "https://ai-bot.cn/sites/23116.html",
+      "link": "https://fanyi.youdao.com/aiwrite/document",
       "category": "AI写作工具",
       "popularity": {
         "views": 40651,
@@ -8419,7 +7977,7 @@
       "id": 194,
       "name": "Character.AI",
       "description": "创建虚拟角色并与其对话",
-      "link": "https://ai-bot.cn/sites/137.html",
+      "link": "https://character.ai/",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 34247,
@@ -8436,7 +7994,7 @@
       "id": 283,
       "name": "Quest AI",
       "description": "AI将设计稿生成React代码，支持JavaScript和TypeScript",
-      "link": "https://ai-bot.cn/sites/3051.html",
+      "link": "https://www.quest.ai/",
       "category": "AI编程工具",
       "popularity": {
         "views": 35028,
@@ -8453,7 +8011,7 @@
       "id": 332,
       "name": "千图网",
       "description": "在线设计图片素材平台",
-      "link": "https://ai-bot.cn/sites/29186.html",
+      "link": "https://www.58pic.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 42205,
@@ -8470,7 +8028,7 @@
       "id": 355,
       "name": "Vizcom",
       "description": "AI渲染转化手绘图为产品设计图",
-      "link": "https://ai-bot.cn/sites/2235.html",
+      "link": "https://www.vizcom.ai/",
       "category": "AI设计工具",
       "popularity": {
         "views": 30199,
@@ -8487,7 +8045,7 @@
       "id": 367,
       "name": "Fabrie AI",
       "description": "在线白板协作平台Fabrie推出的AI设计助手，支持多种渲染模式",
-      "link": "https://ai-bot.cn/sites/3433.html",
+      "link": "https://www.fabrie.com/signup",
       "category": "AI设计工具",
       "popularity": {
         "views": 32392,
@@ -8504,7 +8062,7 @@
       "id": 404,
       "name": "Dexa AI",
       "description": "AI播客搜索工具",
-      "link": "https://ai-bot.cn/sites/15211.html",
+      "link": "https://dexa.ai/sign-up",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 29201,
@@ -8521,7 +8079,7 @@
       "id": 469,
       "name": "Cherry Studio",
       "description": "多模型AI客户端，本地运行AI大模型",
-      "link": "https://ai-bot.cn/cherry-studio/",
+      "link": "https://www.cherry-ai.com/",
       "category": "AI训练模型",
       "popularity": {
         "views": 41254,
@@ -8535,27 +8093,10 @@
       ]
     },
     {
-      "id": 80,
-      "name": "快文CopyDone",
-      "description": "AIGC原创内容创作和营销文案生成",
-      "link": "https://ai-bot.cn/sites/1295.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 30163,
-        "favorites": 835
-      },
-      "vpn_required": false,
-      "hot_score": 26,
-      "hot": false,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 85,
       "name": "ClosersCopy",
       "description": "AI文案写作机器人",
-      "link": "https://ai-bot.cn/sites/966.html",
+      "link": "https://www.closerscopy.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 26874,
@@ -8572,7 +8113,7 @@
       "id": 94,
       "name": "Elephas",
       "description": "与Mac、iPhone、iPad集成的个人写作助手",
-      "link": "https://ai-bot.cn/sites/1067.html",
+      "link": "https://elephas.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 29342,
@@ -8589,7 +8130,7 @@
       "id": 197,
       "name": "Bing新必应",
       "description": "微软推出的新版结合了ChatGPT功能的必应",
-      "link": "https://ai-bot.cn/sites/457.html",
+      "link": "https://www.bing.com/?mkt=zh-CN",
       "category": "AI聊天机器人",
       "popularity": {
         "views": 28071,
@@ -8606,7 +8147,7 @@
       "id": 317,
       "name": "Onlook",
       "description": "开源AI视觉编辑工具，设计修改自动同步代码",
-      "link": "https://ai-bot.cn/onlook/",
+      "link": "https://onlook.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 26710,
@@ -8623,7 +8164,7 @@
       "id": 338,
       "name": "包图网AI素材库",
       "description": "包图网提供的特色图库服务",
-      "link": "https://ai-bot.cn/sites/14683.html",
+      "link": "https://ibaotu.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 24763,
@@ -8657,7 +8198,7 @@
       "id": 430,
       "name": "响指HaiSnap",
       "description": "AI零代码应用开发平台",
-      "link": "https://ai-bot.cn/haisnap/",
+      "link": "https://www.haisnap.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 30264,
@@ -8674,7 +8215,7 @@
       "id": 446,
       "name": "飞桨PaddlePaddle",
       "description": "开源深度学习平台",
-      "link": "https://ai-bot.cn/sites/63.html",
+      "link": "https://www.paddlepaddle.org.cn/",
       "category": "AI开发平台",
       "popularity": {
         "views": 39793,
@@ -8691,7 +8232,7 @@
       "id": 30,
       "name": "MidReal",
       "description": "AI互动式小说文本生成工具",
-      "link": "https://ai-bot.cn/sites/14278.html",
+      "link": "https://midreal.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 28947,
@@ -8708,7 +8249,7 @@
       "id": 45,
       "name": "宙语Cosmos",
       "description": "专为中文写作设计的AI智能写作助手",
-      "link": "https://ai-bot.cn/sites/26065.html",
+      "link": "https://ailjyk.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 40204,
@@ -8725,7 +8266,7 @@
       "id": 92,
       "name": "Jounce",
       "description": "无限制免费AI文案写作",
-      "link": "https://ai-bot.cn/sites/153.html",
+      "link": "https://www.jounce.ai/",
       "category": "AI写作工具",
       "popularity": {
         "views": 21792,
@@ -8742,7 +8283,7 @@
       "id": 273,
       "name": "Augment Code",
       "description": "AI编程辅助工具，专为大型代码库设计",
-      "link": "https://ai-bot.cn/sites/11625.html",
+      "link": "https://www.augmentcode.com/",
       "category": "AI编程工具",
       "popularity": {
         "views": 24686,
@@ -8756,27 +8297,10 @@
       ]
     },
     {
-      "id": 72,
-      "name": "创作王",
-      "description": "AI一键帮助你创作营销内容",
-      "link": "https://ai-bot.cn/sites/1333.html",
-      "category": "AI写作工具",
-      "popularity": {
-        "views": 38319,
-        "favorites": 491
-      },
-      "vpn_required": false,
-      "hot_score": 24,
-      "hot": false,
-      "tags": [
-        "写作工具"
-      ]
-    },
-    {
       "id": 299,
       "name": "Fig",
       "description": "下一代命令行工具（内置AI终端命令自动补全）",
-      "link": "https://ai-bot.cn/sites/114.html",
+      "link": "https://www.gymnastics.sport/site/",
       "category": "AI编程工具",
       "popularity": {
         "views": 36436,
@@ -8793,7 +8317,7 @@
       "id": 314,
       "name": "爱设计",
       "description": "AI在线设计平台，提供多端在线拖拽设计工具",
-      "link": "https://ai-bot.cn/sites/24811.html",
+      "link": "https://www.isheji.com/",
       "category": "AI设计工具",
       "popularity": {
         "views": 31034,
@@ -8810,7 +8334,7 @@
       "id": 411,
       "name": "Phind",
       "description": "专为开发者设计的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11852.html",
+      "link": "https://www.phind.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 36695,
@@ -8827,7 +8351,7 @@
       "id": 502,
       "name": "OpenBMB",
       "description": "清华团队支持发起的大规模预训练语言模型库与相关工具",
-      "link": "https://ai-bot.cn/sites/1129.html",
+      "link": "https://www.openbmb.cn/",
       "category": "AI训练模型",
       "popularity": {
         "views": 24546,
@@ -8844,7 +8368,7 @@
       "id": 47,
       "name": "有道写作",
       "description": "网易有道出品的智能英文写作修改和润色工具",
-      "link": "https://ai-bot.cn/sites/2097.html",
+      "link": "https://write.youdao.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 29105,
@@ -8861,7 +8385,7 @@
       "id": 90,
       "name": "ParagraphAI",
       "description": "基于ChatGPT的AI写作应用",
-      "link": "https://ai-bot.cn/sites/1065.html",
+      "link": "https://www.paragraphai.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 32440,
@@ -8878,7 +8402,7 @@
       "id": 99,
       "name": "小微智能论文",
       "description": "人工智能论文创作辅助工具",
-      "link": "https://ai-bot.cn/sites/7512.html",
+      "link": "https://static.weiweilunwen.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 25275,
@@ -8895,7 +8419,7 @@
       "id": 65,
       "name": "文涌Effidit",
       "description": "腾讯AI Lab开发的智能创作助手",
-      "link": "https://ai-bot.cn/sites/37.html",
+      "link": "https://effidit.qq.com/",
       "category": "AI写作工具",
       "popularity": {
         "views": 31741,
@@ -8912,7 +8436,7 @@
       "id": 115,
       "name": "Krea AI",
       "description": "实时AI图像、视频生成和编辑平台",
-      "link": "https://ai-bot.cn/sites/7050.html",
+      "link": "https://www.krea.ai/",
       "category": "AI图像工具",
       "popularity": {
         "views": 32958,
@@ -8929,7 +8453,7 @@
       "id": 371,
       "name": "Color Wheel",
       "description": "AI灰度logo或插画上色工具",
-      "link": "https://ai-bot.cn/sites/165.html",
+      "link": "https://color.adobe.com/create/color-wheel",
       "category": "AI设计工具",
       "popularity": {
         "views": 23769,
@@ -8946,7 +8470,7 @@
       "id": 105,
       "name": "LiblibAI·哩布哩布AI",
       "description": "国内领先的AI图像创作平台和模型分享社区",
-      "link": "https://ai-bot.cn/sites/6474.html",
+      "link": "https://www.liblib.art/",
       "category": "AI图像工具",
       "popularity": {
         "views": 35196,
@@ -8963,7 +8487,7 @@
       "id": 401,
       "name": "博查AI搜索",
       "description": "支持多模型的AI搜索引擎",
-      "link": "https://ai-bot.cn/sites/11402.html",
+      "link": "https://bochaai.com/",
       "category": "AI搜索引擎",
       "popularity": {
         "views": 27956,
@@ -8980,7 +8504,7 @@
       "id": 426,
       "name": "Zion",
       "description": "全栈开发AI Agent应用的无代码开发平台",
-      "link": "https://ai-bot.cn/zion/",
+      "link": "https://www.functorz.com/",
       "category": "AI开发平台",
       "popularity": {
         "views": 22458,
@@ -8997,7 +8521,7 @@
       "id": 23,
       "name": "茅茅虫",
       "description": "一站式AI论文写作助手",
-      "link": "https://ai-bot.cn/sites/7381.html",
+      "link": "https://m.mymmc.cn/",
       "category": "AI写作工具",
       "popularity": {
         "views": 25936,
