@@ -9,6 +9,7 @@ import AIToolsPage from './pages/AIToolsPage';
 import DivinationPage from './pages/DivinationPage';
 import AnalyzerPage from './pages/AnalyzerPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             
             <Footer />
           </div>
+          <Analytics />
         </Router>
       </ErrorBoundary>
     </HelmetProvider>
