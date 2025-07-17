@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import AIToolsPage from './pages/AIToolsPage';
 import DivinationPage from './pages/DivinationPage';
 import AnalyzerPage from './pages/AnalyzerPage';
+import AboutPage from './pages/AboutPage'; // 新增导入
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/ai-tools" element={<AIToolsPage />} />
                 <Route path="/divination" element={<DivinationPage />} />
                 <Route path="/analyzer" element={<AnalyzerPage />} />
+                <Route path="/about" element={<AboutPage />} /> {/* 新增路由 */}
               </Routes>
             </main>
             

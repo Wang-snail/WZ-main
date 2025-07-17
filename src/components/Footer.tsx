@@ -37,9 +37,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="/about.html" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
                   关于我们
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/ai-tools" className="text-gray-300 hover:text-white transition-colors">
