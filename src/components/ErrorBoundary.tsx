@@ -28,8 +28,11 @@ export class ErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
+      // 检查是否是生产环境（安全地检查，避免 process 未定义错误）
+      const isProduction = typeof process !== 'undefined' && process.env?.NODE_ENV === 'production';
+      
       // 在生产环境中显示更友好的错误信息
-      if (process.env.NODE_ENV === 'production') {
+      if (isProduction) {
         return (
           <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
