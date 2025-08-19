@@ -32,9 +32,21 @@ export default defineConfig(({ mode }) => {
         },
       },
       chunkSizeWarningLimit: 1000,
+      // 添加 sourcemap 便于调试
+      sourcemap: true,
     },
     server: {
       port: 3000,
+      // 添加代理配置（如果需要）
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
+          secure: false,
+        }
+      }
     },
+    // 添加公共目录配置
+    publicDir: "public",
   }
 })

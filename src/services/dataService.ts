@@ -16,7 +16,14 @@ export class DataService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      this.aiToolsCache = data.ai_tools || [];
+      
+      // 数据验证
+      if (!data || !Array.isArray(data.ai_tools)) {
+        console.warn('AI工具数据格式不正确:', data);
+        return [];
+      }
+      
+      this.aiToolsCache = data.ai_tools;
       return this.aiToolsCache;
     } catch (error) {
       console.error('加载AI工具数据失败:', error);
@@ -37,7 +44,14 @@ export class DataService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      this.categoriesCache = data.categories || {};
+      
+      // 数据验证
+      if (!data || typeof data.categories !== 'object') {
+        console.warn('分类数据格式不正确:', data);
+        return {};
+      }
+      
+      this.categoriesCache = data.categories;
       return this.categoriesCache;
     } catch (error) {
       console.error('加载分类数据失败:', error);
@@ -55,8 +69,8 @@ export class DataService {
       ]);
 
       // 如果没有数据，返回空数组而不是失败
-      if (tools.length === 0 || Object.keys(categories).length === 0) {
-        console.warn('未加载到工具或分类数据');
+      if (!Array.isArray(tools) || !categories || typeof categories !== 'object') {
+        console.warn('未加载到有效的工具或分类数据');
         return [];
       }
 
@@ -78,7 +92,20 @@ export class DataService {
         'AI智能抠图': '智能背景移除和图像处理工具',
       };
 
-      return Object.entries(categories).map(([name, toolNames]) => {
+      return Object.entries(categories).map(([name, toolNames], index) => {
+        // 数据验证
+        if (!name || !Array.isArray(toolNames)) {
+          console.warn('分类数据项格式不正确:', { name, toolNames });
+          return {
+            id: `category-${index}`,
+            name: name || '未知分类',
+            description: '优质AI工具集合',
+            icon: '/images/categories/ai-chatbot.jpg',
+            count: 0,
+            tools: [],
+          };
+        }
+        
         // 为分类图标添加默认值，防止因图片缺失导致的问题
         const icon = categoryIcons[name] || '/images/categories/ai-chatbot.jpg';
         
@@ -105,8 +132,19 @@ export class DataService {
         this.loadCategories()
       ]);
 
+      // 数据验证
+      if (!Array.isArray(tools) || !categories || typeof categories !== 'object') {
+        return [];
+      }
+
       const toolNames = categories[categoryName] || [];
-      return tools.filter(tool => toolNames.includes(tool.name));
+      if (!Array.isArray(toolNames)) {
+        return [];
+      }
+      
+      return tools.filter(tool => 
+        tool && tool.name && toolNames.includes(tool.name)
+      );
     } catch (error) {
       console.error('根据分类获取工具失败:', error);
       return [];
@@ -117,12 +155,21 @@ export class DataService {
   async searchTools(query: string): Promise<AITool[]> {
     try {
       const tools = await this.loadAITools();
+      
+      // 数据验证
+      if (!Array.isArray(tools) || !query) {
+        return [];
+      }
+      
       const lowerQuery = query.toLowerCase();
       
       return tools.filter(tool => 
-        tool.name.toLowerCase().includes(lowerQuery) ||
-        tool.description.toLowerCase().includes(lowerQuery) ||
-        tool.category.toLowerCase().includes(lowerQuery)
+        tool && 
+        (
+          (tool.name && tool.name.toLowerCase().includes(lowerQuery)) ||
+          (tool.description && tool.description.toLowerCase().includes(lowerQuery)) ||
+          (tool.category && tool.category.toLowerCase().includes(lowerQuery))
+        )
       );
     } catch (error) {
       console.error('搜索工具失败:', error);
@@ -134,11 +181,19 @@ export class DataService {
   async getPopularTools(limit: number = 12): Promise<AITool[]> {
     try {
       const tools = await this.loadAITools();
-      // 如果没有工具数据，返回空数组
-      if (tools.length === 0) return [];
       
-      return tools
-        .sort((a, b) => b.hot_score - a.hot_score)
+      // 数据验证
+      if (!Array.isArray(tools)) {
+        return [];
+      }
+      
+      // 过滤掉无效数据
+      const validTools = tools.filter(tool => 
+        tool && typeof tool.hot_score === 'number'
+      );
+      
+      return validTools
+        .sort((a, b) => (b.hot_score || 0) - (a.hot_score || 0))
         .slice(0, limit);
     } catch (error) {
       console.error('获取热门工具失败:', error);
@@ -150,14 +205,25 @@ export class DataService {
   async getFeaturedTools(limit: number = 8): Promise<AITool[]> {
     try {
       const tools = await this.loadAITools();
-      // 如果没有工具数据，返回空数组
-      if (tools.length === 0) return [];
+      
+      // 数据验证
+      if (!Array.isArray(tools)) {
+        return [];
+      }
+      
+      // 过滤掉无效数据
+      const validTools = tools.filter(tool => 
+        tool && 
+        typeof tool.hot_score === 'number' && 
+        tool.popularity && 
+        typeof tool.popularity.favorites === 'number'
+      );
       
       // 根据热度和收藏数综合排序
-      return tools
+      return validTools
         .sort((a, b) => {
-          const scoreA = a.hot_score + a.popularity.favorites * 10;
-          const scoreB = b.hot_score + b.popularity.favorites * 10;
+          const scoreA = (a.hot_score || 0) + (a.popularity?.favorites || 0) * 10;
+          const scoreB = (b.hot_score || 0) + (b.popularity?.favorites || 0) * 10;
           return scoreB - scoreA;
         })
         .slice(0, limit);
@@ -171,11 +237,14 @@ export class DataService {
   async getLatestTools(limit: number = 6): Promise<AITool[]> {
     try {
       const tools = await this.loadAITools();
-      // 如果没有工具数据，返回空数组
-      if (tools.length === 0) return [];
+      
+      // 数据验证
+      if (!Array.isArray(tools)) {
+        return [];
+      }
       
       // 由于没有发布时间字段，我们按照数据中的顺序取前几个作为最新
-      return tools.slice(0, limit);
+      return tools.slice(0, limit).filter(tool => tool && tool.name);
     } catch (error) {
       console.error('获取最新工具失败:', error);
       return [];

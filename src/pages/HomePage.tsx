@@ -39,23 +39,54 @@ export default function HomePage() {
       setLoading(true);
       setError(null);
       
-      const [categoriesData, featuredData, popularData] = await Promise.all([
+      // 添加超时机制
+      const timeout = 10000; // 10秒超时
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('数据加载超时')), timeout)
+      );
+      
+      const dataPromise = Promise.all([
         dataService.getCategoryStats(),
         dataService.getFeaturedTools(8),
         dataService.getPopularTools(12)
       ]);
       
-      setCategories(categoriesData);
-      setFeaturedTools(featuredData);
-      setPopularTools(popularData);
+      const [categoriesData, featuredData, popularData] = await Promise.race([
+        dataPromise,
+        timeoutPromise
+      ]) as [Category[], AITool[], AITool[]];
+      
+      // 数据验证
+      if (!Array.isArray(categoriesData)) {
+        console.warn('分类数据格式不正确:', categoriesData);
+        setCategories([]);
+      } else {
+        setCategories(categoriesData);
+      }
+      
+      if (!Array.isArray(featuredData)) {
+        console.warn('推荐工具数据格式不正确:', featuredData);
+        setFeaturedTools([]);
+      } else {
+        setFeaturedTools(featuredData);
+      }
+      
+      if (!Array.isArray(popularData)) {
+        console.warn('热门工具数据格式不正确:', popularData);
+        setPopularTools([]);
+      } else {
+        setPopularTools(popularData);
+      }
       
       // 检查是否有数据加载
-      if (categoriesData.length === 0 && featuredData.length === 0 && popularData.length === 0) {
+      if ((!Array.isArray(categoriesData) || categoriesData.length === 0) && 
+          (!Array.isArray(featuredData) || featuredData.length === 0) && 
+          (!Array.isArray(popularData) || popularData.length === 0)) {
         setError('未加载到数据，请检查网络连接或稍后重试');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('加载数据失败:', error);
-      setError('加载数据时发生错误，请刷新页面重试');
+      setError(`加载数据时发生错误: ${error?.message || '未知错误'}`);
     } finally {
       setLoading(false);
     }
@@ -72,7 +103,7 @@ export default function HomePage() {
     setIsSearching(true);
     try {
       const results = await dataService.searchTools(query);
-      setSearchResults(results);
+      setSearchResults(Array.isArray(results) ? results : []);
     } catch (error) {
       console.error('搜索失败:', error);
       setSearchResults([]);
@@ -135,12 +166,12 @@ export default function HomePage() {
           "url": "https://wsnail.com/",
           "mainEntity": {
             "@type": "ItemList",
-            "numberOfItems": 106,
+            "numberOfItems": categories.length,
             "itemListElement": categories.map((category, index) => ({
               "@type": "ListItem",
               "position": index + 1,
               "name": category.name,
-              "url": `https://wsnail.com/ai-tools?category=${category.id}`
+              "url": `https://wsnail.com/ai-tools?category=${encodeURIComponent(category.id || category.name)}`
             }))
           },
           "provider": {
@@ -190,11 +221,11 @@ export default function HomePage() {
             <div className="flex justify-center items-center space-x-8 text-sm text-gray-500">
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-5 h-5 text-yellow-500" />
-                <span>106+ 精选工具</span>
+                <span>{featuredTools.length}+ 精选工具</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-500" />
-                <span>6大分类</span>
+                <span>{categories.length} 大分类</span>
               </div>
               <div className="flex items-center space-x-2">
                 <TrendingUp className="w-5 h-5 text-green-500" />
@@ -239,16 +270,19 @@ export default function HomePage() {
                 </Link>
               </div>
               
-              {categories.length > 0 ? (
+              {categories && categories.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                  {categories.map((category) => (
-                    <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.name)}`}>
+                  {categories.map((category, index) => (
+                    <Link 
+                      key={category.id || category.name || index} 
+                      to={`/ai-tools?category=${encodeURIComponent(category.name || '')}`}
+                    >
                       <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group">
                         <CardContent className="p-6 text-center">
                           {category.icon && (
                             <img 
                               src={category.icon} 
-                              alt={category.name}
+                              alt={category.name || '分类图标'}
                               className="w-12 h-12 mx-auto mb-3 rounded-lg object-cover group-hover:scale-110 transition-transform"
                               onError={(e) => {
                                 // 如果图片加载失败，使用默认图片
@@ -257,8 +291,8 @@ export default function HomePage() {
                               }}
                             />
                           )}
-                          <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
-                          <p className="text-sm text-gray-500">{category.count} 个工具</p>
+                          <h3 className="font-semibold text-gray-900 mb-1">{category.name || '未知分类'}</h3>
+                          <p className="text-sm text-gray-500">{(category.count || 0)} 个工具</p>
                         </CardContent>
                       </Card>
                     </Link>
@@ -285,7 +319,7 @@ export default function HomePage() {
                 </Link>
               </div>
               
-              {featuredTools.length > 0 ? (
+              {featuredTools && featuredTools.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {featuredTools.map((tool, index) => (
                     <ToolCard key={`featured-${index}`} tool={tool} featured />
@@ -312,7 +346,7 @@ export default function HomePage() {
                 </Link>
               </div>
               
-              {popularTools.length > 0 ? (
+              {popularTools && popularTools.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {popularTools.map((tool, index) => (
                     <ToolCard key={`popular-${index}`} tool={tool} rank={index + 1} />
@@ -382,6 +416,11 @@ export default function HomePage() {
 
 // Tool Card Component
 function ToolCard({ tool, featured = false, rank }: { tool: AITool; featured?: boolean; rank?: number }) {
+  // 添加安全检查
+  if (!tool) {
+    return null;
+  }
+  
   return (
     <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 group relative">
       {featured && (
@@ -399,10 +438,10 @@ function ToolCard({ tool, featured = false, rank }: { tool: AITool; featured?: b
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
-              {tool.name}
+              {tool.name || '未知工具'}
             </CardTitle>
             <Badge variant="secondary" className="mt-2">
-              {tool.category}
+              {tool.category || '未分类'}
             </Badge>
           </div>
           {tool.vpn_required && (
@@ -415,19 +454,19 @@ function ToolCard({ tool, featured = false, rank }: { tool: AITool; featured?: b
       
       <CardContent className="pt-0">
         <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-          {tool.description}
+          {tool.description || '暂无描述'}
         </p>
         
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4 text-sm text-gray-500">
             <div className="flex items-center space-x-1">
               <Star className="w-4 h-4" />
-              <span>{(tool.popularity.views / 1000).toFixed(1)}K</span>
+              <span>{tool.popularity?.views ? (tool.popularity.views / 1000).toFixed(1) + 'K' : '0K'}</span>
             </div>
           </div>
           
           <a 
-            href={tool.link} 
+            href={tool.link || '#'} 
             target="_blank" 
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
