@@ -1,6 +1,6 @@
 import React from 'react';
 
-const searilizeError = (error: any) => {
+const serializeError = (error: any) => {
   if (error instanceof Error) {
     return error.message + '\n' + error.stack;
   }
@@ -17,15 +17,42 @@ export class ErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error: any) {
+    // 更新错误状态
     return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    // 在开发环境中打印错误信息
+    console.error('Error caught by boundary:', error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
+      // 在生产环境中显示更友好的错误信息
+      if (process.env.NODE_ENV === 'production') {
+        return (
+          <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
+              <h2 className="text-2xl font-bold text-red-600 mb-4">页面加载出错</h2>
+              <p className="text-gray-600 mb-4">
+                抱歉，页面加载出现了问题。请尝试刷新页面或稍后再试。
+              </p>
+              <button 
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                onClick={() => window.location.reload()}
+              >
+                刷新页面
+              </button>
+            </div>
+          </div>
+        );
+      }
+      
+      // 在开发环境中显示详细错误信息
       return (
         <div className="p-4 border border-red-500 rounded">
           <h2 className="text-red-500">Something went wrong.</h2>
-          <pre className="mt-2 text-sm">{searilizeError(this.state.error)}</pre>
+          <pre className="mt-2 text-sm">{serializeError(this.state.error)}</pre>
         </div>
       );
     }

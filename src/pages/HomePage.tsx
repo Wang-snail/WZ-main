@@ -9,7 +9,8 @@ import {
   ExternalLink,
   Crown,
   Zap,
-  Users
+  Users,
+  Gamepad2
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -27,6 +28,7 @@ export default function HomePage() {
   const [searchResults, setSearchResults] = useState<AITool[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadData();
@@ -35,6 +37,8 @@ export default function HomePage() {
   const loadData = async () => {
     try {
       setLoading(true);
+      setError(null);
+      
       const [categoriesData, featuredData, popularData] = await Promise.all([
         dataService.getCategoryStats(),
         dataService.getFeaturedTools(8),
@@ -44,8 +48,14 @@ export default function HomePage() {
       setCategories(categoriesData);
       setFeaturedTools(featuredData);
       setPopularTools(popularData);
+      
+      // 检查是否有数据加载
+      if (categoriesData.length === 0 && featuredData.length === 0 && popularData.length === 0) {
+        setError('未加载到数据，请检查网络连接或稍后重试');
+      }
     } catch (error) {
       console.error('加载数据失败:', error);
+      setError('加载数据时发生错误，请刷新页面重试');
     } finally {
       setLoading(false);
     }
@@ -87,6 +97,23 @@ export default function HomePage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">正在加载AI工具库...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">加载失败</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <Button 
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            onClick={() => window.location.reload()}
+          >
+            刷新页面
+          </Button>
         </div>
       </div>
     );
@@ -212,25 +239,36 @@ export default function HomePage() {
                 </Link>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {categories.map((category) => (
-                  <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.name)}`}>
-                    <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group">
-                      <CardContent className="p-6 text-center">
-                        {category.icon && (
-                          <img 
-                            src={category.icon} 
-                            alt={category.name}
-                            className="w-12 h-12 mx-auto mb-3 rounded-lg object-cover group-hover:scale-110 transition-transform"
-                          />
-                        )}
-                        <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
-                        <p className="text-sm text-gray-500">{category.count} 个工具</p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
+              {categories.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {categories.map((category) => (
+                    <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.name)}`}>
+                      <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group">
+                        <CardContent className="p-6 text-center">
+                          {category.icon && (
+                            <img 
+                              src={category.icon} 
+                              alt={category.name}
+                              className="w-12 h-12 mx-auto mb-3 rounded-lg object-cover group-hover:scale-110 transition-transform"
+                              onError={(e) => {
+                                // 如果图片加载失败，使用默认图片
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/images/categories/ai-chatbot.jpg';
+                              }}
+                            />
+                          )}
+                          <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
+                          <p className="text-sm text-gray-500">{category.count} 个工具</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">暂无分类数据</p>
+                </div>
+              )}
             </section>
 
             {/* Featured Tools */}
@@ -247,11 +285,17 @@ export default function HomePage() {
                 </Link>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {featuredTools.map((tool, index) => (
-                  <ToolCard key={`featured-${index}`} tool={tool} featured />
-                ))}
-              </div>
+              {featuredTools.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {featuredTools.map((tool, index) => (
+                    <ToolCard key={`featured-${index}`} tool={tool} featured />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">暂无推荐工具</p>
+                </div>
+              )}
             </section>
 
             {/* Popular Tools */}
@@ -268,11 +312,17 @@ export default function HomePage() {
                 </Link>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {popularTools.map((tool, index) => (
-                  <ToolCard key={`popular-${index}`} tool={tool} rank={index + 1} />
-                ))}
-              </div>
+              {popularTools.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {popularTools.map((tool, index) => (
+                    <ToolCard key={`popular-${index}`} tool={tool} rank={index + 1} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">暂无热门工具</p>
+                </div>
+              )}
             </section>
 
             {/* Self-built Apps Section */}
@@ -283,7 +333,7 @@ export default function HomePage() {
                   <p className="text-gray-600">探索我们精心打造的原创AI应用</p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Link to="/divination">
                     <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group bg-gradient-to-br from-purple-400 to-pink-400 text-white">
                       <CardContent className="p-8 text-center">
@@ -304,6 +354,18 @@ export default function HomePage() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">智能情感分析</h3>
                         <p className="text-white/80">AI驱动的关系分析与建议</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                  
+                  <Link to="/games">
+                    <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group bg-gradient-to-br from-green-400 to-teal-400 text-white">
+                      <CardContent className="p-8 text-center">
+                        <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                          <Gamepad2 className="w-8 h-8" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">AI小游戏</h3>
+                        <p className="text-white/80">智力挑战与娱乐放松</p>
                       </CardContent>
                     </Card>
                   </Link>

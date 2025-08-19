@@ -8,7 +8,19 @@ import HomePage from './pages/HomePage';
 import AIToolsPage from './pages/AIToolsPage';
 import DivinationPage from './pages/DivinationPage';
 import AnalyzerPage from './pages/AnalyzerPage';
-import AboutPage from './pages/AboutPage'; // 新增导入
+import AboutPage from './pages/AboutPage';
+import AIGamesPage from './pages/games/AIGamesPage';
+import AIWordGuessGame from './pages/games/AIWordGuessGame';
+import AITicTacToe from './pages/games/AITicTacToe';
+import AIMemoryGame from './pages/games/AIMemoryGame';
+import AINumberGuessGame from './pages/games/AINumberGuessGame';
+import AIRockPaperScissors from './pages/games/AIRockPaperScissors';
+import AIMathChallenge from './pages/games/AIMathChallenge';
+import WolfSheepGame from './pages/games/WolfSheepGame';
+import ReversiGame from './pages/games/ReversiGame';
+import MilitaryChessGame from './pages/games/MilitaryChessGame';
+import GoGame from './pages/games/GoGame';
+import ToolStatistics from './pages/tools/ToolStatistics';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
@@ -40,7 +52,19 @@ function App() {
                 <Route path="/ai-tools" element={<AIToolsPage />} />
                 <Route path="/divination" element={<DivinationPage />} />
                 <Route path="/analyzer" element={<AnalyzerPage />} />
-                <Route path="/about" element={<AboutPage />} /> {/* 新增路由 */}
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/tools/statistics" element={<ToolStatistics />} />
+                <Route path="/games" element={<AIGamesPage />} />
+                <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
+                <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
+                <Route path="/games/ai-memory" element={<AIMemoryGame />} />
+                <Route path="/games/ai-number-guess" element={<AINumberGuessGame />} />
+                <Route path="/games/ai-rock-paper-scissors" element={<AIRockPaperScissors />} />
+                <Route path="/games/ai-math-challenge" element={<AIMathChallenge />} />
+                <Route path="/games/wolf-sheep" element={<WolfSheepGame />} />
+                <Route path="/games/reversi" element={<ReversiGame />} />
+                <Route path="/games/military-chess" element={<MilitaryChessGame />} />
+                <Route path="/games/go-game" element={<GoGame />} />
               </Routes>
             </main>
             

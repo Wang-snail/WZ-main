@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, Menu, X } from 'lucide-react';
+import { Bot, Sparkles, Menu, X, Gamepad2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState } from 'react';
 
@@ -14,6 +14,7 @@ export default function Header() {
     { name: 'AI工具库', href: '/ai-tools', current: location.pathname === '/ai-tools' },
     { name: 'AI占卜', href: '/divination', current: location.pathname === '/divination' },
     { name: '情感分析', href: '/analyzer', current: location.pathname === '/analyzer' },
+    { name: 'AI游戏', href: '/games', current: location.pathname === '/games' },
   ];
 
   return (
@@ -47,12 +48,13 @@ export default function Header() {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${
                   item.current
                     ? 'bg-blue-100 text-blue-700'
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
+                {item.name === 'AI游戏' && <Gamepad2 className="w-4 h-4 mr-1" />}
                 {item.name}
               </Link>
             ))}
@@ -88,12 +90,13 @@ export default function Header() {
                   key={item.name}
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${
                     item.current
                       ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
+                  {item.name === 'AI游戏' && <Gamepad2 className="w-4 h-4 mr-2" />}
                   {item.name}
                 </Link>
               ))}

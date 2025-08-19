@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { ErrorBoundary } from './components/ErrorBoundary.tsx'
 import './index.css'
 import App from './App.tsx'
-import { inject } from '@vercel/speed-insights';
+import { injectSpeedInsights } from '@vercel/speed-insights';
  
-inject();
+injectSpeedInsights();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
