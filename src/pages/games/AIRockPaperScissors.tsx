@@ -247,34 +247,48 @@ export default function AIRockPaperScissors() {
             </CardHeader>
             
             <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* 玩家选择区 */}
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">你的选择</h3>
-                  <div className="bg-blue-50 rounded-2xl p-6 mb-4">
-                    <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg mb-4">
-                      {playerChoice ? (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="text-blue-600"
-                        >
-                          {getChoiceIcon(playerChoice)}
-                        </motion.div>
-                      ) : (
-                        <Zap className="w-12 h-12 text-blue-400" />
-                      )}
+              {/* 左右对立布局 */}
+              <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
+                {/* 玩家区域 - 左侧 */}
+                <div className="flex-1 w-full max-w-md">
+                  <div className="bg-blue-50 rounded-2xl p-6 shadow-lg">
+                    <h3 className="text-xl font-semibold text-blue-800 mb-4 text-center">玩家</h3>
+                    <div className="flex flex-col items-center">
+                      <div className="w-40 h-40 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg mb-4 border-4 border-blue-300">
+                        {playerChoice ? (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="text-blue-600"
+                          >
+                            {getChoiceIcon(playerChoice)}
+                          </motion.div>
+                        ) : (
+                          <Zap className="w-16 h-16 text-blue-400" />
+                        )}
+                      </div>
+                      <p className="font-semibold text-blue-800 text-lg">
+                        {getPlayerChoiceName(playerChoice)}
+                      </p>
                     </div>
-                    <p className="font-semibold text-blue-800">
-                      {getPlayerChoiceName(playerChoice)}
-                    </p>
                   </div>
                 </div>
                 
-                {/* 对决结果显示区 */}
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">对决结果</h3>
-                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-6 mb-4">
+                {/* 对决中心区域 */}
+                <div className="flex flex-col items-center justify-center">
+                  {/* 开始按钮 */}
+                  {gameState === 'waiting' && (
+                    <Button
+                      onClick={startRound}
+                      className="flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white mb-6 px-8 py-4 text-xl"
+                    >
+                      <Play className="w-6 h-6 mr-2" />
+                      开始对决
+                    </Button>
+                  )}
+                  
+                  {/* 对决结果显示区 */}
+                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-6 mb-4 shadow-lg min-w-[200px] text-center">
                     {gameState === 'countdown' ? (
                       <motion.div
                         initial={{ scale: 0 }}
@@ -303,69 +317,71 @@ export default function AIRockPaperScissors() {
                   </div>
                   
                   {/* 回合信息 */}
-                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">第 {round} 回合</h4>
+                  <div className="bg-gray-50 rounded-lg p-3 mb-4 text-center">
+                    <h4 className="font-semibold text-gray-900">第 {round} 回合</h4>
                     {gameState === 'selecting' && (
-                      <p className="text-gray-600 text-sm">3-2-1倒计时结束，请快速出拳！</p>
+                      <p className="text-gray-600 text-sm mt-1">3-2-1倒计时结束，请快速出拳！</p>
                     )}
-                  </div>
-                  
-                  {/* 游戏说明 */}
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">游戏规则</h4>
-                    <ul className="space-y-1 text-gray-600 text-sm">
-                      <li>• 3-2-1倒计时结束后同时出拳</li>
-                      <li>• 石头胜剪刀</li>
-                      <li>• 剪刀胜布</li>
-                      <li>• 布胜石头</li>
-                      <li>• 3秒内未出拳视为超时</li>
-                    </ul>
                   </div>
                 </div>
                 
-                {/* AI选择区 */}
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">AI选择</h3>
-                  <div className="bg-purple-50 rounded-2xl p-6 mb-4">
-                    <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg mb-4">
-                      {aiChoice ? (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="text-purple-600"
-                        >
-                          {getChoiceIcon(aiChoice)}
-                        </motion.div>
-                      ) : (
-                        <Zap className="w-12 h-12 text-purple-400" />
-                      )}
+                {/* AI区域 - 右侧 */}
+                <div className="flex-1 w-full max-w-md">
+                  <div className="bg-purple-50 rounded-2xl p-6 shadow-lg">
+                    <h3 className="text-xl font-semibold text-purple-800 mb-4 text-center">AI</h3>
+                    <div className="flex flex-col items-center">
+                      <div className="w-40 h-40 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg mb-4 border-4 border-purple-300">
+                        {aiChoice ? (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="text-purple-600"
+                          >
+                            {getChoiceIcon(aiChoice)}
+                          </motion.div>
+                        ) : (
+                          <Zap className="w-16 h-16 text-purple-400" />
+                        )}
+                      </div>
+                      <p className="font-semibold text-purple-800 text-lg">
+                        {getAIChoiceName(aiChoice)}
+                      </p>
                     </div>
-                    <p className="font-semibold text-purple-800">
-                      {getAIChoiceName(aiChoice)}
-                    </p>
                   </div>
                 </div>
               </div>
               
-              {/* 选择按钮 */}
+              {/* 游戏说明（移动到下方） */}
+              <div className="bg-gray-50 rounded-lg p-4 mt-6 mb-6">
+                <h4 className="font-semibold text-gray-900 mb-2 text-center">游戏规则</h4>
+                <div className="flex flex-wrap justify-center gap-4 text-gray-600 text-sm">
+                  <span>• 石头胜剪刀</span>
+                  <span>• 剪刀胜布</span>
+                  <span>• 布胜石头</span>
+                  <span>• 3秒内未出拳视为超时</span>
+                </div>
+              </div>
+              
+              {/* 选择按钮 - 紧凑布局 */}
               {gameState === 'selecting' && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-semibold text-gray-900 text-center mb-6">快速出拳！</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                <div className="mt-6">
+                  <h3 className="text-xl font-semibold text-gray-900 text-center mb-4">快速出拳！</h3>
+                  <div className="flex flex-col sm:flex-row justify-center gap-3 max-w-2xl mx-auto">
                     {choices.map((choice) => (
                       <motion.div
                         key={choice.id}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        className="flex-1"
                       >
                         <Button
                           onClick={() => makeChoice(choice.id as Choice)}
-                          className={`w-full h-auto py-6 flex flex-col items-center justify-center bg-gradient-to-r ${choice.color} text-gray-800 hover:shadow-lg border-0`}
+                          className={`w-full h-auto py-4 flex flex-col items-center justify-center bg-gradient-to-r ${choice.color} text-gray-800 hover:shadow-lg border-0`}
                         >
-                          <div className="mb-2">
+                          <div className="mb-1">
                             {choice.icon}
                           </div>
-                          <span className="text-lg font-semibold">{choice.name}</span>
+                          <span className="text-base font-semibold">{choice.name}</span>
                         </Button>
                       </motion.div>
                     ))}
