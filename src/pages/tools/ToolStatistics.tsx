@@ -29,6 +29,14 @@ export default function ToolStatistics() {
     setError(null);
     
     try {
+      // 安全检查，确保在浏览器环境中不执行爬虫
+      if (typeof window !== 'undefined') {
+        // 在浏览器环境中，我们不执行实际的爬虫，而是显示提示信息
+        setError('此功能仅在服务器环境中可用');
+        setLoading(false);
+        return;
+      }
+      
       const crawler = new ToolCrawler();
       const data = await crawler.getAllTools();
       setCategories(data);
@@ -43,7 +51,14 @@ export default function ToolStatistics() {
   
   // 组件挂载时获取数据
   useEffect(() => {
-    fetchToolData();
+    // 在浏览器环境中不自动执行爬虫
+    if (typeof window === 'undefined') {
+      fetchToolData();
+    } else {
+      // 在浏览器环境中，设置一个友好的提示
+      setLoading(false);
+      setError('此功能需要在服务器环境中运行');
+    }
   }, []);
   
   // 计算统计数据
@@ -84,15 +99,20 @@ export default function ToolStatistics() {
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-gray-900 flex items-center">
                 <AlertCircle className="w-6 h-6 text-red-600 mr-2" />
-                数据加载失败
+                功能提示
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-6">{error}</p>
-              <Button onClick={fetchToolData} className="flex items-center">
-                <RefreshCw className="w-4 h-4 mr-2" />
-                重新加载
-              </Button>
+              <p className="text-gray-500 text-sm mb-4">
+                此功能用于统计和分析工具猫网站的工具分类数据，需要在服务器环境中运行。
+              </p>
+              {typeof window === 'undefined' && (
+                <Button onClick={fetchToolData} className="flex items-center">
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  重新加载
+                </Button>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -196,10 +216,12 @@ export default function ToolStatistics() {
           {/* 操作栏 */}
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">数据概览</h2>
-            <Button onClick={fetchToolData} variant="outline" className="flex items-center">
-              <RefreshCw className="w-4 h-4 mr-2" />
-              刷新数据
-            </Button>
+            {typeof window === 'undefined' && (
+              <Button onClick={fetchToolData} variant="outline" className="flex items-center">
+                <RefreshCw className="w-4 h-4 mr-2" />
+                刷新数据
+              </Button>
+            )}
           </div>
           
           {/* 热门分类排行 */}

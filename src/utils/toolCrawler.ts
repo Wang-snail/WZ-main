@@ -86,6 +86,7 @@ export class ToolCrawler {
           category: categoryId
         };
         
+        // 安全检查，确保工具名称和URL存在
         if (tool.name && tool.url) {
           tools.push(tool);
         }
@@ -137,18 +138,21 @@ export class ToolCrawler {
 // 创建爬虫实例
 export const toolCrawler = new ToolCrawler();
 
-// 示例使用
-if (import.meta.url === `file://${process.argv[1]}`) {
-  // 如果直接运行此文件
-  toolCrawler.getAllTools().then(categories => {
-    console.log('工具分类统计:');
-    categories.forEach(category => {
-      console.log(`- ${category.name}: ${category.count} 个工具`);
+// 安全检查环境再执行示例代码
+if (typeof window === 'undefined' && typeof process !== 'undefined' && process.argv) {
+  // 只在 Node.js 环境中运行示例代码
+  if (process.argv && process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+    // 如果直接运行此文件
+    toolCrawler.getAllTools().then(categories => {
+      console.log('工具分类统计:');
+      categories.forEach(category => {
+        console.log(`- ${category.name}: ${category.count} 个工具`);
+      });
+      
+      // 输出总统计
+      const totalCategories = categories.length;
+      const totalTools = categories.reduce((sum, category) => sum + category.count, 0);
+      console.log(`\n总计: ${totalCategories} 个分类, ${totalTools} 个工具`);
     });
-    
-    // 输出总统计
-    const totalCategories = categories.length;
-    const totalTools = categories.reduce((sum, category) => sum + category.count, 0);
-    console.log(`\n总计: ${totalCategories} 个分类, ${totalTools} 个工具`);
-  });
+  }
 }
