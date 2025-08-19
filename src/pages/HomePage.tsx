@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Search, 
   Star, 
@@ -10,7 +10,8 @@ import {
   Crown,
   Zap,
   Users,
-  Gamepad2
+  Gamepad2,
+  Globe
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -19,8 +20,11 @@ import { Badge } from '../components/ui/badge';
 import { AITool, Category } from '../types';
 import { dataService } from '../services/dataService';
 import SEOHead from '../components/SEOHead';
+import { SUPPORTED_LANGUAGES, getCurrentLanguage, setLanguage, generateLocalizedURL } from '../utils/languageUtils';
+import { SEOManager } from '../utils/seoUtils';
 
 export default function HomePage() {
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [categories, setCategories] = useState<Category[]>([]);
   const [featuredTools, setFeaturedTools] = useState<AITool[]>([]);
@@ -29,10 +33,18 @@ export default function HomePage() {
   const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
 
   useEffect(() => {
     loadData();
   }, []);
+
+  const handleLanguageChange = (langCode: string) => {
+    setLanguage(langCode);
+    setCurrentLang(langCode);
+    // 重新加载页面以应用语言更改
+    window.location.reload();
+  };
 
   const loadData = async () => {
     try {
@@ -133,36 +145,38 @@ export default function HomePage() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">加载失败</h2>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <Button 
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-            onClick={() => window.location.reload()}
-          >
-            刷新页面
-          </Button>
-        </div>
-      </div>
-    );
-  }
+  // 多语言SEO配置
+  const seoConfig = {
+    title: currentLang === 'en' ? 
+      "AI Tools Collection - 106+ Selected AI Tools | WSNAIL.COM" : 
+      "AI工具集合站 - 106+精选AI工具库 | AI聊天机器人、AI绘画、AI视频 | WSNAIL.COM",
+    description: currentLang === 'en' ? 
+      "WSNAIL.COM - Curated collection of 106+ premium AI tools, including AI chatbots, AI search engines, AI image design, AI video production and more. Free AI tool recommendations, AI divination services." : 
+      "WSNAIL.COM - 精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等6大分类。免费AI工具推荐，AI占卜服务，让AI为生活增添更多精彩。",
+    keywords: currentLang === 'en' ? 
+      "AI tools, AI tool library, AI tool collection, artificial intelligence, AI chat, AI painting, AI video, AI programming, ChatGPT, WSNAIL" : 
+      "AI工具,AI工具库,AI工具集合,人工智能工具,AI聊天机器人,AI搜索引擎,AI图像设计,AI视频制作,AI智能抠图,AI占卜,免费AI工具,ChatGPT,AI绘画,AI写作,WSNAIL",
+    url: "https://wsnail.com/",
+    canonical: "https://wsnail.com/",
+    locale: currentLang === 'en' ? 'en_US' : 'zh_CN',
+  };
 
   return (
     <>
       <SEOHead 
-        title="AI工具集合站 - 106+精选AI工具库 | AI聊天机器人、AI绘画、AI视频 | WSNAIL.COM"
-        description="WSNAIL.COM - 精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等6大分类。免费AI工具推荐，AI占卜服务，让AI为生活增添更多精彩。"
-        keywords="AI工具,AI工具库,AI工具集合,人工智能工具,AI聊天机器人,AI搜索引擎,AI图像设计,AI视频制作,AI智能抠图,AI占卜,免费AI工具,ChatGPT,AI绘画,AI写作,WSNAIL"
-        url="https://wsnail.com/"
-        canonical="https://wsnail.com/"
+        title={seoConfig.title}
+        description={seoConfig.description}
+        keywords={seoConfig.keywords}
+        url={seoConfig.url}
+        canonical={seoConfig.canonical}
+        locale={seoConfig.locale}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "AI工具集合站",
-          "description": "精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等6大分类",
+          "name": currentLang === 'en' ? "AI Tools Collection" : "AI工具集合站",
+          "description": currentLang === 'en' ? 
+            "Curated collection of 106+ premium AI tools, including AI chatbots, AI search engines, AI image design, AI video production and more." : 
+            "精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等6大分类",
           "url": "https://wsnail.com/",
           "mainEntity": {
             "@type": "ItemList",
@@ -191,13 +205,32 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                AI工具集合站
-              </span>
-            </h1>
+            <div className="flex justify-between items-start mb-6">
+              <h1 className="text-5xl sm:text-6xl font-bold text-gray-900">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  {currentLang === 'en' ? 'AI Tools Collection' : 'AI工具集合站'}
+                </span>
+              </h1>
+              {/* Language Selector */}
+              <div className="flex items-center space-x-2">
+                <Globe className="w-5 h-5 text-gray-500" />
+                <select 
+                  value={currentLang}
+                  onChange={(e) => handleLanguageChange(e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 text-sm"
+                >
+                  {SUPPORTED_LANGUAGES.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.flag} {lang.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-              发现最佳AI工具，整合7725种技能和扩展，让您的AI获得无限可能
+              {currentLang === 'en' ? 
+                'Discover the best AI tools, integrating 7725 skills and extensions, giving your AI unlimited possibilities' : 
+                '发现最佳AI工具，整合7725种技能和扩展，让您的AI获得无限可能'}
             </p>
             
             {/* Search Bar */}
@@ -206,7 +239,7 @@ export default function HomePage() {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <Input
                   type="text"
-                  placeholder="搜索AI工具..."
+                  placeholder={currentLang === 'en' ? 'Search AI tools...' : '搜索AI工具...'}
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   className="pl-12 pr-4 py-4 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500 shadow-lg"
@@ -221,15 +254,15 @@ export default function HomePage() {
             <div className="flex justify-center items-center space-x-8 text-sm text-gray-500">
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-5 h-5 text-yellow-500" />
-                <span>{featuredTools.length}+ 精选工具</span>
+                <span>{featuredTools.length}+ {currentLang === 'en' ? 'Selected Tools' : '精选工具'}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-500" />
-                <span>{categories.length} 大分类</span>
+                <span>{categories.length} {currentLang === 'en' ? 'Categories' : '大分类'}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <TrendingUp className="w-5 h-5 text-green-500" />
-                <span>持续更新</span>
+                <span>{currentLang === 'en' ? 'Continuously Updated' : '持续更新'}</span>
               </div>
             </div>
           </motion.div>
@@ -262,10 +295,12 @@ export default function HomePage() {
             {/* Categories */}
             <section className="mb-12">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">工具分类</h2>
+                <h2 className="text-3xl font-bold text-gray-900">
+                  {currentLang === 'en' ? 'Tool Categories' : '工具分类'}
+                </h2>
                 <Link to="/ai-tools">
                   <Button variant="outline" className="hover:bg-blue-50">
-                    查看全部 →
+                    {currentLang === 'en' ? 'View All →' : '查看全部 →'}
                   </Button>
                 </Link>
               </div>
@@ -310,11 +345,13 @@ export default function HomePage() {
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center space-x-3">
                   <Crown className="w-8 h-8 text-yellow-500" />
-                  <h2 className="text-3xl font-bold text-gray-900">精选推荐</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    {currentLang === 'en' ? 'Featured Recommendations' : '精选推荐'}
+                  </h2>
                 </div>
                 <Link to="/ai-tools?tab=featured">
                   <Button variant="outline" className="hover:bg-yellow-50">
-                    查看更多 →
+                    {currentLang === 'en' ? 'View More →' : '查看更多 →'}
                   </Button>
                 </Link>
               </div>
@@ -337,11 +374,13 @@ export default function HomePage() {
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center space-x-3">
                   <Zap className="w-8 h-8 text-purple-500" />
-                  <h2 className="text-3xl font-bold text-gray-900">热门工具</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    {currentLang === 'en' ? 'Popular Tools' : '热门工具'}
+                  </h2>
                 </div>
                 <Link to="/ai-tools?tab=popular">
                   <Button variant="outline" className="hover:bg-purple-50">
-                    查看更多 →
+                    {currentLang === 'en' ? 'View More →' : '查看更多 →'}
                   </Button>
                 </Link>
               </div>
@@ -363,8 +402,14 @@ export default function HomePage() {
             <section className="mb-12">
               <div className="bg-gradient-to-r from-orange-100 to-pink-100 rounded-2xl p-8">
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">自建应用</h2>
-                  <p className="text-gray-600">探索我们精心打造的原创AI应用</p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    {currentLang === 'en' ? 'Self-built Applications' : '自建应用'}
+                  </h2>
+                  <p className="text-gray-600">
+                    {currentLang === 'en' ? 
+                      'Explore our carefully crafted original AI applications' : 
+                      '探索我们精心打造的原创AI应用'}
+                  </p>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -374,8 +419,14 @@ export default function HomePage() {
                         <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                           <Sparkles className="w-8 h-8" />
                         </div>
-                        <h3 className="text-xl font-bold mb-2">AI占卜大师</h3>
-                        <p className="text-white/80">塔罗牌、星座、手相、八卦算命</p>
+                        <h3 className="text-xl font-bold mb-2">
+                          {currentLang === 'en' ? 'AI Divination Master' : 'AI占卜大师'}
+                        </h3>
+                        <p className="text-white/80">
+                          {currentLang === 'en' ? 
+                            'Tarot, Astrology, Palmistry, Fortune Telling' : 
+                            '塔罗牌、星座、手相、八卦算命'}
+                        </p>
                       </CardContent>
                     </Card>
                   </Link>
@@ -386,8 +437,14 @@ export default function HomePage() {
                         <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                           <Users className="w-8 h-8" />
                         </div>
-                        <h3 className="text-xl font-bold mb-2">智能情感分析</h3>
-                        <p className="text-white/80">AI驱动的关系分析与建议</p>
+                        <h3 className="text-xl font-bold mb-2">
+                          {currentLang === 'en' ? 'Intelligent Emotional Analysis' : '智能情感分析'}
+                        </h3>
+                        <p className="text-white/80">
+                          {currentLang === 'en' ? 
+                            'AI-driven relationship analysis and advice' : 
+                            'AI驱动的关系分析与建议'}
+                        </p>
                       </CardContent>
                     </Card>
                   </Link>
@@ -398,8 +455,14 @@ export default function HomePage() {
                         <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                           <Gamepad2 className="w-8 h-8" />
                         </div>
-                        <h3 className="text-xl font-bold mb-2">AI小游戏</h3>
-                        <p className="text-white/80">智力挑战与娱乐放松</p>
+                        <h3 className="text-xl font-bold mb-2">
+                          {currentLang === 'en' ? 'AI Mini Games' : 'AI小游戏'}
+                        </h3>
+                        <p className="text-white/80">
+                          {currentLang === 'en' ? 
+                            'Intellectual challenges and entertainment' : 
+                            '智力挑战与娱乐放松'}
+                        </p>
                       </CardContent>
                     </Card>
                   </Link>

@@ -1,169 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-        
-  <!-- 主页 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wsnail.com/</loc>
-    <lastmod>2025-06-27</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- AI工具库主页 -->
   <url>
     <loc>https://wsnail.com/ai-tools</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- AI占卜页面 -->
   <url>
     <loc>https://wsnail.com/divination</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- 情感分析页面 -->
   <url>
     <loc>https://wsnail.com/analyzer</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- AI工具分类页面 -->
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=chatbot</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=search</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=social</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=image</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=video</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=image-processing</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- AI工具标签页面 -->
-  <url>
-    <loc>https://wsnail.com/ai-tools?tab=featured</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?tab=popular</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?tab=latest</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- 占卜服务子页面 -->
-  <url>
-    <loc>https://wsnail.com/divination/tarot</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/zodiac</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/bagua</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/palm</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/word</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <!-- AI游戏页面 -->
   <url>
     <loc>https://wsnail.com/games</loc>
-    <lastmod>2025-08-14</lastmod>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/games/ai-quiz</loc>
-    <lastmod>2025-08-14</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <url>
-    <loc>https://wsnail.com/games/ai-tic-tac-toe</loc>
-    <lastmod>2025-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/games/ai-memory</loc>
-    <lastmod>2025-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
 </urlset>

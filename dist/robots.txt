@@ -1,56 +1,17 @@
-# WSNAIL.COM - AI工具集合站 robots.txt
+# Robotstxt for WSNAIL.COM
+# Generated on 2025-08-19
 
-# 允许所有搜索引擎抓取
 User-agent: *
 Allow: /
-
-# 不允许抓取的路径
 Disallow: /api/
+Disallow: /admin/
 Disallow: /private/
-Disallow: /_next/
-Disallow: /_vercel/
-Disallow: /dist/
-Disallow: /node_modules/
-Disallow: /.git/
-Disallow: /.vscode/
-Disallow: /src/
 
-# 允许抓取静态资源
-Allow: /images/
-Allow: /data/
-Allow: /*.css
-Allow: /*.js
-Allow: /*.json
-
-# 特殊规则 - Google
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-# 特殊规则 - Bing
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 2
-
-# 特殊规则 - 百度
-User-agent: Baiduspider
-Allow: /
-Crawl-delay: 3
-
-# 特殊规则 - 搜狗
-User-agent: Sogou web spider
-Allow: /
-Crawl-delay: 5
-
-# 特殊规则 - 360搜索
-User-agent: 360Spider
-Allow: /
-Crawl-delay: 5
-
-# 网站地图位置
+# Sitemap files
 Sitemap: https://wsnail.com/sitemap.xml
 
-# 额外信息
-# 网站：https://wsnail.com
-# 描述：AI工具集合站 - 精选106+优质AI工具
-# 联系：通过网站联系表单
+# Host
+Host: https://wsnail.com
+
+# Crawl-delay
+Crawl-delay: 10
