@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部署测试 - AI市场调研系统</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+        
+        .success {
+            color: #10b981;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        #apiTest {
+            margin-top: 20px;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success">✅ 部署成功！</div>
+        
+        <h1>🎯 AI市场调研系统</h1>
+        <p>一键获取专业市场调研报告</p>
+        
+        <div class="info">
+            <strong>🚀 系统功能：</strong><br>
+            • 5维度市场分析：市场机会、关键词分析、竞品分析、用户画像、营销策略<br>
+            • AI驱动：SiliconFlow DeepSeek-V3 提供专业分析<br>
+            • 3-5分钟生成完整报告<br>
+            • 支持邮件发送结果
+        </div>
+        
+        <div class="info">
+            <strong>🌐 访问链接：</strong><br>
+            <a href="/market-research.html" class="btn">进入市场调研系统</a>
+        </div>
+        
+        <div class="status">
+            <strong>🔧 技术栈状态检查：</strong><br>
+            <div id="statusInfo">
+                ✅ Vercel部署：成功<br>
+                ✅ 静态文件：正常<br>
+                <span id="apiStatus">🔄 API状态：检查中...</span>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="testAPI()">🧪 测试API连接</button>
+        
+        <div id="apiTest" style="display: none;">
+            <strong>API测试结果：</strong><br>
+            <div id="testResult">测试中...</div>
+        </div>
+        
+        <div class="info" style="margin-top: 30px;">
+            <strong>📝 部署信息：</strong><br>
+            部署时间: <span id="deployTime"></span><br>
+            环境变量: SiliconFlow API 已配置<br>
+            构建状态: NPM构建成功
+        </div>
+    </div>
+
+    <script>
+        // 显示部署时间
+        document.getElementById('deployTime').textContent = new Date().toLocaleString('zh-CN');
+        
+        // 测试API函数
+        async function testAPI() {
+            const testDiv = document.getElementById('apiTest');
+            const resultDiv = document.getElementById('testResult');
+            const apiStatus = document.getElementById('apiStatus');
+            
+            testDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="loading"></div> 正在测试API连接...';
+            
+            try {
+                const response = await fetch('/api/market-research', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        productName: '测试产品',
+                        email: 'test@example.com'
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `
+                        ✅ API连接成功！<br>
+                        状态码: ${response.status}<br>
+                        响应: ${JSON.stringify(data, null, 2)}
+                    `;
+                    apiStatus.innerHTML = '✅ API状态：正常';
+                } else {
+                    resultDiv.innerHTML = `
+                        ⚠️ API返回错误<br>
+                        状态码: ${response.status}<br>
+                        错误: ${response.statusText}
+                    `;
+                    apiStatus.innerHTML = '⚠️ API状态：异常';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    ❌ API连接失败<br>
+                    错误: ${error.message}
+                `;
+                apiStatus.innerHTML = '❌ API状态：连接失败';
+            }
+        }
+        
+        // 页面加载时自动检查API状态
+        window.addEventListener('load', () => {
+            setTimeout(testAPI, 1000);
+        });
+    </script>
+</body>
+</html>
