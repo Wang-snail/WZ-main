@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI市场调研 - 一键生成专业调研报告</title>
+    <meta name="description" content="使用AI技术快速生成专业的市场调研报告，包括市场分析、竞争对手分析、用户画像和营销策略">
+    <meta name="keywords" content="AI市场调研,市场分析,竞争分析,用户画像,营销策略">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    
+    <!-- CSS Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .feature {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        
+        .feature-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .input-hint {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+        
+        .analyze-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .analyze-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .message.success {
+            background: rgba(72, 187, 120, 0.1);
+            color: #38a169;
+            border: 1px solid rgba(72, 187, 120, 0.2);
+        }
+        
+        .message.error {
+            background: rgba(245, 101, 101, 0.1);
+            color: #e53e3e;
+            border: 1px solid rgba(245, 101, 101, 0.2);
+        }
+        
+        .message.info {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .tech-badge {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 640px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .feature {
+                padding: 12px;
+            }
+        }
+        
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <!-- Logo和标题 -->
+        <div class="logo">📊</div>
+        <h1>AI市场调研</h1>
+        <p class="subtitle">输入行业名称，几分钟获得专业调研报告</p>
+        
+        <!-- 功能特色 -->
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🎯</span>
+                <strong>市场机会分析</strong><br>
+                深度挖掘市场潜力
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🏆</span>
+                <strong>竞争对手分析</strong><br>
+                识别竞争优势
+            </div>
+            <div class="feature">
+                <span class="feature-icon">👥</span>
+                <strong>用户画像构建</strong><br>
+                精准定位目标客户
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📈</span>
+                <strong>营销策略建议</strong><br>
+                可执行的营销方案
+            </div>
+        </div>
+        
+        <!-- 表单 -->
+        <form id="researchForm">
+            <div class="form-group">
+                <label for="topicInput">研究主题</label>
+                <input 
+                    type="text" 
+                    id="topicInput" 
+                    placeholder="例如：智能宠物喂食器、电动牙刷、咖啡机..." 
+                    required
+                >
+                <div class="input-hint">请输入您想调研的行业、产品或服务</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="emailInput">接收邮箱</label>
+                <input 
+                    type="email" 
+                    id="emailInput" 
+                    placeholder="your@email.com" 
+                    required
+                >
+                <div class="input-hint">报告将发送到此邮箱（通常3-5分钟内到达）</div>
+            </div>
+            
+            <button type="submit" class="analyze-btn" id="analyzeBtn">
+                <span class="loading-spinner" id="loadingSpinner"></span>
+                <span id="btnText">🚀 开始AI分析</span>
+            </button>
+        </form>
+        
+        <!-- 消息显示区域 -->
+        <div id="messageArea" class="message"></div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <div class="tech-stack">
+                <span class="tech-badge">n8n</span>
+                <span class="tech-badge">Gemini Pro</span>
+                <span class="tech-badge">AI自动化</span>
+            </div>
+            <div>
+                ⚡ 由AI驱动 | 🔒 数据安全 | 📧 邮箱送达
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 配置信息 - 这里需要替换为实际的n8n webhook URL
+        const CONFIG = {
+            // 🚨 重要：部署时需要替换为你的实际n8n webhook URL
+            WEBHOOK_URL: 'https://ai-market-research.onrender.com/webhook/market-research',
+            
+            // 请求超时设置（毫秒）
+            TIMEOUT: 30000,
+            
+            // 调试模式
+            DEBUG: true,
+            
+            // 演示模式 - 启用后将使用模拟数据
+            DEMO_MODE: false
+        };
+        
+        // DOM元素
+        const elements = {
+            form: document.getElementById('researchForm'),
+            topicInput: document.getElementById('topicInput'),
+            emailInput: document.getElementById('emailInput'),
+            analyzeBtn: document.getElementById('analyzeBtn'),
+            btnText: document.getElementById('btnText'),
+            loadingSpinner: document.getElementById('loadingSpinner'),
+            messageArea: document.getElementById('messageArea')
+        };
+        
+        // 工具函数
+        const utils = {
+            // 显示消息
+            showMessage(message, type = 'info') {
+                elements.messageArea.textContent = message;
+                elements.messageArea.className = `message ${type}`;
+                elements.messageArea.style.display = 'block';
+                
+                // 自动隐藏成功消息
+                if (type === 'success') {
+                    setTimeout(() => {
+                        elements.messageArea.style.display = 'none';
+                    }, 8000);
+                }
+                
+                // 平滑滚动到消息区域
+                elements.messageArea.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+            },
+            
+            // 隐藏消息
+            hideMessage() {
+                elements.messageArea.style.display = 'none';
+            },
+            
+            // 设置加载状态
+            setLoading(isLoading) {
+                elements.analyzeBtn.disabled = isLoading;
+                elements.loadingSpinner.style.display = isLoading ? 'inline-block' : 'none';
+                elements.btnText.textContent = isLoading ? '正在分析中...' : '🚀 开始AI分析';
+                
+                // 禁用输入框
+                elements.topicInput.disabled = isLoading;
+                elements.emailInput.disabled = isLoading;
+            },
+            
+            // 验证邮箱格式
+            validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
+            
+            // 验证主题内容
+            validateTopic(topic) {
+                return topic.trim().length >= 2 && topic.trim().length <= 100;
+            },
+            
+            // 记录事件（用于分析优化）
+            logEvent(eventName, data = {}) {
+                if (CONFIG.DEBUG) {
+                    console.log(`[AI Market Research] ${eventName}:`, data);
+                }
+                
+                // 这里可以添加真实的分析代码，如Google Analytics
+                // gtag('event', eventName, data);
+            }
+        };
+        
+        // 主要功能：发起调研请求
+        async function startResearch(topic, email) {
+            utils.logEvent('research_started', { topic, email });
+            
+            try {
+                // 构建请求数据
+                const requestData = {
+                    topic: topic.trim(),
+                    email: email.trim(),
+                    timestamp: new Date().toISOString(),
+                    source: 'web_form',
+                    user_agent: navigator.userAgent,
+                    referrer: document.referrer || 'direct'
+                };
+                
+                utils.logEvent('api_request_start', { url: CONFIG.WEBHOOK_URL });
+                
+                // 检查是否启用演示模式
+                if (CONFIG.DEMO_MODE) {
+                    // 演示模式：模拟API调用
+                    await new Promise(resolve => setTimeout(resolve, 2000)); // 模拟网络延迟
+                    
+                    utils.showMessage(
+                        '🎯 演示模式已启用\n\n' +
+                        `✅ 已模拟提交研究请求: "${topic}"\n` +
+                        `📧 模拟发送地址: ${email}\n\n` +
+                        '📋 在真实环境中，您将在3-5分钟内收到包含以下内容的专业报告：\n' +
+                        '• 📊 市场机会与规模分析\n' +
+                        '• 🔍 关键词与搜索需求洞察\n' +
+                        '• 🏆 竞争对手深度分析\n' +
+                        '• 👥 目标用户画像构建\n' +
+                        '• 📈 营销策略与执行建议\n\n' +
+                        '🚀 要启用完整功能，请按照部署指南完成后端配置',
+                        'success'
+                    );
+                    return;
+                }
+                
+                // 发送请求到n8n webhook
+                const response = await fetch(CONFIG.WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                    signal: AbortSignal.timeout(CONFIG.TIMEOUT)
+                });
+                
+                utils.logEvent('api_response_received', { 
+                    status: response.status, 
+                    statusText: response.statusText 
+                });
+                
+                if (response.ok) {
+                    // 请求成功
+                    utils.showMessage(
+                        `🎉 分析请求已成功提交！\n\n` +
+                        `📧 详细报告将在3-5分钟内发送到 ${email}\n` +
+                        `📊 报告包含：市场分析、竞争分析、用户画像、营销策略\n\n` +
+                        `💡 提示：请检查邮箱垃圾邮件文件夹`,
+                        'success'
+                    );
+                    
+                    // 重置表单
+                    elements.form.reset();
+                    
+                    utils.logEvent('research_success', { topic, email });
+                    
+                } else {
+                    // HTTP错误
+                    throw new Error(`服务器响应错误 (${response.status}): ${response.statusText}`);
+                }
+                
+            } catch (error) {
+                utils.logEvent('research_error', { 
+                    error: error.message, 
+                    topic, 
+                    email 
+                });
+                
+                let errorMessage = '😔 请求处理失败，请稍后重试';
+                
+                if (error.name === 'TimeoutError') {
+                    errorMessage = '⏰ 请求超时，请检查网络连接后重试';
+                } else if (error.message.includes('fetch')) {
+                    errorMessage = '🌐 网络连接错误，请检查网络设置';
+                } else if (error.message.includes('404')) {
+                    errorMessage = '🔧 服务暂时不可用，请联系技术支持';
+                }
+                
+                utils.showMessage(
+                    `${errorMessage}\n\n` +
+                    `🔍 错误详情: ${error.message}\n` +
+                    `💬 如问题持续，请联系技术支持`,
+                    'error'
+                );
+            }
+        }
+        
+        // 表单提交处理
+        elements.form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // 隐藏之前的消息
+            utils.hideMessage();
+            
+            // 获取表单数据
+            const topic = elements.topicInput.value.trim();
+            const email = elements.emailInput.value.trim();
+            
+            // 表单验证
+            if (!utils.validateTopic(topic)) {
+                utils.showMessage(
+                    '📝 请输入有效的研究主题\n\n' +
+                    '• 主题长度应在2-100字符之间\n' +
+                    '• 建议输入具体的产品或行业名称',
+                    'error'
+                );
+                elements.topicInput.focus();
+                return;
+            }
+            
+            if (!utils.validateEmail(email)) {
+                utils.showMessage(
+                    '📧 请输入有效的邮箱地址\n\n' +
+                    '例如：user@example.com',
+                    'error'
+                );
+                elements.emailInput.focus();
+                return;
+            }
+            
+            // 显示确认信息
+            utils.showMessage(
+                `🚀 正在启动AI分析...\n\n` +
+                `📋 研究主题: ${topic}\n` +
+                `📧 报告接收: ${email}\n\n` +
+                `⏱️ 预计耗时: 3-5分钟\n` +
+                `🤖 AI引擎: Google Gemini Pro`,
+                'info'
+            );
+            
+            // 设置加载状态
+            utils.setLoading(true);
+            
+            // 开始调研
+            await startResearch(topic, email);
+            
+            // 恢复正常状态
+            utils.setLoading(false);
+        });
+        
+        // 输入框实时验证
+        elements.topicInput.addEventListener('input', () => {
+            const topic = elements.topicInput.value.trim();
+            if (topic.length > 100) {
+                elements.topicInput.value = topic.substring(0, 100);
+            }
+        });
+        
+        elements.emailInput.addEventListener('blur', () => {
+            const email = elements.emailInput.value.trim();
+            if (email && !utils.validateEmail(email)) {
+                elements.emailInput.style.borderColor = '#e53e3e';
+            } else {
+                elements.emailInput.style.borderColor = '#e2e8f0';
+            }
+        });
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            utils.logEvent('page_loaded');
+            
+            // 检查URL参数（用于预填充）
+            const urlParams = new URLSearchParams(window.location.search);
+            const prefilledTopic = urlParams.get('topic');
+            const prefilledEmail = urlParams.get('email');
+            
+            if (prefilledTopic) {
+                elements.topicInput.value = prefilledTopic;
+            }
+            
+            if (prefilledEmail && utils.validateEmail(prefilledEmail)) {
+                elements.emailInput.value = prefilledEmail;
+            }
+            
+            // 焦点设置
+            if (!prefilledTopic) {
+                elements.topicInput.focus();
+            } else if (!prefilledEmail) {
+                elements.emailInput.focus();
+            }
+            
+            // 检查配置
+            if (CONFIG.WEBHOOK_URL.includes('your-n8n-service')) {
+                console.warn('⚠️ 请配置正确的WEBHOOK_URL');
+                utils.showMessage(
+                    '🔧 系统配置中，请稍后再试\n\n' +
+                    '如果您是开发者，请检查WEBHOOK_URL配置',
+                    'error'
+                );
+            }
+        });
+        
+        // 错误处理
+        window.addEventListener('error', (e) => {
+            utils.logEvent('javascript_error', {
+                message: e.message,
+                filename: e.filename,
+                lineno: e.lineno
+            });
+        });
+        
+        // 页面卸载前的清理
+        window.addEventListener('beforeunload', () => {
+            utils.logEvent('page_unload');
+        });
+    </script>
+    
+    <!-- 结构化数据 (SEO优化) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI市场调研",
+        "description": "使用AI技术快速生成专业的市场调研报告，包括市场分析、竞争对手分析、用户画像和营销策略",
+        "url": "https://your-domain.com",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "AI Market Research"
+        }
+    }
+    </script>
+</body>
+</html>

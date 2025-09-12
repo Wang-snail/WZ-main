@@ -2,12 +2,18 @@
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "functions": {
+    "api/market-research.js": {
+      "maxDuration": 60
+    }
+  },
   "rewrites": [
+    { "source": "/market-research", "destination": "/market-research.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "redirects": [
     {
-      "source": "/:lang(ja|ko|es)/:path*",
+      "source": "/:lang(ja|ko|es|de|fr|it|ru)/:path*",
       "destination": "/:lang/:path*",
       "permanent": true
     },
@@ -50,7 +56,7 @@
       ]
     },
     {
-      "source": "/:lang(en|ja|ko|es)/(.*)",
+      "source": "/:lang(en|ja|ko|es|de|fr|it|ru)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

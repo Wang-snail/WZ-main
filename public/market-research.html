@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI市场调研系统 - 专业市场分析报告</title>
+    <meta name="description" content="使用AI技术进行深度市场调研，5分钟获得专业分析报告">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .analyze-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .analyze-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .analyze-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff40;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .message-area {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        
+        .message-success {
+            background: linear-gradient(135deg, #00c851, #007e33);
+            color: white;
+        }
+        
+        .message-error {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .tech-stack {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .tech-stack h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tech-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 30px 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 AI市场调研系统</h1>
+            <p>5分钟获得专业级市场分析报告，驱动商业决策</p>
+        </div>
+        
+        <div class="card">
+            <form id="researchForm">
+                <div class="form-group">
+                    <label for="topicInput">🔍 调研主题</label>
+                    <input 
+                        type="text" 
+                        id="topicInput" 
+                        placeholder="例如：智能宠物喂食器、新能源汽车、AI写作工具"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="emailInput">📧 邮箱地址</label>
+                    <input 
+                        type="email" 
+                        id="emailInput" 
+                        placeholder="report@yourcompany.com"
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="analyze-btn" id="analyzeBtn">
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                    <span id="btnText">🚀 开始AI深度分析</span>
+                </button>
+            </form>
+            
+            <div class="message-area" id="messageArea"></div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>市场机会分析</h3>
+                <p>深度分析市场规模、增长趋势、细分机会和进入门槛</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🔍</div>
+                <h3>关键词需求洞察</h3>
+                <p>挖掘高价值关键词，分析搜索意图和内容营销机会</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🏆</div>
+                <h3>竞争对手分析</h3>
+                <p>识别主要竞争对手，分析优劣势和市场空白点</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <h3>用户画像构建</h3>
+                <p>精准描绘目标用户特征、行为模式和决策路径</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h3>营销策略制定</h3>
+                <p>提供完整营销方案，包括渠道选择和实施路线图</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>快速专业报告</h3>
+                <p>5分钟内生成完整的专业级市场调研报告</p>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h3>🛠️ 技术架构</h3>
+            <div class="tech-tags">
+                <span class="tech-tag">SiliconFlow DeepSeek-V3</span>
+                <span class="tech-tag">Vercel Serverless</span>
+                <span class="tech-tag">智能分析引擎</span>
+                <span class="tech-tag">实时报告生成</span>
+                <span class="tech-tag">邮件自动推送</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 配置信息
+        const CONFIG = {
+            API_URL: '/api/market-research',
+            TIMEOUT: 60000, // 60秒超时
+            DEBUG: true
+        };
+
+        // DOM元素
+        const elements = {
+            form: document.getElementById('researchForm'),
+            topicInput: document.getElementById('topicInput'),
+            emailInput: document.getElementById('emailInput'),
+            analyzeBtn: document.getElementById('analyzeBtn'),
+            btnText: document.getElementById('btnText'),
+            loadingSpinner: document.getElementById('loadingSpinner'),
+            messageArea: document.getElementById('messageArea')
+        };
+
+        // 工具函数
+        const utils = {
+            logEvent: (event, data = {}) => {
+                if (CONFIG.DEBUG) {
+                    console.log(`[市场调研] ${event}`, data);
+                }
+            },
+
+            showMessage: (message, type = 'success') => {
+                elements.messageArea.textContent = message;
+                elements.messageArea.className = `message-area message-${type}`;
+                elements.messageArea.style.display = 'block';
+                
+                // 滚动到消息区域
+                elements.messageArea.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+            },
+
+            setLoading: (loading) => {
+                elements.analyzeBtn.disabled = loading;
+                elements.loadingSpinner.style.display = loading ? 'inline-block' : 'none';
+                elements.btnText.textContent = loading ? '🧠 AI正在深度分析中...' : '🚀 开始AI深度分析';
+            },
+
+            validateForm: () => {
+                const topic = elements.topicInput.value.trim();
+                const email = elements.emailInput.value.trim();
+
+                if (!topic || topic.length < 2) {
+                    utils.showMessage('请输入有效的调研主题（至少2个字符）', 'error');
+                    elements.topicInput.focus();
+                    return false;
+                }
+
+                if (!email || !email.includes('@') || email.length < 5) {
+                    utils.showMessage('请输入有效的邮箱地址', 'error');
+                    elements.emailInput.focus();
+                    return false;
+                }
+
+                return { topic, email };
+            }
+        };
+
+        // 主要提交处理函数
+        async function submitResearch() {
+            const formData = utils.validateForm();
+            if (!formData) return;
+
+            const { topic, email } = formData;
+            utils.setLoading(true);
+            elements.messageArea.style.display = 'none';
+
+            try {
+                utils.logEvent('api_request_start', { topic, email });
+
+                const response = await fetch(CONFIG.API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        topic: topic.trim(),
+                        email: email.trim(),
+                        timestamp: new Date().toISOString(),
+                        source: 'vercel_web_form',
+                        user_agent: navigator.userAgent
+                    }),
+                    signal: AbortSignal.timeout(CONFIG.TIMEOUT)
+                });
+
+                utils.logEvent('api_response_received', {
+                    status: response.status,
+                    statusText: response.statusText
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || result.error || `API错误: ${response.status}`);
+                }
+
+                if (result.success) {
+                    utils.showMessage(result.message, 'success');
+                    utils.logEvent('analysis_completed', { topic, email });
+                    
+                    // 重置表单
+                    elements.form.reset();
+                } else {
+                    throw new Error(result.error || '未知错误');
+                }
+
+            } catch (error) {
+                utils.logEvent('api_request_error', { error: error.message });
+                
+                let errorMessage = '🔍 错误详情: ' + error.message;
+                
+                if (error.name === 'TimeoutError') {
+                    errorMessage = '⏱️ 请求超时，请稍后重试\n\n可能原因：网络连接较慢或服务器繁忙';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMessage = '🌐 网络连接错误，请检查网络设置\n\n' + errorMessage;
+                } else if (error.message.includes('API错误')) {
+                    errorMessage = '🔧 API服务暂时不可用\n\n' + errorMessage + '\n\n💬 如问题持续，请联系技术支持';
+                }
+
+                utils.showMessage(
+                    '❌ 分析请求失败\n\n' + errorMessage,
+                    'error'
+                );
+            } finally {
+                utils.setLoading(false);
+            }
+        }
+
+        // 事件监听器
+        elements.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitResearch();
+        });
+
+        // 输入框回车提交
+        [elements.topicInput, elements.emailInput].forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    elements.form.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', () => {
+            utils.logEvent('page_loaded');
+            elements.topicInput.focus();
+            
+            // 添加示例文本轮播
+            const examples = [
+                '智能宠物喂食器',
+                '新能源汽车充电桩',
+                'AI写作工具',
+                '在线教育平台',
+                '健身器材',
+                '智能家居设备'
+            ];
+            
+            let exampleIndex = 0;
+            setInterval(() => {
+                if (!elements.topicInput.value && document.activeElement !== elements.topicInput) {
+                    elements.topicInput.placeholder = `例如：${examples[exampleIndex]}`;
+                    exampleIndex = (exampleIndex + 1) % examples.length;
+                }
+            }, 3000);
+        });
+
+        // 错误处理
+        window.addEventListener('error', (e) => {
+            utils.logEvent('page_error', { error: e.error?.message || e.message });
+        });
+    </script>
+</body>
+</html>
