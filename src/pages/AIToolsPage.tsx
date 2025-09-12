@@ -19,7 +19,9 @@ import { Badge } from '../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { AITool, Category } from '../types';
 import { dataService } from '../services/dataService';
+import { useAnalytics } from '../services/analyticsService';
 import SEOHead from '../components/SEOHead';
+import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
 
 export default function AIToolsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,6 +33,8 @@ export default function AIToolsPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
+  
+  const { trackSearch, trackCategoryFilter } = useAnalytics();
 
   const filterTools = useCallback(async () => {
     let filtered = [...tools];
@@ -101,7 +105,14 @@ export default function AIToolsPage() {
   };
 
   const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category === selectedCategory ? '' : category);
+    const newCategory = category === selectedCategory ? '' : category;
+    setSelectedCategory(newCategory);
+    
+    // 追踪分类筛选
+    if (newCategory) {
+      trackCategoryFilter(newCategory);
+    }
+    
     // 更新URL参数
     const newParams = new URLSearchParams(searchParams);
     if (category && category !== selectedCategory) {
@@ -196,7 +207,12 @@ export default function AIToolsPage() {
                   type="text"
                   placeholder="搜索AI工具..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (e.target.value) {
+                      trackSearch(e.target.value);
+                    }
+                  }}
                   className="pl-12 pr-4 py-3 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500"
                 />
               </div>
@@ -227,7 +243,8 @@ export default function AIToolsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
-          <div className="lg:w-64 flex-shrink-0">
+          <div className="lg:w-80 flex-shrink-0 space-y-6">
+            {/* Category Filter */}
             <div className="bg-white rounded-lg p-6 shadow-sm sticky top-8">
               <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
                 <Filter className="w-5 h-5 mr-2" />
@@ -260,6 +277,9 @@ export default function AIToolsPage() {
                 ))}
               </div>
             </div>
+            
+            {/* Personalized Recommendations */}
+            <PersonalizedRecommendations />
           </div>
 
           {/* Main Content */}
@@ -344,6 +364,7 @@ function ToolCard({
   viewMode: 'grid' | 'list';
   rank?: number;
 }) {
+  const { trackToolClick } = useAnalytics();
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1) + 'M';
@@ -402,6 +423,7 @@ function ToolCard({
                       href={tool.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
+                      onClick={() => trackToolClick(tool.name, tool.category)}
                     >
                       <Button size="sm" className="hover:bg-blue-600">
                         访问工具
@@ -461,7 +483,10 @@ function ToolCard({
             href={tool.link} 
             target="_blank" 
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              trackToolClick(tool.name, tool.category);
+            }}
           >
             <Button size="sm" className="group-hover:bg-blue-600">
               访问

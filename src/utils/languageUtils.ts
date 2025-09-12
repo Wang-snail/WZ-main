@@ -5,6 +5,10 @@ export const SUPPORTED_LANGUAGES = [
   { code: 'ja', name: '日本語', flag: '🇯🇵' },
   { code: 'ko', name: '한국어', flag: '🇰🇷' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
 ];
 
 // 语言映射
@@ -14,6 +18,10 @@ export const LANGUAGE_MAP: Record<string, string> = {
   'ja': 'ja',
   'ko': 'ko',
   'es': 'es',
+  'de': 'de',
+  'fr': 'fr',
+  'it': 'it',
+  'ru': 'ru',
 };
 
 // 获取当前语言

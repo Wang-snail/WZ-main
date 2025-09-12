@@ -6,6 +6,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AIToolsPage from './pages/AIToolsPage';
+import WorkflowsPage from './pages/WorkflowsPage';
+import ToolReviewsPage from './pages/ToolReviewsPage';
 import DivinationPage from './pages/DivinationPage';
 import AnalyzerPage from './pages/AnalyzerPage';
 import AboutPage from './pages/AboutPage';
@@ -50,6 +52,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/ai-tools" element={<AIToolsPage />} />
+                <Route path="/workflows" element={<WorkflowsPage />} />
+                <Route path="/tool-reviews" element={<ToolReviewsPage />} />
                 <Route path="/divination" element={<DivinationPage />} />
                 <Route path="/analyzer" element={<AnalyzerPage />} />
                 <Route path="/about" element={<AboutPage />} />

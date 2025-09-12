@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, Menu, X, Gamepad2 } from 'lucide-react';
+import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState } from 'react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const location = useLocation();
@@ -12,9 +13,11 @@ export default function Header() {
   const navigation = [
     { name: '首页', href: '/', current: location.pathname === '/' },
     { name: 'AI工具库', href: '/ai-tools', current: location.pathname === '/ai-tools' },
+    { name: '工作流', href: '/workflows', current: location.pathname === '/workflows', icon: Workflow },
+    { name: '工具评测', href: '/tool-reviews', current: location.pathname === '/tool-reviews', icon: Star },
     { name: 'AI占卜', href: '/divination', current: location.pathname === '/divination' },
     { name: '情感分析', href: '/analyzer', current: location.pathname === '/analyzer' },
-    { name: 'AI游戏', href: '/games', current: location.pathname === '/games' },
+    { name: 'AI游戏', href: '/games', current: location.pathname === '/games', icon: Gamepad2 },
   ];
 
   return (
@@ -54,14 +57,22 @@ export default function Header() {
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                 }`}
               >
-                {item.name === 'AI游戏' && <Gamepad2 className="w-4 h-4 mr-1" />}
+                {item.icon && <item.icon className="w-4 h-4 mr-1" />}
                 {item.name}
               </Link>
             ))}
           </motion.nav>
 
+          {/* Language Switcher */}
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
+
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+            <div className="mr-2">
+              <LanguageSwitcher />
+            </div>
             <Button
               variant="ghost"
               size="sm"
@@ -96,7 +107,7 @@ export default function Header() {
                       : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
-                  {item.name === 'AI游戏' && <Gamepad2 className="w-4 h-4 mr-2" />}
+                  {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                   {item.name}
                 </Link>
               ))}

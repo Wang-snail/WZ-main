@@ -10,8 +10,7 @@ import {
   Crown,
   Zap,
   Users,
-  Gamepad2,
-  Globe
+  Gamepad2
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -20,7 +19,8 @@ import { Badge } from '../components/ui/badge';
 import { AITool, Category } from '../types';
 import { dataService } from '../services/dataService';
 import SEOHead from '../components/SEOHead';
-import { SUPPORTED_LANGUAGES, getCurrentLanguage, setLanguage, generateLocalizedURL } from '../utils/languageUtils';
+import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
+import { getCurrentLanguage, setLanguage, generateLocalizedURL } from '../utils/languageUtils';
 import { SEOManager } from '../utils/seoUtils';
 
 export default function HomePage() {
@@ -211,21 +211,6 @@ export default function HomePage() {
                   {currentLang === 'en' ? 'AI Tools Collection' : 'AI工具集合站'}
                 </span>
               </h1>
-              {/* Language Selector */}
-              <div className="flex items-center space-x-2">
-                <Globe className="w-5 h-5 text-gray-500" />
-                <select 
-                  value={currentLang}
-                  onChange={(e) => handleLanguageChange(e.target.value)}
-                  className="border border-gray-300 rounded-md px-2 py-1 text-sm"
-                >
-                  {SUPPORTED_LANGUAGES.map((lang) => (
-                    <option key={lang.code} value={lang.code}>
-                      {lang.flag} {lang.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
             </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
               {currentLang === 'en' ? 
@@ -338,6 +323,19 @@ export default function HomePage() {
                   <p className="text-gray-500">暂无分类数据</p>
                 </div>
               )}
+            </section>
+
+            {/* Personalized Recommendations */}
+            <section className="mb-12">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center space-x-3">
+                  <Sparkles className="w-8 h-8 text-blue-500" />
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    {currentLang === 'en' ? 'Personalized for You' : '个性化推荐'}
+                  </h2>
+                </div>
+              </div>
+              <PersonalizedRecommendations />
             </section>
 
             {/* Featured Tools */}
