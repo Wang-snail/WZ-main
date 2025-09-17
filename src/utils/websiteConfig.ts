@@ -12,9 +12,9 @@ export const defaultConfig: WebsiteConfig = {
   siteName: 'wsnail.com 网站',
   domain: 'wsnail.com',
   githubRepo: 'https://github.com/Wang-snail/WZ-main',
-  githubAPI: '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',
-  vercelProjectId: 'prj_OXALain1SCUD0EJtGviaB4yHNZMz',
-  vercelKey: 'MzeyH2VWRFHGVv45XiI31ior',
+  githubAPI: '',  // 敏感信息已移除，仅在本地开发环境使用
+  vercelProjectId: '',  // 敏感信息已移除，仅在本地开发环境使用
+  vercelKey: '',  // 敏感信息已移除，仅在本地开发环境使用
   localPath: '/Users/bingzi/dm/claude Code/个人网站/WZ-main'
 };
 
@@ -40,6 +40,21 @@ export class WebsiteConfigManager {
     } catch (error) {
       console.error('加载配置失败:', error);
     }
+
+    // 在开发环境中，尝试加载本地配置
+    if (import.meta.env.DEV) {
+      try {
+        // 动态导入本地配置文件
+        import('./websiteConfig.local').then(({ localConfig }) => {
+          this.saveConfig(localConfig);
+        }).catch(() => {
+          console.log('本地配置文件不存在，使用默认配置');
+        });
+      } catch (error) {
+        console.log('无法加载本地配置，使用默认配置');
+      }
+    }
+
     return defaultConfig;
   }
 

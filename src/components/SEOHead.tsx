@@ -13,9 +13,9 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "AI工具集合站 - 106+精选AI工具库 | AI聊天机器人、AI绘画、AI视频 | WSNAIL.COM",
-  description = "WSNAIL.COM - 精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等6大分类。免费AI工具推荐，AI占卜服务，让AI为生活增添更多精彩。",
-  keywords = "AI工具,AI工具库,AI工具集合,人工智能工具,AI聊天机器人,AI搜索引擎,AI图像设计,AI视频制作,AI智能抠图,AI占卜,免费AI工具,ChatGPT,AI绘画,AI写作,WSNAIL",
+  title = "AI工具大全 - 106+精选AI工具导航 | 免费AI聊天机器人、AI绘画、AI视频工具 | WSNAIL.COM",
+  description = "WSNAIL.COM - 专业AI工具导航网站，精选106+优质AI工具，涵盖AI聊天机器人、AI绘画生成器、AI视频制作、AI智能写作等。免费AI工具推荐，AI占卜娱乐，提升工作效率的必备AI工具集合。",
+  keywords = "AI工具,AI工具大全,AI工具导航,人工智能工具,AI聊天机器人,AI绘画工具,AI视频制作,AI写作助手,免费AI工具,ChatGPT,Midjourney,AI占卜,AI游戏,WSNAIL",
   image = "https://wsnail.com/images/og-image.jpg",
   url = "https://wsnail.com/",
   type = "website",

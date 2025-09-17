@@ -1,2 +1,5 @@
 .vercel
 .env*.local
+
+# Website configuration with sensitive data
+src/utils/websiteConfig.local.ts

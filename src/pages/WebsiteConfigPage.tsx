@@ -27,6 +27,9 @@ import {
 } from '../utils/websiteConfig';
 
 const WebsiteConfigPage: React.FC = () => {
+  // 只在开发环境中可用
+  const isDevelopment = import.meta.env.DEV;
+
   const [config, setConfig] = useState<WebsiteConfig>(WebsiteConfigManager.loadConfig());
 
   const [showSecrets, setShowSecrets] = useState({
@@ -171,11 +174,43 @@ const WebsiteConfigPage: React.FC = () => {
     }
   };
 
+  // 在生产环境中显示访问限制页面
+  if (!isDevelopment) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 flex items-center justify-center">
+        <Helmet>
+          <title>访问受限 | WSNAIL.COM</title>
+          <meta name="description" content="此页面仅在开发环境中可用" />
+        </Helmet>
+        <div className="text-center max-w-md mx-auto p-8">
+          <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">访问受限</h1>
+          <p className="text-gray-600 mb-6">
+            此配置管理页面仅在本地开发环境中可用，以保护敏感信息安全。
+          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white rounded-lg p-4 shadow-lg"
+          >
+            <p className="text-sm text-gray-500">
+              如需访问配置管理功能，请在本地开发环境中访问：
+              <br />
+              <code className="bg-gray-100 px-2 py-1 rounded mt-2 inline-block">
+                http://localhost:3000/website-config
+              </code>
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <Helmet>
-        <title>网站配置管理 | WSNAIL.COM</title>
-        <meta name="description" content="管理网站部署配置，包括GitHub仓库和Vercel项目设置" />
+        <title>网站配置管理 (开发环境) | WSNAIL.COM</title>
+        <meta name="description" content="开发环境专用：管理网站部署配置，包括GitHub仓库和Vercel项目设置" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">

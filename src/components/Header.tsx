@@ -18,7 +18,6 @@ export default function Header() {
     { name: 'AI占卜', href: '/divination', current: location.pathname === '/divination' },
     { name: '情感分析', href: '/analyzer', current: location.pathname === '/analyzer' },
     { name: '销售追踪', href: '/sales-tracking', current: location.pathname === '/sales-tracking', icon: TrendingUp },
-    { name: '网站配置', href: '/website-config', current: location.pathname === '/website-config', icon: Settings },
     { name: 'AI游戏', href: '/games', current: location.pathname === '/games', icon: Gamepad2 },
   ];
 
