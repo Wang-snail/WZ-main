@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp } from 'lucide-react';
+import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -18,6 +18,7 @@ export default function Header() {
     { name: 'AI占卜', href: '/divination', current: location.pathname === '/divination' },
     { name: '情感分析', href: '/analyzer', current: location.pathname === '/analyzer' },
     { name: '销售追踪', href: '/sales-tracking', current: location.pathname === '/sales-tracking', icon: TrendingUp },
+    { name: '网站配置', href: '/website-config', current: location.pathname === '/website-config', icon: Settings },
     { name: 'AI游戏', href: '/games', current: location.pathname === '/games', icon: Gamepad2 },
   ];
 
