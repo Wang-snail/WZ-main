@@ -23,6 +23,7 @@ import ReversiGame from './pages/games/ReversiGame';
 import MilitaryChessGame from './pages/games/MilitaryChessGame';
 import GoGame from './pages/games/GoGame';
 import ToolStatistics from './pages/tools/ToolStatistics';
+import SalesTrackingPage from './pages/SalesTrackingPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/analyzer" element={<AnalyzerPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/tools/statistics" element={<ToolStatistics />} />
+                <Route path="/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/games" element={<AIGamesPage />} />
                 <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
                 <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
