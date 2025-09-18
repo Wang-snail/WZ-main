@@ -21,7 +21,7 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
-    }
+    },
   ],
   "headers": [
     {
