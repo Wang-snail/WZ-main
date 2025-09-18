@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import { useState, useEffect, useRef } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
 
+// Updated: 2025-09-18 13:05 - Force deployment sync
 export default function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
