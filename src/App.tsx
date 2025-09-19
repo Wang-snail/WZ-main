@@ -25,6 +25,7 @@ import GoGame from './pages/games/GoGame';
 import ToolStatistics from './pages/tools/ToolStatistics';
 import SalesTrackingPage from './pages/SalesTrackingPage';
 import WebsiteConfigPage from './pages/WebsiteConfigPage';
+import TestPage from './pages/TestPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/tools/statistics" element={<ToolStatistics />} />
                 <Route path="/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/website-config" element={<WebsiteConfigPage />} />
+                <Route path="/test" element={<TestPage />} />
                 <Route path="/games" element={<AIGamesPage />} />
                 <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
                 <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
