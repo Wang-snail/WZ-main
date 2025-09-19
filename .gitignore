@@ -67,3 +67,7 @@ lighthouse-report*.json
 # Backup files
 *.bak
 *.backup
+
+# Dependencies and build artifacts
+node_modules/
+.vite/
