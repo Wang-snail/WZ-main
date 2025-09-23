@@ -23,6 +23,9 @@ import PersonalizedRecommendations from '../components/PersonalizedRecommendatio
 import { getCurrentLanguage, setLanguage, generateLocalizedURL } from '../utils/languageUtils';
 import { SEOManager } from '../utils/seoUtils';
 
+// 版本标识 - 用于验证部署更新
+const BUILD_VERSION = `v2.1.${Date.now()}`;
+
 export default function HomePage() {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
@@ -469,6 +472,13 @@ export default function HomePage() {
             </section>
           </>
         )}
+
+        {/* 版本信息 - 用于验证部署更新 */}
+        <div className="text-center py-4 text-xs text-gray-400">
+          <div className="max-w-7xl mx-auto px-4">
+            Build: {BUILD_VERSION} | 最后更新: {new Date().toLocaleString('zh-CN')}
+          </div>
+        </div>
       </div>
       </div>
     </>
