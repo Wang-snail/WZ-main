@@ -479,6 +479,12 @@ export default function HomePage() {
             Build: {BUILD_VERSION} | 最后更新: {new Date().toLocaleString('zh-CN')}
           </div>
         </div>
+
+        {/* 🚨 明显的部署验证标记 - 临时添加 */}
+        <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+          <div className="font-bold">🚀 新版本已部署!</div>
+          <div className="text-sm">2025-09-24 00:15</div>
+        </div>
       </div>
       </div>
     </>
