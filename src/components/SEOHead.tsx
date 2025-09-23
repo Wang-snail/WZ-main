@@ -13,7 +13,7 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "AI工具大全 - 106+精选AI工具导航 | 免费AI聊天机器人、AI绘画、AI视频工具 | WSNAIL.COM",
+  title = "AI工具大全 - 106+精选AI工具导航 | 免费AI聊天机器人、AI绘画、AI视频工具 | WSNAIL.COM | v2025.09.24",
   description = "WSNAIL.COM - 专业AI工具导航网站，精选106+优质AI工具，涵盖AI聊天机器人、AI绘画生成器、AI视频制作、AI智能写作等。免费AI工具推荐，AI占卜娱乐，提升工作效率的必备AI工具集合。",
   keywords = "AI工具,AI工具大全,AI工具导航,人工智能工具,AI聊天机器人,AI绘画工具,AI视频制作,AI写作助手,免费AI工具,ChatGPT,Midjourney,AI占卜,AI游戏,WSNAIL",
   image = "https://wsnail.com/images/og-image.jpg",
