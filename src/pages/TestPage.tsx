@@ -25,7 +25,7 @@ const TestPage: React.FC = () => {
           color: '#e5e7eb',
           margin: '0'
         }}>
-          部署测试页面 - {new Date().toLocaleString()}
+          部署测试页面 - 修复部署问题 - {new Date().toLocaleString()}
         </p>
       </div>
     </div>
