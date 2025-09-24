@@ -483,7 +483,7 @@ export default function HomePage() {
         {/* 🚨 明显的部署验证标记 - 临时添加 */}
         <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-pulse">
           <div className="font-bold">🚀 新版本已部署!</div>
-          <div className="text-sm">2025-09-24 04:05 - 强制触发Vercel</div>
+          <div className="text-sm">2025-09-24 04:38 - 强制触发Vercel</div>
         </div>
       </div>
       </div>
