@@ -71,3 +71,4 @@ lighthouse-report*.json
 # Dependencies and build artifacts
 node_modules/
 .vite/
+.vercel
