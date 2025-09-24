@@ -11,7 +11,10 @@
     "generate:sitemap": "node scripts/generateSitemap.cjs",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "deploy": "npm run build && echo 'Build completed for deployment'",
+    "deploy:vercel": "vercel --prod",
+    "deploy:force": "echo 'Force deployment trigger' && npm run build"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
