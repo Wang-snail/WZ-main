@@ -14,7 +14,9 @@
     "test:run": "vitest run",
     "deploy": "npm run build && echo 'Build completed for deployment'",
     "deploy:vercel": "vercel --prod",
-    "deploy:force": "echo 'Force deployment trigger' && npm run build"
+    "deploy:force": "echo 'Force deployment trigger' && npm run build",
+    "verify:deployment": "node scripts/verify-deployment.js",
+    "deploy:verify": "npm run build && npm run deploy && npm run verify:deployment"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

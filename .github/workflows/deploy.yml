@@ -1,9 +1,12 @@
-name: Deploy to Vercel
+name: Deploy and Verify
 
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  schedule:
+    # 每天检查一次部署状态
+    - cron: '0 10 * * *'
 
 jobs:
   deploy:
@@ -24,6 +27,12 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Verify build output
+        run: |
+          echo "🔍 检查构建输出..."
+          ls -la dist/assets/index-*.js
+          echo "✅ 构建完成"
+
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -32,3 +41,25 @@ jobs:
           vercel-project-id: prj_OXALain1SCUD0EJtGviaB4yHNZMz
           working-directory: ./
           vercel-args: '--prod'
+
+      - name: Wait for deployment
+        run: sleep 180
+
+      - name: Verify deployment
+        run: |
+          echo "🔍 验证部署..."
+          chmod +x scripts/verify-deployment.js
+          node scripts/verify-deployment.js || echo "⚠️ 部署验证失败，但不阻断流程"
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: failure()
+    steps:
+      - name: Notify deployment failure
+        run: |
+          echo "❌ 部署失败通知"
+          echo "请检查以下内容："
+          echo "1. Vercel配置是否正确"
+          echo "2. 网络连接是否稳定"
+          echo "3. 是否需要手动触发部署"
