@@ -1,0 +1,8 @@
+FORCE DEPLOYMENT TRIGGER
+Timestamp: 2025-09-24 04:15:00
+Commit: c4054741
+Purpose: Force Vercel deployment trigger
+Method: File-based deployment signal
+
+This file is created to force a deployment trigger.
+The website should show the red badge after successful deployment.
