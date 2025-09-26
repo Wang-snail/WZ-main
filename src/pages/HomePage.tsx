@@ -20,6 +20,7 @@ import { AITool, Category } from '../types';
 import { dataService } from '../services/dataService';
 import SEOHead from '../components/SEOHead';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
+import InteractiveGuide from '../components/InteractiveGuide';
 import { getCurrentLanguage, setLanguage, generateLocalizedURL } from '../utils/languageUtils';
 import { SEOManager } from '../utils/seoUtils';
 
@@ -258,6 +259,13 @@ export default function HomePage() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Interactive Guide - 降低跳出率的互动元素 */}
+        {!searchQuery && (
+          <section id="quick-start" className="mb-16">
+            <InteractiveGuide language={currentLang === 'en' ? 'en' : 'zh'} />
+          </section>
+        )}
+
         {/* Search Results */}
         {searchQuery && (
           <section className="mb-12">
