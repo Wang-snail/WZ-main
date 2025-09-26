@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "wz-main-force-deploy",
+  "name": "wsnail-ai-tools-platform",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
@@ -20,15 +20,19 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/(.*\\.(js|css|html))",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "no-cache, no-store, must-revalidate"
         },
         {
-          "key": "X-Force-Deploy",
-          "value": "true"
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
         }
       ]
     }
