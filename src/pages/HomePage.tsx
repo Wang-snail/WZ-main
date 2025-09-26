@@ -21,6 +21,9 @@ import { dataService } from '../services/dataService';
 import SEOHead from '../components/SEOHead';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
 import InteractiveGuide from '../components/InteractiveGuide';
+import UserRetentionEnhancer from '../components/UserRetentionEnhancer';
+import EngagementBooster from '../components/EngagementBooster';
+import SEOEnhancer from '../components/SEOEnhancer';
 import { getCurrentLanguage, setLanguage, generateLocalizedURL } from '../utils/languageUtils';
 import { SEOManager } from '../utils/seoUtils';
 
@@ -167,19 +170,18 @@ export default function HomePage() {
 
   return (
     <>
-      <SEOHead 
+      {/* Enhanced SEO优化 */}
+      <SEOEnhancer
         title={seoConfig.title}
         description={seoConfig.description}
         keywords={seoConfig.keywords}
         url={seoConfig.url}
-        canonical={seoConfig.canonical}
-        locale={seoConfig.locale}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           "name": currentLang === 'en' ? "AI Tools Collection" : "AI工具集合站",
-          "description": currentLang === 'en' ? 
-            "Curated collection of 106+ premium AI tools, including AI chatbots, AI search engines, AI image design, AI video production and more." : 
+          "description": currentLang === 'en' ?
+            "Curated collection of 106+ premium AI tools, including AI chatbots, AI search engines, AI image design, AI video production and more." :
             "精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等6大分类",
           "url": "https://wsnail.com/",
           "mainEntity": {
@@ -197,6 +199,36 @@ export default function HomePage() {
             "name": "WSNAIL.COM",
             "url": "https://wsnail.com"
           }
+        }}
+        breadcrumbs={[
+          { name: "首页", url: "https://wsnail.com/" }
+        ]}
+      />
+
+      {/* 用户留存增强器 */}
+      <UserRetentionEnhancer
+        currentPage="/"
+        userId={userProfile?.userId}
+      />
+
+      {/* 参与度提升器 */}
+      <EngagementBooster
+        currentPage="/"
+        content={{
+          readingTime: 5,
+          sections: ["首页介绍", "工具分类", "推荐工具", "自建应用"],
+          relatedLinks: [
+            {
+              title: "AI工具库",
+              url: "/ai-tools",
+              description: "浏览完整的AI工具集合"
+            },
+            {
+              title: "AI游戏中心",
+              url: "/games",
+              description: "体验AI驱动的智能游戏"
+            }
+          ]
         }}
       />
       

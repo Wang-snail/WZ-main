@@ -28,6 +28,7 @@ import WebsiteConfigPage from './pages/WebsiteConfigPage';
 import TestPage from './pages/TestPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
+import PerformanceMonitor from './components/PerformanceMonitor';
 import './App.css';
 
 function App() {
@@ -81,6 +82,12 @@ function App() {
             <Footer />
           </div>
           <Analytics />
+
+          {/* 性能监控组件 */}
+          <PerformanceMonitor
+            isDevelopment={process.env.NODE_ENV === 'development'}
+            showRealTimeStats={true}
+          />
         </Router>
       </ErrorBoundary>
     </HelmetProvider>
