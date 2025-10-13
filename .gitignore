@@ -49,6 +49,7 @@ src/utils/websiteConfig.local.ts
 *.md
 !README.md
 !docs/**/*.md
+!AGENTS.md
 
 # Test files
 test-*.js
