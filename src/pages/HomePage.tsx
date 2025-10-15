@@ -208,7 +208,7 @@ export default function HomePage() {
       {/* 用户留存增强器 */}
       <UserRetentionEnhancer
         currentPage="/"
-        userId={userProfile?.userId}
+        userId={undefined}
       />
 
       {/* 参与度提升器 */}
