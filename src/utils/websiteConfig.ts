@@ -42,8 +42,9 @@ export class WebsiteConfigManager {
     }
 
     // 在开发环境中，尝试从环境变量加载配置
-    if (import.meta.env.DEV) {
-      try {
+    try {
+      // 安全地检查 import.meta.env 是否存在
+      if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
         const envConfig: Partial<WebsiteConfig> = {};
         if (import.meta.env.VITE_GITHUB_API) {
           envConfig.githubAPI = import.meta.env.VITE_GITHUB_API;
@@ -58,9 +59,10 @@ export class WebsiteConfigManager {
           const mergedConfig = { ...defaultConfig, ...envConfig };
           this.saveConfig(mergedConfig);
         }
-      } catch (error) {
-        console.log('无法加载环境变量配置，使用默认配置');
       }
+    } catch (error) {
+      // 静默处理错误，使用默认配置
+      console.log('无法加载环境变量配置，使用默认配置');
     }
 
     return defaultConfig;
