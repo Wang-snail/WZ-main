@@ -5,8 +5,12 @@ import { defineConfig, loadEnv } from "vite"
 export default defineConfig(({ mode }) => {
   // 加载环境变量
   const env = loadEnv(mode, process.cwd(), '')
-  
+
   return {
+    // GitHub Pages 部署需要设置 base
+    // 如果使用自定义域名（如 wsnail.com），设置为 '/'
+    // 如果使用 GitHub Pages 默认域名（username.github.io/repo），设置为 '/repo/'
+    base: process.env.GITHUB_PAGES === 'true' ? '/' : '/',
     plugins: [react()],
     define: {
       // 为客户端环境变量提供默认值，解决 "process is not defined" 错误
