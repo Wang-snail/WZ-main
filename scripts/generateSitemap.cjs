@@ -4,40 +4,85 @@
 const fs = require('fs');
 const path = require('path');
 
-// 生成简单的站点地图
+// 生成完整的站点地图
 function generateSimpleSitemap() {
+  const today = new Date().toISOString().split('T')[0];
+
+  // 主要页面
+  const mainPages = [
+    { loc: 'https://wsnail.com/', priority: '1.0', changefreq: 'daily' },
+    { loc: 'https://wsnail.com/ai-tools', priority: '0.9', changefreq: 'daily' },
+    { loc: 'https://wsnail.com/analyzer', priority: '0.9', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/divination', priority: '0.9', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/games', priority: '0.8', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/workflows', priority: '0.7', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/tool-reviews', priority: '0.7', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/sales-tracking', priority: '0.6', changefreq: 'monthly' },
+  ];
+
+  // 游戏页面
+  const gamePages = [
+    'ai-quiz',
+    'ai-word-chain',
+    'ai-math-challenge',
+    'ai-rock-paper-scissors',
+    'ai-storytelling',
+    'ai-debate',
+    'go-game',
+    'chess-game'
+  ].map(game => ({
+    loc: `https://wsnail.com/games/${game}`,
+    priority: '0.6',
+    changefreq: 'weekly'
+  }));
+
+  // AI工具分类页面（长尾关键词优化）
+  const categoryPages = [
+    'chat', 'search', 'social', 'image', 'video', 'processing'
+  ].map(cat => ({
+    loc: `https://wsnail.com/ai-tools?category=${cat}`,
+    priority: '0.8',
+    changefreq: 'daily'
+  }));
+
+  // 占卜类型页面
+  const divinationTypes = [
+    'tarot', 'zodiac', 'bazi', 'palmistry', 'nametest', 'jiugong'
+  ].map(type => ({
+    loc: `https://wsnail.com/divination?type=${type}`,
+    priority: '0.7',
+    changefreq: 'weekly'
+  }));
+
+  // SEO 着陆页（长尾关键词优化）
+  const landingPages = [
+    'ai-chatbot',
+    'ai-image-generator',
+    'ai-video-maker',
+    'free-ai-tools',
+    'ai-writing-assistant',
+    'ai-search-engine'
+  ].map(type => ({
+    loc: `https://wsnail.com/landing?type=${type}`,
+    priority: '0.9',
+    changefreq: 'weekly'
+  }));
+
+  // 合并所有页面
+  const allPages = [...mainPages, ...gamePages, ...categoryPages, ...divinationTypes, ...landingPages];
+
+  // 生成XML
+  const urls = allPages.map(page => `  <url>
+    <loc>${page.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n');
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://wsnail.com/</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wsnail.com/ai-tools</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://wsnail.com/divination</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wsnail.com/analyzer</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wsnail.com/games</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urls}
 </urlset>`;
 
   const sitemapPath = path.join(__dirname, '../dist/sitemap.xml');

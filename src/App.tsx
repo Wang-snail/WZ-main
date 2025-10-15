@@ -28,6 +28,7 @@ import WebsiteConfigPage from './pages/WebsiteConfigPage';
 import TestPage from './pages/TestPage';
 import KajianLessonsPage from './pages/KajianLessonsPage';
 import KajianLessonDetailPage from './pages/KajianLessonDetailPage';
+import LandingPages from './pages/LandingPages';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import PerformanceMonitor from './components/PerformanceMonitor';
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/divination" element={<DivinationPage />} />
                 <Route path="/analyzer" element={<AnalyzerPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/landing" element={<LandingPages />} />
                 <Route path="/tools/statistics" element={<ToolStatistics />} />
                 <Route path="/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/website-config" element={<WebsiteConfigPage />} />
