@@ -26,6 +26,8 @@ import ToolStatistics from './pages/tools/ToolStatistics';
 import SalesTrackingPage from './pages/SalesTrackingPage';
 import WebsiteConfigPage from './pages/WebsiteConfigPage';
 import TestPage from './pages/TestPage';
+import KajianLessonsPage from './pages/KajianLessonsPage';
+import KajianLessonDetailPage from './pages/KajianLessonDetailPage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import PerformanceMonitor from './components/PerformanceMonitor';
@@ -65,6 +67,8 @@ function App() {
                 <Route path="/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/website-config" element={<WebsiteConfigPage />} />
                 <Route path="/test" element={<TestPage />} />
+                <Route path="/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/kajian-lessons/:id" element={<KajianLessonDetailPage />} />
                 <Route path="/games" element={<AIGamesPage />} />
                 <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
                 <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />

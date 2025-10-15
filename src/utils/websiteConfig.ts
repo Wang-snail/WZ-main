@@ -41,17 +41,25 @@ export class WebsiteConfigManager {
       console.error('加载配置失败:', error);
     }
 
-    // 在开发环境中，尝试加载本地配置
+    // 在开发环境中，尝试从环境变量加载配置
     if (import.meta.env.DEV) {
       try {
-        // 动态导入本地配置文件
-        import('./websiteConfig.local').then(({ localConfig }) => {
-          this.saveConfig(localConfig);
-        }).catch(() => {
-          console.log('本地配置文件不存在，使用默认配置');
-        });
+        const envConfig: Partial<WebsiteConfig> = {};
+        if (import.meta.env.VITE_GITHUB_API) {
+          envConfig.githubAPI = import.meta.env.VITE_GITHUB_API;
+        }
+        if (import.meta.env.VITE_VERCEL_PROJECT_ID) {
+          envConfig.vercelProjectId = import.meta.env.VITE_VERCEL_PROJECT_ID;
+        }
+        if (import.meta.env.VITE_VERCEL_KEY) {
+          envConfig.vercelKey = import.meta.env.VITE_VERCEL_KEY;
+        }
+        if (Object.keys(envConfig).length > 0) {
+          const mergedConfig = { ...defaultConfig, ...envConfig };
+          this.saveConfig(mergedConfig);
+        }
       } catch (error) {
-        console.log('无法加载本地配置，使用默认配置');
+        console.log('无法加载环境变量配置，使用默认配置');
       }
     }
 
