@@ -23,7 +23,7 @@ export interface DivinationService {
   bgColor: string;
 }
 
-// 卡吉安电商经验教训相关类型定义
+// 电商经验教训相关类型定义
 export interface KajianLesson {
   id: string;
   title: string;

@@ -205,7 +205,7 @@ const KajianLessonDetailPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{lesson.title} - 卡吉安电商经验库 | wsnail.com</title>
+        <title>{lesson.title} - 电商经验库 | wsnail.com</title>
         <meta name="description" content={lesson.summary} />
       </Helmet>
 

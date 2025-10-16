@@ -203,8 +203,8 @@ const KajianLessonsPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>卡吉安电商经验库 - 记录与学习 | wsnail.com</title>
-        <meta name="description" content="卡吉安电商经验教训记录库，分享电商运营的成功案例和失败教训，帮助学习和成长" />
+        <title>电商经验库 - 记录与学习 | wsnail.com</title>
+        <meta name="description" content="电商经验教训记录库，分享电商运营的成功案例和失败教训，帮助学习和成长" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -214,7 +214,7 @@ const KajianLessonsPage: React.FC = () => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3 flex-1 justify-center">
                 <BookOpen size={40} />
-                <h1 className="text-4xl font-bold">卡吉安电商经验库</h1>
+                <h1 className="text-4xl font-bold">电商经验库</h1>
               </div>
               <Button
                 onClick={() => setShowForm(true)}
@@ -443,7 +443,7 @@ const KajianLessonsPage: React.FC = () => {
               <div className="text-center">
                 <h3 className="text-lg font-semibold mb-2">💡 关于这个经验库</h3>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  这里记录了卡吉安电商实践中的真实经验和教训。每一次尝试，无论成功还是失败，都是成长的阶梯。
+                  这里记录了电商实践中的真实经验和教训。每一次尝试，无论成功还是失败，都是成长的阶梯。
                   希望这些记录能帮助你避免同样的错误，复制成功的经验。
                 </p>
               </div>
