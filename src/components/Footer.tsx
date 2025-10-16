@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-300">contact@wsnail.com</span>
+                <span className="text-gray-300">wsanil2025@163.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Github className="w-4 h-4 text-gray-400" />
