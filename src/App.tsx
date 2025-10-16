@@ -89,11 +89,13 @@ function App() {
           </div>
           <Analytics />
 
-          {/* 性能监控组件 */}
-          <PerformanceMonitor
-            isDevelopment={process.env.NODE_ENV === 'development'}
-            showRealTimeStats={true}
-          />
+          {/* 性能监控组件 - 仅在开发环境显示 */}
+          {import.meta.env.DEV && (
+            <PerformanceMonitor
+              isDevelopment={true}
+              showRealTimeStats={true}
+            />
+          )}
         </Router>
       </ErrorBoundary>
     </HelmetProvider>
