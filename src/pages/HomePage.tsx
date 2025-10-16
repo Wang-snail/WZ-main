@@ -25,8 +25,8 @@ export default function HomePage() {
       icon: <Target className="w-6 h-6" />,
       color: 'from-blue-400 to-cyan-400',
       tools: [
-        { name: 'AI市场分析', link: '/ai-tools?category=analysis' },
-        { name: '趋势预测工具', link: '/ai-tools?category=prediction' },
+        { name: 'AI搜索引擎', link: '/ai-tools?category=AI搜索引擎' },
+        { name: 'AI数据分析', link: '/ai-tools' },
       ]
     },
     {
@@ -35,7 +35,7 @@ export default function HomePage() {
       color: 'from-green-400 to-emerald-400',
       tools: [
         { name: '销售追踪', link: '/sales-tracking' },
-        { name: '数据分析', link: '/ai-tools?category=analytics' },
+        { name: 'AI编程工具', link: '/ai-tools?category=AI编程工具' },
       ]
     },
     {
@@ -43,9 +43,9 @@ export default function HomePage() {
       icon: <Megaphone className="w-6 h-6" />,
       color: 'from-orange-400 to-red-400',
       tools: [
-        { name: 'AI文案生成', link: '/ai-tools?category=writing' },
-        { name: 'AI图片设计', link: '/ai-tools?category=image' },
-        { name: 'AI视频制作', link: '/ai-tools?category=video' },
+        { name: 'AI文案生成', link: '/ai-tools?category=AI写作工具' },
+        { name: 'AI图片设计', link: '/ai-tools?category=AI图像工具' },
+        { name: 'AI视频制作', link: '/ai-tools?category=AI视频工具' },
       ]
     },
     {

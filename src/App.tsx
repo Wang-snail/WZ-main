@@ -31,6 +31,7 @@ import KajianLessonsPage from './pages/KajianLessonsPage';
 import KajianLessonDetailPage from './pages/KajianLessonDetailPage';
 import LandingPages from './pages/LandingPages';
 import PlatformNewsPage from './pages/PlatformNewsPage';
+import CommunityPage from './pages/CommunityPage';
 import LanguageRedirect from './components/LanguageRedirect';
 import LanguageSynchronizer from './components/LanguageSynchronizer';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -84,6 +85,7 @@ function App() {
                 <Route path="/kajian-lessons" element={<KajianLessonsPage />} />
                 <Route path="/kajian-lessons/:id" element={<KajianLessonDetailPage />} />
                 <Route path="/platform-news" element={<PlatformNewsPage />} />
+                <Route path="/community" element={<CommunityPage />} />
                 <Route path="/games" element={<AIGamesPage />} />
                 <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
                 <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
@@ -103,6 +105,7 @@ function App() {
                 <Route path="/en/platform-news" element={<PlatformNewsPage />} />
                 <Route path="/en/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/en/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/en/community" element={<CommunityPage />} />
                 <Route path="/en/games" element={<AIGamesPage />} />
 
                 {/* 日语 /jp/* */}
@@ -111,6 +114,7 @@ function App() {
                 <Route path="/jp/platform-news" element={<PlatformNewsPage />} />
                 <Route path="/jp/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/jp/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/jp/community" element={<CommunityPage />} />
                 <Route path="/jp/games" element={<AIGamesPage />} />
 
                 {/* 韩语 /kr/* */}
@@ -119,6 +123,7 @@ function App() {
                 <Route path="/kr/platform-news" element={<PlatformNewsPage />} />
                 <Route path="/kr/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/kr/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/kr/community" element={<CommunityPage />} />
                 <Route path="/kr/games" element={<AIGamesPage />} />
 
                 {/* 西班牙语 /es/* */}
@@ -127,6 +132,7 @@ function App() {
                 <Route path="/es/platform-news" element={<PlatformNewsPage />} />
                 <Route path="/es/sales-tracking" element={<SalesTrackingPage />} />
                 <Route path="/es/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/es/community" element={<CommunityPage />} />
                 <Route path="/es/games" element={<AIGamesPage />} />
               </Routes>
             </main>
