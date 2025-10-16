@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen } from 'lucide-react';
+import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState, useEffect, useRef } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -37,6 +37,7 @@ export default function Header() {
   ];
 
   const moreNavigation = [
+    { name: '平台情报', href: '/platform-news', current: location.pathname === '/platform-news', icon: Newspaper },
     { name: '工作流', href: '/workflows', current: location.pathname === '/workflows', icon: Workflow },
     { name: '工具评测', href: '/tool-reviews', current: location.pathname === '/tool-reviews', icon: Star },
     { name: '经验库', href: '/kajian-lessons', current: location.pathname.startsWith('/kajian-lessons'), icon: BookOpen },

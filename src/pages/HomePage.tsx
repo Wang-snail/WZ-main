@@ -53,8 +53,8 @@ export default function HomePage() {
       icon: <Shield className="w-6 h-6" />,
       color: 'from-pink-400 to-rose-400',
       tools: [
-        { name: '平台规则解读', link: '/ai-tools?category=policy' },
-        { name: '合规检查', link: '/ai-tools?category=compliance' },
+        { name: '平台情报中心', link: '/platform-news' },
+        { name: '2025全年资讯', link: '/platform-news' },
       ]
     },
     {
