@@ -196,34 +196,6 @@ export default function AnalyzerPage() {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-        {/* Header */}
-        <header className="bg-white/80 backdrop-blur-sm border-b border-pink-100 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex items-center">
-                <img src="/images/logo.svg" alt="WSNAIL.COM" className="h-8 w-auto mr-3" />
-                <span className="text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                  WSNAIL.COM
-                </span>
-              </div>
-              <nav className="hidden md:flex space-x-8">
-                <Button variant="ghost" onClick={() => navigate('/')}>首页</Button>
-                <Button variant="ghost" onClick={() => navigate('/ai-tools')}>AI工具库</Button>
-                <Button variant="ghost" onClick={() => navigate('/divination')}>AI占卜</Button>
-                <Button variant="ghost" className="text-pink-600 font-medium">情感分析</Button>
-              </nav>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => navigate('/')}
-                className="md:hidden"
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        </header>
-
         {/* Main Content */}
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Hero Section */}
