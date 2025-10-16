@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bot, Sparkles, Heart, Mail, Github, Twitter } from 'lucide-react';
+import { Bot, Sparkles, Heart, Mail, Github, Twitter, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -63,6 +63,13 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">联系我们</h3>
             <ul className="space-y-2">
+              <li className="flex items-center space-x-2">
+                <MessageCircle className="w-4 h-4 text-green-400" />
+                <div className="text-gray-300">
+                  <span className="text-gray-400 text-sm">微信:</span>
+                  <span className="ml-1 font-medium text-white">wsnail-com</span>
+                </div>
+              </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-gray-400" />
                 <span className="text-gray-300">contact@wsnail.com</span>
