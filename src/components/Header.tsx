@@ -39,7 +39,6 @@ export default function Header() {
   const moreNavigation = [
     { name: '工作流', href: '/workflows', current: location.pathname === '/workflows', icon: Workflow },
     { name: '工具评测', href: '/tool-reviews', current: location.pathname === '/tool-reviews', icon: Star },
-    { name: '经验库', href: '/kajian-lessons', current: location.pathname.startsWith('/kajian-lessons'), icon: BookOpen },
   ];
 
   return (
