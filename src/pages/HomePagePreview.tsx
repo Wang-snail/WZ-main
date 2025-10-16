@@ -4,23 +4,28 @@ import { Link } from 'react-router-dom';
 import {
   TrendingUp,
   BarChart3,
+  Palette,
+  MessageSquare,
   Sparkles,
   BookOpen,
   Users,
   ArrowRight,
+  CheckCircle,
   Target,
   Zap,
   ShoppingCart,
   LineChart,
   Megaphone,
+  Heart,
   Lightbulb,
   Shield,
+  FileCheck
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 
-export default function HomePage() {
+export default function HomePagePreview() {
   const ecommerceWorkflow = [
     {
       phase: '选品策划',
@@ -153,18 +158,14 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <Link to="/ai-tools">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  <Target className="w-5 h-5 mr-2" />
-                  开始使用
-                </Button>
-              </Link>
-              <Link to="/kajian-lessons">
-                <Button size="lg" variant="outline">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  查看案例
-                </Button>
-              </Link>
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                <Target className="w-5 h-5 mr-2" />
+                开始使用
+              </Button>
+              <Button size="lg" variant="outline">
+                <BookOpen className="w-5 h-5 mr-2" />
+                查看案例
+              </Button>
             </div>
 
             {/* Stats */}
@@ -289,21 +290,33 @@ export default function HomePage() {
             加入1000+电商从业者，使用AI工具提升效率，学习成功经验，避免踩坑
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/ai-tools">
-              <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
-                <Target className="w-5 h-5 mr-2" />
-                立即开始
-              </Button>
-            </Link>
-            <Link to="/community">
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                <Users className="w-5 h-5 mr-2" />
-                加入社区
-              </Button>
-            </Link>
+            <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
+              <Target className="w-5 h-5 mr-2" />
+              立即开始
+            </Button>
+            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+              <Users className="w-5 h-5 mr-2" />
+              加入社区
+            </Button>
           </div>
         </div>
       </section>
+
+      {/* Preview Note */}
+      <div className="fixed bottom-4 right-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4 shadow-xl max-w-sm">
+        <div className="flex items-start">
+          <Sparkles className="w-5 h-5 text-yellow-600 mt-0.5 mr-2 flex-shrink-0" />
+          <div>
+            <p className="font-bold text-yellow-800 mb-1">预览模式</p>
+            <p className="text-sm text-yellow-700">
+              这是新首页的预览设计，突出电商定位和工作流程。
+            </p>
+            <Link to="/" className="text-sm text-yellow-800 font-medium underline mt-2 inline-block">
+              返回当前首页
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

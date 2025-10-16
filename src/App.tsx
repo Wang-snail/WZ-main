@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import HomePagePreview from './pages/HomePagePreview';
 import AIToolsPage from './pages/AIToolsPage';
 import WorkflowsPage from './pages/WorkflowsPage';
 import ToolReviewsPage from './pages/ToolReviewsPage';
@@ -58,6 +59,7 @@ function App() {
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/preview" element={<HomePagePreview />} />
                 <Route path="/ai-tools" element={<AIToolsPage />} />
                 <Route path="/workflows" element={<WorkflowsPage />} />
                 <Route path="/tool-reviews" element={<ToolReviewsPage />} />

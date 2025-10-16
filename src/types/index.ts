@@ -71,3 +71,48 @@ export interface KajianStats {
   totalProfit: number;
   avgROI: number;
 }
+
+// 电商社区问答相关类型定义
+export interface CommunityUser {
+  id: string;
+  name: string;
+  avatar?: string;
+  role?: 'expert' | 'user' | 'admin';
+  reputation?: number; // 声望值
+}
+
+export interface Answer {
+  id: string;
+  questionId: string;
+  content: string;
+  author: CommunityUser;
+  upvotes: number;
+  isAccepted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Question {
+  id: string;
+  title: string;
+  content: string;
+  author: CommunityUser;
+  category: 'operation' | 'product' | 'marketing' | 'tools' | 'strategy' | 'other';
+  tags: string[];
+  views: number;
+  answers: Answer[];
+  upvotes: number;
+  hasAcceptedAnswer: boolean;
+  createdAt: string;
+  updatedAt: string;
+  isSolved: boolean;
+}
+
+export interface QuestionCategory {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  count: number;
+}
