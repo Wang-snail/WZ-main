@@ -31,6 +31,7 @@ import KajianLessonsPage from './pages/KajianLessonsPage';
 import KajianLessonDetailPage from './pages/KajianLessonDetailPage';
 import LandingPages from './pages/LandingPages';
 import PlatformNewsPage from './pages/PlatformNewsPage';
+import LanguageRedirect from './components/LanguageRedirect';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import PerformanceMonitor from './components/PerformanceMonitor';
@@ -55,10 +56,14 @@ function App() {
               }}
             />
             
+            {/* 语言重定向组件 - 处理 /zh/* 到 /* 的重定向 */}
+            <LanguageRedirect />
+
             <Header />
-            
+
             <main className="flex-1">
               <Routes>
+                {/* 默认语言路由 (中文) */}
                 <Route path="/" element={<HomePage />} />
                 <Route path="/preview" element={<HomePagePreview />} />
                 <Route path="/ai-tools" element={<AIToolsPage />} />
@@ -86,6 +91,39 @@ function App() {
                 <Route path="/games/reversi" element={<ReversiGame />} />
                 <Route path="/games/military-chess" element={<MilitaryChessGame />} />
                 <Route path="/games/go-game" element={<GoGame />} />
+
+                {/* 多语言路由 - 支持 /:lang/* 格式 */}
+                {/* 英文 /en/* */}
+                <Route path="/en" element={<HomePage />} />
+                <Route path="/en/ai-tools" element={<AIToolsPage />} />
+                <Route path="/en/platform-news" element={<PlatformNewsPage />} />
+                <Route path="/en/sales-tracking" element={<SalesTrackingPage />} />
+                <Route path="/en/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/en/games" element={<AIGamesPage />} />
+
+                {/* 日语 /jp/* */}
+                <Route path="/jp" element={<HomePage />} />
+                <Route path="/jp/ai-tools" element={<AIToolsPage />} />
+                <Route path="/jp/platform-news" element={<PlatformNewsPage />} />
+                <Route path="/jp/sales-tracking" element={<SalesTrackingPage />} />
+                <Route path="/jp/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/jp/games" element={<AIGamesPage />} />
+
+                {/* 韩语 /kr/* */}
+                <Route path="/kr" element={<HomePage />} />
+                <Route path="/kr/ai-tools" element={<AIToolsPage />} />
+                <Route path="/kr/platform-news" element={<PlatformNewsPage />} />
+                <Route path="/kr/sales-tracking" element={<SalesTrackingPage />} />
+                <Route path="/kr/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/kr/games" element={<AIGamesPage />} />
+
+                {/* 西班牙语 /es/* */}
+                <Route path="/es" element={<HomePage />} />
+                <Route path="/es/ai-tools" element={<AIToolsPage />} />
+                <Route path="/es/platform-news" element={<PlatformNewsPage />} />
+                <Route path="/es/sales-tracking" element={<SalesTrackingPage />} />
+                <Route path="/es/kajian-lessons" element={<KajianLessonsPage />} />
+                <Route path="/es/games" element={<AIGamesPage />} />
               </Routes>
             </main>
             
