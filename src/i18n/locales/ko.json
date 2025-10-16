@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "홈",
+    "aiTools": "AI 도구",
+    "analyzer": "분석 도구",
+    "divination": "AI 점술",
+    "games": "AI 게임",
+    "workflows": "워크플로우",
+    "toolReviews": "도구 리뷰",
+    "salesTracking": "판매 추적",
+    "platformNews": "플랫폼 뉴스"
+  },
+  "home": {
+    "title": "전자상거래 전문가를 위한 스마트 도구함",
+    "subtitle": "크로스보더 전자상거래를 위한 AI 기반 플랫폼",
+    "description": "상품 선정, 운영, 마케팅을 포괄하는 106개 이상의 전문 AI 도구 통합. Amazon, Shopee, TikTok 등의 플랫폼에서 313개의 업데이트를 실시간으로 추적합니다.",
+    "stats": {
+      "tools": "AI 도구",
+      "news": "플랫폼 업데이트",
+      "users": "활성 사용자",
+      "categories": "카테고리"
+    },
+    "workflow": {
+      "title": "AI 기반 전자상거래 워크플로우",
+      "subtitle": "선정부터 마케팅까지 모든 단계에서 AI 지원",
+      "productSelection": "상품 선정",
+      "productSelectionDesc": "시장 분석, 트렌드 예측, 경쟁업체 조사",
+      "operations": "운영 관리",
+      "operationsDesc": "재고 관리, 주문 처리, 데이터 분석",
+      "marketing": "마케팅",
+      "marketingDesc": "콘텐츠 제작, 광고 최적화, 소셜 미디어 운영",
+      "platformPolicy": "플랫폼 정책",
+      "platformPolicyDesc": "실시간 정책 업데이트, 규칙 해석, 컴플라이언스",
+      "experience": "모범 사례",
+      "experienceDesc": "사례 연구, 모범 사례, 함정 가이드"
+    },
+    "features": {
+      "title": "WSNAIL을 선택하는 이유",
+      "aiPowered": "AI 기반",
+      "aiPoweredDesc": "최고의 AI 도구를 통합하여 효율성을 10배 향상",
+      "comprehensive": "전체 프로세스 커버",
+      "comprehensiveDesc": "선정부터 애프터서비스까지 각 단계에 전문 도구",
+      "realtime": "실시간 업데이트",
+      "realtimeDesc": "313개의 플랫폼 정보를 실시간으로 추적",
+      "easyToUse": "사용하기 쉬움",
+      "easyToUseDesc": "직관적인 인터페이스, 학습 비용 없음"
+    },
+    "cta": {
+      "exploreTools": "AI 도구 탐색",
+      "viewNews": "플랫폼 뉴스 보기"
+    }
+  },
+  "platformNews": {
+    "title": "플랫폼 인텔리전스 센터",
+    "subtitle": "크로스보더 전자상거래 플랫폼 동향을 실시간으로 추적",
+    "totalNews": "개의 업데이트",
+    "filters": {
+      "all": "전체",
+      "category": "카테고리",
+      "platform": "플랫폼",
+      "search": "뉴스 제목 또는 내용 검색..."
+    },
+    "categories": {
+      "all": "모든 카테고리",
+      "platform_policy": "플랫폼 정책",
+      "market_trends": "시장 트렌드",
+      "promotion_activities": "프로모션 활동",
+      "new_features": "새로운 기능",
+      "compliance_risks": "컴플라이언스 리스크",
+      "industry_insights": "업계 인사이트",
+      "operation_tips": "운영 팁"
+    },
+    "platforms": {
+      "all": "모든 플랫폼",
+      "Amazon": "Amazon",
+      "Shopee": "Shopee",
+      "TikTok": "TikTok",
+      "Lazada": "Lazada",
+      "AliExpress": "AliExpress",
+      "eBay": "eBay",
+      "Walmart": "Walmart",
+      "Multiple": "다중"
+    },
+    "noResults": "관련 뉴스를 찾을 수 없습니다",
+    "adjustFilters": "필터 또는 검색 키워드를 조정해보세요",
+    "readMore": "더 읽기",
+    "collapse": "접기",
+    "impact": "영향 분석",
+    "relevantPlatforms": "관련 플랫폼"
+  },
+  "footer": {
+    "description": "크로스보더 전자상거래 전문가를 위해 구축된 AI 기반 플랫폼",
+    "quickLinks": "빠른 링크",
+    "contact": "문의하기",
+    "wechat": "WeChat",
+    "email": "이메일",
+    "follow": "팔로우",
+    "copyright": "© 2024 WSNAIL.COM. All rights reserved."
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류",
+    "retry": "다시 시도",
+    "confirm": "확인",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "편집",
+    "search": "검색",
+    "filter": "필터",
+    "sort": "정렬",
+    "more": "더보기"
+  }
+}

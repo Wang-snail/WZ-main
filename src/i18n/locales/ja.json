@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "aiTools": "AIツール",
+    "analyzer": "分析ツール",
+    "divination": "AI占い",
+    "games": "AIゲーム",
+    "workflows": "ワークフロー",
+    "toolReviews": "ツールレビュー",
+    "salesTracking": "売上追跡",
+    "platformNews": "プラットフォーム情報"
+  },
+  "home": {
+    "title": "Eコマース専門家のためのスマートツールボックス",
+    "subtitle": "越境ECのためのAI支援プラットフォーム",
+    "description": "商品選定、運営、マーケティングをカバーする106以上のプロフェッショナルAIツールを統合。Amazon、Shopee、TikTokなどのプラットフォームから313件の最新情報をリアルタイムで追跡。",
+    "stats": {
+      "tools": "AIツール",
+      "news": "プラットフォーム情報",
+      "users": "アクティブユーザー",
+      "categories": "カテゴリー"
+    },
+    "workflow": {
+      "title": "AI搭載のEコマースワークフロー",
+      "subtitle": "選定からマーケティングまで、すべての段階でAIサポート",
+      "productSelection": "商品選定",
+      "productSelectionDesc": "市場分析、トレンド予測、競合調査",
+      "operations": "運営管理",
+      "operationsDesc": "在庫管理、注文処理、データ分析",
+      "marketing": "マーケティング",
+      "marketingDesc": "コンテンツ作成、広告最適化、ソーシャルメディア運営",
+      "platformPolicy": "プラットフォームポリシー",
+      "platformPolicyDesc": "リアルタイムポリシー更新、ルール解釈、コンプライアンス",
+      "experience": "ベストプラクティス",
+      "experienceDesc": "ケーススタディ、ベストプラクティス、落とし穴ガイド"
+    },
+    "features": {
+      "title": "WSNAILを選ぶ理由",
+      "aiPowered": "AI駆動",
+      "aiPoweredDesc": "トップAIツールを統合し、効率を10倍向上",
+      "comprehensive": "全プロセスカバー",
+      "comprehensiveDesc": "選定からアフターサービスまで、各段階に専門ツール",
+      "realtime": "リアルタイム更新",
+      "realtimeDesc": "313件のプラットフォーム情報をリアルタイムで追跡",
+      "easyToUse": "使いやすい",
+      "easyToUseDesc": "直感的なインターフェース、学習コストゼロ"
+    },
+    "cta": {
+      "exploreTools": "AIツールを探索",
+      "viewNews": "プラットフォーム情報を見る"
+    }
+  },
+  "platformNews": {
+    "title": "プラットフォームインテリジェンスセンター",
+    "subtitle": "越境ECプラットフォームの動向をリアルタイムで追跡",
+    "totalNews": "件の情報",
+    "filters": {
+      "all": "すべて",
+      "category": "カテゴリー",
+      "platform": "プラットフォーム",
+      "search": "ニュースのタイトルまたは内容を検索..."
+    },
+    "categories": {
+      "all": "すべてのカテゴリー",
+      "platform_policy": "プラットフォームポリシー",
+      "market_trends": "市場トレンド",
+      "promotion_activities": "プロモーション活動",
+      "new_features": "新機能",
+      "compliance_risks": "コンプライアンスリスク",
+      "industry_insights": "業界インサイト",
+      "operation_tips": "運営のヒント"
+    },
+    "platforms": {
+      "all": "すべてのプラットフォーム",
+      "Amazon": "Amazon",
+      "Shopee": "Shopee",
+      "TikTok": "TikTok",
+      "Lazada": "Lazada",
+      "AliExpress": "AliExpress",
+      "eBay": "eBay",
+      "Walmart": "Walmart",
+      "Multiple": "複数"
+    },
+    "noResults": "関連情報が見つかりません",
+    "adjustFilters": "フィルターまたは検索キーワードを調整してください",
+    "readMore": "続きを読む",
+    "collapse": "折りたたむ",
+    "impact": "影響分析",
+    "relevantPlatforms": "関連プラットフォーム"
+  },
+  "footer": {
+    "description": "越境EC専門家のために構築されたAI支援プラットフォーム",
+    "quickLinks": "クイックリンク",
+    "contact": "お問い合わせ",
+    "wechat": "WeChat",
+    "email": "メール",
+    "follow": "フォロー",
+    "copyright": "© 2024 WSNAIL.COM. All rights reserved."
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "retry": "再試行",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "search": "検索",
+    "filter": "フィルター",
+    "sort": "並び替え",
+    "more": "もっと見る"
+  }
+}

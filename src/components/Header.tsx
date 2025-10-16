@@ -4,14 +4,23 @@ import { motion } from 'framer-motion';
 import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import { extractLanguageFromPath, buildLocalizedUrl } from '@/config/i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 
 // Updated: 2025-09-18 13:05 - Force deployment sync
 export default function Header() {
   const location = useLocation();
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
   const moreMenuRef = useRef<HTMLDivElement>(null);
+
+  // 获取当前语言和路径信息
+  const { language: currentLanguage, cleanPath } = extractLanguageFromPath(location.pathname);
+
+  // 构建带语言前缀的链接
+  const localizedLink = (path: string) => buildLocalizedUrl(path, currentLanguage.code);
 
   // 点击外部关闭下拉菜单
   useEffect(() => {
@@ -28,19 +37,19 @@ export default function Header() {
   }, []);
 
   const navigation = [
-    { name: '首页', href: '/', current: location.pathname === '/' },
-    { name: 'AI工具库', href: '/ai-tools', current: location.pathname === '/ai-tools' },
-    { name: 'AI占卜', href: '/divination', current: location.pathname === '/divination' },
-    { name: '情感分析', href: '/analyzer', current: location.pathname === '/analyzer' },
-    { name: '销售追踪', href: '/sales-tracking', current: location.pathname === '/sales-tracking', icon: TrendingUp },
-    { name: 'AI游戏', href: '/games', current: location.pathname === '/games', icon: Gamepad2 },
+    { name: t('nav.home'), href: localizedLink('/'), current: cleanPath === '/' },
+    { name: t('nav.aiTools'), href: localizedLink('/ai-tools'), current: cleanPath === '/ai-tools' },
+    { name: t('nav.divination'), href: localizedLink('/divination'), current: cleanPath === '/divination' },
+    { name: t('nav.analyzer'), href: localizedLink('/analyzer'), current: cleanPath === '/analyzer' },
+    { name: t('nav.salesTracking'), href: localizedLink('/sales-tracking'), current: cleanPath === '/sales-tracking', icon: TrendingUp },
+    { name: t('nav.games'), href: localizedLink('/games'), current: cleanPath === '/games', icon: Gamepad2 },
   ];
 
   const moreNavigation = [
-    { name: '平台情报', href: '/platform-news', current: location.pathname === '/platform-news', icon: Newspaper },
-    { name: '工作流', href: '/workflows', current: location.pathname === '/workflows', icon: Workflow },
-    { name: '工具评测', href: '/tool-reviews', current: location.pathname === '/tool-reviews', icon: Star },
-    { name: '经验库', href: '/kajian-lessons', current: location.pathname.startsWith('/kajian-lessons'), icon: BookOpen },
+    { name: t('nav.platformNews'), href: localizedLink('/platform-news'), current: cleanPath === '/platform-news', icon: Newspaper },
+    { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath === '/workflows', icon: Workflow },
+    { name: t('nav.toolReviews'), href: localizedLink('/tool-reviews'), current: cleanPath === '/tool-reviews', icon: Star },
+    { name: '经验库', href: localizedLink('/kajian-lessons'), current: cleanPath.startsWith('/kajian-lessons'), icon: BookOpen },
   ];
 
   return (

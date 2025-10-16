@@ -5,6 +5,7 @@
 
 export interface LanguageConfig {
   code: string;      // 语言代码 (如: zh, en, jp)
+  i18nCode: string;  // i18next语言代码 (如: zh, en, ja, ko)
   name: string;      // 语言名称
   nativeName: string; // 原生语言名称
   locale: string;    // 完整locale (如: zh-CN, en-US)
@@ -16,6 +17,7 @@ export interface LanguageConfig {
 export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
   {
     code: 'zh',
+    i18nCode: 'zh',
     name: 'Chinese',
     nativeName: '简体中文',
     locale: 'zh-CN',
@@ -24,6 +26,7 @@ export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
   },
   {
     code: 'en',
+    i18nCode: 'en',
     name: 'English',
     nativeName: 'English',
     locale: 'en-US',
@@ -32,6 +35,7 @@ export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
   },
   {
     code: 'jp',
+    i18nCode: 'ja', // URL是jp,但i18n代码是ja
     name: 'Japanese',
     nativeName: '日本語',
     locale: 'ja-JP',
@@ -40,6 +44,7 @@ export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
   },
   {
     code: 'kr',
+    i18nCode: 'ko', // URL是kr,但i18n代码是ko
     name: 'Korean',
     nativeName: '한국어',
     locale: 'ko-KR',
@@ -48,6 +53,7 @@ export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
   },
   {
     code: 'es',
+    i18nCode: 'es',
     name: 'Spanish',
     nativeName: 'Español',
     locale: 'es-ES',

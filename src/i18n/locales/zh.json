@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "首页",
+    "aiTools": "AI工具库",
+    "analyzer": "关系分析器",
+    "divination": "AI占卜",
+    "games": "AI游戏",
+    "workflows": "工作流程",
+    "toolReviews": "工具评测",
+    "salesTracking": "销售追踪",
+    "platformNews": "平台情报"
+  },
+  "home": {
+    "title": "电商人的智能工具箱",
+    "subtitle": "专为跨境电商人打造的AI助手平台",
+    "description": "整合106+专业AI工具，覆盖选品、运营、营销全流程。实时追踪313条平台情报，掌握Amazon、Shopee、TikTok等平台最新动态。",
+    "stats": {
+      "tools": "AI工具",
+      "news": "平台情报",
+      "users": "活跃用户",
+      "categories": "功能分类"
+    },
+    "workflow": {
+      "title": "电商全流程AI赋能",
+      "subtitle": "从选品到营销，每个环节都有AI助力",
+      "productSelection": "选品策划",
+      "productSelectionDesc": "市场分析、趋势预测、竞品研究",
+      "operations": "运营管理",
+      "operationsDesc": "库存管理、订单处理、数据分析",
+      "marketing": "营销推广",
+      "marketingDesc": "内容创作、广告优化、社媒运营",
+      "platformPolicy": "平台政策",
+      "platformPolicyDesc": "实时政策更新、规则解读、合规指南",
+      "experience": "经验沉淀",
+      "experienceDesc": "案例分析、最佳实践、避坑指南"
+    },
+    "features": {
+      "title": "为什么选择WSNAIL",
+      "aiPowered": "AI驱动",
+      "aiPoweredDesc": "整合顶尖AI工具，提升工作效率10倍",
+      "comprehensive": "全流程覆盖",
+      "comprehensiveDesc": "从选品到售后，每个环节都有专业工具",
+      "realtime": "实时更新",
+      "realtimeDesc": "313条平台情报实时追踪，掌握最新动态",
+      "easyToUse": "简单易用",
+      "easyToUseDesc": "直观界面设计，零学习成本快速上手"
+    },
+    "cta": {
+      "exploreTools": "探索AI工具",
+      "viewNews": "查看平台情报"
+    }
+  },
+  "platformNews": {
+    "title": "平台情报中心",
+    "subtitle": "实时追踪跨境电商平台动态",
+    "totalNews": "条情报",
+    "filters": {
+      "all": "全部",
+      "category": "分类",
+      "platform": "平台",
+      "search": "搜索情报标题或内容..."
+    },
+    "categories": {
+      "all": "全部分类",
+      "platform_policy": "平台政策",
+      "market_trends": "市场趋势",
+      "promotion_activities": "促销活动",
+      "new_features": "新功能发布",
+      "compliance_risks": "合规风险",
+      "industry_insights": "行业洞察",
+      "operation_tips": "运营技巧"
+    },
+    "platforms": {
+      "all": "全部平台",
+      "Amazon": "亚马逊",
+      "Shopee": "虾皮",
+      "TikTok": "TikTok",
+      "Lazada": "来赞达",
+      "AliExpress": "速卖通",
+      "eBay": "eBay",
+      "Walmart": "沃尔玛",
+      "Multiple": "多平台"
+    },
+    "noResults": "未找到相关情报",
+    "adjustFilters": "请尝试调整筛选条件或搜索关键词",
+    "readMore": "阅读全文",
+    "collapse": "收起",
+    "impact": "影响分析",
+    "relevantPlatforms": "相关平台"
+  },
+  "footer": {
+    "description": "专为跨境电商人打造的AI智能工具平台",
+    "quickLinks": "快速链接",
+    "contact": "联系我们",
+    "wechat": "微信",
+    "email": "邮箱",
+    "follow": "关注我们",
+    "copyright": "© 2024 WSNAIL.COM. 保留所有权利。"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "出错了",
+    "retry": "重试",
+    "confirm": "确认",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "more": "更多"
+  }
+}

@@ -32,6 +32,7 @@ import KajianLessonDetailPage from './pages/KajianLessonDetailPage';
 import LandingPages from './pages/LandingPages';
 import PlatformNewsPage from './pages/PlatformNewsPage';
 import LanguageRedirect from './components/LanguageRedirect';
+import LanguageSynchronizer from './components/LanguageSynchronizer';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import PerformanceMonitor from './components/PerformanceMonitor';
@@ -58,6 +59,9 @@ function App() {
             
             {/* 语言重定向组件 - 处理 /zh/* 到 /* 的重定向 */}
             <LanguageRedirect />
+
+            {/* 语言同步组件 - 监听URL变化同步i18n语言 */}
+            <LanguageSynchronizer />
 
             <Header />
 

@@ -6,6 +6,8 @@ import App from './App.tsx'
 import { injectSpeedInsights } from '@vercel/speed-insights';
 // 导入浏览器扩展错误处理器
 import './utils/browserExtensionErrorHandler';
+// 导入i18n国际化配置
+import './i18n';
 
 injectSpeedInsights();
 

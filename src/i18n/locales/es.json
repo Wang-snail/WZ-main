@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "aiTools": "Herramientas IA",
+    "analyzer": "Analizador",
+    "divination": "Adivinación IA",
+    "games": "Juegos IA",
+    "workflows": "Flujos de trabajo",
+    "toolReviews": "Reseñas de herramientas",
+    "salesTracking": "Seguimiento de ventas",
+    "platformNews": "Noticias de plataformas"
+  },
+  "home": {
+    "title": "Caja de herramientas inteligente para profesionales del comercio electrónico",
+    "subtitle": "Plataforma impulsada por IA para comercio electrónico transfronterizo",
+    "description": "Integración de más de 106 herramientas profesionales de IA que cubren selección de productos, operaciones y marketing. Seguimiento de 313 actualizaciones de plataformas como Amazon, Shopee, TikTok en tiempo real.",
+    "stats": {
+      "tools": "Herramientas IA",
+      "news": "Actualizaciones de plataformas",
+      "users": "Usuarios activos",
+      "categories": "Categorías"
+    },
+    "workflow": {
+      "title": "Flujo de trabajo de comercio electrónico impulsado por IA",
+      "subtitle": "Asistencia de IA en cada etapa desde la selección hasta el marketing",
+      "productSelection": "Selección de productos",
+      "productSelectionDesc": "Análisis de mercado, predicción de tendencias, investigación de competidores",
+      "operations": "Operaciones",
+      "operationsDesc": "Gestión de inventario, procesamiento de pedidos, análisis de datos",
+      "marketing": "Marketing",
+      "marketingDesc": "Creación de contenido, optimización de anuncios, redes sociales",
+      "platformPolicy": "Políticas de plataforma",
+      "platformPolicyDesc": "Actualizaciones de políticas en tiempo real, interpretación de reglas, cumplimiento",
+      "experience": "Mejores prácticas",
+      "experienceDesc": "Estudios de casos, mejores prácticas, guías de trampas"
+    },
+    "features": {
+      "title": "Por qué elegir WSNAIL",
+      "aiPowered": "Impulsado por IA",
+      "aiPoweredDesc": "Integre las mejores herramientas de IA para aumentar la eficiencia 10 veces",
+      "comprehensive": "Cobertura completa",
+      "comprehensiveDesc": "Herramientas profesionales para cada etapa desde la selección hasta posventa",
+      "realtime": "Actualizaciones en tiempo real",
+      "realtimeDesc": "Seguimiento de 313 actualizaciones de plataformas en tiempo real",
+      "easyToUse": "Fácil de usar",
+      "easyToUseDesc": "Interfaz intuitiva, curva de aprendizaje cero"
+    },
+    "cta": {
+      "exploreTools": "Explorar herramientas IA",
+      "viewNews": "Ver noticias de plataformas"
+    }
+  },
+  "platformNews": {
+    "title": "Centro de inteligencia de plataformas",
+    "subtitle": "Seguimiento en tiempo real de la dinámica de plataformas de comercio electrónico transfronterizo",
+    "totalNews": "actualizaciones",
+    "filters": {
+      "all": "Todo",
+      "category": "Categoría",
+      "platform": "Plataforma",
+      "search": "Buscar título o contenido de noticias..."
+    },
+    "categories": {
+      "all": "Todas las categorías",
+      "platform_policy": "Política de plataforma",
+      "market_trends": "Tendencias del mercado",
+      "promotion_activities": "Promociones",
+      "new_features": "Nuevas funciones",
+      "compliance_risks": "Riesgos de cumplimiento",
+      "industry_insights": "Información de la industria",
+      "operation_tips": "Consejos de operación"
+    },
+    "platforms": {
+      "all": "Todas las plataformas",
+      "Amazon": "Amazon",
+      "Shopee": "Shopee",
+      "TikTok": "TikTok",
+      "Lazada": "Lazada",
+      "AliExpress": "AliExpress",
+      "eBay": "eBay",
+      "Walmart": "Walmart",
+      "Multiple": "Múltiple"
+    },
+    "noResults": "No se encontraron noticias",
+    "adjustFilters": "Intente ajustar los filtros o las palabras clave de búsqueda",
+    "readMore": "Leer más",
+    "collapse": "Colapsar",
+    "impact": "Análisis de impacto",
+    "relevantPlatforms": "Plataformas relevantes"
+  },
+  "footer": {
+    "description": "Plataforma impulsada por IA construida para profesionales del comercio electrónico transfronterizo",
+    "quickLinks": "Enlaces rápidos",
+    "contact": "Contáctenos",
+    "wechat": "WeChat",
+    "email": "Correo electrónico",
+    "follow": "Síguenos",
+    "copyright": "© 2024 WSNAIL.COM. Todos los derechos reservados."
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "more": "Más"
+  }
+}

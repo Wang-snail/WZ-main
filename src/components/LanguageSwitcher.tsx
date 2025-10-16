@@ -1,68 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { Globe } from 'lucide-react';
-import { SUPPORTED_LANGUAGES, getCurrentLanguage, setLanguage } from '../utils/languageUtils';
+import React, { useState, useRef, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Globe, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SUPPORTED_LANGUAGES, extractLanguageFromPath, buildLocalizedUrl } from '@/config/i18n';
+import { useTranslation } from 'react-i18next';
 
-interface LanguageSwitcherProps {
-  onLanguageChange?: (langCode: string) => void;
-}
+/**
+ * 语言切换器组件
+ * 显示当前语言并允许用户切换到其他支持的语言
+ */
+export default function LanguageSwitcher() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-export default function LanguageSwitcher({ onLanguageChange }: LanguageSwitcherProps) {
-  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
+  // 获取当前语言
+  const { language: currentLanguage, cleanPath } = extractLanguageFromPath(location.pathname);
 
+  // 点击外部关闭下拉菜单
   useEffect(() => {
-    // 检测浏览器语言并自动设置
-    const browserLang = navigator.language.toLowerCase();
-    let detectedLang = 'en'; // 默认语言
-    
-    // 根据浏览器语言映射到支持的语言
-    if (browserLang.includes('zh')) {
-      detectedLang = 'zh';
-    } else if (browserLang.includes('ja')) {
-      detectedLang = 'ja';
-    } else if (browserLang.includes('ko')) {
-      detectedLang = 'ko';
-    } else if (browserLang.includes('es')) {
-      detectedLang = 'es';
-    } else if (browserLang.includes('de')) {
-      detectedLang = 'de';
-    } else if (browserLang.includes('fr')) {
-      detectedLang = 'fr';
-    } else if (browserLang.includes('it')) {
-      detectedLang = 'it';
-    } else if (browserLang.includes('ru')) {
-      detectedLang = 'ru';
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     }
-    
-    // 如果检测到的语言在支持列表中且与当前语言不同，则设置
-    if (SUPPORTED_LANGUAGES.some(lang => lang.code === detectedLang) && detectedLang !== currentLang) {
-      handleLanguageChange(detectedLang);
-    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
-  const handleLanguageChange = (langCode: string) => {
-    setLanguage(langCode);
-    setCurrentLang(langCode);
-    if (onLanguageChange) {
-      onLanguageChange(langCode);
+  // 切换语言
+  const handleLanguageChange = (languageCode: string) => {
+    // 构建新的URL
+    const newPath = buildLocalizedUrl(cleanPath, languageCode);
+
+    // 切换i18n语言
+    const language = SUPPORTED_LANGUAGES.find(lang => lang.code === languageCode);
+    if (language) {
+      i18n.changeLanguage(language.i18nCode);
     }
-    // 重新加载页面以应用语言更改
-    window.location.reload();
+
+    // 导航到新URL
+    navigate(newPath);
+
+    // 关闭下拉菜单
+    setIsOpen(false);
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      <Globe className="w-5 h-5 text-gray-500" />
-      <select 
-        value={currentLang}
-        onChange={(e) => handleLanguageChange(e.target.value)}
-        className="border border-gray-300 rounded-md px-2 py-1 text-sm bg-white"
+    <div className="relative" ref={dropdownRef}>
+      {/* 语言切换按钮 */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+        aria-label="Switch language"
       >
-        {SUPPORTED_LANGUAGES.map((lang) => (
-          <option key={lang.code} value={lang.code}>
-            {lang.flag} {lang.name}
-          </option>
-        ))}
-      </select>
+        <Globe className="w-4 h-4" />
+        <span className="hidden sm:inline">{currentLanguage.nativeName}</span>
+        <span className="sm:hidden">{currentLanguage.code.toUpperCase()}</span>
+      </button>
+
+      {/* 语言选项下拉菜单 */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border z-50"
+          >
+            <div className="py-1">
+              {SUPPORTED_LANGUAGES.map((language) => (
+                <button
+                  key={language.code}
+                  onClick={() => handleLanguageChange(language.code)}
+                  className={`w-full text-left px-4 py-2 text-sm flex items-center justify-between transition-colors ${
+                    language.code === currentLanguage.code
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <span className="font-medium">{language.nativeName}</span>
+                    <span className="text-xs text-gray-400">{language.name}</span>
+                  </div>
+                  {language.code === currentLanguage.code && (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  )}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

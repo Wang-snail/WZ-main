@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "home": "Home",
+    "aiTools": "AI Tools",
+    "analyzer": "Analyzer",
+    "divination": "AI Divination",
+    "games": "AI Games",
+    "workflows": "Workflows",
+    "toolReviews": "Tool Reviews",
+    "salesTracking": "Sales Tracking",
+    "platformNews": "Platform News"
+  },
+  "home": {
+    "title": "Smart Toolbox for E-commerce Professionals",
+    "subtitle": "AI-Powered Platform for Cross-Border E-commerce",
+    "description": "Integrating 106+ professional AI tools covering product selection, operations, and marketing. Track 313 platform updates from Amazon, Shopee, TikTok and more in real-time.",
+    "stats": {
+      "tools": "AI Tools",
+      "news": "Platform Updates",
+      "users": "Active Users",
+      "categories": "Categories"
+    },
+    "workflow": {
+      "title": "AI-Powered E-commerce Workflow",
+      "subtitle": "AI assistance at every stage from selection to marketing",
+      "productSelection": "Product Selection",
+      "productSelectionDesc": "Market analysis, trend prediction, competitor research",
+      "operations": "Operations",
+      "operationsDesc": "Inventory management, order processing, data analysis",
+      "marketing": "Marketing",
+      "marketingDesc": "Content creation, ad optimization, social media",
+      "platformPolicy": "Platform Policy",
+      "platformPolicyDesc": "Real-time policy updates, rule interpretation, compliance",
+      "experience": "Best Practices",
+      "experienceDesc": "Case studies, best practices, pitfall guides"
+    },
+    "features": {
+      "title": "Why Choose WSNAIL",
+      "aiPowered": "AI-Powered",
+      "aiPoweredDesc": "Integrate top AI tools to boost efficiency by 10x",
+      "comprehensive": "Full Coverage",
+      "comprehensiveDesc": "Professional tools for every stage from selection to after-sales",
+      "realtime": "Real-time Updates",
+      "realtimeDesc": "Track 313 platform updates in real-time, stay informed",
+      "easyToUse": "Easy to Use",
+      "easyToUseDesc": "Intuitive interface, zero learning curve"
+    },
+    "cta": {
+      "exploreTools": "Explore AI Tools",
+      "viewNews": "View Platform News"
+    }
+  },
+  "platformNews": {
+    "title": "Platform Intelligence Center",
+    "subtitle": "Real-time tracking of cross-border e-commerce platform dynamics",
+    "totalNews": "Updates",
+    "filters": {
+      "all": "All",
+      "category": "Category",
+      "platform": "Platform",
+      "search": "Search news title or content..."
+    },
+    "categories": {
+      "all": "All Categories",
+      "platform_policy": "Platform Policy",
+      "market_trends": "Market Trends",
+      "promotion_activities": "Promotions",
+      "new_features": "New Features",
+      "compliance_risks": "Compliance Risks",
+      "industry_insights": "Industry Insights",
+      "operation_tips": "Operation Tips"
+    },
+    "platforms": {
+      "all": "All Platforms",
+      "Amazon": "Amazon",
+      "Shopee": "Shopee",
+      "TikTok": "TikTok",
+      "Lazada": "Lazada",
+      "AliExpress": "AliExpress",
+      "eBay": "eBay",
+      "Walmart": "Walmart",
+      "Multiple": "Multiple"
+    },
+    "noResults": "No news found",
+    "adjustFilters": "Try adjusting filters or search keywords",
+    "readMore": "Read More",
+    "collapse": "Collapse",
+    "impact": "Impact Analysis",
+    "relevantPlatforms": "Relevant Platforms"
+  },
+  "footer": {
+    "description": "AI-powered platform built for cross-border e-commerce professionals",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Us",
+    "wechat": "WeChat",
+    "email": "Email",
+    "follow": "Follow Us",
+    "copyright": "© 2024 WSNAIL.COM. All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "more": "More"
+  }
+}
