@@ -1,6 +1,6 @@
 // 用户行为追踪服务
 export interface UserEvent {
-  type: 'page_view' | 'tool_click' | 'workflow_view' | 'search' | 'category_filter' | 'user_action';
+  type: 'page_view' | 'tool_click' | 'workflow_view' | 'search' | 'category_filter' | 'user_action' | 'social_share' | 'user_registration' | 'user_login' | 'conversion';
   data: {
     page?: string;
     tool?: string;
@@ -9,10 +9,18 @@ export interface UserEvent {
     query?: string;
     action?: string;
     metadata?: Record<string, any>;
+    socialPlatform?: string;
+    conversionType?: string;
+    referrer?: string;
+    utmSource?: string;
+    utmMedium?: string;
+    utmCampaign?: string;
   };
   timestamp: number;
   sessionId: string;
   userId?: string;
+  ipAddress?: string;
+  userAgent?: string;
 }
 
 export interface UserPreferences {
