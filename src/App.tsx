@@ -4,7 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePageOptimized';
 import HomePagePreview from './pages/HomePagePreview';
 import AIToolsPage from './pages/AIToolsPage';
 import WorkflowsPage from './pages/WorkflowsPage';

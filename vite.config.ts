@@ -30,12 +30,26 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ['react', 'react-dom', 'react-router-dom'],
-            ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tooltip'],
+            // 核心依赖
+            vendor: ['react', 'react-dom'],
+            reactRouter: ['react-router-dom'],
+            // UI 库
+            ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tooltip', '@radix-ui/react-navigation-menu'],
+            // 图表库
+            charts: ['chart.js', 'react-chartjs-2', 'chartjs-plugin-datalabels'],
+            // 动画库
+            animation: ['framer-motion', 'tailwindcss-animate'],
+            // 国际化
+            i18n: ['i18next', 'react-i18next'],
+            // 表单处理
+            forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+            // 工具库
+            utils: ['date-fns', 'clsx', 'tailwind-merge', 'class-variance-authority'],
           },
         },
       },
-      chunkSizeWarningLimit: 1000,
+      // 降低chunk大小警告阈值
+      chunkSizeWarningLimit: 500,
       // 添加 sourcemap 便于调试
       sourcemap: true,
     },

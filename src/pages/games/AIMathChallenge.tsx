@@ -45,21 +45,24 @@ export default function AIMathChallenge() {
     
     switch (difficulty) {
       case 'easy':
-        // 简单加减法
-        const easyOperators = ['+', '-'];
-        const easyOperator = easyOperators[Math.floor(Math.random() * easyOperators.length)];
-        const easyA = Math.floor(Math.random() * 20) + 1;
-        const easyB = Math.floor(Math.random() * 20) + 1;
-        expression = `${easyA} ${easyOperator} ${easyB}`;
-        answer = easyOperator === '+' ? easyA + easyB : easyA - easyB;
+        { // 添加花括块
+          // 简单加减法
+          const easyOperators = ['+', '-'];
+          const easyOperator = easyOperators[Math.floor(Math.random() * easyOperators.length)];
+          const easyA = Math.floor(Math.random() * 20) + 1;
+          const easyB = Math.floor(Math.random() * 20) + 1;
+          expression = `${easyA} ${easyOperator} ${easyB}`;
+          answer = easyOperator === '+' ? easyA + easyB : easyA - easyB;
+        }
         break;
-        
+
       case 'medium':
-        // 中等难度：混合运算
-        const mediumOperators = ['+', '-', '*', '/'];
-        const mediumOperator = mediumOperators[Math.floor(Math.random() * mediumOperators.length)];
-        let mediumA, mediumB;
-        
+        { // 添加花括块
+          // 中等难度：混合运算
+          const mediumOperators = ['+', '-', '*', '/'];
+          const mediumOperator = mediumOperators[Math.floor(Math.random() * mediumOperators.length)];
+          let mediumA, mediumB;
+
         if (mediumOperator === '/') {
           mediumB = Math.floor(Math.random() * 10) + 1;
           mediumA = mediumB * (Math.floor(Math.random() * 10) + 1);
@@ -80,47 +83,50 @@ export default function AIMathChallenge() {
         
         expression = `${mediumA} ${mediumOperator} ${mediumB}`;
         answer = Math.round(answer * 100) / 100;
+        }
         break;
         
       case 'hard':
-        // 困难难度：复杂表达式
-        const patterns = [
-          () => {
-            const a = Math.floor(Math.random() * 20) + 1;
-            const b = Math.floor(Math.random() * 20) + 1;
-            const c = Math.floor(Math.random() * 20) + 1;
-            const result = a + b * c;
-            return {
-              expression: `${a} + ${b} × ${c}`,
-              answer: result
-            };
-          },
-          () => {
-            const a = Math.floor(Math.random() * 30) + 1;
-            const b = Math.floor(Math.random() * 10) + 1;
-            const c = Math.floor(Math.random() * 10) + 1;
-            const result = a - b * c;
-            return {
-              expression: `${a} - ${b} × ${c}`,
-              answer: result
-            };
-          },
-          () => {
-            const a = Math.floor(Math.random() * 12) + 1;
-            const b = Math.floor(Math.random() * 12) + 1;
-            const c = Math.floor(Math.random() * 12) + 1;
-            const result = (a * b) / c;
-            return {
-              expression: `(${a} × ${b}) ÷ ${c}`,
-              answer: Math.round(result * 100) / 100
-            };
-          }
-        ];
-        
-        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
-        const result = pattern();
-        expression = result.expression;
-        answer = result.answer;
+        { // 添加花括块
+          // 困难难度：复杂表达式
+          const patterns = [
+            () => {
+              const a = Math.floor(Math.random() * 20) + 1;
+              const b = Math.floor(Math.random() * 20) + 1;
+              const c = Math.floor(Math.random() * 20) + 1;
+              const result = a + b * c;
+              return {
+                expression: `${a} + ${b} × ${c}`,
+                answer: result
+              };
+            },
+            () => {
+              const a = Math.floor(Math.random() * 30) + 1;
+              const b = Math.floor(Math.random() * 10) + 1;
+              const c = Math.floor(Math.random() * 10) + 1;
+              const result = a - b * c;
+              return {
+                expression: `${a} - ${b} × ${c}`,
+                answer: result
+              };
+            },
+            () => {
+              const a = Math.floor(Math.random() * 12) + 1;
+              const b = Math.floor(Math.random() * 12) + 1;
+              const c = Math.floor(Math.random() * 12) + 1;
+              const result = (a * b) / c;
+              return {
+                expression: `(${a} × ${b}) ÷ ${c}`,
+                answer: Math.round(result * 100) / 100
+              };
+            }
+          ];
+
+          const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+          const result = pattern();
+          expression = result.expression;
+          answer = result.answer;
+        }
         break;
     }
     

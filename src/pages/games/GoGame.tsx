@@ -205,8 +205,8 @@ export default function GoGame() {
 
   // 计算得分（简化版）
   const calculateScore = () => {
-    let blackTerritory = 0;
-    let whiteTerritory = 0;
+    const blackTerritory = 0;
+    const whiteTerritory = 0;
     
     // 简单计算：棋子数 + 被捕获数
     let blackStones = 0;

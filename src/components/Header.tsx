@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { extractLanguageFromPath, buildLocalizedUrl } from '@/config/i18n';
-import LanguageSwitcher from './LanguageSwitcher';
+import SimplifiedLanguageSwitcher from './SimplifiedLanguageSwitcher';
 
 // Updated: 2025-09-18 13:05 - Force deployment sync
 export default function Header() {
@@ -137,13 +137,13 @@ export default function Header() {
 
           {/* Language Switcher */}
           <div className="hidden md:block">
-            <LanguageSwitcher />
+            <SimplifiedLanguageSwitcher />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <div className="mr-2">
-              <LanguageSwitcher />
+              <SimplifiedLanguageSwitcher />
             </div>
             <Button
               variant="ghost"

@@ -3,27 +3,71 @@ import { AITool, Category } from '../types';
 export class DataService {
   private aiToolsCache: AITool[] | null = null;
   private categoriesCache: Record<string, string[]> | null = null;
+  private newsCache: any[] | null = null;
+  private loadingPromises: Map<string, Promise<any>> = new Map();
 
-  // 加载AI工具数据
-  async loadAITools(): Promise<AITool[]> {
-    if (this.aiToolsCache) {
+  // 加载AI工具数据（支持优先级加载）
+  async loadAITools(priority = 'normal'): Promise<AITool[]> {
+    const cacheKey = `ai-tools-${priority}`;
+
+    // 如果有缓存，直接返回
+    if (this.aiToolsCache && priority === 'normal') {
       return this.aiToolsCache;
     }
 
+    // 如果已经有加载中的请求，直接返回
+    if (this.loadingPromises.has(cacheKey)) {
+      return this.loadingPromises.get(cacheKey);
+    }
+
+    const loadPromise = this.loadAIToolsInternal(priority);
+    this.loadingPromises.set(cacheKey, loadPromise);
+
     try {
-      const response = await fetch('/data/ai_tools_database.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const result = await loadPromise;
+      return result;
+    } finally {
+      this.loadingPromises.delete(cacheKey);
+    }
+  }
+
+  private async loadAIToolsInternal(priority: string): Promise<AITool[]> {
+    try {
+      // 优先级高的请求可能需要部分数据
+      if (priority === 'high') {
+        // 先获取前20个工具用于快速显示
+        const response = await fetch('/data/ai_tools_database.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (!data || !Array.isArray(data.ai_tools)) {
+          console.warn('AI工具数据格式不正确:', data);
+          return [];
+        }
+
+        // 高优先级只返回部分数据用于快速显示
+        this.aiToolsCache = data.ai_tools;
+        return data.ai_tools.slice(0, 20);
       }
-      const data = await response.json();
-      
-      // 数据验证
-      if (!data || !Array.isArray(data.ai_tools)) {
-        console.warn('AI工具数据格式不正确:', data);
-        return [];
+
+      // 普通优先级加载完整数据
+      if (!this.aiToolsCache) {
+        const response = await fetch('/data/ai_tools_database.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (!data || !Array.isArray(data.ai_tools)) {
+          console.warn('AI工具数据格式不正确:', data);
+          return [];
+        }
+
+        this.aiToolsCache = data.ai_tools;
       }
-      
-      this.aiToolsCache = data.ai_tools;
+
       return this.aiToolsCache;
     } catch (error) {
       console.error('加载AI工具数据失败:', error);
