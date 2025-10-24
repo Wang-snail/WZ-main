@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import LoadingProgress from '../components/LoadingProgress';
+import SocialShareButtons from '../components/SocialShareButtons';
 import { dataService } from '../services/dataService';
 
 // 懒加载组件
@@ -85,6 +86,10 @@ export default function HomePageOptimized() {
             查看成功案例
           </Button>
         </Link>
+        <SocialShareButtons
+          title="WSNAIL - 你的AI电商助手"
+          description="从选品到营销，106+专业AI工具助力电商人高效成长"
+        />
       </div>
 
       {/* Stats - 简化版 */}

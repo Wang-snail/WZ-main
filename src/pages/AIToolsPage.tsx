@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Search, 
-  Filter, 
+import {
+  Search,
+  Filter,
   Grid,
   List,
   ExternalLink,
@@ -17,6 +17,7 @@ import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import SocialShareButtons from '../components/SocialShareButtons';
 import { AITool, Category } from '../types';
 import { dataService } from '../services/dataService';
 import { useAnalytics } from '../services/analyticsService';
@@ -346,6 +347,15 @@ export default function AIToolsPage() {
                 )}
               </TabsContent>
             </Tabs>
+
+            {/* 社交分享组件 */}
+            <div className="pt-4 border-t">
+              <SocialShareButtons
+                title={`AI工具库 - ${selectedCategory ? categories.find(c => c.id === selectedCategory)?.name + '工具' : '106+精选AI工具'}`}
+                description={`发现${tools.length}个精选AI工具，提升工作效率。${selectedCategory ? categories.find(c => c.id === selectedCategory)?.description || '' : 'AI聊天、设计、写作、视频制作一站式解决方案。'}`}
+                hashtags={['AI工具', '人工智能', '效率工具', 'WSNAIL']}
+              />
+            </div>
           </div>
         </div>
       </div>
