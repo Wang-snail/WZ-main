@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Share2, MessageSquare, Twitter, Facebook, Link2, Check } from 'lucide-react';
-import { Button } from './ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Share2, MessageSquare, Twitter, Facebook, Link2, Check, MessageCircle } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 interface SocialShareProps {
   title: string;
@@ -113,7 +113,7 @@ ${description}
               onClick={shareToWechat}
               className="gap-2"
             >
-              <Wechat className="w-4 h-4 text-green-500" />
+              <MessageCircle className="w-4 h-4 text-green-500" />
               微信
             </Button>
 

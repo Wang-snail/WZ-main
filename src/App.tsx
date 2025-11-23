@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePageOptimized';
 import HomePagePreview from './pages/HomePagePreview';
 import AIToolsPage from './pages/AIToolsPage';
 import WorkflowsPage from './pages/WorkflowsPage';
 import ToolReviewsPage from './pages/ToolReviewsPage';
-import DivinationPage from './pages/DivinationPage';
+import DivinationPage from './pages/games/DivinationPage';
 import AnalyzerPage from './pages/AnalyzerPage';
 import AboutPage from './pages/AboutPage';
 import AIGamesPage from './pages/games/AIGamesPage';
@@ -24,19 +24,19 @@ import ReversiGame from './pages/games/ReversiGame';
 import MilitaryChessGame from './pages/games/MilitaryChessGame';
 import GoGame from './pages/games/GoGame';
 import ToolStatistics from './pages/tools/ToolStatistics';
-import SalesTrackingPage from './pages/SalesTrackingPage';
+import SalesTrackingPage from './pages/features/SalesTrackingPage';
 import WebsiteConfigPage from './pages/WebsiteConfigPage';
 import TestPage from './pages/TestPage';
-import KajianLessonsPage from './pages/KajianLessonsPage';
-import KajianLessonDetailPage from './pages/KajianLessonDetailPage';
+import KajianLessonsPage from './pages/features/KajianLessonsPage';
+import KajianLessonDetailPage from './pages/features/KajianLessonDetailPage';
 import LandingPages from './pages/LandingPages';
-import PlatformNewsPage from './pages/PlatformNewsPage';
+import PlatformNewsPage from './pages/features/PlatformNewsPage';
 import CommunityPage from './pages/CommunityPage';
-import LanguageRedirect from './components/LanguageRedirect';
-import LanguageSynchronizer from './components/LanguageSynchronizer';
-import { ErrorBoundary } from './components/ErrorBoundary';
+import LanguageRedirect from './components/common/LanguageRedirect';
+import LanguageSynchronizer from './components/common/LanguageSynchronizer';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
-import PerformanceMonitor from './components/PerformanceMonitor';
+import PerformanceMonitor from './components/features/PerformanceMonitor';
 import './App.css';
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
       <ErrorBoundary>
         <Router>
           <div className="min-h-screen flex flex-col">
-            <Toaster 
+            <Toaster
               position="top-center"
               toastOptions={{
                 duration: 4000,
@@ -57,7 +57,7 @@ function App() {
                 },
               }}
             />
-            
+
             {/* 语言重定向组件 - 处理 /zh/* 到 /* 的重定向 */}
             <LanguageRedirect />
 
@@ -136,7 +136,7 @@ function App() {
                 <Route path="/es/games" element={<AIGamesPage />} />
               </Routes>
             </main>
-            
+
             <Footer />
           </div>
           <Analytics />

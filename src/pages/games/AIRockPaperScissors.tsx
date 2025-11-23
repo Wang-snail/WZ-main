@@ -16,7 +16,7 @@ import {
 import { Button } from '../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
-import SEOHead from '../../components/SEOHead';
+import SEOHead from '../../components/common/SEOHead';
 
 type Choice = 'rock' | 'paper' | 'scissors' | null;
 type Result = 'win' | 'lose' | 'draw' | 'timeout' | null;

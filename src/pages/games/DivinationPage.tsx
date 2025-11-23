@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Sparkles, 
-  Star, 
-  Hand, 
+import {
+  Sparkles,
+  Star,
+  Hand,
   Type,
   ArrowLeft,
   Compass,
   Zap
 } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { DivinationResult } from '../types';
-import { storageService } from '../services/localStorage';
-import SEOHead from '../components/SEOHead';
+import { Button } from '../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { DivinationResult } from '../../types';
+import { storageService } from '../../services/localStorage';
+import SEOHead from '../../components/common/SEOHead';
 import { useNavigate } from 'react-router-dom';
-import DivinationServiceForm from '../components/DivinationServiceForm';
-import DivinationHistory from '../components/DivinationHistory';
-import DivinationResultDisplay from '../components/DivinationResultDisplay';
+import DivinationServiceForm from '../../components/features/DivinationServiceForm';
+import DivinationHistory from '../../components/features/DivinationHistory';
+import DivinationResultDisplay from '../../components/features/DivinationResultDisplay';
 
 export default function DivinationPage() {
   const [activeService, setActiveService] = useState<string | null>(null);
@@ -38,7 +38,7 @@ export default function DivinationPage() {
     setResults([result, ...results]);
     setActiveService(null);
     setCurrentResult(result);
-    
+
     if (canUseFree) {
       storageService.markFreeUsed();
       setCanUseFree(false);
@@ -109,14 +109,14 @@ export default function DivinationPage() {
   ];
 
   if (currentResult) {
-    return <DivinationResultDisplay 
+    return <DivinationResultDisplay
       result={currentResult}
       onBack={() => setCurrentResult(null)}
     />
   }
 
   if (activeService) {
-    return <DivinationServiceForm 
+    return <DivinationServiceForm
       service={divinationServices.find(s => s.id === activeService)!}
       onBack={() => setActiveService(null)}
       onComplete={handleServiceComplete}
@@ -126,7 +126,7 @@ export default function DivinationPage() {
 
   return (
     <>
-      <SEOHead 
+      <SEOHead
         title="AI占卜大师 - 塔罗牌占卜、星座运势、八卦算命、手相分析 | WSNAIL.COM"
         description="专业AI占卜平台，提供塔罗牌占卜、星座运势分析、周易八卦算命、手相分析、姓名测字、九宫飞星等传统占卜服务。结合古代智慧与现代AI技术，为您提供准确的命运指导。"
         keywords="AI占卜,塔罗牌占卜,星座运势,八卦算命,手相分析,姓名测字,九宫飞星,风水分析,命运预测,WSNAIL"
@@ -143,13 +143,13 @@ export default function DivinationPage() {
           }
         }}
       />
-      
+
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <motion.h1 
+            <motion.h1
               className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -157,7 +157,7 @@ export default function DivinationPage() {
             >
               AI占卜大师
             </motion.h1>
-            <motion.p 
+            <motion.p
               className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -187,7 +187,7 @@ export default function DivinationPage() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
                     <Card className={`group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 ${service.bgColor} hover:scale-105`}
-                          onClick={() => setActiveService(service.id)}>
+                      onClick={() => setActiveService(service.id)}>
                       <CardHeader className="text-center pb-4">
                         <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${service.color} flex items-center justify-center shadow-lg`}>
                           {service.icon}
@@ -209,7 +209,7 @@ export default function DivinationPage() {
                             </div>
                           ))}
                         </div>
-                        <Button 
+                        <Button
                           className={`w-full bg-gradient-to-r ${service.color} text-white border-0 hover:shadow-lg transition-all duration-300`}
                         >
                           {canUseFree ? '免费体验' : '¥9.9 开始占卜'}
@@ -247,7 +247,7 @@ export default function DivinationPage() {
                   Created by MiniMax Agent
                 </p>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-gray-800 mb-4">快速链接</h3>
                 <div className="space-y-2">
@@ -257,7 +257,7 @@ export default function DivinationPage() {
                   <a href="/analyzer" className="block text-gray-600 hover:text-purple-600 transition-colors">情感分析</a>
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-gray-800 mb-4">联系我们</h3>
                 <div className="space-y-2">

@@ -2,11 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { extractLanguageFromPath, buildLocalizedUrl } from '@/config/i18n';
-import SimplifiedLanguageSwitcher from './SimplifiedLanguageSwitcher';
+import SimplifiedLanguageSwitcher from '../SimplifiedLanguageSwitcher';
 
 // Updated: 2025-09-18 13:05 - Force deployment sync
 export default function Header() {
@@ -83,11 +83,10 @@ export default function Header() {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${
-                  item.current
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${item.current
                     ? 'bg-blue-100 text-blue-700'
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                }`}
+                  }`}
               >
                 {item.icon && <item.icon className="w-4 h-4 mr-1" />}
                 {item.name}
@@ -119,11 +118,10 @@ export default function Header() {
                         key={item.name}
                         to={item.href}
                         onClick={() => setMoreMenuOpen(false)}
-                        className={`block px-4 py-2 text-sm transition-colors flex items-center ${
-                          item.current
+                        className={`block px-4 py-2 text-sm transition-colors flex items-center ${item.current
                             ? 'bg-blue-100 text-blue-700'
                             : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                        }`}
+                          }`}
                       >
                         {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                         {item.name}
@@ -174,11 +172,10 @@ export default function Header() {
                   key={item.name}
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${
-                    item.current
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${item.current
                       ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                    }`}
                 >
                   {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                   {item.name}
@@ -195,11 +192,10 @@ export default function Header() {
                     key={item.name}
                     to={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${
-                      item.current
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${item.current
                         ? 'bg-blue-100 text-blue-700'
                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                    }`}
+                      }`}
                   >
                     {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                     {item.name}

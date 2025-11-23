@@ -21,7 +21,7 @@ import { Input } from '../components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { ToolReview, toolReviews, getRecommendedReviews, getPopularReviews } from '../data/toolReviews';
 import { useAnalytics } from '../services/analyticsService';
-import SEOHead from '../components/SEOHead';
+import SEOHead from '../components/common/SEOHead';
 
 export default function ToolReviewsPage() {
   const [reviews, setReviews] = useState<ToolReview[]>(toolReviews);

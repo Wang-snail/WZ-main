@@ -1,13 +1,13 @@
-// src/components/DivinationServiceForm.tsx
+// src/components/features/DivinationServiceForm.tsx
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Label } from './ui/label';
-import { DivinationResult, DivinationService } from '../types';
-import { aiServiceManager } from '../services/aiServiceManager';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Label } from '../ui/label';
+import { DivinationResult, DivinationService } from '@/types';
+import { aiServiceManager } from '@/services/aiServiceManager';
 import PaymentModal from './PaymentModal';
 
 interface Props {
@@ -27,7 +27,7 @@ export default function DivinationServiceForm({ service, onBack, onComplete, can
     try {
       const prompt = generateDivinationPrompt(service, formData);
       const analysis = await aiServiceManager.generateResponse(prompt);
-      
+
       const result: DivinationResult = {
         id: Date.now().toString(),
         service: service.title,
@@ -36,7 +36,7 @@ export default function DivinationServiceForm({ service, onBack, onComplete, can
         timestamp: new Date(),
         type: service.id
       };
-      
+
       onComplete(result);
     } catch (error) {
       console.error('占卜分析失败:', error);
@@ -60,9 +60,9 @@ export default function DivinationServiceForm({ service, onBack, onComplete, can
   };
 
   if (showPayment) {
-    return <PaymentModal 
+    return <PaymentModal
       onClose={() => setShowPayment(false)}
-      onSuccess={handlePaymentSuccess} 
+      onSuccess={handlePaymentSuccess}
     />;
   }
 
@@ -77,7 +77,7 @@ export default function DivinationServiceForm({ service, onBack, onComplete, can
           <ArrowLeft className="w-4 h-4 mr-2" />
           返回
         </Button>
-        
+
         <Card className="shadow-xl">
           <CardHeader className="text-center">
             <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${service.color} flex items-center justify-center shadow-lg`}>
@@ -89,7 +89,7 @@ export default function DivinationServiceForm({ service, onBack, onComplete, can
           <CardContent>
             <div className="space-y-6">
               {renderServiceForm(service, formData, setFormData)}
-              
+
               <Button
                 onClick={handleSubmit}
                 disabled={isAnalyzing}
@@ -109,7 +109,7 @@ export default function DivinationServiceForm({ service, onBack, onComplete, can
 function generateDivinationPrompt(service: DivinationService, formData: any): string {
   const basePrompt = `作为专业的${service.title}师，请根据以下信息进行详细分析：\n\n`;
   const dataStr = Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n');
-  
+
   return basePrompt + dataStr + '\n\n请提供专业、详细的分析结果，包括具体的建议和指导。';
 }
 

@@ -22,7 +22,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { KajianLesson, KajianCategory, KajianStats } from '@/types';
 import { KajianService } from '@/services/kajianService';
-import { KajianLessonForm } from '@/components/KajianLessonForm';
+import { KajianLessonForm } from '@/components/features/KajianLessonForm';
 import toast from 'react-hot-toast';
 
 const KajianLessonsPage: React.FC = () => {

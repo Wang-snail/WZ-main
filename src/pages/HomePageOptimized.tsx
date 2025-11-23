@@ -11,8 +11,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import LoadingProgress from '../components/LoadingProgress';
-import SocialShareButtons from '../components/SocialShareButtons';
+import LoadingProgress from '../components/common/LoadingProgress';
+import SocialShareButtons from '../components/features/SocialShareButtons';
 import { dataService } from '../services/dataService';
 
 // 懒加载组件

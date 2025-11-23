@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { shouldRedirectToDefault } from '../config/i18n';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { shouldRedirectToDefault } from '@/config/i18n';
 
 /**
  * 语言重定向组件

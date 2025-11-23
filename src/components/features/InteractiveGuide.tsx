@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Star, Sparkles, Target, Zap } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 interface InteractiveGuideProps {
   language: 'en' | 'zh';
@@ -135,9 +135,8 @@ const InteractiveGuide: React.FC<InteractiveGuideProps> = ({ language }) => {
           {[0, 1].map((step) => (
             <div
               key={step}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                currentStep >= step ? 'bg-blue-500' : 'bg-gray-300'
-              }`}
+              className={`w-3 h-3 rounded-full transition-colors ${currentStep >= step ? 'bg-blue-500' : 'bg-gray-300'
+                }`}
             />
           ))}
         </div>

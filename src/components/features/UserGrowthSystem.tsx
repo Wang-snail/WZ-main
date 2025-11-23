@@ -13,9 +13,9 @@ import {
   Target,
   Zap
 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
 
 interface Reward {
   id: string;
@@ -312,7 +312,8 @@ const UserGrowthSystem: React.FC = () => {
                   </h4>
                   <div className="space-y-3">
                     {typeRewards.map((reward) => {
-                      const IconComponent = require(`lucide-react`).[reward.icon];
+                      // 使用默认图标,因为动态导入在这里不适用
+                      const IconComponent = Star;
                       return (
                         <motion.div
                           key={reward.id}
@@ -321,9 +322,8 @@ const UserGrowthSystem: React.FC = () => {
                         >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                                reward.claimed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'
-                              }`}>
+                              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${reward.claimed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'
+                                }`}>
                                 <IconComponent className="w-5 h-5" />
                               </div>
                               <div>
@@ -386,16 +386,14 @@ const UserGrowthSystem: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * index }}
-                  className={`flex items-center justify-between p-3 rounded-lg ${
-                    user.name === '您的排名' ? 'bg-blue-50 border border-blue-200' : 'bg-gray-50'
-                  }`}
+                  className={`flex items-center justify-between p-3 rounded-lg ${user.name === '您的排名' ? 'bg-blue-50 border border-blue-200' : 'bg-gray-50'
+                    }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      user.rank === 1 ? 'bg-yellow-500' :
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${user.rank === 1 ? 'bg-yellow-500' :
                       user.rank === 2 ? 'bg-gray-400' :
-                      user.rank === 3 ? 'bg-orange-400' : 'bg-gray-300'
-                    }`}>
+                        user.rank === 3 ? 'bg-orange-400' : 'bg-gray-300'
+                      }`}>
                       <span className="text-white font-bold text-sm">
                         {user.rank === 4 ? '您' : user.rank}
                       </span>

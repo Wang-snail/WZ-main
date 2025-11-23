@@ -1,8 +1,8 @@
-// src/components/DivinationHistory.tsx
+// src/components/features/DivinationHistory.tsx
 import React from 'react';
 import { History } from 'lucide-react';
-import { Card, CardContent } from './ui/card';
-import { DivinationResult } from '../types';
+import { Card, CardContent } from '../ui/card';
+import { DivinationResult } from '@/types';
 
 interface Props {
   results: DivinationResult[];
@@ -23,8 +23,8 @@ export default function DivinationHistory({ results, onResultClick }: Props) {
   return (
     <div className="space-y-4">
       {results.map((result) => (
-        <Card 
-          key={result.id} 
+        <Card
+          key={result.id}
           className="cursor-pointer hover:shadow-lg transition-all duration-300"
           onClick={() => onResultClick(result)}
         >

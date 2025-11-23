@@ -14,10 +14,10 @@ import {
   Bell,
   X
 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { useAnalytics } from '../services/analyticsService';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { useAnalytics } from '@/services/analyticsService';
 import { Link } from 'react-router-dom';
 
 interface UserRetentionEnhancerProps {
@@ -195,11 +195,10 @@ export default function UserRetentionEnhancer({ currentPage = '', userId }: User
         >
           <Button
             onClick={() => handleBookmark(currentPage, `页面-${currentPage}`)}
-            className={`rounded-full w-12 h-12 shadow-lg ${
-              bookmarkedItems.includes(currentPage)
-                ? 'bg-yellow-500 hover:bg-yellow-600'
-                : 'bg-gray-600 hover:bg-gray-700'
-            }`}
+            className={`rounded-full w-12 h-12 shadow-lg ${bookmarkedItems.includes(currentPage)
+              ? 'bg-yellow-500 hover:bg-yellow-600'
+              : 'bg-gray-600 hover:bg-gray-700'
+              }`}
             title={bookmarkedItems.includes(currentPage) ? '取消收藏' : '收藏此页'}
           >
             {bookmarkedItems.includes(currentPage) ? (
@@ -320,7 +319,7 @@ export default function UserRetentionEnhancer({ currentPage = '', userId }: User
       </AnimatePresence>
 
       {/* 用户行为统计面板（开发调试用） */}
-      {process.env.NODE_ENV === 'development' && (
+      {import.meta.env.DEV && (
         <div className="fixed top-16 right-4 bg-white p-4 rounded-lg shadow-lg text-xs max-w-xs z-30">
           <h4 className="font-bold mb-2">用户留存数据</h4>
           <p>访问次数: {visitCount}</p>

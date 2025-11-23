@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   Star,
   TrendingUp,
   Heart,
@@ -9,10 +9,10 @@ import {
   RefreshCw,
   User
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { useAnalytics } from '../services/analyticsService';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+import { useAnalytics } from '@/services/analyticsService';
 
 interface RecommendedTool {
   name: string;
@@ -47,19 +47,19 @@ export default function PersonalizedRecommendations() {
 
   const loadRecommendations = async () => {
     setLoading(true);
-    
+
     try {
       // 获取用户画像
       const profile = getUserProfile();
       setUserProfile(profile);
-      
+
       // 获取推荐内容
       const recs = getRecommendations();
-      
+
       // 模拟推荐数据（实际应该从API获取）
       const toolRecommendations = generateToolRecommendations(profile);
       const workflowRecommendations = generateWorkflowRecommendations(profile);
-      
+
       setRecommendations({
         tools: toolRecommendations,
         workflows: workflowRecommendations
@@ -75,7 +75,7 @@ export default function PersonalizedRecommendations() {
   const generateToolRecommendations = (profile: any): RecommendedTool[] => {
     const { preferences } = profile;
     const tools: RecommendedTool[] = [];
-    
+
     // 基于访问过的分类推荐
     if (preferences.visitedCategories.includes('AI写作')) {
       tools.push({
@@ -87,7 +87,7 @@ export default function PersonalizedRecommendations() {
         confidence: 90
       });
     }
-    
+
     if (preferences.visitedCategories.includes('AI设计')) {
       tools.push({
         name: 'Midjourney',
@@ -98,7 +98,7 @@ export default function PersonalizedRecommendations() {
         confidence: 85
       });
     }
-    
+
     // 热门推荐
     tools.push({
       name: 'ChatGPT',
@@ -108,7 +108,7 @@ export default function PersonalizedRecommendations() {
       reason: '用户热门选择',
       confidence: 95
     });
-    
+
     return tools.slice(0, 4);
   };
 
@@ -116,9 +116,9 @@ export default function PersonalizedRecommendations() {
   const generateWorkflowRecommendations = (profile: any): RecommendedWorkflow[] => {
     const { preferences, activityLevel } = profile;
     const workflows: RecommendedWorkflow[] = [];
-    
-    if (preferences.visitedCategories.includes('AI写作') || 
-        preferences.searchKeywords.some(k => k.includes('写作'))) {
+
+    if (preferences.visitedCategories.includes('AI写作') ||
+      preferences.searchKeywords.some(k => k.includes('写作'))) {
       workflows.push({
         id: 'wechat-marketing',
         title: '微信公众号运营工作流',
@@ -128,7 +128,7 @@ export default function PersonalizedRecommendations() {
         confidence: 88
       });
     }
-    
+
     if (activityLevel === 'high') {
       workflows.push({
         id: 'product-manager',
@@ -139,7 +139,7 @@ export default function PersonalizedRecommendations() {
         confidence: 92
       });
     }
-    
+
     return workflows.slice(0, 3);
   };
 
@@ -209,8 +209,8 @@ export default function PersonalizedRecommendations() {
             </div>
             <div className="text-center">
               <div className="font-semibold text-orange-600">
-                {userProfile.activityLevel === 'high' ? '活跃' : 
-                 userProfile.activityLevel === 'medium' ? '一般' : '新手'}
+                {userProfile.activityLevel === 'high' ? '活跃' :
+                  userProfile.activityLevel === 'medium' ? '一般' : '新手'}
               </div>
               <div className="text-gray-500">活跃度</div>
             </div>
@@ -252,11 +252,11 @@ export default function PersonalizedRecommendations() {
                       {tool.confidence}%
                     </div>
                   </div>
-                  
+
                   <p className="text-sm text-gray-600 mb-2">
                     {tool.description}
                   </p>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-blue-600">
                       💡 {tool.reason}
@@ -306,13 +306,13 @@ export default function PersonalizedRecommendations() {
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center text-xs text-gray-500 ml-4">
                       <TrendingUp className="w-3 h-3 mr-1" />
                       {workflow.confidence}%
                     </div>
                   </div>
-                  
+
                   <div className="flex justify-end">
                     <Button variant="outline" size="sm" className="group-hover:bg-blue-600 group-hover:text-white">
                       查看详情

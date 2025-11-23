@@ -6,15 +6,15 @@ vi.mock('@/lib/utils', () => ({
   cn: () => ''
 }))
 
-vi.mock('./components/Header', () => ({
+vi.mock('./components/layout/Header', () => ({
   default: () => <nav>Header</nav>
 }))
 
-vi.mock('./components/Footer', () => ({
+vi.mock('./components/layout/Footer', () => ({
   default: () => <footer>Footer</footer>
 }))
 
-vi.mock('./components/ErrorBoundary', () => ({
+vi.mock('./components/common/ErrorBoundary', () => ({
   ErrorBoundary: ({ children }: any) => children
 }))
 

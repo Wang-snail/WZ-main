@@ -15,11 +15,11 @@ import {
   VolumeX,
   RotateCcw
 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
-import { useAnalytics } from '../services/analyticsService';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { Progress } from '../ui/progress';
+import { useAnalytics } from '@/services/analyticsService';
 import { Link } from 'react-router-dom';
 
 interface EngagementBoosterProps {
@@ -241,11 +241,10 @@ export default function EngagementBooster({
                 <div className="relative">
                   <div className="w-12 h-12 rounded-full border-4 border-gray-200">
                     <div
-                      className={`w-full h-full rounded-full border-4 border-transparent ${
-                        engagementLevel === 'low' ? 'border-t-blue-500' :
+                      className={`w-full h-full rounded-full border-4 border-transparent ${engagementLevel === 'low' ? 'border-t-blue-500' :
                         engagementLevel === 'medium' ? 'border-t-purple-500' :
-                        'border-t-green-500'
-                      } animate-spin`}
+                          'border-t-green-500'
+                        } animate-spin`}
                       style={{
                         transform: `rotate(${(timeSpent % 60) * 6}deg)`
                       }}

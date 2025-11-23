@@ -23,7 +23,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { KajianLesson } from '@/types';
 import { KajianService } from '@/services/kajianService';
-import { KajianLessonForm } from '@/components/KajianLessonForm';
+import { KajianLessonForm } from '@/components/features/KajianLessonForm';
 import toast from 'react-hot-toast';
 
 const KajianLessonDetailPage: React.FC = () => {
@@ -165,7 +165,7 @@ const KajianLessonDetailPage: React.FC = () => {
         title: lesson?.title,
         text: lesson?.summary,
         url: window.location.href
-      }).catch(() => {});
+      }).catch(() => { });
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast.success('链接已复制到剪贴板');

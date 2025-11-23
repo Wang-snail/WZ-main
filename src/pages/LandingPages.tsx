@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import SEOHead from '../components/SEOHead';
+import SEOHead from '../components/common/SEOHead';
 
 // SEO 着陆页配置
 const landingPageConfigs: Record<string, {

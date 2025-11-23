@@ -18,7 +18,7 @@ import {
 import { Button } from '../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
-import SEOHead from '../../components/SEOHead';
+import SEOHead from '../../components/common/SEOHead';
 
 type PieceType = '司令' | '军长' | '师长' | '旅长' | '团长' | '营长' | '连长' | '排长' | '工兵' | '地雷' | '炸弹' | '军旗' | null;
 type Player = 'red' | 'blue' | null;

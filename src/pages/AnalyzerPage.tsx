@@ -23,7 +23,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Badge } from '../components/ui/badge';
 import { useNavigate } from 'react-router-dom';
-import SEOHead from '../components/SEOHead';
+import SEOHead from '../components/common/SEOHead';
 import { aiServiceManager } from '../services/aiServiceManager';
 
 interface ChatMessage {

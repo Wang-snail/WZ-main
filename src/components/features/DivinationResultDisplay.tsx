@@ -1,11 +1,11 @@
-// src/components/DivinationResultDisplay.tsx
+// src/components/features/DivinationResultDisplay.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Download, Share2 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { DivinationResult } from '../types';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { DivinationResult } from '@/types';
 
 interface Props {
   result: DivinationResult;
@@ -50,7 +50,7 @@ ${result.result}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 p-4 sm:p-6 lg:p-8">
-      <motion.div 
+      <motion.div
         className="max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
