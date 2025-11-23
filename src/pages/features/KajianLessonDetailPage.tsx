@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '@/components/common/SEOHead';
 import {
   ArrowLeft,
   Calendar,
@@ -204,10 +204,13 @@ const KajianLessonDetailPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{lesson.title} - 电商经验库 | wsnail.com</title>
-        <meta name="description" content={lesson.summary} />
-      </Helmet>
+      <SEOHead
+        title={`${lesson.title} - 电商经验库 | wsnail.com`}
+        description={lesson.summary}
+        keywords={`${lesson.category},${lesson.tags.join(',')},跨境电商经验,电商案例`}
+        url={`https://wsnail.com/kajian-lessons/${lesson.id}`}
+        type="article"
+      />
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container mx-auto px-4 py-8 max-w-5xl">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '@/components/common/SEOHead';
 import {
   BookOpen,
   TrendingUp,
@@ -202,10 +202,12 @@ const KajianLessonsPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>电商经验库 - 记录与学习 | wsnail.com</title>
-        <meta name="description" content="电商经验教训记录库，分享电商运营的成功案例和失败教训，帮助学习和成长" />
-      </Helmet>
+      <SEOHead
+        title="电商经验库 - 记录与学习 | wsnail.com"
+        description="电商经验教训记录库，分享电商运营的成功案例和失败教训，帮助学习和成长。涵盖选品、运营、营销等多个维度的实战经验。"
+        keywords="电商经验,跨境电商案例,运营教训,选品经验,电商复盘"
+        url="https://wsnail.com/kajian-lessons"
+      />
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         {/* 头部横幅 */}

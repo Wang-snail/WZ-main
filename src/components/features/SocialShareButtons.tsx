@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import { Share2, MessageSquare, Twitter, Facebook, Link2, Check, MessageCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
@@ -18,6 +19,7 @@ const SocialShareButtons: React.FC<SocialShareProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [showWechatQR, setShowWechatQR] = useState(false);
 
   // 分享链接生成
   const generateShareUrl = (platform: string, additionalParams = {}) => {
@@ -39,17 +41,11 @@ const SocialShareButtons: React.FC<SocialShareProps> = ({
     window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
-  // 微信分享（网页版）
+  // 微信分享（二维码）
   const shareToWechat = () => {
-    // 生成微信分享的二维码提示
-    const qrContent = `
-请使用微信扫描二维码分享此页面
-
-${title}
-
-${description}
-    `;
-    alert(qrContent);
+    setIsOpen(true);
+    // 切换到微信分享视图
+    setShowWechatQR(true);
   };
 
   // Twitter分享
@@ -93,99 +89,119 @@ ${description}
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-72 p-4">
-        <div className="space-y-3">
-          <h4 className="font-medium text-sm text-gray-900">分享到</h4>
-
-          <div className="grid grid-cols-2 gap-2">
+        {showWechatQR ? (
+          <div className="flex flex-col items-center space-y-4">
+            <h4 className="font-medium text-sm text-gray-900">微信扫一扫分享</h4>
+            <div className="bg-white p-2 rounded-lg border">
+              <QRCodeSVG value={url} size={160} />
+            </div>
+            <p className="text-xs text-gray-500 text-center">
+              打开微信，点击右上角"+"，<br />选择"扫一扫"
+            </p>
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={shareToWeibo}
-              className="gap-2"
+              onClick={() => setShowWechatQR(false)}
+              className="text-gray-500"
             >
-              <MessageSquare className="w-4 h-4 text-red-500" />
-              微博
-            </Button>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={shareToWechat}
-              className="gap-2"
-            >
-              <MessageCircle className="w-4 h-4 text-green-500" />
-              微信
-            </Button>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={shareToTwitter}
-              className="gap-2"
-            >
-              <Twitter className="w-4 h-4 text-blue-400" />
-              Twitter
-            </Button>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={shareToFacebook}
-              className="gap-2"
-            >
-              <Facebook className="w-4 h-4 text-blue-600" />
-              Facebook
+              返回
             </Button>
           </div>
+        ) : (
+          <div className="space-y-3">
+            <h4 className="font-medium text-sm text-gray-900">分享到</h4>
 
-          <div className="border-t pt-3">
-            <h5 className="font-medium text-sm text-gray-900 mb-2">专业平台</h5>
             <div className="grid grid-cols-2 gap-2">
               <Button
                 variant="outline"
                 size="sm"
-                onClick={shareToZhihu}
-                className="gap-2 text-sm"
+                onClick={shareToWeibo}
+                className="gap-2"
               >
-                知乎
+                <MessageSquare className="w-4 h-4 text-red-500" />
+                微博
               </Button>
 
               <Button
                 variant="outline"
                 size="sm"
-                onClick={shareToJuejin}
-                className="gap-2 text-sm"
+                onClick={shareToWechat}
+                className="gap-2"
               >
-                掘金
+                <MessageCircle className="w-4 h-4 text-green-500" />
+                微信
+              </Button>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={shareToTwitter}
+                className="gap-2"
+              >
+                <Twitter className="w-4 h-4 text-blue-400" />
+                Twitter
+              </Button>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={shareToFacebook}
+                className="gap-2"
+              >
+                <Facebook className="w-4 h-4 text-blue-600" />
+                Facebook
               </Button>
             </div>
-          </div>
 
-          <div className="border-t pt-3">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={copyToClipboard}
-              className="w-full gap-2"
-            >
-              {copied ? (
-                <>
-                  <Check className="w-4 h-4 text-green-600" />
-                  已复制链接
-                </>
-              ) : (
-                <>
-                  <Link2 className="w-4 h-4" />
-                  复制链接
-                </>
-              )}
-            </Button>
-          </div>
+            <div className="border-t pt-3">
+              <h5 className="font-medium text-sm text-gray-900 mb-2">专业平台</h5>
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shareToZhihu}
+                  className="gap-2 text-sm"
+                >
+                  知乎
+                </Button>
 
-          <div className="text-xs text-gray-500 text-center pt-2">
-            {hashtags.map(tag => `#${tag}`).join(' ')}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shareToJuejin}
+                  className="gap-2 text-sm"
+                >
+                  掘金
+                </Button>
+              </div>
+            </div>
+
+            <div className="border-t pt-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={copyToClipboard}
+                className="w-full gap-2"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-green-600" />
+                    已复制链接
+                  </>
+                ) : (
+                  <>
+                    <Link2 className="w-4 h-4" />
+                    复制链接
+                  </>
+                )}
+              </Button>
+            </div>
+
+            <div className="text-xs text-gray-500 text-center pt-2">
+              {hashtags.map(tag => `#${tag}`).join(' ')}
+            </div>
           </div>
-        </div>
+        )}
       </PopoverContent>
     </Popover>
   );

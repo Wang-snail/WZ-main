@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/common/SEOHead';
 import { motion } from 'framer-motion';
 import {
   Newspaper,
@@ -118,16 +118,12 @@ export default function PlatformNewsPage() {
 
   return (
     <>
-      <Helmet>
-        <title>平台情报中心 - 313条跨境电商平台最新动态 | WSNAIL.COM</title>
-        <meta name="description" content="实时追踪313条2025年跨境电商平台情报。涵盖Amazon、Shopee、TikTok等10+平台的政策更新、市场趋势、促销活动。7大分类，精准筛选，助您掌握平台最新动态。" />
-        <meta name="keywords" content="平台情报,跨境电商新闻,Amazon政策,Shopee动态,TikTok大促,速卖通活动,平台政策,市场趋势,电商资讯" />
-        <link rel="canonical" href="https://wsnail.com/platform-news" />
-        <meta property="og:title" content="平台情报中心 - 313条跨境电商平台最新动态" />
-        <meta property="og:description" content="实时追踪313条2025年跨境电商平台情报。涵盖Amazon、Shopee、TikTok等主流平台政策、市场、促销动态。" />
-        <meta property="og:url" content="https://wsnail.com/platform-news" />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <SEOHead
+        title="平台情报中心 - 313条跨境电商平台最新动态 | WSNAIL.COM"
+        description="实时追踪313条2025年跨境电商平台情报。涵盖Amazon、Shopee、TikTok等10+平台的政策更新、市场趋势、促销活动。7大分类，精准筛选，助您掌握平台最新动态。"
+        keywords="平台情报,跨境电商新闻,Amazon政策,Shopee动态,TikTok大促,速卖通活动,平台政策,市场趋势,电商资讯"
+        url="https://wsnail.com/platform-news"
+      />
 
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-slate-100 to-gray-50">
         {/* Header */}
@@ -187,8 +183,8 @@ export default function PlatformNewsPage() {
                     <button
                       onClick={() => setSelectedCategory('all')}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${selectedCategory === 'all'
-                          ? 'bg-blue-100 text-blue-700 font-semibold'
-                          : 'hover:bg-gray-100 text-gray-700'
+                        ? 'bg-blue-100 text-blue-700 font-semibold'
+                        : 'hover:bg-gray-100 text-gray-700'
                         }`}
                     >
                       全部分类 ({newsData.totalCount})
@@ -200,8 +196,8 @@ export default function PlatformNewsPage() {
                           key={key}
                           onClick={() => setSelectedCategory(key)}
                           className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${selectedCategory === key
-                              ? 'bg-blue-100 text-blue-700 font-semibold'
-                              : 'hover:bg-gray-100 text-gray-700'
+                            ? 'bg-blue-100 text-blue-700 font-semibold'
+                            : 'hover:bg-gray-100 text-gray-700'
                             }`}
                         >
                           {name} ({count})
@@ -221,8 +217,8 @@ export default function PlatformNewsPage() {
                     <button
                       onClick={() => setSelectedPlatform('all')}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${selectedPlatform === 'all'
-                          ? 'bg-cyan-100 text-cyan-700 font-semibold'
-                          : 'hover:bg-gray-100 text-gray-700'
+                        ? 'bg-cyan-100 text-cyan-700 font-semibold'
+                        : 'hover:bg-gray-100 text-gray-700'
                         }`}
                     >
                       全部平台
@@ -232,8 +228,8 @@ export default function PlatformNewsPage() {
                         key={platform}
                         onClick={() => setSelectedPlatform(platform)}
                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${selectedPlatform === platform
-                            ? 'bg-cyan-100 text-cyan-700 font-semibold'
-                            : 'hover:bg-gray-100 text-gray-700'
+                          ? 'bg-cyan-100 text-cyan-700 font-semibold'
+                          : 'hover:bg-gray-100 text-gray-700'
                           }`}
                       >
                         {platform} ({count})
