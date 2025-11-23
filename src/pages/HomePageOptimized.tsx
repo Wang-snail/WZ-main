@@ -43,10 +43,7 @@ export default function HomePageOptimized() {
 
   // Hero Section
   const HeroSection = () => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+    <div
       className="text-center"
     >
       {/* 简化的玻璃态标签 */}
@@ -112,7 +109,7 @@ export default function HomePageOptimized() {
           </motion.div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 
   // 快速功能展示

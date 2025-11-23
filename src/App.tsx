@@ -1,43 +1,53 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import HomePage from './pages/HomePageOptimized';
-import HomePagePreview from './pages/HomePagePreview';
-import AIToolsPage from './pages/AIToolsPage';
-import WorkflowsPage from './pages/WorkflowsPage';
-import ToolReviewsPage from './pages/ToolReviewsPage';
-import DivinationPage from './pages/games/DivinationPage';
-import AnalyzerPage from './pages/AnalyzerPage';
-import AboutPage from './pages/AboutPage';
-import AIGamesPage from './pages/games/AIGamesPage';
-import AIWordGuessGame from './pages/games/AIWordGuessGame';
-import AITicTacToe from './pages/games/AITicTacToe';
-import AIMemoryGame from './pages/games/AIMemoryGame';
-import AINumberGuessGame from './pages/games/AINumberGuessGame';
-import AIRockPaperScissors from './pages/games/AIRockPaperScissors';
-import AIMathChallenge from './pages/games/AIMathChallenge';
-import WolfSheepGame from './pages/games/WolfSheepGame';
-import ReversiGame from './pages/games/ReversiGame';
-import MilitaryChessGame from './pages/games/MilitaryChessGame';
-import GoGame from './pages/games/GoGame';
-import ToolStatistics from './pages/tools/ToolStatistics';
-import SalesTrackingPage from './pages/features/SalesTrackingPage';
-import WebsiteConfigPage from './pages/WebsiteConfigPage';
-import TestPage from './pages/TestPage';
-import KajianLessonsPage from './pages/features/KajianLessonsPage';
-import KajianLessonDetailPage from './pages/features/KajianLessonDetailPage';
-import LandingPages from './pages/LandingPages';
-import PlatformNewsPage from './pages/features/PlatformNewsPage';
-import CommunityPage from './pages/CommunityPage';
 import LanguageRedirect from './components/common/LanguageRedirect';
 import LanguageSynchronizer from './components/common/LanguageSynchronizer';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import PerformanceMonitor from './components/features/PerformanceMonitor';
+import LoadingProgress from './components/common/LoadingProgress';
 import './App.css';
+
+// 路由组件懒加载
+const HomePage = React.lazy(() => import('./pages/HomePageOptimized'));
+const HomePagePreview = React.lazy(() => import('./pages/HomePagePreview'));
+const AIToolsPage = React.lazy(() => import('./pages/AIToolsPage'));
+const WorkflowsPage = React.lazy(() => import('./pages/WorkflowsPage'));
+const ToolReviewsPage = React.lazy(() => import('./pages/ToolReviewsPage'));
+const DivinationPage = React.lazy(() => import('./pages/games/DivinationPage'));
+const AnalyzerPage = React.lazy(() => import('./pages/AnalyzerPage'));
+const AboutPage = React.lazy(() => import('./pages/AboutPage'));
+const AIGamesPage = React.lazy(() => import('./pages/games/AIGamesPage'));
+const AIWordGuessGame = React.lazy(() => import('./pages/games/AIWordGuessGame'));
+const AITicTacToe = React.lazy(() => import('./pages/games/AITicTacToe'));
+const AIMemoryGame = React.lazy(() => import('./pages/games/AIMemoryGame'));
+const AINumberGuessGame = React.lazy(() => import('./pages/games/AINumberGuessGame'));
+const AIRockPaperScissors = React.lazy(() => import('./pages/games/AIRockPaperScissors'));
+const AIMathChallenge = React.lazy(() => import('./pages/games/AIMathChallenge'));
+const WolfSheepGame = React.lazy(() => import('./pages/games/WolfSheepGame'));
+const ReversiGame = React.lazy(() => import('./pages/games/ReversiGame'));
+const MilitaryChessGame = React.lazy(() => import('./pages/games/MilitaryChessGame'));
+const GoGame = React.lazy(() => import('./pages/games/GoGame'));
+const ToolStatistics = React.lazy(() => import('./pages/tools/ToolStatistics'));
+const SalesTrackingPage = React.lazy(() => import('./pages/features/SalesTrackingPage'));
+const WebsiteConfigPage = React.lazy(() => import('./pages/WebsiteConfigPage'));
+const TestPage = React.lazy(() => import('./pages/TestPage'));
+const KajianLessonsPage = React.lazy(() => import('./pages/features/KajianLessonsPage'));
+const KajianLessonDetailPage = React.lazy(() => import('./pages/features/KajianLessonDetailPage'));
+const LandingPages = React.lazy(() => import('./pages/LandingPages'));
+const PlatformNewsPage = React.lazy(() => import('./pages/features/PlatformNewsPage'));
+const CommunityPage = React.lazy(() => import('./pages/CommunityPage'));
+
+// 页面加载时的Loading组件
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <LoadingProgress />
+  </div>
+);
 
 function App() {
   return (
@@ -67,74 +77,76 @@ function App() {
             <Header />
 
             <main className="flex-1">
-              <Routes>
-                {/* 默认语言路由 (中文) */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/preview" element={<HomePagePreview />} />
-                <Route path="/ai-tools" element={<AIToolsPage />} />
-                <Route path="/workflows" element={<WorkflowsPage />} />
-                <Route path="/tool-reviews" element={<ToolReviewsPage />} />
-                <Route path="/divination" element={<DivinationPage />} />
-                <Route path="/analyzer" element={<AnalyzerPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/landing" element={<LandingPages />} />
-                <Route path="/tools/statistics" element={<ToolStatistics />} />
-                <Route path="/sales-tracking" element={<SalesTrackingPage />} />
-                <Route path="/website-config" element={<WebsiteConfigPage />} />
-                <Route path="/test" element={<TestPage />} />
-                <Route path="/kajian-lessons" element={<KajianLessonsPage />} />
-                <Route path="/kajian-lessons/:id" element={<KajianLessonDetailPage />} />
-                <Route path="/platform-news" element={<PlatformNewsPage />} />
-                <Route path="/community" element={<CommunityPage />} />
-                <Route path="/games" element={<AIGamesPage />} />
-                <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
-                <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
-                <Route path="/games/ai-memory" element={<AIMemoryGame />} />
-                <Route path="/games/ai-number-guess" element={<AINumberGuessGame />} />
-                <Route path="/games/ai-rock-paper-scissors" element={<AIRockPaperScissors />} />
-                <Route path="/games/ai-math-challenge" element={<AIMathChallenge />} />
-                <Route path="/games/wolf-sheep" element={<WolfSheepGame />} />
-                <Route path="/games/reversi" element={<ReversiGame />} />
-                <Route path="/games/military-chess" element={<MilitaryChessGame />} />
-                <Route path="/games/go-game" element={<GoGame />} />
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  {/* 默认语言路由 (中文) */}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/preview" element={<HomePagePreview />} />
+                  <Route path="/ai-tools" element={<AIToolsPage />} />
+                  <Route path="/workflows" element={<WorkflowsPage />} />
+                  <Route path="/tool-reviews" element={<ToolReviewsPage />} />
+                  <Route path="/divination" element={<DivinationPage />} />
+                  <Route path="/analyzer" element={<AnalyzerPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/landing" element={<LandingPages />} />
+                  <Route path="/tools/statistics" element={<ToolStatistics />} />
+                  <Route path="/sales-tracking" element={<SalesTrackingPage />} />
+                  <Route path="/website-config" element={<WebsiteConfigPage />} />
+                  <Route path="/test" element={<TestPage />} />
+                  <Route path="/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/kajian-lessons/:id" element={<KajianLessonDetailPage />} />
+                  <Route path="/platform-news" element={<PlatformNewsPage />} />
+                  <Route path="/community" element={<CommunityPage />} />
+                  <Route path="/games" element={<AIGamesPage />} />
+                  <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
+                  <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
+                  <Route path="/games/ai-memory" element={<AIMemoryGame />} />
+                  <Route path="/games/ai-number-guess" element={<AINumberGuessGame />} />
+                  <Route path="/games/ai-rock-paper-scissors" element={<AIRockPaperScissors />} />
+                  <Route path="/games/ai-math-challenge" element={<AIMathChallenge />} />
+                  <Route path="/games/wolf-sheep" element={<WolfSheepGame />} />
+                  <Route path="/games/reversi" element={<ReversiGame />} />
+                  <Route path="/games/military-chess" element={<MilitaryChessGame />} />
+                  <Route path="/games/go-game" element={<GoGame />} />
 
-                {/* 多语言路由 - 支持 /:lang/* 格式 */}
-                {/* 英文 /en/* */}
-                <Route path="/en" element={<HomePage />} />
-                <Route path="/en/ai-tools" element={<AIToolsPage />} />
-                <Route path="/en/platform-news" element={<PlatformNewsPage />} />
-                <Route path="/en/sales-tracking" element={<SalesTrackingPage />} />
-                <Route path="/en/kajian-lessons" element={<KajianLessonsPage />} />
-                <Route path="/en/community" element={<CommunityPage />} />
-                <Route path="/en/games" element={<AIGamesPage />} />
+                  {/* 多语言路由 - 支持 /:lang/* 格式 */}
+                  {/* 英文 /en/* */}
+                  <Route path="/en" element={<HomePage />} />
+                  <Route path="/en/ai-tools" element={<AIToolsPage />} />
+                  <Route path="/en/platform-news" element={<PlatformNewsPage />} />
+                  <Route path="/en/sales-tracking" element={<SalesTrackingPage />} />
+                  <Route path="/en/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/en/community" element={<CommunityPage />} />
+                  <Route path="/en/games" element={<AIGamesPage />} />
 
-                {/* 日语 /jp/* */}
-                <Route path="/jp" element={<HomePage />} />
-                <Route path="/jp/ai-tools" element={<AIToolsPage />} />
-                <Route path="/jp/platform-news" element={<PlatformNewsPage />} />
-                <Route path="/jp/sales-tracking" element={<SalesTrackingPage />} />
-                <Route path="/jp/kajian-lessons" element={<KajianLessonsPage />} />
-                <Route path="/jp/community" element={<CommunityPage />} />
-                <Route path="/jp/games" element={<AIGamesPage />} />
+                  {/* 日语 /jp/* */}
+                  <Route path="/jp" element={<HomePage />} />
+                  <Route path="/jp/ai-tools" element={<AIToolsPage />} />
+                  <Route path="/jp/platform-news" element={<PlatformNewsPage />} />
+                  <Route path="/jp/sales-tracking" element={<SalesTrackingPage />} />
+                  <Route path="/jp/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/jp/community" element={<CommunityPage />} />
+                  <Route path="/jp/games" element={<AIGamesPage />} />
 
-                {/* 韩语 /kr/* */}
-                <Route path="/kr" element={<HomePage />} />
-                <Route path="/kr/ai-tools" element={<AIToolsPage />} />
-                <Route path="/kr/platform-news" element={<PlatformNewsPage />} />
-                <Route path="/kr/sales-tracking" element={<SalesTrackingPage />} />
-                <Route path="/kr/kajian-lessons" element={<KajianLessonsPage />} />
-                <Route path="/kr/community" element={<CommunityPage />} />
-                <Route path="/kr/games" element={<AIGamesPage />} />
+                  {/* 韩语 /kr/* */}
+                  <Route path="/kr" element={<HomePage />} />
+                  <Route path="/kr/ai-tools" element={<AIToolsPage />} />
+                  <Route path="/kr/platform-news" element={<PlatformNewsPage />} />
+                  <Route path="/kr/sales-tracking" element={<SalesTrackingPage />} />
+                  <Route path="/kr/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/kr/community" element={<CommunityPage />} />
+                  <Route path="/kr/games" element={<AIGamesPage />} />
 
-                {/* 西班牙语 /es/* */}
-                <Route path="/es" element={<HomePage />} />
-                <Route path="/es/ai-tools" element={<AIToolsPage />} />
-                <Route path="/es/platform-news" element={<PlatformNewsPage />} />
-                <Route path="/es/sales-tracking" element={<SalesTrackingPage />} />
-                <Route path="/es/kajian-lessons" element={<KajianLessonsPage />} />
-                <Route path="/es/community" element={<CommunityPage />} />
-                <Route path="/es/games" element={<AIGamesPage />} />
-              </Routes>
+                  {/* 西班牙语 /es/* */}
+                  <Route path="/es" element={<HomePage />} />
+                  <Route path="/es/ai-tools" element={<AIToolsPage />} />
+                  <Route path="/es/platform-news" element={<PlatformNewsPage />} />
+                  <Route path="/es/sales-tracking" element={<SalesTrackingPage />} />
+                  <Route path="/es/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/es/community" element={<CommunityPage />} />
+                  <Route path="/es/games" element={<AIGamesPage />} />
+                </Routes>
+              </Suspense>
             </main>
 
             <Footer />
