@@ -11,7 +11,7 @@
         "favorites": 2740
       },
       "vpn_required": false,
-      "hot_score": 100,
+      "hot_score": 85,
       "hot": true,
       "tags": [
         "搜索引擎"
@@ -28,7 +28,7 @@
         "favorites": 4014
       },
       "vpn_required": false,
-      "hot_score": 100,
+      "hot_score": 95,
       "hot": true,
       "tags": [
         "训练模型"
@@ -41,11 +41,11 @@
       "link": "https://chatgpt.com",
       "category": "AI搜索引擎",
       "popularity": {
-        "views": 106756,
-        "favorites": 3077
+        "views": 2500000,
+        "favorites": 15000
       },
       "vpn_required": false,
-      "hot_score": 92,
+      "hot_score": 100,
       "hot": true,
       "tags": [
         "搜索引擎"
@@ -126,11 +126,11 @@
       "link": "https://openai.com/index/hello-gpt-4o",
       "category": "AI训练模型",
       "popularity": {
-        "views": 118869,
-        "favorites": 3391
+        "views": 2800000,
+        "favorites": 18000
       },
       "vpn_required": false,
-      "hot_score": 90,
+      "hot_score": 100,
       "hot": true,
       "tags": [
         "训练模型"
@@ -160,11 +160,11 @@
       "link": "https://www.deepseek.com",
       "category": "AI聊天机器人",
       "popularity": {
-        "views": 135581,
-        "favorites": 2554
+        "views": 1500000,
+        "favorites": 8500
       },
       "vpn_required": false,
-      "hot_score": 89,
+      "hot_score": 98,
       "hot": true,
       "tags": [
         "聊天机器人"
@@ -636,11 +636,11 @@
       "link": "https://www.tongyi.com/",
       "category": "AI聊天机器人",
       "popularity": {
-        "views": 83364,
-        "favorites": 2044
+        "views": 1200000,
+        "favorites": 6500
       },
       "vpn_required": false,
-      "hot_score": 82,
+      "hot_score": 96,
       "hot": true,
       "tags": [
         "聊天机器人"
@@ -1605,11 +1605,11 @@
       "link": "https://claude.ai/",
       "category": "AI聊天机器人",
       "popularity": {
-        "views": 66026,
-        "favorites": 2575
+        "views": 2200000,
+        "favorites": 12000
       },
       "vpn_required": false,
-      "hot_score": 74,
+      "hot_score": 100,
       "hot": true,
       "tags": [
         "聊天机器人"
@@ -6382,12 +6382,12 @@
       "link": "https://www.gemini.com/",
       "category": "AI聊天机器人",
       "popularity": {
-        "views": 48723,
-        "favorites": 1241
+        "views": 2400000,
+        "favorites": 14000
       },
       "vpn_required": false,
-      "hot_score": 39,
-      "hot": false,
+      "hot_score": 100,
+      "hot": true,
       "tags": [
         "聊天机器人"
       ]
