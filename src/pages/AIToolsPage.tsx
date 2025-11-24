@@ -45,13 +45,13 @@ export default function AIToolsPage() {
       const featuredTools = await dataService.getFeaturedTools(20);
       filtered = featuredTools;
     } else if (activeTab === 'popular') {
-      filtered = filtered.sort((a, b) => (b.hot_score || 0) - (a.hot_score || 0));
+      filtered = filtered.sort((a, b) => (b.popularity?.views || 0) - (a.popularity?.views || 0));
     } else if (activeTab === 'latest') {
       const latestTools = await dataService.getLatestTools(20);
       filtered = latestTools;
     } else {
-      // 'all' tab: also sort by hot_score by default
-      filtered = filtered.sort((a, b) => (b.hot_score || 0) - (a.hot_score || 0));
+      // 'all' tab: also sort by views by default
+      filtered = filtered.sort((a, b) => (b.popularity?.views || 0) - (a.popularity?.views || 0));
     }
 
     // 按分类筛选
