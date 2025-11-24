@@ -105,6 +105,9 @@ body {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
+  .font-serif-display {
+    font-family: "Playfair Display", "Noto Serif SC", "Songti SC", serif;
+  }
 }
 
 img {

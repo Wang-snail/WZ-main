@@ -213,16 +213,19 @@ const SalesTrackingPage: React.FC = () => {
   const actualComparison = compareWithTarget(actualTotal, targets.usd.sales);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FDFBF7]">
       <Helmet>
         <title>销售额目标追踪 | WSNAIL.COM</title>
         <meta name="description" content="产品部26年产品上架计划和销售额目标追踪系统" />
       </Helmet>
 
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
-          产品部26年产品上架计划
-        </h1>
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-serif-display font-medium text-gray-800 mb-6 tracking-wide">
+            产品部26年产品上架计划
+          </h1>
+          <div className="w-16 h-0.5 bg-gray-300 mx-auto"></div>
+        </div>
 
         {/* 目标计算区域 */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
@@ -374,13 +377,13 @@ const SalesTrackingPage: React.FC = () => {
                 <div key={key} className="flex justify-between items-center">
                   <label className="text-sm text-gray-600 capitalize">
                     {key === 'product' ? '成本' :
-                     key === 'logistics' ? '头程' :
-                     key === 'advertising' ? '广告' :
-                     key === 'lastmile' ? '尾程' :
-                     key === 'commission' ? '佣金' :
-                     key === 'returns' ? '退货' :
-                     key === 'other' ? '其他' :
-                     key === 'profit' ? '利润' : key}:
+                      key === 'logistics' ? '头程' :
+                        key === 'advertising' ? '广告' :
+                          key === 'lastmile' ? '尾程' :
+                            key === 'commission' ? '佣金' :
+                              key === 'returns' ? '退货' :
+                                key === 'other' ? '其他' :
+                                  key === 'profit' ? '利润' : key}:
                   </label>
                   <div className="flex items-center">
                     <input
@@ -454,9 +457,9 @@ const SalesTrackingPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {Object.entries(productLines).map(([lineKey, lineData]) => {
               const lineName = lineKey === 'steel' ? '🏗️ 钢木' :
-                              lineKey === 'bracket' ? '📺 支架' :
-                              lineKey === 'plastic' ? '🔧 塑料' :
-                              '🌱 植物';
+                lineKey === 'bracket' ? '📺 支架' :
+                  lineKey === 'plastic' ? '🔧 塑料' :
+                    '🌱 植物';
               const forecastComp = compareWithTarget(lineData.forecast.annualSales, targets.usd.sales);
               const actualComp = compareWithTarget(lineData.actual.annualSales, targets.usd.sales);
 

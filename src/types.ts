@@ -14,3 +14,28 @@ export interface UserState {
   totalUsage: number;
   lastUsageDate: string;
 }
+
+export interface AITool {
+  id: number | string;
+  name: string;
+  description: string;
+  link: string;
+  category: string;
+  vpn_required?: boolean;
+  hot_score?: number;
+  hot?: boolean;
+  popularity: {
+    views: number;
+    favorites: number;
+  };
+  tags?: string[];
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  description?: string;
+  icon?: string;
+  count: number;
+  tools?: string[];
+}

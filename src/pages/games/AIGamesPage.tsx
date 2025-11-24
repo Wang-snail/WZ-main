@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Brain, 
-  Gamepad2, 
-  Trophy, 
+import {
+  Brain,
+  Gamepad2,
+  Trophy,
   Star,
   Users,
   Zap,
@@ -14,7 +14,10 @@ import {
   Disc,
   Shield,
   Circle,
-  BarChart3
+  BarChart3,
+  Heart,
+  Sparkles,
+  TrendingUp
 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
@@ -28,7 +31,7 @@ interface Game {
   title: string;
   description: string;
   category: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
   players: number;
   duration: string;
   icon: React.ReactNode;
@@ -41,7 +44,7 @@ interface Game {
 export default function AIGamesPage() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
+
   // 游戏数据
   const games: Game[] = [
     {
@@ -174,8 +177,8 @@ export default function AIGamesPage() {
   ];
 
   // 筛选游戏
-  const filteredGames = selectedCategory === 'all' 
-    ? games 
+  const filteredGames = selectedCategory === 'all'
+    ? games
     : games.filter(game => game.category === selectedCategory);
 
   // 获取所有分类
@@ -197,214 +200,215 @@ export default function AIGamesPage() {
 
   return (
     <>
-      <SEOHead 
-        title="AI小游戏 - 人工智能互动娱乐 | WSNAIL.COM"
-        description="体验各种有趣的AI小游戏，包括知识问答、策略对战、益智解谜等。与AI互动，挑战智力，享受科技带来的娱乐乐趣。"
-        keywords="AI小游戏,人工智能游戏,互动娱乐,知识问答,策略对战,益智解谜,WSNAIL"
+      <SEOHead
+        title="AI游戏与体验 - 寻找内心的平静 | WSNAIL.COM"
+        description="探索AI带来的奇妙体验。从寻找内心平静的占卜，到深入了解关系的分析，再到充满乐趣的智力游戏。WSNAIL为您提供全方位的AI互动体验。"
+        keywords="AI游戏,AI占卜,情感分析,销售追踪,内心平静,互动娱乐,WSNAIL"
         url="https://wsnail.com/games"
         canonical="https://wsnail.com/games"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "AI小游戏",
-          "description": "精选AI互动娱乐游戏集合",
-          "url": "https://wsnail.com/games",
-          "mainEntity": {
-            "@type": "ItemList",
-            "numberOfItems": games.length,
-            "itemListElement": games.map((game, index) => ({
-              "@type": "Game",
-              "position": index + 1,
-              "name": game.title,
-              "description": game.description,
-              "genre": game.category,
-              "playMode": "SinglePlayer"
-            }))
-          },
+          "name": "AI游戏与体验",
+          "description": "AI互动体验集合",
           "provider": {
             "@type": "Organization",
-            "name": "WSNAIL.COM",
-            "url": "https://wsnail.com"
+            "name": "WSNAIL.COM"
           }
         }}
       />
-      
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+
+      <div className="min-h-screen bg-[#FDFBF7]">
         {/* Header */}
-        <div className="bg-white/80 backdrop-blur-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <motion.div 
+        <div className="bg-white/50 backdrop-blur-sm border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-center"
             >
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
-                AI小游戏
+              <h1 className="text-4xl md:text-5xl font-serif-display font-medium text-gray-800 mb-6 tracking-wide">
+                AI 互动体验
               </h1>
-              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-                与人工智能互动，挑战智力极限，体验科技带来的娱乐乐趣
+              <div className="w-16 h-0.5 bg-gray-300 mx-auto mb-8"></div>
+              <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed font-light">
+                探索科技与心灵的交汇点。
+                <br />
+                无论是寻找指引、分析关系，还是享受游戏的乐趣，这里都有属于您的空间。
               </p>
-              
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
-                <div className="flex items-center space-x-2">
-                  <Gamepad2 className="w-5 h-5 text-blue-500" />
-                  <span>{games.length}+ 精选游戏</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-purple-500" />
-                  <span>单人挑战</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5 text-yellow-500" />
-                  <span>持续更新</span>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* 分类筛选 */}
-          <div className="mb-8">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory(category)}
-                  className="rounded-full"
-                >
-                  {category === 'all' ? '全部游戏' : category}
-                </Button>
-              ))}
-            </div>
-          </div>
 
-          {/* 游戏网格 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredGames.map((game, index) => (
+          {/* Featured Apps (Merged Tools) */}
+          <section className="mb-20">
+            <div className="flex items-center mb-8">
+              <h2 className="text-2xl font-serif-display font-medium text-gray-800">精选体验</h2>
+              <div className="h-px bg-gray-200 flex-1 ml-6"></div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Divination */}
               <motion.div
-                key={game.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                transition={{ duration: 0.6 }}
               >
-                <Card className={`group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 ${game.bgColor} hover:scale-105`}
-                      onClick={() => navigate(`/games/${game.id}`)}>
-                  <CardHeader className="text-center pb-4 relative">
-                    {/* 标签 */}
-                    <div className="absolute top-4 right-4 flex gap-2">
-                      {game.isNew && (
-                        <Badge variant="default" className="bg-gradient-to-r from-green-500 to-teal-500">
-                          新
-                        </Badge>
-                      )}
-                      {game.isPopular && (
-                        <Badge variant="default" className="bg-gradient-to-r from-yellow-500 to-orange-500">
-                          热门
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${game.color} flex items-center justify-center shadow-lg`}>
-                      {game.icon}
-                    </div>
-                    <CardTitle className="text-xl font-bold text-gray-800 mb-2">
-                      {game.title}
-                    </CardTitle>
-                    <Badge variant="secondary" className="mb-3">
-                      {game.category}
-                    </Badge>
-                  </CardHeader>
-                  
-                  <CardContent>
-                    <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                      {game.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {getDifficultyBadge(game.difficulty)}
-                      <Badge variant="secondary" className="bg-gray-100 text-gray-800">
-                        {game.duration}
-                      </Badge>
-                      <Badge variant="secondary" className="bg-gray-100 text-gray-800">
-                        {game.players}人
-                      </Badge>
-                    </div>
-                    
-                    <Button 
-                      className={`w-full bg-gradient-to-r ${game.color} text-white border-0 hover:shadow-lg transition-all duration-300`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/games/${game.id}`);
-                      }}
-                    >
-                      <Play className="w-4 h-4 mr-2" />
-                      开始游戏
-                    </Button>
-                  </CardContent>
-                </Card>
+                <div
+                  className="group cursor-pointer bg-white border border-gray-100 rounded-xl p-8 hover:shadow-lg transition-all duration-500 hover:-translate-y-1 h-full flex flex-col"
+                  onClick={() => navigate('/divination')}
+                >
+                  <div className="mb-6 p-4 bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center group-hover:bg-purple-100 transition-colors duration-500">
+                    <Sparkles className="w-8 h-8 text-purple-600 stroke-[1.5px]" />
+                  </div>
+                  <h3 className="text-xl font-serif-display font-medium text-gray-800 mb-2">AI 占卜大师</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
+                    结合古老智慧与现代AI，为您提供塔罗、星座、周易的专业指引，寻找内心的平静。
+                  </p>
+                  <div className="flex items-center text-purple-600 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                    开始探索 <ArrowRight className="w-4 h-4 ml-1" />
+                  </div>
+                </div>
               </motion.div>
-            ))}
-          </div>
 
-          {/* 游戏介绍 */}
-          <section className="mt-20 bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">AI游戏的乐趣</h2>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                通过与人工智能互动的游戏，不仅可以娱乐放松，还能锻炼思维能力，了解AI技术的奇妙应用
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Brain className="w-8 h-8 text-blue-600" />
+              {/* Analyzer */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <div
+                  className="group cursor-pointer bg-white border border-gray-100 rounded-xl p-8 hover:shadow-lg transition-all duration-500 hover:-translate-y-1 h-full flex flex-col"
+                  onClick={() => navigate('/analyzer')}
+                >
+                  <div className="mb-6 p-4 bg-pink-50 rounded-full w-16 h-16 flex items-center justify-center group-hover:bg-pink-100 transition-colors duration-500">
+                    <Heart className="w-8 h-8 text-pink-600 stroke-[1.5px]" />
+                  </div>
+                  <h3 className="text-xl font-serif-display font-medium text-gray-800 mb-2">情感分析师</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
+                    深度分析情感关系，提供专业的沟通建议和冲突解决方案，让爱更懂表达。
+                  </p>
+                  <div className="flex items-center text-pink-600 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                    开始分析 <ArrowRight className="w-4 h-4 ml-1" />
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">智力挑战</h3>
-                <p className="text-gray-600">
-                  通过各种智力游戏挑战，锻炼逻辑思维和问题解决能力
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="w-8 h-8 text-purple-600" />
+              </motion.div>
+
+              {/* Sales Tracking */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div
+                  className="group cursor-pointer bg-white border border-gray-100 rounded-xl p-8 hover:shadow-lg transition-all duration-500 hover:-translate-y-1 h-full flex flex-col"
+                  onClick={() => navigate('/sales-tracking')}
+                >
+                  <div className="mb-6 p-4 bg-blue-50 rounded-full w-16 h-16 flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-500">
+                    <TrendingUp className="w-8 h-8 text-blue-600 stroke-[1.5px]" />
+                  </div>
+                  <h3 className="text-xl font-serif-display font-medium text-gray-800 mb-2">销售模拟追踪</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
+                    模拟和追踪销售数据，分析成本利润，体验商业决策的乐趣与挑战。
+                  </p>
+                  <div className="flex items-center text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                    进入系统 <ArrowRight className="w-4 h-4 ml-1" />
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">技术体验</h3>
-                <p className="text-gray-600">
-                  亲身体验人工智能技术的魅力和无限可能性
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Gamepad2 className="w-8 h-8 text-pink-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">娱乐放松</h3>
-                <p className="text-gray-600">
-                  在轻松愉快的游戏氛围中放松心情，享受科技乐趣
-                </p>
-              </div>
+              </motion.div>
             </div>
           </section>
-          
-          {/* 工具统计链接 */}
-          <section className="mt-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 shadow-lg">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">工具数据统计</h2>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                查看工具猫网站的工具分类与数量分析，了解更多AI工具信息
-              </p>
-              <Button 
-                onClick={() => window.location.href = '/tools/statistics'}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg py-3 px-6"
-              >
-                <BarChart3 className="w-5 h-5 mr-2" />
-                查看工具统计
-              </Button>
+
+          {/* Games Section */}
+          <section>
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center">
+                <h2 className="text-2xl font-serif-display font-medium text-gray-800">休闲游戏</h2>
+                <div className="h-px bg-gray-200 w-12 ml-6 hidden md:block"></div>
+              </div>
+
+              {/* 分类筛选 */}
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? 'default' : 'ghost'}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`rounded-full text-sm ${selectedCategory === category ? 'bg-gray-800 text-white hover:bg-gray-700' : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'}`}
+                  >
+                    {category === 'all' ? '全部' : category}
+                  </Button>
+                ))}
+              </div>
             </div>
+
+            {/* 游戏网格 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredGames.map((game, index) => (
+                <motion.div
+                  key={game.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                >
+                  <div
+                    className="group cursor-pointer bg-white border border-gray-100 rounded-xl p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                    onClick={() => navigate(`/games/${game.id}`)}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`p-3 rounded-lg bg-gray-50 group-hover:bg-[#FDFBF7] transition-colors duration-300`}>
+                        {React.cloneElement(game.icon as React.ReactElement, {
+                          className: "w-6 h-6 text-gray-700"
+                        })}
+                      </div>
+                      <div className="flex gap-2">
+                        {game.isNew && (
+                          <span className="px-2 py-0.5 text-xs font-medium bg-green-50 text-green-700 rounded-full">NEW</span>
+                        )}
+                        {game.isPopular && (
+                          <span className="px-2 py-0.5 text-xs font-medium bg-orange-50 text-orange-700 rounded-full">HOT</span>
+                        )}
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-medium text-gray-800 mb-1 group-hover:text-blue-600 transition-colors">
+                      {game.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-4 line-clamp-2 h-10">
+                      {game.description}
+                    </p>
+
+                    <div className="flex items-center justify-between text-xs text-gray-400 pt-4 border-t border-gray-50">
+                      <span className="flex items-center">
+                        <Users className="w-3 h-3 mr-1" /> {game.players}人
+                      </span>
+                      <span className="flex items-center">
+                        <RotateCcw className="w-3 h-3 mr-1" /> {game.duration}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
+          {/* 工具统计链接 */}
+          <section className="mt-20 bg-white border border-gray-100 rounded-2xl p-12 text-center">
+            <h2 className="text-2xl font-serif-display font-medium text-gray-800 mb-4">探索更多可能</h2>
+            <p className="text-gray-500 mb-8 font-light">
+              查看工具猫网站的工具分类与数量分析，了解更多AI工具信息
+            </p>
+            <Button
+              onClick={() => window.location.href = '/tools/statistics'}
+              variant="outline"
+              className="border-gray-200 text-gray-600 hover:bg-gray-50 px-8"
+            >
+              <BarChart3 className="w-4 h-4 mr-2" />
+              查看工具统计
+            </Button>
           </section>
         </div>
       </div>

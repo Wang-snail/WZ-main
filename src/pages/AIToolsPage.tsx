@@ -33,7 +33,7 @@ export default function AIToolsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState('popular');
 
   const { trackSearch, trackCategoryFilter } = useAnalytics();
 
@@ -45,10 +45,13 @@ export default function AIToolsPage() {
       const featuredTools = await dataService.getFeaturedTools(20);
       filtered = featuredTools;
     } else if (activeTab === 'popular') {
-      filtered = filtered.sort((a, b) => b.hot_score - a.hot_score);
+      filtered = filtered.sort((a, b) => (b.hot_score || 0) - (a.hot_score || 0));
     } else if (activeTab === 'latest') {
       const latestTools = await dataService.getLatestTools(20);
       filtered = latestTools;
+    } else {
+      // 'all' tab: also sort by hot_score by default
+      filtered = filtered.sort((a, b) => (b.hot_score || 0) - (a.hot_score || 0));
     }
 
     // 按分类筛选

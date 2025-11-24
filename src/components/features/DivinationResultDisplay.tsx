@@ -49,48 +49,80 @@ ${result.result}
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-[#FDFBF7] p-4 sm:p-6 lg:p-8">
       <motion.div
         className="max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="mb-6 flex justify-between items-center">
-          <Button variant="ghost" onClick={onBack}>
+        <div className="mb-8 flex justify-between items-center">
+          <Button
+            variant="ghost"
+            onClick={onBack}
+            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             返回
           </Button>
           <div className="space-x-2">
-            <Button variant="outline" size="sm" onClick={handleShare}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleShare}
+              className="border-gray-200 text-gray-600 hover:bg-gray-50"
+            >
               <Share2 className="w-4 h-4 mr-2" />
               分享
             </Button>
-            <Button variant="outline" size="sm" onClick={handleDownload}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDownload}
+              className="border-gray-200 text-gray-600 hover:bg-gray-50"
+            >
               <Download className="w-4 h-4 mr-2" />
               下载
             </Button>
           </div>
         </div>
 
-        <Card className="shadow-xl overflow-hidden">
-          <CardHeader className="bg-white/50 border-b border-gray-200 p-6">
-            <div className="text-center">
-              <Badge variant="secondary" className="mb-4">{result.service}</Badge>
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                占卜分析结果
-              </CardTitle>
-              <p className="text-sm text-gray-500 mt-2">
-                {new Date(result.timestamp).toLocaleString()}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="bg-[#FDFBF7] border-b border-gray-100 p-8 text-center">
+            <Badge
+              variant="secondary"
+              className="mb-4 bg-white border border-gray-200 text-gray-600 font-light tracking-wider"
+            >
+              {result.service}
+            </Badge>
+            <h2 className="text-3xl font-serif-display font-medium text-gray-800 mb-2">
+              指引与启示
+            </h2>
+            <p className="text-sm text-gray-400 font-light">
+              {new Date(result.timestamp).toLocaleString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </p>
+          </div>
+
+          <div className="p-8 md:p-12">
+            <div className="prose prose-lg max-w-none">
+              <div className="font-serif-display text-gray-700 leading-loose whitespace-pre-wrap">
+                {result.result}
+              </div>
+            </div>
+
+            <div className="mt-12 pt-8 border-t border-gray-50 text-center">
+              <p className="text-sm text-gray-400 font-light italic">
+                "愿这份指引能为您带来内心的平静与力量"
               </p>
             </div>
-          </CardHeader>
-          <CardContent className="p-6 md:p-8">
-            <div className="prose prose-lg max-w-none text-gray-700 whitespace-pre-wrap">
-              {result.result}
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </motion.div>
     </div>
   );

@@ -127,16 +127,16 @@ export default function DivinationPage() {
   return (
     <>
       <SEOHead
-        title="AI占卜大师 - 塔罗牌占卜、星座运势、八卦算命、手相分析 | WSNAIL.COM"
-        description="专业AI占卜平台，提供塔罗牌占卜、星座运势分析、周易八卦算命、手相分析、姓名测字、九宫飞星等传统占卜服务。结合古代智慧与现代AI技术，为您提供准确的命运指导。"
-        keywords="AI占卜,塔罗牌占卜,星座运势,八卦算命,手相分析,姓名测字,九宫飞星,风水分析,命运预测,WSNAIL"
+        title="AI占卜大师 - 寻找内心的平静 | 塔罗牌、星座、周易 | WSNAIL.COM"
+        description="在这个喧嚣的世界中寻找内心的平静。WSNAIL提供专业的AI塔罗牌占卜、星座运势分析、周易八卦算命。结合古代智慧与现代AI技术，为您提供温暖而准确的指引。"
+        keywords="AI占卜,内心平静,塔罗牌,星座运势,周易,八卦,心灵疗愈,WSNAIL"
         url="https://wsnail.com/divination"
         canonical="https://wsnail.com/divination"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "Service",
           "name": "AI占卜大师",
-          "description": "专业AI占卜平��，提供多种传统占卜服务",
+          "description": "寻找内心的平静，提供专业的AI占卜服务",
           "provider": {
             "@type": "Organization",
             "name": "WSNAIL.COM"
@@ -144,78 +144,95 @@ export default function DivinationPage() {
         }}
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
+      <div className="min-h-screen bg-[#FDFBF7]">
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Hero Section */}
-          <div className="text-center mb-12">
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6"
+          <div className="text-center mb-16">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              AI占卜大师
-            </motion.h1>
+              <h1 className="text-4xl md:text-5xl font-serif-display font-medium text-gray-800 mb-6 tracking-wide">
+                寻找内心的平静
+              </h1>
+              <div className="w-16 h-0.5 bg-gray-300 mx-auto mb-8"></div>
+            </motion.div>
+
             <motion.p
-              className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
+              className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed font-light"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              结合古代智慧与现代AI技术，为您提供专业的命运指导。
+              当世界变得喧嚣，我们更需要聆听内心的声音。
               <br />
-              探索塔罗奥秘，解读星座密码，领悟易经智慧。
+              结合古老智慧与现代科技，为您指引方向，抚平焦虑。
             </motion.p>
           </div>
 
           {/* Tab Navigation */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="services" className="text-lg py-3">占卜服务</TabsTrigger>
-              <TabsTrigger value="history" className="text-lg py-3">历史记录</TabsTrigger>
-            </TabsList>
+            <div className="flex justify-center mb-12">
+              <TabsList className="bg-white/50 border border-gray-200 p-1 rounded-full">
+                <TabsTrigger
+                  value="services"
+                  className="px-8 py-2 rounded-full data-[state=active]:bg-gray-800 data-[state=active]:text-white transition-all duration-300"
+                >
+                  占卜服务
+                </TabsTrigger>
+                <TabsTrigger
+                  value="history"
+                  className="px-8 py-2 rounded-full data-[state=active]:bg-gray-800 data-[state=active]:text-white transition-all duration-300"
+                >
+                  历史记录
+                </TabsTrigger>
+              </TabsList>
+            </div>
 
             <TabsContent value="services">
               {/* Services Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                 {divinationServices.map((service, index) => (
                   <motion.div
                     key={service.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.8, delay: index * 0.1 }}
                   >
-                    <Card className={`group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 ${service.bgColor} hover:scale-105`}
-                      onClick={() => setActiveService(service.id)}>
-                      <CardHeader className="text-center pb-4">
-                        <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${service.color} flex items-center justify-center shadow-lg`}>
-                          {service.icon}
+                    <div
+                      className="group cursor-pointer bg-white border border-gray-100 rounded-xl p-8 hover:shadow-lg transition-all duration-500 hover:-translate-y-1"
+                      onClick={() => setActiveService(service.id)}
+                    >
+                      <div className="flex flex-col items-center text-center">
+                        <div className="mb-6 p-4 bg-gray-50 rounded-full group-hover:bg-[#FDFBF7] transition-colors duration-500">
+                          {React.cloneElement(service.icon as React.ReactElement, {
+                            className: "w-8 h-8 text-gray-700 stroke-[1.5px]"
+                          })}
                         </div>
-                        <CardTitle className="text-xl font-bold text-gray-800 mb-2">
+
+                        <h3 className="text-xl font-serif-display font-medium text-gray-800 mb-2">
                           {service.title}
-                        </CardTitle>
-                        <p className="text-sm text-gray-500 font-medium">{service.subtitle}</p>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                        </h3>
+                        <p className="text-xs uppercase tracking-widest text-gray-400 mb-4 font-light">
+                          {service.subtitle}
+                        </p>
+
+                        <p className="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">
                           {service.description}
                         </p>
-                        <div className="space-y-2 mb-6">
-                          {service.features.slice(0, 3).map((feature, idx) => (
-                            <div key={idx} className="flex items-center text-sm text-gray-600">
-                              <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} mr-2`}></div>
-                              {feature}
-                            </div>
-                          ))}
+
+                        <div className="w-full pt-6 border-t border-gray-50">
+                          <Button
+                            variant="ghost"
+                            className="w-full hover:bg-gray-50 text-gray-600 font-light tracking-wide group-hover:text-gray-900 transition-colors"
+                          >
+                            {canUseFree ? '开始体验' : '¥9.9 解锁'}
+                          </Button>
                         </div>
-                        <Button
-                          className={`w-full bg-gradient-to-r ${service.color} text-white border-0 hover:shadow-lg transition-all duration-300`}
-                        >
-                          {canUseFree ? '免费体验' : '¥9.9 开始占卜'}
-                        </Button>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -230,50 +247,18 @@ export default function DivinationPage() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-white/80 backdrop-blur-sm border-t border-purple-100 mt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="md:col-span-2">
-                <div className="flex items-center mb-4">
-                  <img src="/images/logo.svg" alt="WSNAIL.COM" className="h-8 w-auto mr-3" />
-                  <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    WSNAIL.COM
-                  </span>
-                </div>
-                <p className="text-gray-600 mb-4">
-                  专业的AI工具集合平台，提供占卜、分析、创作等多种智能服务。
-                </p>
-                <p className="text-sm text-gray-500">
-                  Created by MiniMax Agent
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-4">快速链接</h3>
-                <div className="space-y-2">
-                  <a href="/" className="block text-gray-600 hover:text-purple-600 transition-colors">��页</a>
-                  <a href="/ai-tools" className="block text-gray-600 hover:text-purple-600 transition-colors">AI工具库</a>
-                  <a href="/divination" className="block text-gray-600 hover:text-purple-600 transition-colors">AI占卜</a>
-                  <a href="/analyzer" className="block text-gray-600 hover:text-purple-600 transition-colors">情感分析</a>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-4">联系我们</h3>
-                <div className="space-y-2">
-                  <p className="text-gray-600">邮箱: contact@wsnail.com</p>
-                  <div className="flex space-x-4 mt-4">
-                    <a href="#" className="text-gray-400 hover:text-purple-600 transition-colors">
-                      <span className="sr-only">GitHub</span>
-                      {/* GitHub icon */}
-                    </a>
-                    <a href="#" className="text-gray-400 hover:text-purple-600 transition-colors">
-                      <span className="sr-only">Twitter</span>
-                      {/* Twitter icon */}
-                    </a>
-                  </div>
-                </div>
-              </div>
+        <footer className="bg-white border-t border-gray-100 mt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+            <div className="mb-4">
+              <span className="text-xl font-serif-display font-bold text-gray-800">
+                WSNAIL
+              </span>
+            </div>
+            <p className="text-gray-500 font-light text-sm mb-8">
+              愿您在每一次探索中，都能找到属于自己的答案。
+            </p>
+            <div className="text-xs text-gray-400">
+              © 2025 WSNAIL.COM · All Rights Reserved
             </div>
           </div>
         </footer>

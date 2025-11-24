@@ -38,11 +38,8 @@ export default function Header() {
 
   const navigation = [
     { name: t('nav.home'), href: localizedLink('/'), current: cleanPath === '/' },
-    { name: t('nav.aiTools'), href: localizedLink('/ai-tools'), current: cleanPath === '/ai-tools' },
-    { name: t('nav.divination'), href: localizedLink('/divination'), current: cleanPath === '/divination' },
-    { name: t('nav.analyzer'), href: localizedLink('/analyzer'), current: cleanPath === '/analyzer' },
-    { name: t('nav.salesTracking'), href: localizedLink('/sales-tracking'), current: cleanPath === '/sales-tracking', icon: TrendingUp },
     { name: t('nav.games'), href: localizedLink('/games'), current: cleanPath === '/games', icon: Gamepad2 },
+    { name: t('nav.aiTools'), href: localizedLink('/ai-tools'), current: cleanPath === '/ai-tools' },
   ];
 
   const moreNavigation = [
@@ -84,8 +81,8 @@ export default function Header() {
                 key={item.name}
                 to={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${item.current
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  ? 'bg-blue-100 text-blue-700'
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                   }`}
               >
                 {item.icon && <item.icon className="w-4 h-4 mr-1" />}
@@ -119,8 +116,8 @@ export default function Header() {
                         to={item.href}
                         onClick={() => setMoreMenuOpen(false)}
                         className={`block px-4 py-2 text-sm transition-colors flex items-center ${item.current
-                            ? 'bg-blue-100 text-blue-700'
-                            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                           }`}
                       >
                         {item.icon && <item.icon className="w-4 h-4 mr-2" />}
@@ -173,8 +170,8 @@ export default function Header() {
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${item.current
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                     }`}
                 >
                   {item.icon && <item.icon className="w-4 h-4 mr-2" />}
@@ -193,8 +190,8 @@ export default function Header() {
                     to={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${item.current
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                       }`}
                   >
                     {item.icon && <item.icon className="w-4 h-4 mr-2" />}

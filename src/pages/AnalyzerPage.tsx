@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Heart, 
-  Sparkles, 
-  Users, 
-  Shield, 
-  BookOpen, 
+import {
+  Heart,
+  Sparkles,
+  Users,
+  Shield,
+  BookOpen,
   ArrowLeft,
   Send,
   Download,
@@ -82,11 +82,11 @@ export default function AnalyzerPage() {
 请用专业、温暖、具有建设性的语言回复，帮助当事人更好地理解和改善关系。`;
 
       const response = await aiServiceManager.generateResponse(prompt);
-      
+
       // 解析AI回复并结构化
       const result = parseAnalysisResponse(response);
       setAnalysisResult(result);
-      
+
     } catch (error) {
       console.error('Analysis failed:', error);
     } finally {
@@ -122,7 +122,7 @@ export default function AnalyzerPage() {
 请用温暖、专业、有帮助的语调回复，就像一位资深的心理咨询师。`;
 
       const response = await aiServiceManager.generateResponse(prompt);
-      
+
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
@@ -146,10 +146,10 @@ export default function AnalyzerPage() {
   };
 
   const exportChat = () => {
-    const chatText = chatMessages.map(msg => 
+    const chatText = chatMessages.map(msg =>
       `[${msg.type === 'user' ? '用户' : 'AI助手'}] ${msg.timestamp.toLocaleString()}\n${msg.content}\n\n`
     ).join('');
-    
+
     const blob = new Blob([chatText], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -174,7 +174,7 @@ export default function AnalyzerPage() {
 
   return (
     <>
-      <SEOHead 
+      <SEOHead
         title="智能关系分析师 - AI情感分析、关系诊断、互动建议 | WSNAIL.COM"
         description="AI驱动的智能关系分析工具，提供情感分析、关系诊断、互动建议等功能。输入聊天记录或文本，获得专业的关系分析报告，改善人际关系，提升沟通效果。"
         keywords="智能关系分析,AI情感分析,关系诊断,互动建议,聊天记录分析,情感智能,AI心理分析,人际关系,沟通分析,WSNAIL"
@@ -194,43 +194,45 @@ export default function AnalyzerPage() {
           }
         }}
       />
-      
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+
+      <div className="min-h-screen bg-[#FDFBF7]">
         {/* Main Content */}
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <motion.h1 
-              className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6"
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              智能情感关系分析师
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-gray-600 mb-4 max-w-4xl mx-auto"
+              <h1 className="text-4xl md:text-5xl font-serif-display font-medium text-gray-800 mb-6 tracking-wide">
+                智能情感关系分析师
+              </h1>
+              <div className="w-16 h-0.5 bg-gray-300 mx-auto mb-8"></div>
+            </motion.div>
+            <motion.p
+              className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto font-light leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              用AI驱动的深度分析，理解彼此真实感受，化解情感冲突，让每一段关系都能在理解中成长 ✨
+              用AI驱动的深度分析，理解彼此真实感受，化解情感冲突，让每一段关系都能在理解中成长。
             </motion.p>
-            <motion.div 
+            <motion.div
               className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Badge variant="secondary" className="bg-pink-100 text-pink-700">
+              <Badge variant="secondary" className="bg-white border border-gray-200 text-gray-600 font-light">
                 <Brain className="w-4 h-4 mr-1" />
                 AI智能分析
               </Badge>
-              <Badge variant="secondary" className="bg-purple-100 text-purple-700">
+              <Badge variant="secondary" className="bg-white border border-gray-200 text-gray-600 font-light">
                 <Heart className="w-4 h-4 mr-1" />
                 深度情感理解
               </Badge>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+              <Badge variant="secondary" className="bg-white border border-gray-200 text-gray-600 font-light">
                 <Lock className="w-4 h-4 mr-1" />
                 隐私安全保护
               </Badge>
@@ -424,7 +426,7 @@ export default function AnalyzerPage() {
                     与AI情感助手实时对话，获得专业的情感咨询和建议
                   </p>
                 </CardHeader>
-                
+
                 {/* Chat Messages */}
                 <CardContent className="flex-1 overflow-y-auto p-6 space-y-4">
                   {chatMessages.length === 0 ? (
@@ -443,15 +445,13 @@ export default function AnalyzerPage() {
                           transition={{ duration: 0.3 }}
                           className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
-                          <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-lg ${
-                            message.type === 'user' 
-                              ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white' 
+                          <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-lg ${message.type === 'user'
+                              ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
                               : 'bg-gray-100 text-gray-800'
-                          }`}>
-                            <p className="text-sm leading-relaxed">{message.content}</p>
-                            <p className={`text-xs mt-2 ${
-                              message.type === 'user' ? 'text-pink-100' : 'text-gray-500'
                             }`}>
+                            <p className="text-sm leading-relaxed">{message.content}</p>
+                            <p className={`text-xs mt-2 ${message.type === 'user' ? 'text-pink-100' : 'text-gray-500'
+                              }`}>
                               {message.timestamp.toLocaleTimeString()}
                             </p>
                           </div>
@@ -521,7 +521,7 @@ export default function AnalyzerPage() {
                   Created by MiniMax Agent
                 </p>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-gray-800 mb-4">快速链接</h3>
                 <div className="space-y-2">
@@ -531,7 +531,7 @@ export default function AnalyzerPage() {
                   <a href="/analyzer" className="block text-gray-600 hover:text-pink-600 transition-colors">情感分析</a>
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold text-gray-800 mb-4">联系我们</h3>
                 <div className="space-y-2">
