@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper } from 'lucide-react';
+import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper, FileSpreadsheet } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -47,6 +47,7 @@ export default function Header() {
     { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath === '/workflows', icon: Workflow },
     { name: t('nav.toolReviews'), href: localizedLink('/tool-reviews'), current: cleanPath === '/tool-reviews', icon: Star },
     { name: '经验库', href: localizedLink('/kajian-lessons'), current: cleanPath.startsWith('/kajian-lessons'), icon: BookOpen },
+    { name: '采购报价单', href: localizedLink('/procurement-quotation'), current: cleanPath === '/procurement-quotation', icon: FileSpreadsheet },
   ];
 
   return (

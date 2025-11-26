@@ -42,6 +42,7 @@ const KajianLessonDetailPage = React.lazy(() => import('./pages/features/KajianL
 const LandingPages = React.lazy(() => import('./pages/LandingPages'));
 const PlatformNewsPage = React.lazy(() => import('./pages/features/PlatformNewsPage'));
 const CommunityPage = React.lazy(() => import('./pages/CommunityPage'));
+const ProcurementTablePage = React.lazy(() => import('./pages/features/ProcurementTablePage'));
 
 // 页面加载时的Loading组件
 const PageLoader = () => (
@@ -98,6 +99,7 @@ function App() {
                   <Route path="/kajian-lessons/:id" element={<KajianLessonDetailPage />} />
                   <Route path="/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/community" element={<CommunityPage />} />
+                  <Route path="/procurement-quotation" element={<ProcurementTablePage />} />
                   <Route path="/games" element={<AIGamesPage />} />
                   <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
                   <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
