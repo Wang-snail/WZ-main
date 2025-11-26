@@ -13,7 +13,8 @@ import LoadingProgress from './components/common/LoadingProgress';
 import './App.css';
 
 // 路由组件懒加载
-const HomePage = React.lazy(() => import('./pages/HomePageOptimized'));
+import HomePage from './pages/HomePageOptimized';
+// const HomePage = React.lazy(() => import('./pages/HomePageOptimized'));
 const HomePagePreview = React.lazy(() => import('./pages/HomePagePreview'));
 const AIToolsPage = React.lazy(() => import('./pages/AIToolsPage'));
 const WorkflowsPage = React.lazy(() => import('./pages/WorkflowsPage'));
