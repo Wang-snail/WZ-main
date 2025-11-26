@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ProcurementQuotation, ViewConfig } from '@/types/procurementTypes';
 import { ProcurementService } from '@/services/procurementService';
+import { ProcurementForm } from '@/components/features/ProcurementForm';
 import SEOHead from '@/components/common/SEOHead';
 import toast from 'react-hot-toast';
 
@@ -133,6 +134,18 @@ const ProcurementTablePage: React.FC = () => {
             toast.success('导出成功');
         } catch (error) {
             toast.error('导出失败');
+        }
+    };
+
+    const handleAddQuotation = (data: Omit<ProcurementQuotation, 'id' | 'calculated' | 'createdAt' | 'updatedAt'>) => {
+        try {
+            ProcurementService.addQuotation(data);
+            loadData();
+            setShowAddForm(false);
+            toast.success('添加成功！');
+        } catch (error) {
+            toast.error('添加失败，请重试');
+            console.error('添加报价失败:', error);
         }
     };
 
@@ -342,6 +355,14 @@ const ProcurementTablePage: React.FC = () => {
                     )}
                 </div>
             </div>
+
+            {/* 添加报价表单 */}
+            {showAddForm && (
+                <ProcurementForm
+                    onSave={handleAddQuotation}
+                    onCancel={() => setShowAddForm(false)}
+                />
+            )}
         </>
     );
 };
