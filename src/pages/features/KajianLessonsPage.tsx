@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '@/components/common/SEOHead';
 import {
@@ -6,15 +6,13 @@ import {
   TrendingUp,
   TrendingDown,
   Search,
-  Filter,
-  Star,
   Calendar,
   Tag,
-  DollarSign,
   BarChart3,
   Award,
   AlertCircle,
-  Plus
+  Plus,
+  Star
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,39 +23,83 @@ import { KajianService } from '@/services/kajianService';
 import { KajianLessonForm } from '@/components/features/KajianLessonForm';
 import toast from 'react-hot-toast';
 
+// Static helpers to avoid recreation
+const getCategoryIcon = (category: string) => {
+  const icons: Record<string, string> = {
+    success: '🎉',
+    failure: '⚠️',
+    operation: '⚙️',
+    product: '📦',
+    marketing: '📢',
+    other: '💡'
+  };
+  return icons[category] || '📝';
+};
+
+const getCategoryColor = (category: string) => {
+  const colors: Record<string, string> = {
+    success: 'bg-green-100 text-green-800 border-green-200',
+    failure: 'bg-red-100 text-red-800 border-red-200',
+    operation: 'bg-blue-100 text-blue-800 border-blue-200',
+    product: 'bg-purple-100 text-purple-800 border-purple-200',
+    marketing: 'bg-orange-100 text-orange-800 border-orange-200',
+    other: 'bg-gray-100 text-gray-800 border-gray-200'
+  };
+  return colors[category] || 'bg-gray-100 text-gray-800';
+};
+
+const getCategoryName = (category: string) => {
+  const names: Record<string, string> = {
+    success: '成功案例',
+    failure: '失败教训',
+    operation: '运营技巧',
+    product: '选品经验',
+    marketing: '营销推广',
+    other: '其他经验'
+  };
+  return names[category] || category;
+};
+
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('zh-CN', {
+    style: 'currency',
+    currency: 'CNY',
+    minimumFractionDigits: 0
+  }).format(amount);
+};
+
+const RenderStars = React.memo(({ importance }: { importance: number }) => {
+  return (
+    <div className="flex gap-0.5">
+      {[...Array(5)].map((_, i) => (
+        <Star
+          key={i}
+          size={14}
+          className={i < importance ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+        />
+      ))}
+    </div>
+  );
+});
+
 const KajianLessonsPage: React.FC = () => {
   const [lessons, setLessons] = useState<KajianLesson[]>([]);
   const [categories, setCategories] = useState<KajianCategory[]>([]);
-  const [filteredLessons, setFilteredLessons] = useState<KajianLesson[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'date' | 'importance'>('date');
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [stats, setStats] = useState<KajianStats>({
-    totalLessons: 0,
-    successCount: 0,
-    failureCount: 0,
-    totalInvestment: 0,
-    totalRevenue: 0,
-    totalProfit: 0,
-    avgROI: 0
-  });
 
   useEffect(() => {
     loadData();
   }, []);
-
-  useEffect(() => {
-    filterLessons();
-  }, [lessons, selectedCategory, searchQuery, sortBy]);
 
   const loadData = async () => {
     try {
       const data = await KajianService.loadAllLessons();
       setLessons(data.lessons || []);
       setCategories(data.categories || []);
-      calculateStats(data.lessons || []);
     } catch (error) {
       console.error('加载数据失败:', error);
     } finally {
@@ -65,7 +107,7 @@ const KajianLessonsPage: React.FC = () => {
     }
   };
 
-  const handleAddLesson = (lessonData: Omit<KajianLesson, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleAddLesson = useCallback((lessonData: Omit<KajianLesson, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       KajianService.addLesson(lessonData);
       toast.success('经验添加成功！');
@@ -75,35 +117,10 @@ const KajianLessonsPage: React.FC = () => {
       toast.error('添加失败，请重试');
       console.error('添加经验失败:', error);
     }
-  };
+  }, []);
 
-  const calculateStats = (lessonsData: KajianLesson[]) => {
-    const stats: KajianStats = {
-      totalLessons: lessonsData.length,
-      successCount: lessonsData.filter(l => l.category === 'success').length,
-      failureCount: lessonsData.filter(l => l.category === 'failure').length,
-      totalInvestment: 0,
-      totalRevenue: 0,
-      totalProfit: 0,
-      avgROI: 0
-    };
-
-    lessonsData.forEach(lesson => {
-      if (lesson.financialData) {
-        stats.totalInvestment += lesson.financialData.investment || 0;
-        stats.totalRevenue += lesson.financialData.revenue || 0;
-        stats.totalProfit += lesson.financialData.profit || 0;
-      }
-    });
-
-    stats.avgROI = stats.totalInvestment > 0
-      ? Math.round((stats.totalProfit / stats.totalInvestment) * 100)
-      : 0;
-
-    setStats(stats);
-  };
-
-  const filterLessons = () => {
+  // Memoized filtered lessons
+  const filteredLessons = useMemo(() => {
     let filtered = [...lessons];
 
     // 分类筛选
@@ -128,66 +145,38 @@ const KajianLessonsPage: React.FC = () => {
       filtered.sort((a, b) => b.importance - a.importance);
     }
 
-    setFilteredLessons(filtered);
-  };
+    return filtered;
+  }, [lessons, selectedCategory, searchQuery, sortBy]);
 
-  const getCategoryIcon = (category: string) => {
-    const icons: Record<string, string> = {
-      success: '🎉',
-      failure: '⚠️',
-      operation: '⚙️',
-      product: '📦',
-      marketing: '📢',
-      other: '💡'
+  // Memoized stats calculation
+  const stats = useMemo<KajianStats>(() => {
+    const newStats: KajianStats = {
+      totalLessons: lessons.length,
+      successCount: 0,
+      failureCount: 0,
+      totalInvestment: 0,
+      totalRevenue: 0,
+      totalProfit: 0,
+      avgROI: 0
     };
-    return icons[category] || '📝';
-  };
 
-  const getCategoryColor = (category: string) => {
-    const colors: Record<string, string> = {
-      success: 'bg-green-100 text-green-800 border-green-200',
-      failure: 'bg-red-100 text-red-800 border-red-200',
-      operation: 'bg-blue-100 text-blue-800 border-blue-200',
-      product: 'bg-purple-100 text-purple-800 border-purple-200',
-      marketing: 'bg-orange-100 text-orange-800 border-orange-200',
-      other: 'bg-gray-100 text-gray-800 border-gray-200'
-    };
-    return colors[category] || 'bg-gray-100 text-gray-800';
-  };
+    lessons.forEach(lesson => {
+      if (lesson.category === 'success') newStats.successCount++;
+      if (lesson.category === 'failure') newStats.failureCount++;
 
-  const getCategoryName = (category: string) => {
-    const names: Record<string, string> = {
-      success: '成功案例',
-      failure: '失败教训',
-      operation: '运营技巧',
-      product: '选品经验',
-      marketing: '营销推广',
-      other: '其他经验'
-    };
-    return names[category] || category;
-  };
+      if (lesson.financialData) {
+        newStats.totalInvestment += lesson.financialData.investment || 0;
+        newStats.totalRevenue += lesson.financialData.revenue || 0;
+        newStats.totalProfit += lesson.financialData.profit || 0;
+      }
+    });
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('zh-CN', {
-      style: 'currency',
-      currency: 'CNY',
-      minimumFractionDigits: 0
-    }).format(amount);
-  };
+    newStats.avgROI = newStats.totalInvestment > 0
+      ? Math.round((newStats.totalProfit / newStats.totalInvestment) * 100)
+      : 0;
 
-  const renderStars = (importance: number) => {
-    return (
-      <div className="flex gap-0.5">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={14}
-            className={i < importance ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
-          />
-        ))}
-      </div>
-    );
-  };
+    return newStats;
+  }, [lessons]);
 
   if (loading) {
     return (
@@ -369,7 +358,7 @@ const KajianLessonsPage: React.FC = () => {
                         <span className="mr-1">{getCategoryIcon(lesson.category)}</span>
                         {getCategoryName(lesson.category)}
                       </Badge>
-                      {renderStars(lesson.importance)}
+                      <RenderStars importance={lesson.importance} />
                     </div>
                     <CardTitle className="text-lg group-hover:text-primary transition-colors">
                       {lesson.title}

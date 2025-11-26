@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import SEOHead from '@/components/common/SEOHead';
 import {
@@ -7,10 +7,7 @@ import {
   Tag,
   TrendingUp,
   TrendingDown,
-  DollarSign,
   Star,
-  CheckCircle2,
-  AlertCircle,
   ExternalLink,
   Share2,
   Bookmark,
@@ -26,11 +23,70 @@ import { KajianService } from '@/services/kajianService';
 import { KajianLessonForm } from '@/components/features/KajianLessonForm';
 import toast from 'react-hot-toast';
 
+// Static helpers
+const getCategoryIcon = (category: string) => {
+  const icons: Record<string, string> = {
+    success: '🎉',
+    failure: '⚠️',
+    operation: '⚙️',
+    product: '📦',
+    marketing: '📢',
+    other: '💡'
+  };
+  return icons[category] || '📝';
+};
+
+const getCategoryColor = (category: string) => {
+  const colors: Record<string, string> = {
+    success: 'bg-green-100 text-green-800 border-green-200',
+    failure: 'bg-red-100 text-red-800 border-red-200',
+    operation: 'bg-blue-100 text-blue-800 border-blue-200',
+    product: 'bg-purple-100 text-purple-800 border-purple-200',
+    marketing: 'bg-orange-100 text-orange-800 border-orange-200',
+    other: 'bg-gray-100 text-gray-800 border-gray-200'
+  };
+  return colors[category] || 'bg-gray-100 text-gray-800';
+};
+
+const getCategoryName = (category: string) => {
+  const names: Record<string, string> = {
+    success: '成功案例',
+    failure: '失败教训',
+    operation: '运营技巧',
+    product: '选品经验',
+    marketing: '营销推广',
+    other: '其他经验'
+  };
+  return names[category] || category;
+};
+
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('zh-CN', {
+    style: 'currency',
+    currency: 'CNY',
+    minimumFractionDigits: 0
+  }).format(amount);
+};
+
+const RenderStars = React.memo(({ importance }: { importance: number }) => {
+  return (
+    <div className="flex gap-0.5">
+      {[...Array(5)].map((_, i) => (
+        <Star
+          key={i}
+          size={18}
+          className={i < importance ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+        />
+      ))}
+    </div>
+  );
+});
+
 const KajianLessonDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [lesson, setLesson] = useState<KajianLesson | null>(null);
-  const [relatedLessons, setRelatedLessons] = useState<KajianLesson[]>([]);
+  const [allLessons, setAllLessons] = useState<KajianLesson[]>([]);
   const [loading, setLoading] = useState(true);
   const [bookmarked, setBookmarked] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -45,17 +101,15 @@ const KajianLessonDetailPage: React.FC = () => {
 
   const loadLesson = async () => {
     try {
+      // Use cached data loading
       const data = await KajianService.loadAllLessons();
+      setAllLessons(data.lessons);
+
       const currentLesson = data.lessons.find((l: KajianLesson) => l.id === id);
 
       if (currentLesson) {
         setLesson(currentLesson);
         setIsCustomLesson(KajianService.isCustomLesson(id || ''));
-        // 找到相关经验（同类别的其他经验）
-        const related = data.lessons
-          .filter((l: KajianLesson) => l.id !== id && l.category === currentLesson.category)
-          .slice(0, 3);
-        setRelatedLessons(related);
       } else {
         toast.error('未找到该经验记录');
         navigate('/kajian-lessons');
@@ -68,7 +122,15 @@ const KajianLessonDetailPage: React.FC = () => {
     }
   };
 
-  const handleEdit = (lessonData: Omit<KajianLesson, 'id' | 'createdAt' | 'updatedAt'>) => {
+  // Memoize related lessons calculation
+  const relatedLessons = useMemo(() => {
+    if (!lesson || !allLessons.length) return [];
+    return allLessons
+      .filter((l: KajianLesson) => l.id !== id && l.category === lesson.category)
+      .slice(0, 3);
+  }, [lesson, allLessons, id]);
+
+  const handleEdit = useCallback((lessonData: Omit<KajianLesson, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       if (id) {
         KajianService.updateLesson(id, lessonData);
@@ -80,9 +142,9 @@ const KajianLessonDetailPage: React.FC = () => {
       toast.error('更新失败，请重试');
       console.error('更新经验失败:', error);
     }
-  };
+  }, [id]);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     if (!id) return;
 
     if (window.confirm('确定要删除这条经验记录吗？此操作无法撤销。')) {
@@ -99,67 +161,9 @@ const KajianLessonDetailPage: React.FC = () => {
         console.error('删除经验失败:', error);
       }
     }
-  };
+  }, [id, navigate]);
 
-  const getCategoryIcon = (category: string) => {
-    const icons: Record<string, string> = {
-      success: '🎉',
-      failure: '⚠️',
-      operation: '⚙️',
-      product: '📦',
-      marketing: '📢',
-      other: '💡'
-    };
-    return icons[category] || '📝';
-  };
-
-  const getCategoryColor = (category: string) => {
-    const colors: Record<string, string> = {
-      success: 'bg-green-100 text-green-800 border-green-200',
-      failure: 'bg-red-100 text-red-800 border-red-200',
-      operation: 'bg-blue-100 text-blue-800 border-blue-200',
-      product: 'bg-purple-100 text-purple-800 border-purple-200',
-      marketing: 'bg-orange-100 text-orange-800 border-orange-200',
-      other: 'bg-gray-100 text-gray-800 border-gray-200'
-    };
-    return colors[category] || 'bg-gray-100 text-gray-800';
-  };
-
-  const getCategoryName = (category: string) => {
-    const names: Record<string, string> = {
-      success: '成功案例',
-      failure: '失败教训',
-      operation: '运营技巧',
-      product: '选品经验',
-      marketing: '营销推广',
-      other: '其他经验'
-    };
-    return names[category] || category;
-  };
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('zh-CN', {
-      style: 'currency',
-      currency: 'CNY',
-      minimumFractionDigits: 0
-    }).format(amount);
-  };
-
-  const renderStars = (importance: number) => {
-    return (
-      <div className="flex gap-0.5">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={18}
-            className={i < importance ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const handleShare = () => {
+  const handleShare = useCallback(() => {
     if (navigator.share) {
       navigator.share({
         title: lesson?.title,
@@ -170,9 +174,9 @@ const KajianLessonDetailPage: React.FC = () => {
       navigator.clipboard.writeText(window.location.href);
       toast.success('链接已复制到剪贴板');
     }
-  };
+  }, [lesson]);
 
-  const handleBookmark = () => {
+  const handleBookmark = useCallback(() => {
     const bookmarks = JSON.parse(localStorage.getItem('kajian_bookmarks') || '[]');
     if (bookmarked) {
       const newBookmarks = bookmarks.filter((b: string) => b !== id);
@@ -185,7 +189,7 @@ const KajianLessonDetailPage: React.FC = () => {
       setBookmarked(true);
       toast.success('已添加到收藏');
     }
-  };
+  }, [bookmarked, id]);
 
   if (loading) {
     return (
@@ -234,7 +238,7 @@ const KajianLessonDetailPage: React.FC = () => {
                       <span className="mr-1">{getCategoryIcon(lesson.category)}</span>
                       {getCategoryName(lesson.category)}
                     </Badge>
-                    {renderStars(lesson.importance)}
+                    <RenderStars importance={lesson.importance} />
                   </div>
                   <CardTitle className="text-3xl mb-3">{lesson.title}</CardTitle>
                   <div className="flex items-center gap-4 text-sm text-gray-600">

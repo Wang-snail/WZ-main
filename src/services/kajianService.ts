@@ -9,11 +9,21 @@ interface KajianData {
 }
 
 export class KajianService {
+  private static cache: KajianData | null = null;
+  private static cacheTimestamp: number = 0;
+  private static readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
   /**
    * 加载所有经验数据（包括默认数据和用户添加的数据）
    */
-  static async loadAllLessons(): Promise<KajianData> {
+  static async loadAllLessons(forceRefresh = false): Promise<KajianData> {
     try {
+      // Check cache validity
+      const now = Date.now();
+      if (!forceRefresh && this.cache && (now - this.cacheTimestamp < this.CACHE_DURATION)) {
+        return this.cache;
+      }
+
       // 加载默认数据
       const response = await fetch('/data/kajian_lessons.json');
       const defaultData: KajianData = await response.json();
@@ -27,14 +37,36 @@ export class KajianService {
       // 更新分类计数
       const updatedCategories = this.updateCategoryCounts(defaultData.categories, allLessons);
 
-      return {
+      const result = {
         lessons: allLessons,
         categories: updatedCategories
       };
+
+      // Update cache
+      this.cache = result;
+      this.cacheTimestamp = now;
+
+      return result;
     } catch (error) {
       console.error('加载经验数据失败:', error);
       return { lessons: [], categories: [] };
     }
+  }
+
+  /**
+   * 获取单个经验详情
+   */
+  static async getLessonById(id: string): Promise<KajianLesson | undefined> {
+    const data = await this.loadAllLessons();
+    return data.lessons.find(l => l.id === id);
+  }
+
+  /**
+   * 清除缓存
+   */
+  static clearCache() {
+    this.cache = null;
+    this.cacheTimestamp = 0;
   }
 
   /**
@@ -79,6 +111,7 @@ export class KajianService {
 
     customLessons.push(newLesson);
     this.saveCustomLessons(customLessons);
+    this.clearCache();
 
     return newLesson;
   }
@@ -101,6 +134,7 @@ export class KajianService {
     };
 
     this.saveCustomLessons(customLessons);
+    this.clearCache();
     return customLessons[index];
   }
 
@@ -116,6 +150,7 @@ export class KajianService {
     }
 
     this.saveCustomLessons(filtered);
+    this.clearCache();
     return true;
   }
 
@@ -130,9 +165,20 @@ export class KajianService {
    * 更新分类计数
    */
   private static updateCategoryCounts(categories: KajianCategory[], lessons: KajianLesson[]): KajianCategory[] {
+    const counts = new Map<string, number>();
+
+    // Initialize counts
+    categories.forEach(cat => counts.set(cat.id, 0));
+
+    // Count lessons per category
+    lessons.forEach(lesson => {
+      const currentCount = counts.get(lesson.category) || 0;
+      counts.set(lesson.category, currentCount + 1);
+    });
+
     return categories.map(cat => ({
       ...cat,
-      count: lessons.filter(l => l.category === cat.id).length
+      count: counts.get(cat.id) || 0
     }));
   }
 
