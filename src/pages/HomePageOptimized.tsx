@@ -185,8 +185,13 @@ export default function HomePageOptimized() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      {/* 加载进度条 */}
-      <LoadingProgress showLogo={false} />
+      {/* 加载进度条 - 仅在首次访问时显示 */}
+      {!sessionStorage.getItem('has_visited_home') && (
+        <LoadingProgress
+          showLogo={false}
+          onComplete={() => sessionStorage.setItem('has_visited_home', 'true')}
+        />
+      )}
 
       {/* Hero Section */}
       <section className="relative">

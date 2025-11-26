@@ -5,11 +5,13 @@ import { Loader2, Sparkles } from 'lucide-react';
 interface LoadingProgressProps {
   message?: string;
   showLogo?: boolean;
+  onComplete?: () => void;
 }
 
 export default function LoadingProgress({
   message = "正在加载 WSNAIL...",
-  showLogo = true
+  showLogo = true,
+  onComplete
 }: LoadingProgressProps) {
   const [progress, setProgress] = useState(0);
   const [showLoading, setShowLoading] = useState(false);
@@ -31,6 +33,7 @@ export default function LoadingProgress({
         // 完成后隐藏
         setTimeout(() => {
           setShowLoading(false);
+          if (onComplete) onComplete();
         }, 300);
       }
       setProgress(Math.min(currentProgress, 95));
