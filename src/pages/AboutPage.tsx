@@ -20,13 +20,13 @@ const AboutPage: React.FC = () => {
               <h2 className="text-2xl font-bold mb-4">我们的使命</h2>
               <p>在这个AI技术日新月异的时代，我们致力于成为您最信赖的AI工具���航站。我们的使命是为您发现、评测并精选出全球范围内最新、最有趣的AI工具，帮助您节省时间，激发创造力，探索人工智能的无限可能。</p>
             </section>
-            
+
             <section>
               <h2 className="text-2xl font-bold mb-8">认识站长</h2>
               <div className="flex flex-col sm:flex-row items-center gap-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-                <img 
-                  src="/images/avatar-placeholder.png" 
-                  alt="wsnail (王蜗牛) 头像" 
+                <img
+                  src="/images/avatar-placeholder.png"
+                  alt="wsnail (王蜗牛) 头像"
                   className="w-24 h-24 rounded-full object-cover ring-4 ring-blue-500 dark:ring-blue-400"
                 />
                 <div>
@@ -38,6 +38,7 @@ const AboutPage: React.FC = () => {
                   <div className="mt-4 flex space-x-4">
                     <a href="https://github.com/Wang-snail" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>
                     <a href="https://twitter.com/wsnail" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Twitter</a>
+                    <span className="text-gray-600 dark:text-gray-400">微信: Reaper-B</span>
                   </div>
                 </div>
               </div>

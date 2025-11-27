@@ -183,12 +183,15 @@ const ProcurementTablePage: React.FC = () => {
                     <div className="container mx-auto px-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <h1 className="text-3xl font-bold mb-2">采购寻源报价单</h1>
+                                <h1 className="text-3xl font-bold mb-2">采购寻源报价单 <span className="text-sm font-normal opacity-70">v1.1</span></h1>
                                 <p className="text-blue-100">智能多维表格 · 自动计算 · 供应商比价</p>
                             </div>
                             <div className="flex gap-2">
                                 <Button
-                                    onClick={() => setShowAddForm(true)}
+                                    onClick={() => {
+                                        console.log('Clicked Add Quotation');
+                                        setShowAddForm(true);
+                                    }}
                                     className="bg-white text-primary hover:bg-blue-50"
                                 >
                                     <Plus size={20} className="mr-2" />

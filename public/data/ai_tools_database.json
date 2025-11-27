@@ -1,6 +1,44 @@
 {
   "ai_tools": [
     {
+      "id": "amazon-profit-compass",
+      "name": "Amazon Profit Compass",
+      "description": "亚马逊产品利润分析工具，提供AI智能建议",
+      "link": "/tools/amazon-profit-compass",
+      "category": "AI效率工具",
+      "popularity": {
+        "views": 1000,
+        "favorites": 100
+      },
+      "vpn_required": false,
+      "hot_score": 90,
+      "hot": true,
+      "tags": [
+        "亚马逊",
+        "利润计算",
+        "AI分析"
+      ]
+    },
+    {
+      "id": "fba-calculator",
+      "name": "亚马逊 FBA 费用计算器",
+      "description": "精准计算亚马逊FBA物流费用",
+      "link": "/tools/fba-calculator",
+      "category": "AI效率工具",
+      "popularity": {
+        "views": 1000,
+        "favorites": 100
+      },
+      "vpn_required": false,
+      "hot_score": 90,
+      "hot": true,
+      "tags": [
+        "亚马逊",
+        "FBA",
+        "费用计算"
+      ]
+    },
+    {
       "id": 394,
       "name": "百度AI探索版",
       "description": "百度推出的深度AI搜索引擎",

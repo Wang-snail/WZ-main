@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   Star,
   Clock,
   DollarSign,
@@ -14,23 +14,22 @@ import {
   ThumbsDown,
   ExternalLink
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { Input } from '../components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ToolReview, toolReviews, getRecommendedReviews, getPopularReviews } from '../data/toolReviews';
-import { useAnalytics } from '../services/analyticsService';
-import SEOHead from '../components/common/SEOHead';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Badge } from '../../components/ui/badge';
+import { Input } from '../../components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { ToolReview, toolReviews, getRecommendedReviews, getPopularReviews } from '../../data/toolReviews';
+import { useAnalytics } from '../../services/analyticsService';
 
-export default function ToolReviewsPage() {
+export default function ToolReviewsSection() {
   const [reviews, setReviews] = useState<ToolReview[]>(toolReviews);
   const [filteredReviews, setFilteredReviews] = useState<ToolReview[]>(toolReviews);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedReview, setSelectedReview] = useState<ToolReview | null>(null);
   const [activeTab, setActiveTab] = useState('all');
-  
+
   const { trackSearch, trackUserAction, getUserProfile } = useAnalytics();
 
   useEffect(() => {
@@ -72,13 +71,12 @@ export default function ToolReviewsPage() {
     return Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
-        className={`w-4 h-4 ${
-          i < Math.floor(rating) 
-            ? 'fill-yellow-400 text-yellow-400' 
-            : i < rating 
-            ? 'fill-yellow-400/50 text-yellow-400' 
+        className={`w-4 h-4 ${i < Math.floor(rating)
+          ? 'fill-yellow-400 text-yellow-400'
+          : i < rating
+            ? 'fill-yellow-400/50 text-yellow-400'
             : 'text-gray-300'
-        }`}
+          }`}
       />
     ));
   };
@@ -107,164 +105,123 @@ export default function ToolReviewsPage() {
   }
 
   return (
-    <>
-      <SEOHead 
-        title="AI工具深度评测 - 专业测评报告 | WSNAIL.COM"
-        description="专业的AI工具评测报告，深入分析ChatGPT、Midjourney、Notion AI等热门工具的功能、性价比和使用体验。帮您选择最适合的AI工具。"
-        keywords="AI工具评测,工具测评,ChatGPT评测,Midjourney评测,AI工具对比,工具选择指南,WSNAIL"
-        url="https://wsnail.com/reviews"
-      />
-      
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-8"
-            >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                AI工具深度评测
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                专业评测报告，帮您选择最适合的AI工具
-              </p>
-              
-              <div className="flex justify-center space-x-8 text-sm text-gray-600">
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="w-5 h-5 text-blue-500" />
-                  <span>{toolReviews.length}+ 深度评测</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-green-500" />
-                  <span>专业评测师团队</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-yellow-500" />
-                  <span>实时更新</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Search */}
-            <div className="max-w-2xl mx-auto">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <Input
-                  type="text"
-                  placeholder="搜索工具评测..."
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    if (e.target.value) {
-                      trackSearch(e.target.value);
-                    }
-                  }}
-                  className="pl-12 pr-4 py-3 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500"
-                />
-              </div>
-            </div>
+    <div className="bg-gray-50">
+      {/* Header removed for integration */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Search */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Input
+              type="text"
+              placeholder="搜索工具评测..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if (e.target.value) {
+                  trackSearch(e.target.value);
+                }
+              }}
+              className="pl-12 pr-4 py-3 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500"
+            />
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar */}
-            <div className="lg:w-64 flex-shrink-0">
-              <div className="bg-white rounded-lg p-6 shadow-sm sticky top-8">
-                <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                  <Filter className="w-5 h-5 mr-2" />
-                  分类筛选
-                </h3>
-                
-                <div className="space-y-2">
-                  <Button
-                    variant={selectedCategory === '' ? 'default' : 'ghost'}
-                    className="w-full justify-start"
-                    onClick={() => setSelectedCategory('')}
-                  >
-                    全部评测 ({toolReviews.length})
-                  </Button>
-                  
-                  {categories.map((category) => {
-                    const count = toolReviews.filter(r => r.category === category).length;
-                    return (
-                      <Button
-                        key={category}
-                        variant={selectedCategory === category ? 'default' : 'ghost'}
-                        className="w-full justify-start text-left"
-                        onClick={() => setSelectedCategory(category)}
-                      >
-                        <div className="flex items-center justify-between w-full">
-                          <span>{category}</span>
-                          <Badge variant="secondary" className="ml-2">
-                            {count}
-                          </Badge>
-                        </div>
-                      </Button>
-                    );
-                  })}
-                </div>
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar */}
+          <div className="lg:w-64 flex-shrink-0">
+            <div className="bg-white rounded-lg p-6 shadow-sm sticky top-8">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <Filter className="w-5 h-5 mr-2" />
+                分类筛选
+              </h3>
+
+              <div className="space-y-2">
+                <Button
+                  variant={selectedCategory === '' ? 'default' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedCategory('')}
+                >
+                  全部评测 ({toolReviews.length})
+                </Button>
+
+                {categories.map((category) => {
+                  const count = toolReviews.filter(r => r.category === category).length;
+                  return (
+                    <Button
+                      key={category}
+                      variant={selectedCategory === category ? 'default' : 'ghost'}
+                      className="w-full justify-start text-left"
+                      onClick={() => setSelectedCategory(category)}
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        <span>{category}</span>
+                        <Badge variant="secondary" className="ml-2">
+                          {count}
+                        </Badge>
+                      </div>
+                    </Button>
+                  );
+                })}
               </div>
             </div>
+          </div>
 
-            {/* Main Content */}
-            <div className="flex-1">
-              {/* Tabs */}
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="all">全部评测</TabsTrigger>
-                  <TabsTrigger value="popular">热门推荐</TabsTrigger>
-                  <TabsTrigger value="recommended">为您推荐</TabsTrigger>
-                </TabsList>
-              </Tabs>
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Tabs */}
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="all">全部评测</TabsTrigger>
+                <TabsTrigger value="popular">热门推荐</TabsTrigger>
+                <TabsTrigger value="recommended">为您推荐</TabsTrigger>
+              </TabsList>
+            </Tabs>
 
-              {/* Results */}
-              <div className="mb-6">
-                <p className="text-gray-600">
-                  共找到 <span className="font-semibold">{filteredReviews.length}</span> 个评测
+            {/* Results */}
+            <div className="mb-6">
+              <p className="text-gray-600">
+                共找到 <span className="font-semibold">{filteredReviews.length}</span> 个评测
+              </p>
+            </div>
+
+            {/* Reviews Grid */}
+            {filteredReviews.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {filteredReviews.map((review, index) => (
+                  <ReviewCard
+                    key={review.id}
+                    review={review}
+                    index={index}
+                    onClick={() => setSelectedReview(review)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-600 mb-2">
+                  没有找到相关评测
+                </h3>
+                <p className="text-gray-500">
+                  尝试调整搜索关键词或筛选条件
                 </p>
               </div>
-
-              {/* Reviews Grid */}
-              {filteredReviews.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filteredReviews.map((review, index) => (
-                    <ReviewCard 
-                      key={review.id} 
-                      review={review} 
-                      index={index}
-                      onClick={() => setSelectedReview(review)}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-600 mb-2">
-                    没有找到相关评测
-                  </h3>
-                  <p className="text-gray-500">
-                    尝试调整搜索关键词或筛选条件
-                  </p>
-                </div>
-              )}
-            </div>
+            )}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 // Review Card Component
-function ReviewCard({ 
-  review, 
-  index, 
-  onClick 
-}: { 
-  review: ToolReview; 
+function ReviewCard({
+  review,
+  index,
+  onClick
+}: {
+  review: ToolReview;
   index: number;
   onClick: () => void;
 }) {
@@ -272,13 +229,12 @@ function ReviewCard({
     return Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
-        className={`w-4 h-4 ${
-          i < Math.floor(rating) 
-            ? 'fill-yellow-400 text-yellow-400' 
-            : i < rating 
-            ? 'fill-yellow-400/50 text-yellow-400' 
+        className={`w-4 h-4 ${i < Math.floor(rating)
+          ? 'fill-yellow-400 text-yellow-400'
+          : i < rating
+            ? 'fill-yellow-400/50 text-yellow-400'
             : 'text-gray-300'
-        }`}
+          }`}
       />
     ));
   };
@@ -289,7 +245,7 @@ function ReviewCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
     >
-      <Card 
+      <Card
         className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group"
         onClick={onClick}
       >
@@ -312,12 +268,12 @@ function ReviewCard({
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent>
           <p className="text-gray-600 text-sm mb-4 line-clamp-3">
             {review.reviewContent.overview}
           </p>
-          
+
           <div className="space-y-3">
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center space-x-2">
@@ -326,11 +282,11 @@ function ReviewCard({
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="w-3 h-3 text-blue-500" />
-                <span>{review.learnDifficulty === 'easy' ? '易上手' : 
-                       review.learnDifficulty === 'medium' ? '中等' : '需学习'}</span>
+                <span>{review.learnDifficulty === 'easy' ? '易上手' :
+                  review.learnDifficulty === 'medium' ? '中等' : '需学习'}</span>
               </div>
             </div>
-            
+
             <div className="flex flex-wrap gap-1">
               {review.tags.slice(0, 3).map((tag, i) => (
                 <Badge key={i} variant="outline" className="text-xs">
@@ -344,7 +300,7 @@ function ReviewCard({
               )}
             </div>
           </div>
-          
+
           <div className="mt-4 pt-4 border-t flex items-center justify-between">
             <div className="flex items-center space-x-4 text-xs text-gray-500">
               <div className="flex items-center space-x-1">
@@ -368,11 +324,11 @@ function ReviewCard({
 }
 
 // Review Detail Component
-function ReviewDetail({ 
-  review, 
-  onBack 
-}: { 
-  review: ToolReview; 
+function ReviewDetail({
+  review,
+  onBack
+}: {
+  review: ToolReview;
   onBack: () => void;
 }) {
   const { trackUserAction } = useAnalytics();
@@ -381,13 +337,12 @@ function ReviewDetail({
     return Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
-        className={`w-5 h-5 ${
-          i < Math.floor(rating) 
-            ? 'fill-yellow-400 text-yellow-400' 
-            : i < rating 
-            ? 'fill-yellow-400/50 text-yellow-400' 
+        className={`w-5 h-5 ${i < Math.floor(rating)
+          ? 'fill-yellow-400 text-yellow-400'
+          : i < rating
+            ? 'fill-yellow-400/50 text-yellow-400'
             : 'text-gray-300'
-        }`}
+          }`}
       />
     ));
   };
@@ -399,7 +354,7 @@ function ReviewDetail({
           <Button variant="outline" onClick={onBack} className="mb-6">
             ← 返回评测列表
           </Button>
-          
+
           <div className="flex items-start justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -417,7 +372,7 @@ function ReviewDetail({
               </div>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Card>
               <CardContent className="p-4 text-center">
@@ -426,18 +381,18 @@ function ReviewDetail({
                 <div className="text-sm text-gray-500">价格区间</div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-4 text-center">
                 <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
                 <div className="font-semibold">
-                  {review.learnDifficulty === 'easy' ? '容易' : 
-                   review.learnDifficulty === 'medium' ? '中等' : '困难'}
+                  {review.learnDifficulty === 'easy' ? '容易' :
+                    review.learnDifficulty === 'medium' ? '中等' : '困难'}
                 </div>
                 <div className="text-sm text-gray-500">学习难度</div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="p-4 text-center">
                 <Users className="w-8 h-8 text-purple-500 mx-auto mb-2" />
@@ -448,7 +403,7 @@ function ReviewDetail({
           </div>
         </div>
       </div>
-      
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8">
           {/* 概述 */}
@@ -589,24 +544,24 @@ function ReviewDetail({
               <p className="text-gray-700 leading-relaxed mb-4">
                 {review.reviewContent.conclusion}
               </p>
-              
+
               <div className="flex items-center justify-between pt-4 border-t">
                 <div className="text-sm text-gray-500">
                   评测师：{review.author.name} | {review.author.expertise}
                 </div>
                 <div className="flex items-center">
-                  <Button 
+                  <Button
                     onClick={() => {
                       trackUserAction('share_review', { toolName: review.toolName });
                       // 实现分享功能
                     }}
-                    variant="outline" 
+                    variant="outline"
                     size="sm"
                     className="mr-2"
                   >
                     分享评测
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => {
                       trackUserAction('helpful_review', { toolName: review.toolName });
                     }}

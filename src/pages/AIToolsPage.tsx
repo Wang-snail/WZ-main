@@ -23,6 +23,7 @@ import { dataService } from '../services/dataService';
 import { useAnalytics } from '../services/analyticsService';
 import SEOHead from '../components/common/SEOHead';
 import PersonalizedRecommendations from '../components/features/PersonalizedRecommendations';
+import ToolReviewsSection from '../components/features/ToolReviewsSection';
 
 export default function AIToolsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +35,7 @@ export default function AIToolsPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('popular');
+  const [activeSection, setActiveSection] = useState<'tools' | 'reviews'>('tools');
 
   const { trackSearch, trackCategoryFilter } = useAnalytics();
 
@@ -197,171 +199,194 @@ export default function AIToolsPage() {
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 AI工具库
               </h1>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 mb-8">
                 发现最佳AI工具，提升工作效率
               </p>
+
+              <div className="flex justify-center space-x-4 mb-8">
+                <Button
+                  variant={activeSection === 'tools' ? 'default' : 'outline'}
+                  onClick={() => setActiveSection('tools')}
+                  className="px-8"
+                >
+                  AI工具库
+                </Button>
+                <Button
+                  variant={activeSection === 'reviews' ? 'default' : 'outline'}
+                  onClick={() => setActiveSection('reviews')}
+                  className="px-8"
+                >
+                  深度评测
+                </Button>
+              </div>
             </motion.div>
 
-            {/* Search and Filters */}
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-              <div className="flex-1 max-w-2xl">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <Input
-                    type="text"
-                    placeholder="搜索AI工具..."
-                    value={searchQuery}
-                    onChange={(e) => {
-                      setSearchQuery(e.target.value);
-                      if (e.target.value) {
-                        trackSearch(e.target.value);
-                      }
-                    }}
-                    className="pl-12 pr-4 py-3 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500"
+            {/* Search and Filters - Only show for tools section */}
+            {activeSection === 'tools' && (
+              <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+                <div className="flex-1 max-w-2xl">
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Input
+                      type="text"
+                      placeholder="搜索AI工具..."
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        if (e.target.value) {
+                          trackSearch(e.target.value);
+                        }
+                      }}
+                      className="pl-12 pr-4 py-3 text-lg rounded-full border-2 border-gray-200 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      variant={viewMode === 'grid' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                    >
+                      <Grid className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'list' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setViewMode('list')}
+                    >
+                      <List className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {activeSection === 'tools' ? (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Sidebar */}
+              <div className="lg:w-80 flex-shrink-0 space-y-6">
+                {/* Category Filter */}
+                <div className="bg-white rounded-lg p-6 shadow-sm sticky top-8">
+                  <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                    <Filter className="w-5 h-5 mr-2" />
+                    分类筛选
+                  </h3>
+
+                  <div className="space-y-2">
+                    <Button
+                      variant={selectedCategory === '' ? 'default' : 'ghost'}
+                      className="w-full justify-start"
+                      onClick={() => handleCategorySelect('')}
+                    >
+                      全部工具 ({tools.length})
+                    </Button>
+
+                    {categories.map((category) => (
+                      <Button
+                        key={category.id}
+                        variant={selectedCategory === category.name ? 'default' : 'ghost'}
+                        className="w-full justify-start text-left"
+                        onClick={() => handleCategorySelect(category.name)}
+                      >
+                        <div className="flex items-center justify-between w-full">
+                          <span>{category.name}</span>
+                          <Badge variant="secondary" className="ml-2">
+                            {category.count}
+                          </Badge>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Personalized Recommendations */}
+                <PersonalizedRecommendations />
+              </div>
+
+              {/* Main Content */}
+              <div className="flex-1">
+                {/* Tabs */}
+                <Tabs value={activeTab} onValueChange={handleTabChange} className="mb-8">
+                  <TabsList className="grid w-full grid-cols-4">
+                    <TabsTrigger value="all" className="flex items-center space-x-2">
+                      <span>全部</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="featured" className="flex items-center space-x-2">
+                      <Crown className="w-4 h-4" />
+                      <span>精选</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="popular" className="flex items-center space-x-2">
+                      <TrendingUp className="w-4 h-4" />
+                      <span>热门</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="latest" className="flex items-center space-x-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>最新</span>
+                    </TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value={activeTab} className="mt-6">
+                    {/* Results Summary */}
+                    <div className="flex items-center justify-between mb-6">
+                      <p className="text-gray-600">
+                        共找到 <span className="font-semibold">{filteredTools.length}</span> 个工具
+                        {selectedCategory && (
+                          <span> 在 <span className="font-semibold">{selectedCategory}</span> 分类中</span>
+                        )}
+                      </p>
+                    </div>
+
+                    {/* Tools Grid/List */}
+                    {filteredTools.length > 0 ? (
+                      <div className={
+                        viewMode === 'grid'
+                          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                          : "space-y-4"
+                      }>
+                        {filteredTools.map((tool, index) => (
+                          <ToolCard
+                            key={`${tool.name}-${index}`}
+                            tool={tool}
+                            viewMode={viewMode}
+                            rank={activeTab === 'popular' ? index + 1 : undefined}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-12">
+                        <div className="text-gray-400 mb-4">
+                          <Search className="w-16 h-16 mx-auto" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-600 mb-2">
+                          没有找到相关工具
+                        </h3>
+                        <p className="text-gray-500">
+                          尝试调整搜索关键词或筛选条件
+                        </p>
+                      </div>
+                    )}
+                  </TabsContent>
+                </Tabs>
+
+                {/* 社交分享组件 */}
+                <div className="pt-4 border-t">
+                  <SocialShareButtons
+                    title={`AI工具库 - ${selectedCategory ? categories.find(c => c.id === selectedCategory)?.name + '工具' : '106+精选AI工具'}`}
+                    description={`发现${tools.length}个精选AI工具，提升工作效率。${selectedCategory ? categories.find(c => c.id === selectedCategory)?.description || '' : 'AI聊天、设计、写作、视频制作一站式解决方案。'}`}
+                    hashtags={['AI工具', '人工智能', '效率工具', 'WSNAIL']}
                   />
                 </div>
               </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant={viewMode === 'grid' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                  >
-                    <Grid className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'list' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                  >
-                    <List className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar */}
-            <div className="lg:w-80 flex-shrink-0 space-y-6">
-              {/* Category Filter */}
-              <div className="bg-white rounded-lg p-6 shadow-sm sticky top-8">
-                <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                  <Filter className="w-5 h-5 mr-2" />
-                  分类筛选
-                </h3>
-
-                <div className="space-y-2">
-                  <Button
-                    variant={selectedCategory === '' ? 'default' : 'ghost'}
-                    className="w-full justify-start"
-                    onClick={() => handleCategorySelect('')}
-                  >
-                    全部工具 ({tools.length})
-                  </Button>
-
-                  {categories.map((category) => (
-                    <Button
-                      key={category.id}
-                      variant={selectedCategory === category.name ? 'default' : 'ghost'}
-                      className="w-full justify-start text-left"
-                      onClick={() => handleCategorySelect(category.name)}
-                    >
-                      <div className="flex items-center justify-between w-full">
-                        <span>{category.name}</span>
-                        <Badge variant="secondary" className="ml-2">
-                          {category.count}
-                        </Badge>
-                      </div>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Personalized Recommendations */}
-              <PersonalizedRecommendations />
-            </div>
-
-            {/* Main Content */}
-            <div className="flex-1">
-              {/* Tabs */}
-              <Tabs value={activeTab} onValueChange={handleTabChange} className="mb-8">
-                <TabsList className="grid w-full grid-cols-4">
-                  <TabsTrigger value="all" className="flex items-center space-x-2">
-                    <span>全部</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="featured" className="flex items-center space-x-2">
-                    <Crown className="w-4 h-4" />
-                    <span>精选</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="popular" className="flex items-center space-x-2">
-                    <TrendingUp className="w-4 h-4" />
-                    <span>热门</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="latest" className="flex items-center space-x-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>最新</span>
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value={activeTab} className="mt-6">
-                  {/* Results Summary */}
-                  <div className="flex items-center justify-between mb-6">
-                    <p className="text-gray-600">
-                      共找到 <span className="font-semibold">{filteredTools.length}</span> 个工具
-                      {selectedCategory && (
-                        <span> 在 <span className="font-semibold">{selectedCategory}</span> 分类中</span>
-                      )}
-                    </p>
-                  </div>
-
-                  {/* Tools Grid/List */}
-                  {filteredTools.length > 0 ? (
-                    <div className={
-                      viewMode === 'grid'
-                        ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                        : "space-y-4"
-                    }>
-                      {filteredTools.map((tool, index) => (
-                        <ToolCard
-                          key={`${tool.name}-${index}`}
-                          tool={tool}
-                          viewMode={viewMode}
-                          rank={activeTab === 'popular' ? index + 1 : undefined}
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-12">
-                      <div className="text-gray-400 mb-4">
-                        <Search className="w-16 h-16 mx-auto" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-gray-600 mb-2">
-                        没有找到相关工具
-                      </h3>
-                      <p className="text-gray-500">
-                        尝试调整搜索关键词或筛选条件
-                      </p>
-                    </div>
-                  )}
-                </TabsContent>
-              </Tabs>
-
-              {/* 社交分享组件 */}
-              <div className="pt-4 border-t">
-                <SocialShareButtons
-                  title={`AI工具库 - ${selectedCategory ? categories.find(c => c.id === selectedCategory)?.name + '工具' : '106+精选AI工具'}`}
-                  description={`发现${tools.length}个精选AI工具，提升工作效率。${selectedCategory ? categories.find(c => c.id === selectedCategory)?.description || '' : 'AI聊天、设计、写作、视频制作一站式解决方案。'}`}
-                  hashtags={['AI工具', '人工智能', '效率工具', 'WSNAIL']}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        ) : (
+          <ToolReviewsSection />
+        )}
       </div>
     </>
   );

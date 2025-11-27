@@ -67,7 +67,7 @@ export default function Footer() {
                 <MessageCircle className="w-4 h-4 text-green-400" />
                 <div className="text-gray-300">
                   <span className="text-gray-400 text-sm">微信:</span>
-                  <span className="ml-1 font-medium text-white">wsnail-com</span>
+                  <span className="ml-1 font-medium text-white">Reaper-B</span>
                 </div>
               </li>
               <li className="flex items-center space-x-2">

@@ -45,7 +45,6 @@ export default function Header() {
   const moreNavigation = [
     { name: t('nav.platformNews'), href: localizedLink('/platform-news'), current: cleanPath === '/platform-news', icon: Newspaper },
     { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath === '/workflows', icon: Workflow },
-    { name: t('nav.toolReviews'), href: localizedLink('/tool-reviews'), current: cleanPath === '/tool-reviews', icon: Star },
     { name: '经验库', href: localizedLink('/kajian-lessons'), current: cleanPath.startsWith('/kajian-lessons'), icon: BookOpen },
     { name: '采购报价单', href: localizedLink('/procurement-quotation'), current: cleanPath === '/procurement-quotation', icon: FileSpreadsheet },
   ];

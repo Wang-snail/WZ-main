@@ -18,7 +18,6 @@ import HomePage from './pages/HomePageOptimized';
 const HomePagePreview = React.lazy(() => import('./pages/HomePagePreview'));
 const AIToolsPage = React.lazy(() => import('./pages/AIToolsPage'));
 const WorkflowsPage = React.lazy(() => import('./pages/WorkflowsPage'));
-const ToolReviewsPage = React.lazy(() => import('./pages/ToolReviewsPage'));
 const DivinationPage = React.lazy(() => import('./pages/games/DivinationPage'));
 const AnalyzerPage = React.lazy(() => import('./pages/AnalyzerPage'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
@@ -43,6 +42,8 @@ const LandingPages = React.lazy(() => import('./pages/LandingPages'));
 const PlatformNewsPage = React.lazy(() => import('./pages/features/PlatformNewsPage'));
 const CommunityPage = React.lazy(() => import('./pages/CommunityPage'));
 const ProcurementTablePage = React.lazy(() => import('./pages/features/ProcurementTablePage'));
+const AmazonProfitCompass = React.lazy(() => import('./pages/tools/amazon-profit-compass/AmazonProfitCompass'));
+const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
 
 // 页面加载时的Loading组件
 const PageLoader = () => (
@@ -86,7 +87,6 @@ function App() {
                   <Route path="/preview" element={<HomePagePreview />} />
                   <Route path="/ai-tools" element={<AIToolsPage />} />
                   <Route path="/workflows" element={<WorkflowsPage />} />
-                  <Route path="/tool-reviews" element={<ToolReviewsPage />} />
                   <Route path="/divination" element={<DivinationPage />} />
                   <Route path="/analyzer" element={<AnalyzerPage />} />
                   <Route path="/about" element={<AboutPage />} />
@@ -100,6 +100,8 @@ function App() {
                   <Route path="/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/community" element={<CommunityPage />} />
                   <Route path="/procurement-quotation" element={<ProcurementTablePage />} />
+                  <Route path="/tools/amazon-profit-compass" element={<AmazonProfitCompass />} />
+                  <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/games" element={<AIGamesPage />} />
                   <Route path="/games/ai-word-guess" element={<AIWordGuessGame />} />
                   <Route path="/games/ai-tic-tac-toe" element={<AITicTacToe />} />
