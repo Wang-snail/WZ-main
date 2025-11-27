@@ -94,7 +94,7 @@ function App() {
                   <Route path="/sales-tracking" element={<SalesTrackingPage />} />
                   <Route path="/website-config" element={<WebsiteConfigPage />} />
                   <Route path="/test" element={<TestPage />} />
-                  <Route path="/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/kajian-lessons" element={<WorkflowsPage />} />
                   <Route path="/kajian-lessons/:id" element={<KajianLessonDetailPage />} />
                   <Route path="/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/community" element={<CommunityPage />} />
