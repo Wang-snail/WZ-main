@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper, FileSpreadsheet } from 'lucide-react';
+import { Bot, Sparkles, Menu, X, Gamepad2, Workflow, Star, TrendingUp, Settings, ChevronDown, MoreHorizontal, BookOpen, Newspaper, FileSpreadsheet, Wrench } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,9 @@ export default function Header() {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
+  const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const moreMenuRef = useRef<HTMLDivElement>(null);
+  const toolsMenuRef = useRef<HTMLDivElement>(null);
 
   // 获取当前语言和路径信息
   const { language: currentLanguage, cleanPath } = extractLanguageFromPath(location.pathname);
@@ -27,6 +29,9 @@ export default function Header() {
     function handleClickOutside(event: MouseEvent) {
       if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
         setMoreMenuOpen(false);
+      }
+      if (toolsMenuRef.current && !toolsMenuRef.current.contains(event.target as Node)) {
+        setToolsMenuOpen(false);
       }
     }
 
@@ -46,6 +51,12 @@ export default function Header() {
     { name: t('nav.platformNews'), href: localizedLink('/platform-news'), current: cleanPath === '/platform-news', icon: Newspaper },
     { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath === '/workflows', icon: Workflow },
     { name: '采购报价单', href: localizedLink('/procurement-quotation'), current: cleanPath === '/procurement-quotation', icon: FileSpreadsheet },
+  ];
+
+  const toolsNavigation = [
+    { name: 'Amazon Profit Compass', href: localizedLink('/tools/amazon-profit-compass'), icon: TrendingUp },
+    { name: 'FBA 费用计算器', href: localizedLink('/tools/fba-calculator'), icon: TrendingUp },
+    { name: '采购报价单', href: localizedLink('/procurement-quotation'), icon: FileSpreadsheet },
   ];
 
   return (
@@ -88,6 +99,42 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+
+            {/* Tools Menu */}
+            <div className="relative" ref={toolsMenuRef}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setToolsMenuOpen(!toolsMenuOpen)}
+                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 flex items-center"
+              >
+                <Wrench className="w-4 h-4 mr-1" />
+                工具
+                <ChevronDown className="w-3 h-3 ml-1" />
+              </Button>
+
+              {toolsMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg border z-50"
+                >
+                  <div className="py-1">
+                    {toolsNavigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        onClick={() => setToolsMenuOpen(false)}
+                        className="block px-4 py-2 text-sm transition-colors flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                      >
+                        <item.icon className="w-4 h-4 mr-2" />
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </div>
 
             {/* More Menu */}
             <div className="relative" ref={moreMenuRef}>
@@ -177,31 +224,50 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
+            </div>
 
-              {/* More navigation items */}
-              <div className="border-t pt-2 mt-2">
-                <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  更多功能
-                </div>
-                {moreNavigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${item.current
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                      }`}
-                  >
-                    {item.icon && <item.icon className="w-4 h-4 mr-2" />}
-                    {item.name}
-                  </Link>
-                ))}
+            {/* Tools Section */}
+            <div className="border-t pt-2 mt-2">
+              <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center">
+                <Wrench className="w-3 h-3 mr-1" />
+                工具
               </div>
+              {toolsNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                >
+                  <item.icon className="w-4 h-4 mr-2" />
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* More navigation items */}
+            <div className="border-t pt-2 mt-2">
+              <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                更多功能
+              </div>
+              {moreNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center ${item.current
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    }`}
+                >
+                  {item.icon && <item.icon className="w-4 h-4 mr-2" />}
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </motion.div>
         )}
       </div>
-    </header>
+    </header >
   );
 }
