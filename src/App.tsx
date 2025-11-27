@@ -36,7 +36,6 @@ const ToolStatistics = React.lazy(() => import('./pages/tools/ToolStatistics'));
 const SalesTrackingPage = React.lazy(() => import('./pages/features/SalesTrackingPage'));
 const WebsiteConfigPage = React.lazy(() => import('./pages/WebsiteConfigPage'));
 const TestPage = React.lazy(() => import('./pages/TestPage'));
-const KajianLessonsPage = React.lazy(() => import('./pages/features/KajianLessonsPage'));
 const KajianLessonDetailPage = React.lazy(() => import('./pages/features/KajianLessonDetailPage'));
 const LandingPages = React.lazy(() => import('./pages/LandingPages'));
 const PlatformNewsPage = React.lazy(() => import('./pages/features/PlatformNewsPage'));
@@ -120,7 +119,7 @@ function App() {
                   <Route path="/en/ai-tools" element={<AIToolsPage />} />
                   <Route path="/en/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/en/sales-tracking" element={<SalesTrackingPage />} />
-                  <Route path="/en/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/en/kajian-lessons" element={<WorkflowsPage />} />
                   <Route path="/en/community" element={<CommunityPage />} />
                   <Route path="/en/games" element={<AIGamesPage />} />
 
@@ -129,7 +128,7 @@ function App() {
                   <Route path="/jp/ai-tools" element={<AIToolsPage />} />
                   <Route path="/jp/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/jp/sales-tracking" element={<SalesTrackingPage />} />
-                  <Route path="/jp/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/jp/kajian-lessons" element={<WorkflowsPage />} />
                   <Route path="/jp/community" element={<CommunityPage />} />
                   <Route path="/jp/games" element={<AIGamesPage />} />
 
@@ -138,7 +137,7 @@ function App() {
                   <Route path="/kr/ai-tools" element={<AIToolsPage />} />
                   <Route path="/kr/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/kr/sales-tracking" element={<SalesTrackingPage />} />
-                  <Route path="/kr/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/kr/kajian-lessons" element={<WorkflowsPage />} />
                   <Route path="/kr/community" element={<CommunityPage />} />
                   <Route path="/kr/games" element={<AIGamesPage />} />
 
@@ -147,7 +146,7 @@ function App() {
                   <Route path="/es/ai-tools" element={<AIToolsPage />} />
                   <Route path="/es/platform-news" element={<PlatformNewsPage />} />
                   <Route path="/es/sales-tracking" element={<SalesTrackingPage />} />
-                  <Route path="/es/kajian-lessons" element={<KajianLessonsPage />} />
+                  <Route path="/es/kajian-lessons" element={<WorkflowsPage />} />
                   <Route path="/es/community" element={<CommunityPage />} />
                   <Route path="/es/games" element={<AIGamesPage />} />
                 </Routes>

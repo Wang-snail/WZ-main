@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   ArrowRight,
   Clock,
   Users,
@@ -21,6 +21,7 @@ import { Badge } from '../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import SEOHead from '../components/common/SEOHead';
 import { useAnalytics } from '../services/analyticsService';
+import KajianLessonsSection from '../components/features/KajianLessonsSection';
 
 interface WorkflowStep {
   id: string;
@@ -291,7 +292,7 @@ const workflows: Workflow[] = [
 
 const difficultyColors = {
   beginner: 'bg-green-100 text-green-800',
-  intermediate: 'bg-yellow-100 text-yellow-800', 
+  intermediate: 'bg-yellow-100 text-yellow-800',
   advanced: 'bg-red-100 text-red-800'
 };
 
@@ -304,6 +305,7 @@ const difficultyLabels = {
 export default function WorkflowsPage() {
   const [selectedWorkflow, setSelectedWorkflow] = useState<Workflow | null>(null);
   const [activeTab, setActiveTab] = useState('all');
+  const [activeSection, setActiveSection] = useState<'workflows' | 'lessons'>('workflows');
   const [filteredWorkflows, setFilteredWorkflows] = useState(workflows);
   const { trackWorkflowView, trackCategoryFilter, trackUserAction } = useAnalytics();
 
@@ -329,18 +331,18 @@ export default function WorkflowsPage() {
 
   return (
     <>
-      <SEOHead 
+      <SEOHead
         title="AI工具工作流 - 职业化场景解决方案 | WSNAIL.COM"
         description="专业的AI工具工作流指南，涵盖微信公众号运营、电商运营、视频制作、产品管理等场景。提供完整的工具链配置和使用教程，大幅提升工作效率。"
         keywords="AI工作流,工具组合,微信公众号运营,电商运营,视频制作,产品管理,效率提升,WSNAIL"
         url="https://wsnail.com/workflows"
       />
-      
+
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <div className="bg-white border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-8"
@@ -351,7 +353,24 @@ export default function WorkflowsPage() {
               <p className="text-xl text-gray-600 mb-8">
                 职业化场景解决方案，让AI工具发挥最大价值
               </p>
-              
+
+              <div className="flex justify-center space-x-4 mb-8">
+                <Button
+                  variant={activeSection === 'workflows' ? 'default' : 'outline'}
+                  onClick={() => setActiveSection('workflows')}
+                  className="px-8"
+                >
+                  工作流
+                </Button>
+                <Button
+                  variant={activeSection === 'lessons' ? 'default' : 'outline'}
+                  onClick={() => setActiveSection('lessons')}
+                  className="px-8"
+                >
+                  经验库
+                </Button>
+              </div>
+
               <div className="flex justify-center space-x-8 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
                   <Zap className="w-5 h-5 text-blue-500" />
@@ -371,113 +390,119 @@ export default function WorkflowsPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Categories */}
-          <Tabs value={activeTab} onValueChange={(value) => {
-            trackCategoryFilter(value);
-            setActiveTab(value);
-          }} className="mb-8">
-            <TabsList className="grid w-full grid-cols-5">
-              {categories.map(category => (
-                <TabsTrigger key={category.id} value={category.id}>
-                  {category.name} ({category.count})
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          {activeSection === 'workflows' ? (
+            <>
+              {/* Categories */}
+              <Tabs value={activeTab} onValueChange={(value) => {
+                trackCategoryFilter(value);
+                setActiveTab(value);
+              }} className="mb-8">
+                <TabsList className="grid w-full grid-cols-5">
+                  {categories.map(category => (
+                    <TabsTrigger key={category.id} value={category.id}>
+                      {category.name} ({category.count})
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
 
-          {/* Workflows Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {filteredWorkflows.map((workflow, index) => (
-              <motion.div
-                key={workflow.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group"
+              {/* Workflows Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {filteredWorkflows.map((workflow, index) => (
+                  <motion.div
+                    key={workflow.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Card className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group"
                       onClick={() => {
                         trackWorkflowView(workflow.id);
                         setSelectedWorkflow(workflow);
                       }}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="text-blue-600 group-hover:text-blue-700">
-                          {workflow.icon}
-                        </div>
-                        <div>
-                          <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
-                            {workflow.title}
-                          </CardTitle>
-                          <div className="flex items-center space-x-2 mt-2">
-                            <Badge className={difficultyColors[workflow.difficulty]}>
-                              {difficultyLabels[workflow.difficulty]}
-                            </Badge>
-                            <Badge variant="outline">
-                              <Clock className="w-3 h-3 mr-1" />
-                              {workflow.duration}
-                            </Badge>
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="text-blue-600 group-hover:text-blue-700">
+                              {workflow.icon}
+                            </div>
+                            <div>
+                              <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
+                                {workflow.title}
+                              </CardTitle>
+                              <div className="flex items-center space-x-2 mt-2">
+                                <Badge className={difficultyColors[workflow.difficulty]}>
+                                  {difficultyLabels[workflow.difficulty]}
+                                </Badge>
+                                <Badge variant="outline">
+                                  <Clock className="w-3 h-3 mr-1" />
+                                  {workflow.duration}
+                                </Badge>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="flex items-center text-yellow-500 mb-1">
+                              <Star className="w-4 h-4 mr-1" />
+                              <span className="text-sm font-medium">{workflow.popularity}%</span>
+                            </div>
+                            <div className="text-xs text-gray-500">满意度</div>
                           </div>
                         </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex items-center text-yellow-500 mb-1">
-                          <Star className="w-4 h-4 mr-1" />
-                          <span className="text-sm font-medium">{workflow.popularity}%</span>
+                      </CardHeader>
+
+                      <CardContent>
+                        <p className="text-gray-600 mb-4">
+                          {workflow.description}
+                        </p>
+
+                        <div className="space-y-3">
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900 mb-2">适用人群</h4>
+                            <div className="flex flex-wrap gap-1">
+                              {workflow.targetAudience.slice(0, 3).map((audience, i) => (
+                                <Badge key={i} variant="secondary" className="text-xs">
+                                  {audience}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900 mb-2">核心工具</h4>
+                            <div className="flex flex-wrap gap-1">
+                              {workflow.tools.slice(0, 4).map((tool, i) => (
+                                <Badge key={i} variant="outline" className="text-xs">
+                                  {tool}
+                                </Badge>
+                              ))}
+                              {workflow.tools.length > 4 && (
+                                <Badge variant="outline" className="text-xs">
+                                  +{workflow.tools.length - 4}
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-xs text-gray-500">满意度</div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent>
-                    <p className="text-gray-600 mb-4">
-                      {workflow.description}
-                    </p>
-                    
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="text-sm font-medium text-gray-900 mb-2">适用人群</h4>
-                        <div className="flex flex-wrap gap-1">
-                          {workflow.targetAudience.slice(0, 3).map((audience, i) => (
-                            <Badge key={i} variant="secondary" className="text-xs">
-                              {audience}
-                            </Badge>
-                          ))}
+
+                        <div className="mt-4 pt-4 border-t flex items-center justify-between">
+                          <span className="text-sm text-gray-500">
+                            {workflow.steps.length} 个步骤
+                          </span>
+                          <Button variant="outline" size="sm" className="group-hover:bg-blue-600 group-hover:text-white">
+                            查看详情
+                            <ArrowRight className="w-4 h-4 ml-1" />
+                          </Button>
                         </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="text-sm font-medium text-gray-900 mb-2">核心工具</h4>
-                        <div className="flex flex-wrap gap-1">
-                          {workflow.tools.slice(0, 4).map((tool, i) => (
-                            <Badge key={i} variant="outline" className="text-xs">
-                              {tool}
-                            </Badge>
-                          ))}
-                          {workflow.tools.length > 4 && (
-                            <Badge variant="outline" className="text-xs">
-                              +{workflow.tools.length - 4}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-4 pt-4 border-t flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        {workflow.steps.length} 个步骤
-                      </span>
-                      <Button variant="outline" size="sm" className="group-hover:bg-blue-600 group-hover:text-white">
-                        查看详情
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <KajianLessonsSection />
+          )}
         </div>
       </div>
     </>
@@ -485,11 +510,11 @@ export default function WorkflowsPage() {
 }
 
 // Workflow Detail Component
-function WorkflowDetail({ 
-  workflow, 
-  onBack 
-}: { 
-  workflow: Workflow; 
+function WorkflowDetail({
+  workflow,
+  onBack
+}: {
+  workflow: Workflow;
   onBack: () => void;
 }) {
   const { trackUserAction } = useAnalytics();
@@ -497,12 +522,12 @@ function WorkflowDetail({
 
   const handleStartWorkflow = () => {
     // 追踪用户开始使用工作流
-    trackUserAction('start_workflow', { 
+    trackUserAction('start_workflow', {
       workflowId: workflow.id,
       workflowTitle: workflow.title,
       difficulty: workflow.difficulty
     });
-    
+
     // 创建更好的工作流开始体验
     const confirmStart = window.confirm(
       `🚀 准备开始工作流：${workflow.title}\n\n` +
@@ -511,7 +536,7 @@ function WorkflowDetail({
       `🔧 需要工具：${workflow.tools.slice(0, 3).join(', ')}${workflow.tools.length > 3 ? '等' : ''}\n\n` +
       `点击确定将在新标签页中打开相关工具链接，方便您开始工作流程。`
     );
-    
+
     if (confirmStart) {
       // 打开第一步的工具链接（如果有的话）
       const firstStep = workflow.steps[0];
@@ -527,13 +552,13 @@ function WorkflowDetail({
           '微信指数': 'https://index.weixin.qq.com',
           '百度指数': 'https://index.baidu.com'
         };
-        
+
         const toolToOpen = firstStep.tools.find(tool => toolLinks[tool]);
         if (toolToOpen) {
           window.open(toolLinks[toolToOpen], '_blank');
         }
       }
-      
+
       // 显示成功提示
       alert(`✅ 工作流已启动！\n\n接下来请按照步骤指导完成各个环节。如需帮助，可随时返回查看详细说明。`);
     }
@@ -565,7 +590,7 @@ function WorkflowDetail({
               {workflow.title}
             </h1>
           </div>
-          
+
           <div className="flex items-center space-x-4 mb-4">
             <Badge className={difficultyColors[workflow.difficulty]}>
               {difficultyLabels[workflow.difficulty]}
@@ -579,11 +604,11 @@ function WorkflowDetail({
               <span className="text-sm font-medium">{workflow.popularity}%</span>
             </div>
           </div>
-          
+
           <p className="text-lg text-gray-600 mb-6">
             {workflow.description}
           </p>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
@@ -600,7 +625,7 @@ function WorkflowDetail({
                 </ul>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">适用人群</CardTitle>
@@ -615,7 +640,7 @@ function WorkflowDetail({
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">使用工具</CardTitle>
@@ -633,7 +658,7 @@ function WorkflowDetail({
           </div>
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
@@ -642,28 +667,27 @@ function WorkflowDetail({
               进度：{completedSteps.length} / {workflow.steps.length}
             </div>
           </div>
-          
+
           {/* 进度条 */}
           <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
-            <div 
+            <div
               className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-              style={{ 
-                width: `${workflow.steps.length > 0 ? (completedSteps.length / workflow.steps.length) * 100 : 0}%` 
+              style={{
+                width: `${workflow.steps.length > 0 ? (completedSteps.length / workflow.steps.length) * 100 : 0}%`
               }}
             ></div>
           </div>
         </div>
-        
+
         <div className="space-y-6">
           {workflow.steps.map((step, index) => (
             <Card key={step.id}>
               <CardHeader>
                 <div className="flex items-center space-x-4">
-                  <div className={`flex items-center justify-center w-8 h-8 rounded-full font-bold transition-colors ${
-                    completedSteps.includes(step.id) 
-                      ? 'bg-green-600 text-white' 
-                      : 'bg-blue-600 text-white'
-                  }`}>
+                  <div className={`flex items-center justify-center w-8 h-8 rounded-full font-bold transition-colors ${completedSteps.includes(step.id)
+                    ? 'bg-green-600 text-white'
+                    : 'bg-blue-600 text-white'
+                    }`}>
                     {completedSteps.includes(step.id) ? '✓' : index + 1}
                   </div>
                   <div>
@@ -680,12 +704,12 @@ function WorkflowDetail({
                   </div>
                 </div>
               </CardHeader>
-              
+
               <CardContent>
                 <p className="text-gray-600 mb-4">
                   {step.description}
                 </p>
-                
+
                 <div className="mb-4">
                   <h4 className="text-sm font-medium text-gray-900 mb-2">推荐工具</h4>
                   <div className="flex flex-wrap gap-2">
@@ -696,7 +720,7 @@ function WorkflowDetail({
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center justify-between pt-4 border-t">
                   <div className="flex items-center space-x-2">
                     {completedSteps.includes(step.id) ? (
@@ -711,7 +735,7 @@ function WorkflowDetail({
                       </>
                     )}
                   </div>
-                  
+
                   <Button
                     variant={completedSteps.includes(step.id) ? "secondary" : "outline"}
                     size="sm"
@@ -725,10 +749,10 @@ function WorkflowDetail({
             </Card>
           ))}
         </div>
-        
+
         <div className="mt-8 text-center">
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="bg-blue-600 hover:bg-blue-700"
             onClick={handleStartWorkflow}
           >
