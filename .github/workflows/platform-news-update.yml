@@ -1,0 +1,36 @@
+name: Platform News Auto Update
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every day (08:00 Beijing Time)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual triggering from GitHub UI
+
+permissions:
+  contents: write # Grant permission to push changes
+
+jobs:
+  daily-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main # Checkout main branch to allow pushing back to it
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Configure Git Identity
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Run Update Script
+        # Script uses built-in modules, no npm install needed for now
+        run: node scripts/update_news.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
