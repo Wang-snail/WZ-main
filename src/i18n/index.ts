@@ -8,6 +8,9 @@ import en from './locales/en.json';
 import ja from './locales/ja.json';
 import ko from './locales/ko.json';
 import es from './locales/es.json';
+import fr from './locales/fr.json';
+import ru from './locales/ru.json';
+import pt from './locales/pt.json';
 
 // 语言资源配置
 const resources = {
@@ -16,6 +19,9 @@ const resources = {
   ja: { translation: ja },
   ko: { translation: ko },
   es: { translation: es },
+  fr: { translation: fr },
+  ru: { translation: ru },
+  pt: { translation: pt },
 };
 
 // 从URL路径获取语言代码

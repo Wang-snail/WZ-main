@@ -60,6 +60,33 @@ export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
     urlPrefix: 'es',
     isDefault: false,
   },
+  {
+    code: 'fr',
+    i18nCode: 'fr',
+    name: 'French',
+    nativeName: 'Français',
+    locale: 'fr-FR',
+    urlPrefix: 'fr',
+    isDefault: false,
+  },
+  {
+    code: 'ru',
+    i18nCode: 'ru',
+    name: 'Russian',
+    nativeName: 'Русский',
+    locale: 'ru-RU',
+    urlPrefix: 'ru',
+    isDefault: false,
+  },
+  {
+    code: 'pt',
+    i18nCode: 'pt',
+    name: 'Portuguese',
+    nativeName: 'Português',
+    locale: 'pt-PT',
+    urlPrefix: 'pt',
+    isDefault: false,
+  },
 ];
 
 // 默认语言
