@@ -84,7 +84,7 @@ export default function CommunityPage() {
   ];
 
   const stats = [
-    { value: '500+', label: '预约用户', icon: <Users className="w-5 h-5" /> },
+    { value: '1000+', label: '社区用户', icon: <Users className="w-5 h-5" /> },
     { value: '2025年Q1', label: '预计上线', icon: <Rocket className="w-5 h-5" /> },
     { value: '6大', label: '核心功能', icon: <Sparkles className="w-5 h-5" /> },
   ];
@@ -167,7 +167,7 @@ export default function CommunityPage() {
                 <div className="backdrop-blur-xl bg-white/80 border border-gray-200 rounded-2xl p-8 shadow-2xl">
                   <div className="flex items-center justify-center mb-4">
                     <Bell className="w-6 h-6 text-blue-600 mr-2" />
-                    <h3 className="text-xl font-bold text-gray-800">抢先预约</h3>
+                    <h3 className="text-xl font-bold text-gray-800">加入社区</h3>
                   </div>
                   <p className="text-gray-600 mb-6">
                     留下您的邮箱，社区上线时我们会第一时间通知您
@@ -196,7 +196,7 @@ export default function CommunityPage() {
                         ) : (
                           <>
                             <Mail className="w-5 h-5 mr-2" />
-                            预约通知
+                            订阅通知
                           </>
                         )}
                       </Button>
@@ -218,13 +218,13 @@ export default function CommunityPage() {
                     <CheckCircle className="w-12 h-12 text-green-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                    预约成功！
+                    订阅成功！
                   </h3>
                   <p className="text-gray-600 mb-4">
                     感谢您的关注！我们会在社区上线时第一时间通过邮件通知您
                   </p>
                   <p className="text-sm text-gray-500">
-                    预约邮箱：<span className="font-medium text-gray-700">{email}</span>
+                    订阅邮箱：<span className="font-medium text-gray-700">{email}</span>
                   </p>
                 </div>
               </motion.div>
@@ -298,7 +298,7 @@ export default function CommunityPage() {
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg"
               >
                 <Bell className="w-5 h-5 mr-2" />
-                立即预约
+                立即加入
               </Button>
             )}
           </motion.div>

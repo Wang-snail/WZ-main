@@ -19,7 +19,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
-              探索AI的无限可能，发现最佳工具，体验智能占卜，让技术为生活增添更多精彩。
+              探索AI的无限可能，发现最佳工具，让技术为生活增添更多精彩。
             </p>
             <div className="flex items-center space-x-2 text-gray-300">
               <Heart className="w-5 h-5 text-red-400" />
@@ -46,11 +46,7 @@ export default function Footer() {
                   AI工具库
                 </Link>
               </li>
-              <li>
-                <Link to="/divination" className="text-gray-300 hover:text-white transition-colors">
-                  AI占卜大师
-                </Link>
-              </li>
+
               <li>
                 <Link to="/analyzer" className="text-gray-300 hover:text-white transition-colors">
                   智能情感分析
@@ -72,19 +68,16 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-300">wsanil2025@163.com</span>
+                <span className="text-gray-300">support@wsnail.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Github className="w-4 h-4 text-gray-400" />
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <a href="https://github.com/Wang-snail/WZ-main" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                   GitHub
                 </a>
               </li>
               <li className="flex items-center space-x-2">
-                <Twitter className="w-4 h-4 text-gray-400" />
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  Twitter
-                </a>
+                {/* Twitter hidden as per request */}
               </li>
             </ul>
           </div>
@@ -93,7 +86,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm">
-              © 2024 WSNAIL.COM. All rights reserved.
+              © 2024-2025 WSNAIL.COM. All rights reserved.
             </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">

@@ -7,20 +7,20 @@ import { Users, TrendingUp, CheckCircle } from 'lucide-react';
 export default function LazySocialProof() {
   const testimonials = [
     {
-      name: "张明",
-      role: "跨境电商卖家",
+      name: "亚马逊资深卖家",
+      role: "5年跨境电商经验",
       content: "WSNAIL的AI选品工具帮我找到了3个爆款产品，月销售额提升了300%",
       avatar: "👨‍💼"
     },
     {
-      name: "李小红",
-      role: "电商运营",
+      name: "DTC品牌主理人",
+      role: "独立站运营",
       content: "营销文案生成工具节省了我70%的时间，转化率提升了25%",
       avatar: "👩‍💼"
     },
     {
-      name: "王大伟",
-      role: "淘宝店主",
+      name: "跨境营销专家",
+      role: "数据分析师",
       content: "数据分析功能让我清楚地了解客户需求，店铺评分从4.2提升到4.8",
       avatar: "👨‍🔧"
     }
@@ -128,7 +128,7 @@ export default function LazySocialProof() {
               <Link to="/ai-tools">
                 <Button size="lg" className="backdrop-blur-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl px-8 py-6 text-lg font-semibold">
                   <Users className="w-5 h-5 mr-2" />
-                  立即开始
+                  免费体验AI选品
                 </Button>
               </Link>
               <Link to="/community">

@@ -297,28 +297,7 @@ export default function AIGamesPage() {
                 </div>
               </motion.div>
 
-              {/* Sales Tracking */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <div
-                  className="group cursor-pointer bg-white border border-gray-100 rounded-xl p-8 hover:shadow-lg transition-all duration-500 hover:-translate-y-1 h-full flex flex-col"
-                  onClick={() => navigate('/sales-tracking')}
-                >
-                  <div className="mb-6 p-4 bg-blue-50 rounded-full w-16 h-16 flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-500">
-                    <TrendingUp className="w-8 h-8 text-blue-600 stroke-[1.5px]" />
-                  </div>
-                  <h3 className="text-xl font-serif-display font-medium text-gray-800 mb-2">销售模拟追踪</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
-                    模拟和追踪销售数据，分析成本利润，体验商业决策的乐趣与挑战。
-                  </p>
-                  <div className="flex items-center text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform">
-                    进入系统 <ArrowRight className="w-4 h-4 ml-1" />
-                  </div>
-                </div>
-              </motion.div>
+
             </div>
           </section>
 

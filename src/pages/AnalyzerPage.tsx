@@ -446,8 +446,8 @@ export default function AnalyzerPage() {
                           className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
                           <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-lg ${message.type === 'user'
-                              ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
-                              : 'bg-gray-100 text-gray-800'
+                            ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
+                            : 'bg-gray-100 text-gray-800'
                             }`}>
                             <p className="text-sm leading-relaxed">{message.content}</p>
                             <p className={`text-xs mt-2 ${message.type === 'user' ? 'text-pink-100' : 'text-gray-500'
@@ -527,7 +527,7 @@ export default function AnalyzerPage() {
                 <div className="space-y-2">
                   <a href="/" className="block text-gray-600 hover:text-pink-600 transition-colors">首页</a>
                   <a href="/ai-tools" className="block text-gray-600 hover:text-pink-600 transition-colors">AI工具库</a>
-                  <a href="/divination" className="block text-gray-600 hover:text-pink-600 transition-colors">AI占卜</a>
+                  {/* Link removed */}
                   <a href="/analyzer" className="block text-gray-600 hover:text-pink-600 transition-colors">情感分析</a>
                 </div>
               </div>

@@ -18,6 +18,7 @@ import { dataService } from '../services/dataService';
 // 懒加载组件
 const LazyCoreFeatures = React.lazy(() => import('./features/LazyCoreFeatures'));
 const LazySocialProof = React.lazy(() => import('./features/LazySocialProof'));
+const DataSecurityFAQ = React.lazy(() => import('../components/features/DataSecurityFAQ'));
 
 // 简化的统计数据
 const stats = [
@@ -206,6 +207,11 @@ export default function HomePageOptimized() {
       {/* 核心功能 - 懒加载 */}
       <Suspense fallback={<div className="py-20 text-center">加载更多功能...</div>}>
         <LazyCoreFeatures />
+      </Suspense>
+
+      {/* FAQ部分 - 懒加载 */}
+      <Suspense fallback={<div className="py-20 text-center">加载常见问题...</div>}>
+        <DataSecurityFAQ />
       </Suspense>
 
       {/* CTA部分 - 懒加载 */}

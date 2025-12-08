@@ -21,8 +21,8 @@ interface SEOEnhancerProps {
 
 export default function SEOEnhancer({
   title = "AI工具集合站 - 106+精选AI工具库 | WSNAIL.COM",
-  description = "WSNAIL.COM - 精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等。免费AI工具推荐，AI占卜服务，AI游戏娱乐，让AI为生活增添更多精彩。",
-  keywords = "AI工具,AI工具库,AI工具集合,人工智能工具,AI聊天机器人,AI搜索引擎,AI图像设计,AI视频制作,AI游戏,AI占卜,免费AI工具,ChatGPT,AI绘画,AI写作,WSNAIL",
+  description = "WSNAIL.COM - 精选106+优质AI工具，包含AI聊天机器人、AI搜索引擎、AI图像设计、AI视频制作等。免费AI工具推荐，AI游戏娱乐，让AI为生活增添更多精彩。",
+  keywords = "AI工具,AI工具库,AI工具集合,人工智能工具,AI聊天机器人,AI搜索引擎,AI图像设计,AI视频制作,AI游戏,免费AI工具,ChatGPT,AI绘画,AI写作,WSNAIL",
   image = "https://wsnail.com/images/logo.svg",
   url,
   structuredData,
@@ -113,21 +113,7 @@ export default function SEOEnhancer({
       };
     }
 
-    if (pathname === '/divination') {
-      return {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "AI占卜大师 - 智能占卜服务",
-        "description": "提供塔罗牌、星座、手相、八卦等多种AI占卜服务",
-        "url": currentUrl,
-        "serviceType": "占卜服务",
-        "provider": {
-          "@type": "Organization",
-          "name": "WSNAIL",
-          "url": "https://wsnail.com"
-        }
-      };
-    }
+
 
     if (pathname === '/analyzer') {
       return {
@@ -153,8 +139,6 @@ export default function SEOEnhancer({
 
     if (pathname === '/games') {
       pageSpecificKeywords.push('AI游戏', 'AI小游戏', '在线AI游戏', '智能游戏');
-    } else if (pathname === '/divination') {
-      pageSpecificKeywords.push('在线占卜', 'AI塔罗牌', 'AI算命', '免费占卜');
     } else if (pathname === '/analyzer') {
       pageSpecificKeywords.push('情感分析', '关系分析', 'AI心理分析', '情感咨询');
     } else if (pathname === '/ai-tools') {
@@ -175,8 +159,6 @@ export default function SEOEnhancer({
       return `AI工具库 - 106+精选AI工具集合 | ${siteName}`;
     } else if (pathname === '/games') {
       return `AI游戏中心 - 10+智能游戏在线体验 | ${siteName}`;
-    } else if (pathname === '/divination') {
-      return `AI占卜大师 - 塔罗牌·星座·算命 | ${siteName}`;
     } else if (pathname === '/analyzer') {
       return `AI情感分析器 - 智能关系分析工具 | ${siteName}`;
     }

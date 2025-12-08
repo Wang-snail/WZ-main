@@ -43,17 +43,16 @@ export default function Header() {
 
   const navigation = [
     { name: t('nav.home'), href: localizedLink('/'), current: cleanPath === '/' },
-    { name: t('nav.games'), href: localizedLink('/games'), current: cleanPath === '/games', icon: Gamepad2 },
     { name: t('nav.aiTools'), href: localizedLink('/ai-tools'), current: cleanPath === '/ai-tools' },
   ];
 
   const moreNavigation = [
-    { name: t('nav.platformNews'), href: localizedLink('/platform-news'), current: cleanPath === '/platform-news', icon: Newspaper },
-    { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath === '/workflows', icon: Workflow },
-    { name: '采购报价单', href: localizedLink('/procurement-quotation'), current: cleanPath === '/procurement-quotation', icon: FileSpreadsheet },
+    { name: 'AI实验室', href: localizedLink('/games'), current: cleanPath === '/games', icon: Sparkles },
   ];
 
   const toolsNavigation = [
+    { name: t('nav.platformNews'), href: localizedLink('/platform-news'), icon: Newspaper },
+    { name: t('nav.workflows'), href: localizedLink('/workflows'), icon: Workflow },
     { name: 'Amazon Profit Compass', href: localizedLink('/tools/amazon-profit-compass'), icon: TrendingUp },
     { name: 'FBA 费用计算器', href: localizedLink('/tools/fba-calculator'), icon: TrendingUp },
     { name: '采购报价单', href: localizedLink('/procurement-quotation'), icon: FileSpreadsheet },
@@ -95,7 +94,6 @@ export default function Header() {
                   : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                   }`}
               >
-                {item.icon && <item.icon className="w-4 h-4 mr-1" />}
                 {item.name}
               </Link>
             ))}
@@ -109,7 +107,7 @@ export default function Header() {
                 className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 flex items-center"
               >
                 <Wrench className="w-4 h-4 mr-1" />
-                工具
+                电商工具包
                 <ChevronDown className="w-3 h-3 ml-1" />
               </Button>
 
@@ -220,7 +218,6 @@ export default function Header() {
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                     }`}
                 >
-                  {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                   {item.name}
                 </Link>
               ))}
@@ -230,7 +227,7 @@ export default function Header() {
             <div className="border-t pt-2 mt-2">
               <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center">
                 <Wrench className="w-3 h-3 mr-1" />
-                工具
+                电商工具包
               </div>
               {toolsNavigation.map((item) => (
                 <Link
