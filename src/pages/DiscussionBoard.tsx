@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import { ArrowLeft, Send, Trash2, Shield, User, MessageCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 interface Reply {
     id: string;
@@ -26,6 +27,7 @@ interface Post {
 }
 
 const DiscussionBoard = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [posts, setPosts] = useState<Post[]>([]);
     const [nickname, setNickname] = useState('');
@@ -101,7 +103,7 @@ const DiscussionBoard = () => {
 
         savePosts([newPost, ...posts]);
         setContent('');
-        toast.success('发布成功！');
+        toast.success(t('discussion.post.success'));
     };
 
     const handleReplySubmit = (e: React.FormEvent, postId: string) => {
@@ -128,18 +130,18 @@ const DiscussionBoard = () => {
         savePosts(updatedPosts);
         setReplyingTo(null);
         setReplyContent('');
-        toast.success('回复成功！');
+        toast.success(t('discussion.reply.success'));
     };
 
     const handleDelete = (id: string) => {
-        if (!window.confirm('确定要删除这条留言及其所有回复吗？')) return;
+        if (!window.confirm(t('discussion.admin.deleteConfirm'))) return;
         const updatedPosts = posts.filter(post => post.id !== id);
         savePosts(updatedPosts);
-        toast.success('已删除');
+        toast.success(t('discussion.admin.deleted'));
     };
 
     const handleDeleteReply = (postId: string, replyId: string) => {
-        if (!window.confirm('确定要删除这条回复吗？')) return;
+        if (!window.confirm(t('discussion.admin.deleteReplyConfirm'))) return;
         const updatedPosts = posts.map(post => {
             if (post.id === postId) {
                 return {
@@ -150,7 +152,7 @@ const DiscussionBoard = () => {
             return post;
         });
         savePosts(updatedPosts);
-        toast.success('回复已删除');
+        toast.success(t('discussion.admin.deleted'));
     };
 
     const handleAdminLogin = () => {
@@ -159,16 +161,16 @@ const DiscussionBoard = () => {
             localStorage.setItem('discussion_admin', 'true');
             setShowAdminLogin(false);
             setAdminPassword('');
-            toast.success('管理员模式已开启');
+            toast.success(t('discussion.admin.modeOn'));
         } else {
-            toast.error('密码错误');
+            toast.error('Admin Password Error');
         }
     };
 
     const handleAdminLogout = () => {
         setIsAdmin(false);
         localStorage.removeItem('discussion_admin');
-        toast.success('管理员模式已关闭');
+        toast.success(t('discussion.admin.modeOff'));
     };
 
     return (
@@ -181,14 +183,14 @@ const DiscussionBoard = () => {
                         className="hover:bg-gray-100"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2" />
-                        返回首页
+                        {t('discussion.backHome')}
                     </Button>
 
                     <div className="flex items-center gap-2">
                         {isAdmin ? (
                             <Button variant="outline" size="sm" onClick={handleAdminLogout} className="text-red-600 border-red-200 hover:bg-red-50">
                                 <Shield className="w-4 h-4 mr-2" />
-                                退出管理
+                                {t('discussion.admin.logout')}
                             </Button>
                         ) : (
                             <Button variant="ghost" size="sm" onClick={() => setShowAdminLogin(!showAdminLogin)} className="text-gray-400">
@@ -204,12 +206,12 @@ const DiscussionBoard = () => {
                         <CardContent className="flex items-center gap-4 py-4">
                             <Input
                                 type="password"
-                                placeholder="输入管理员密码"
+                                placeholder={t('discussion.admin.placeholder')}
                                 value={adminPassword}
-                                onChange={(e) => setAdminPassword(e.target.value)}
+                                onChange={(e: any) => setAdminPassword(e.target.value)}
                                 className="bg-white"
                             />
-                            <Button onClick={handleAdminLogin}>登录</Button>
+                            <Button onClick={handleAdminLogin}>{t('discussion.admin.login')}</Button>
                         </CardContent>
                     </Card>
                 )}
@@ -221,29 +223,29 @@ const DiscussionBoard = () => {
                             <CardHeader className="bg-gradient-to-r from-blue-50 to-white pb-4">
                                 <CardTitle className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                     <Send className="w-4 h-4 text-blue-600" />
-                                    发布新话题
+                                    {t('discussion.post.new')}
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="pt-6">
                                 <form onSubmit={handleSubmit} className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="nickname">你的昵称</Label>
+                                        <Label htmlFor="nickname">{t('discussion.post.nicknameLabel')}</Label>
                                         <Input
                                             id="nickname"
-                                            placeholder="取个好听的名字"
+                                            placeholder={t('discussion.post.nicknamePlaceholder')}
                                             value={nickname}
-                                            onChange={(e) => setNickname(e.target.value)}
+                                            onChange={(e: any) => setNickname(e.target.value)}
                                             required
                                             maxLength={20}
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="content">想说什么？</Label>
+                                        <Label htmlFor="content">{t('discussion.post.contentLabel')}</Label>
                                         <Textarea
                                             id="content"
-                                            placeholder="分享你的想法、提问或者建议..."
+                                            placeholder={t('discussion.post.contentPlaceholder')}
                                             value={content}
-                                            onChange={(e) => setContent(e.target.value)}
+                                            onChange={(e: any) => setContent(e.target.value)}
                                             required
                                             rows={6}
                                             maxLength={500}
@@ -254,7 +256,7 @@ const DiscussionBoard = () => {
                                         </div>
                                     </div>
                                     <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                                        发布
+                                        {t('discussion.post.submit')}
                                     </Button>
                                 </form>
                             </CardContent>
@@ -265,13 +267,13 @@ const DiscussionBoard = () => {
                     <div className="lg:col-span-3 space-y-6">
                         <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
                             <User className="w-5 h-5" />
-                            社区动态
-                            <span className="text-sm font-normal text-gray-500 ml-2">({posts.length} 条讨论)</span>
+                            {t('discussion.title')}
+                            <span className="text-sm font-normal text-gray-500 ml-2">({posts.length} {t('discussion.post.count')})</span>
                         </h2>
 
                         {posts.length === 0 ? (
                             <div className="text-center py-12 text-gray-500 bg-white rounded-lg border border-gray-100">
-                                还没有人发言，快来抢沙发吧！
+                                {t('discussion.post.emptyList')}
                             </div>
                         ) : (
                             posts.map((post) => (
@@ -301,7 +303,7 @@ const DiscussionBoard = () => {
                                                     }}
                                                 >
                                                     <MessageCircle className="w-4 h-4 mr-1" />
-                                                    回复
+                                                    {t('discussion.reply.action')}
                                                 </Button>
                                                 {isAdmin && (
                                                     <Button
@@ -353,18 +355,18 @@ const DiscussionBoard = () => {
                                                     <div className="grid grid-cols-3 gap-2 mb-2">
                                                         <div className="col-span-1">
                                                             <Input
-                                                                placeholder="昵称"
+                                                                placeholder={t('discussion.post.nicknameLabel')}
                                                                 value={replyNickname}
-                                                                onChange={(e) => setReplyNickname(e.target.value)}
+                                                                onChange={(e: any) => setReplyNickname(e.target.value)}
                                                                 className="bg-white h-8 text-sm"
                                                                 required
                                                             />
                                                         </div>
                                                         <div className="col-span-2">
                                                             <Input
-                                                                placeholder="回复内容..."
+                                                                placeholder={t('discussion.reply.placeholder')}
                                                                 value={replyContent}
-                                                                onChange={(e) => setReplyContent(e.target.value)}
+                                                                onChange={(e: any) => setReplyContent(e.target.value)}
                                                                 className="bg-white h-8 text-sm"
                                                                 required
                                                             />
@@ -378,14 +380,14 @@ const DiscussionBoard = () => {
                                                             onClick={() => setReplyingTo(null)}
                                                             className="h-7 text-xs"
                                                         >
-                                                            取消
+                                                            {t('discussion.reply.cancel')}
                                                         </Button>
                                                         <Button
                                                             type="submit"
                                                             size="sm"
                                                             className="h-7 text-xs bg-blue-600 hover:bg-blue-700"
                                                         >
-                                                            发送回复
+                                                            {t('discussion.reply.submit')}
                                                         </Button>
                                                     </div>
                                                 </form>

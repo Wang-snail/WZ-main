@@ -14,6 +14,7 @@ import './App.css';
 
 // 路由组件
 import SalesTargetTracking from '@/pages/SalesTargetTracking';
+import EmailContactPage from '@/pages/EmailContactPage';
 import DiscussionBoard from '@/pages/DiscussionBoard';
 import HomePage from './pages/HomePageOptimized';
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
@@ -60,6 +61,7 @@ function App() {
                   {/* 主要路由 */}
                   <Route path="/" element={<HomePage />} />
                   <Route path="/sales-target" element={<SalesTargetTracking />} />
+                  <Route path="/email-contact" element={<EmailContactPage />} />
                   <Route path="/discussion" element={<DiscussionBoard />} />
                   <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />

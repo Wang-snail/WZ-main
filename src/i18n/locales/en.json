@@ -8,12 +8,28 @@
     "workflows": "Workflows",
     "toolReviews": "Tool Reviews",
     "salesTracking": "Sales Tracking",
-    "platformNews": "Platform News"
+    "platformNews": "Platform News",
+    "contact": "Contact Us"
   },
   "home": {
-    "title": "Smart Toolbox for E-commerce Professionals",
-    "subtitle": "AI-Powered Platform for Cross-Border E-commerce",
-    "description": "Integrating 106+ professional AI tools covering product selection, operations, and marketing. Track 313 platform updates from Amazon, Shopee, TikTok and more in real-time.",
+    "title": "Deconstruct Cross-border Business with AI",
+    "subtitle": "Powered by DeepSeek · Free No Login · Real-time Generation",
+    "description": "One-stop aggregation of 100+ AI efficiency tools, covering product selection, copywriting to operations.",
+    "searchPlaceholder": "Search tools (e.g., Amazon Copywriting, Profit Calc...)",
+    "loading": "Loading tool library...",
+    "noResults": "No tools found, try another keyword?",
+    "tools": {
+      "salesTarget": {
+        "name": "Sales Target Tracking System",
+        "desc": "Professional sales target management tool supporting automatic currency conversion, cost structure analysis, and multi-product line performance tracking."
+      }
+    },
+    "bottomCta": {
+      "title": "Considering custom tools?",
+      "desc": "Contact our consultant, tell us your needs, and we will find or customize for you within 24 hours.",
+      "contact": "Contact Us",
+      "community": "Community"
+    },
     "stats": {
       "tools": "AI Tools",
       "news": "Platform Updates",
@@ -89,13 +105,17 @@
     "relevantPlatforms": "Relevant Platforms"
   },
   "footer": {
-    "description": "AI-powered platform built for cross-border e-commerce professionals",
+    "description": "Explore infinite possibilities of AI, discover the best tools, and add more excitement to life with technology.",
+    "slogan": "Making AI technology closer to life",
     "quickLinks": "Quick Links",
+    "home": "Home",
+    "about": "About Us",
     "contact": "Contact Us",
     "wechat": "WeChat",
-    "email": "Email",
-    "follow": "Follow Us",
-    "copyright": "© 2024 WSNAIL.COM. All rights reserved."
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "help": "Help Center",
+    "copyright": "© 2024-2025 WSNAIL.COM. All rights reserved."
   },
   "common": {
     "loading": "Loading...",
@@ -109,6 +129,245 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
-    "more": "More"
+    "more": "More",
+    "discussion": {
+      "title": "Community",
+      "backHome": "Back to Home",
+      "admin": {
+        "login": "Login",
+        "logout": "Admin Logout",
+        "placeholder": "Enter Admin Password",
+        "modeOn": "Admin Mode Enabled",
+        "modeOff": "Admin Mode Disabled",
+        "deleteConfirm": "Delete this post and all replies?",
+        "deleteReplyConfirm": "Delete this reply?",
+        "deleted": "Deleted"
+      },
+      "post": {
+        "new": "New Post",
+        "nicknameLabel": "Nickname",
+        "nicknamePlaceholder": "Enter your nickname",
+        "contentLabel": "Content",
+        "contentPlaceholder": "Share your thoughts, questions or suggestions...",
+        "submit": "Post",
+        "success": "Posted successfully!",
+        "emptyList": "No posts yet, be the first!",
+        "count": "Discussions"
+      },
+      "reply": {
+        "action": "Reply",
+        "placeholder": "Reply content...",
+        "cancel": "Cancel",
+        "submit": "Send Reply",
+        "success": "Reply sent!"
+      }
+    }
+  },
+  "salesTarget": {
+    "title": "Sales Target Tracking System",
+    "overview": {
+      "targetSalesCNY": "Target Sales (CNY)",
+      "targetProfitCNY": "Target Profit (CNY)",
+      "targetSalesUSD": "Target Sales (USD)",
+      "targetProfitUSD": "Target Profit (USD)",
+      "exchangeRate": "Exchange Rate",
+      "successRate": "Success Rate (%)",
+      "actualProfitRate": "Actual Profit Margin"
+    },
+    "costAnalysis": {
+      "title": "Cost Structure Analysis",
+      "productCost": "Product Cost",
+      "logisticsCost": "Logistics",
+      "adCost": "Advertising",
+      "shippingCost": "Shipping",
+      "commission": "Commission",
+      "returns": "Returns",
+      "otherCost": "Other",
+      "profit": "Profit Margin",
+      "totalCheck": "Total Check"
+    },
+    "productLine": {
+      "title": "Performance & Product Line Analysis",
+      "name": "Product Line",
+      "price": "Avg Price",
+      "spu": "SPU Count",
+      "monthlySales": "Monthly Sales/SKU",
+      "annualSales": "Annual Sales",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "status": {
+        "title": "Status",
+        "exceed": "Exceeds Target",
+        "meet": "Meets Target",
+        "below": "Below Target"
+      }
+    }
+  },
+  "amazonSop": {
+    "title": "Amazon New Product Import SOP",
+    "backHome": "Back to Home",
+    "meta": {
+      "version": "Version",
+      "updated": "Last Updated"
+    },
+    "stages": {
+      "concept": "Phase 1: Product Concept",
+      "project": "Phase 2: Project Initiation",
+      "delivery": "Phase 3: Product Delivery"
+    },
+    "labels": {
+      "outputs": "📋 Core Outputs:",
+      "doc": "📑 Output Docs:",
+      "branch": "🔀 Decision Branch:",
+      "note": "📌 Note:",
+      "role": "Owner"
+    },
+    "steps": {
+      "01": {
+        "title": "Product Planning",
+        "role": "Product Dept",
+        "content": "Product dept forms initial concept based on ops needs and company plan, communicates with decision makers for alignment."
+      },
+      "02": {
+        "title": "Market Research",
+        "role": "Product Dept",
+        "content": "Conduct market research and output 'Market Research Report' for ops dept and decision makers.",
+        "outputs": [
+          "Target market size & customer analysis",
+          "Core selling points & profit analysis",
+          "Competitiveness & risk analysis",
+          "Competitor analysis (TOP5 negative reviews)"
+        ]
+      },
+      "03": {
+        "title": "Requirement Definition",
+        "role": "Product Dept",
+        "content": "Define product requirements, output 'Product Requirement Document' (PRD).",
+        "outputs": [
+          "Target market regulations & certifications",
+          "Product positioning: scenarios, selling points, user groups",
+          "Specs, config, appearance & colors",
+          "Functions, UI/UX interaction",
+          "Packaging & accessories",
+          "Competitor models & links"
+        ]
+      },
+      "04": {
+        "title": "PRD Review",
+        "role": "Product (Host), Ops, Quality",
+        "content": "Organize review of PRD with Ops and Quality. Unclear or unreasonable definitions must be revised and re-reviewed.",
+        "doc": "PRD Review Minutes"
+      },
+      "05": {
+        "title": "Publish PRD",
+        "role": "Product Dept",
+        "content": "Formally publish PRD via email after approval. Future changes require re-review and version upgrade notification.",
+        "note": "Key Control Point: PRD is key output of concept phase; Ops makes sales/promo plans based on it; Quality uses it for standards/testing."
+      },
+      "06": {
+        "title": "Sourcing",
+        "role": "Product Dept, Suppliers",
+        "content": "Source target products (functional samples) per PRD. Require: ≥3 target products, ≥2 samples each.",
+        "outputs": [
+          "Specs",
+          "BOM",
+          "Cert Reports",
+          "Test Reports"
+        ]
+      },
+      "07": {
+        "title": "Sample Testing",
+        "role": "Product, Ops (Exp); Quality (Test)",
+        "content": "Product & Ops conduct experience testing; Quality conducts quality testing.",
+        "doc": "Experience Report, Quality Test Report"
+      },
+      "08": {
+        "title": "Sample Review",
+        "role": "Product (Host), Ops, Quality",
+        "content": "Product organizes review of test findings, solutions, and requirement changes after testing.",
+        "doc": "Sample Review Minutes"
+      },
+      "09": {
+        "title": "Quality Standard Output",
+        "role": "Quality Dept",
+        "content": "Quality dept formulates quality standards after testing/review and releases to Purchasing.",
+        "doc": "Quality Standards"
+      },
+      "10": {
+        "title": "Business Negotiation",
+        "role": "Purchasing/Business",
+        "content": "Purchasing communicates plan with Ops/Product, negotiates with suppliers based on standards/payment terms."
+      },
+      "11": {
+        "title": "Factory Audit",
+        "role": "Purchasing (Host), Product, Quality",
+        "content": "Key products or >500k amount require audit. Three parties output reports; Quality scores for final decision.",
+        "doc": "Audit Report"
+      },
+      "12": {
+        "title": "Project Initiation Review",
+        "role": "Product (Host), Ops, Purchasing, Quality",
+        "content": "Product organizes initiation review with all depts and decision makers after sample/audit approval."
+      },
+      "13": {
+        "title": "Project Decision",
+        "role": "Decision Makers",
+        "content": "Final decision on procurement. Product leads signing of 'Project Initiation Form'.",
+        "branch": "Approved -> Structuring; Rejected -> End",
+        "doc": "Project Initiation Form"
+      },
+      "14": {
+        "title": "Final Sampling",
+        "role": "Purchasing Dept",
+        "content": "Purchasing leads final sampling and payment after project approval.",
+        "outputs": [
+          "3 Final Samples with Packaging"
+        ]
+      },
+      "15": {
+        "title": "Sample Signing",
+        "role": "Product (Host), Ops, Quality",
+        "content": "Joint signing of final samples. Company keeps 2 sets (Quality/Ops).",
+        "outputs": [
+          "3 Signed Samples"
+        ]
+      },
+      "16": {
+        "title": "Order Placement",
+        "role": "Purchasing/Business",
+        "content": "Purchasing places order after sample signing."
+      },
+      "17": {
+        "title": "Production",
+        "role": "Supplier (Mfg), Purchasing (Monitor)",
+        "content": "Supplier produces per order. Purchasing monitors schedule and notifies Quality/Ops.",
+        "doc": "Inspection Plan"
+      },
+      "18": {
+        "title": "Inspection",
+        "role": "Quality Dept",
+        "content": "Quality arranges QC/arrival inspection. Report issued next day.",
+        "branch": "Pass -> Ship; Fail -> Rectify/Remake",
+        "doc": "Inspection Report"
+      },
+      "19": {
+        "title": "Logistics & Inbound",
+        "role": "Purchasing, Logistics",
+        "content": "Execute transport and warehousing after inspection."
+      },
+      "20": {
+        "title": "Listing & Sales",
+        "role": "Ops Dept",
+        "content": "Ops arranges listing and sales based on inbound status. End of process."
+      }
+    },
+    "footer": "© 2022-2025 WSNAIL SOP Management System"
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "We look forward to hearing from you. We respond within 24 hours.",
+    "copied": "Email address copied",
+    "sendEmail": "Send Email",
+    "wechat": "Or add WeChat:"
   }
 }

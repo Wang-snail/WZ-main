@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { Button } from './ui/button';
+import { extractLanguageFromPath, buildLocalizedUrl } from '@/config/i18n';
+
+
 
 const languages = [
   { code: 'zh', name: '中文', flag: '🇨🇳' },
@@ -13,15 +16,12 @@ export default function SimplifiedLanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLanguageChange = (langCode: string) => {
+    // 使用统一的路由处理逻辑
+    const { cleanPath } = extractLanguageFromPath(window.location.pathname);
+    const newPath = buildLocalizedUrl(cleanPath, langCode);
+
     i18n.changeLanguage(langCode);
     setIsOpen(false);
-
-    // 简化重定向逻辑 - 直接重新加载页面
-    const currentPath = window.location.pathname;
-    const newPath = currentPath.startsWith(`/${langCode}`)
-      ? currentPath
-      : `/${langCode}${currentPath}`;
-
     window.location.href = newPath;
   };
 

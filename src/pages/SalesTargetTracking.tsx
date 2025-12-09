@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import TargetOverview from '@/components/sales/TargetOverview';
 import CostAnalysis, { CostStructure } from '@/components/sales/CostAnalysis';
 import ProductLineAnalysis, { ProductLineData } from '@/components/sales/ProductLineAnalysis';
+import { useTranslation } from 'react-i18next';
 
 const SalesTargetTracking: React.FC = () => {
+    const { t } = useTranslation();
     // --- State Configuration ---
 
     // 1. Overview State
@@ -148,7 +150,7 @@ const SalesTargetTracking: React.FC = () => {
     return (
         <div className="container mx-auto p-4 max-w-7xl animate-in fade-in duration-500">
             <h1 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                销售额目标追踪系统
+                {t('salesTarget.title')}
             </h1>
 
             {/* 1. Overview */}
@@ -176,7 +178,7 @@ const SalesTargetTracking: React.FC = () => {
 
             {/* 3. Product Line Analysis */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-500 pl-4">业绩对比与品线分析</h2>
+                <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-500 pl-4">{t('salesTarget.productLine.title')}</h2>
                 <ProductLineAnalysis
                     productLines={productLines}
                     onProductLineChange={handleProductLineChange}

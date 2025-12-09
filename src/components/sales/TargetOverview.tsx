@@ -3,6 +3,8 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useTranslation } from 'react-i18next';
+
 
 interface TargetOverviewProps {
     cnyTargetSales: number;
@@ -35,18 +37,19 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
     onExchangeRateChange,
     onSuccessRateChange,
 }) => {
+    const { t } = useTranslation();
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* CNY Area */}
             <Card className="bg-gradient-to-br from-red-50 to-white border-red-100">
                 <CardHeader className="pb-2">
                     <CardTitle className="text-lg font-bold text-red-800 flex items-center gap-2">
-                        🇨🇳 人民币区域
+                        🇨🇳 {t('salesTarget.overview.targetSalesCNY').split(' ')[0]} / {t('salesTarget.overview.targetProfitCNY').split(' ')[0]}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="cnyTargetSales" className="text-red-700">目标销售额 (万元)</Label>
+                        <Label htmlFor="cnyTargetSales" className="text-red-700">{t('salesTarget.overview.targetSalesCNY')}</Label>
                         <Input
                             id="cnyTargetSales"
                             type="number"
@@ -56,7 +59,7 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="cnyTargetProfit" className="text-red-700">目标利润 (万元)</Label>
+                        <Label htmlFor="cnyTargetProfit" className="text-red-700">{t('salesTarget.overview.targetProfitCNY')}</Label>
                         <Input
                             id="cnyTargetProfit"
                             type="number"
@@ -66,7 +69,7 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
                         />
                     </div>
                     <div className="pt-2 border-t border-red-100 flex justify-between items-center">
-                        <span className="text-sm text-red-600 font-medium">利润率</span>
+                        <span className="text-sm text-red-600 font-medium">{t('salesTarget.overview.actualProfitRate')}</span>
                         <span className="text-xl font-bold text-red-700">{profitRate.toFixed(2)}%</span>
                     </div>
                 </CardContent>
@@ -76,12 +79,12 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
             <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-100">
                 <CardHeader className="pb-2">
                     <CardTitle className="text-lg font-bold text-blue-800 flex items-center gap-2">
-                        🇺🇸 美元区域
+                        🇺🇸 {t('salesTarget.overview.targetSalesUSD').split(' ')[0]} / {t('salesTarget.overview.targetProfitUSD').split(' ')[0]}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="usdTargetSales" className="text-blue-700">目标销售额 (万美元)</Label>
+                        <Label htmlFor="usdTargetSales" className="text-blue-700">{t('salesTarget.overview.targetSalesUSD')}</Label>
                         <Input
                             id="usdTargetSales"
                             type="number"
@@ -91,7 +94,7 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="usdTargetProfit" className="text-blue-700">目标利润 (万美元)</Label>
+                        <Label htmlFor="usdTargetProfit" className="text-blue-700">{t('salesTarget.overview.targetProfitUSD')}</Label>
                         <Input
                             id="usdTargetProfit"
                             type="number"
@@ -101,7 +104,7 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
                         />
                     </div>
                     <div className="pt-2 border-t border-blue-100 flex justify-between items-center">
-                        <span className="text-sm text-blue-600 font-medium">利润率</span>
+                        <span className="text-sm text-blue-600 font-medium">{t('salesTarget.overview.actualProfitRate')}</span>
                         <span className="text-xl font-bold text-blue-700">{profitRate.toFixed(2)}%</span>
                     </div>
                 </CardContent>
@@ -111,12 +114,12 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
             <Card className="bg-gradient-to-br from-gray-50 to-white border-gray-100">
                 <CardHeader className="pb-2">
                     <CardTitle className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                        ⚙️ 关键参数
+                        ⚙️ {t('salesTarget.overview.exchangeRate').split(' ')[0]}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="exchangeRate" className="text-gray-700">汇率</Label>
+                        <Label htmlFor="exchangeRate" className="text-gray-700">{t('salesTarget.overview.exchangeRate')}</Label>
                         <Input
                             id="exchangeRate"
                             type="number"
@@ -127,7 +130,7 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="successRate" className="text-gray-700">成功率 (%)</Label>
+                        <Label htmlFor="successRate" className="text-gray-700">{t('salesTarget.overview.successRate')}</Label>
                         <Input
                             id="successRate"
                             type="number"
@@ -138,7 +141,7 @@ const TargetOverview: React.FC<TargetOverviewProps> = ({
                         />
                     </div>
                     <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
-                        <span className="text-sm text-gray-600 font-medium">实际利润率</span>
+                        <span className="text-sm text-gray-600 font-medium">{t('salesTarget.overview.actualProfitRate')}</span>
                         <span className="text-xl font-bold text-gray-700">{profitRate.toFixed(2)}%</span>
                     </div>
                 </CardContent>

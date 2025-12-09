@@ -5,6 +5,7 @@ import { Pie } from 'react-chartjs-2';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useTranslation } from 'react-i18next';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -25,9 +26,20 @@ interface CostAnalysisProps {
 }
 
 const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange }) => {
+    const { t } = useTranslation();
+
     const chartData: ChartData<'pie'> = useMemo(() => {
         return {
-            labels: ['成本', '头程', '广告', '尾程', '佣金', '退货', '其他', '利润'],
+            labels: [
+                t('salesTarget.costAnalysis.productCost'),
+                t('salesTarget.costAnalysis.logisticsCost'),
+                t('salesTarget.costAnalysis.adCost'),
+                t('salesTarget.costAnalysis.shippingCost'),
+                t('salesTarget.costAnalysis.commission'),
+                t('salesTarget.costAnalysis.returns'),
+                t('salesTarget.costAnalysis.otherCost'),
+                t('salesTarget.costAnalysis.profit'),
+            ],
             datasets: [
                 {
                     data: [
@@ -64,7 +76,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                 },
             ],
         };
-    }, [costStructure]);
+    }, [costStructure, t]);
 
     const handleInputChange = (field: keyof CostStructure, value: number) => {
         // Ensure value is non-negative
@@ -95,7 +107,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
             {/* Chart Area */}
             <Card>
                 <CardHeader>
-                    <CardTitle>成本分析图表</CardTitle>
+                    <CardTitle>{t('salesTarget.costAnalysis.title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex justify-center h-[400px]">
                     <Pie data={chartData} options={{ maintainAspectRatio: false }} />
@@ -105,12 +117,12 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
             {/* Inputs Area */}
             <Card>
                 <CardHeader>
-                    <CardTitle>成本构成详情</CardTitle>
+                    <CardTitle>{t('salesTarget.costAnalysis.title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <Label>产品成本 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.productCost')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -121,7 +133,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>头程物流 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.logisticsCost')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -132,7 +144,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>广告费用 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.adCost')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -143,7 +155,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>尾程物流 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.shippingCost')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -154,7 +166,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>平台佣金 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.commission')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -165,7 +177,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>退货损失 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.returns')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -176,7 +188,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>其他费用 (%)</Label>
+                            <Label>{t('salesTarget.costAnalysis.otherCost')} (%)</Label>
                             <Input
                                 type="number"
                                 step="0.1"
@@ -187,7 +199,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label className="text-green-600 font-bold">利润 (%)</Label>
+                            <Label className="text-green-600 font-bold">{t('salesTarget.costAnalysis.profit')} (%)</Label>
                             <Input
                                 type="number"
                                 readOnly
@@ -198,7 +210,7 @@ const CostAnalysis: React.FC<CostAnalysisProps> = ({ costStructure, onCostChange
                     </div>
 
                     <div className="pt-4 border-t flex justify-between font-bold">
-                        <span>总计</span>
+                        <span>{t('salesTarget.costAnalysis.totalCheck')}</span>
                         <span>100%</span>
                     </div>
                 </CardContent>
