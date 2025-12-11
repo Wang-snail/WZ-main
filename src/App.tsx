@@ -21,9 +21,9 @@ import ToolsPage from '@/pages/tools/ToolsPage';
 import WorkflowsPage from '@/pages/workflows/WorkflowsPage';
 import ForumPage from '@/pages/forum/ForumPage';
 import SyncPage from '@/pages/sync/SyncPage';
-import CoreToolsPage from '@/pages/core-tools/CoreToolsPage';
+import EfficientToolsPage from '@/pages/efficient-tools/EfficientToolsPage';
 import ExperimentPage from '@/pages/experiment/ExperimentPage';
-import SemanticStrategySystem from '@/components/strategy/SemanticStrategySystem';
+import StrategySimulator from '@/pages/core-tools/StrategySimulator';
 import TestUIPage from '@/pages/test-ui/TestUIPage';
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
 const AmazonNewProductProcess = React.lazy(() => import('./pages/processes/AmazonNewProductProcess'));
@@ -90,10 +90,10 @@ function App() {
                   <Route path="/workflows" element={<WorkflowsPage />} />
                   <Route path="/forum" element={<ForumPage />} />
                   <Route path="/sync" element={<SyncPage />} />
-                  <Route path="/core-tools" element={<CoreToolsPage />} />
+                  <Route path="/efficient-tools" element={<EfficientToolsPage />} />
+                  <Route path="/efficient-tools/strategy-simulator" element={<StrategySimulator />} />
                   <Route path="/experiment" element={<ExperimentPage />} />
-                  <Route path="/experiment/strategy-simulator" element={<SemanticStrategySystem />} />
-                  <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
+                  <Route path="/efficient-tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/test-ui" element={<TestUIPage />} />
@@ -103,13 +103,13 @@ function App() {
                   {/* 英文 */}
                   <Route path="/en" element={<HomePage />} />
                   <Route path="/en/tools" element={<ToolsPage />} />
+                  <Route path="/en/efficient-tools" element={<EfficientToolsPage />} />
                   <Route path="/en/workflows" element={<WorkflowsPage />} />
                   <Route path="/en/forum" element={<ForumPage />} />
                   <Route path="/en/sync" element={<SyncPage />} />
-                  <Route path="/en/core-tools" element={<CoreToolsPage />} />
+                  <Route path="/en/efficient-tools/strategy-simulator" element={<StrategySimulator />} />
                   <Route path="/en/experiment" element={<ExperimentPage />} />
-                  <Route path="/en/experiment/strategy-simulator" element={<SemanticStrategySystem />} />
-                  <Route path="/en/tools/fba-calculator" element={<FbaCalculator />} />
+                  <Route path="/en/efficient-tools/fba-calculator" element={<FbaCalculator />} />
 
 
                   {/* 其他语言路由占位，暂定都指向 Home 或具体工具 */}
@@ -120,10 +120,10 @@ function App() {
                       <Route path={`/${lang}/workflows`} element={<WorkflowsPage />} />
                       <Route path={`/${lang}/forum`} element={<ForumPage />} />
                       <Route path={`/${lang}/sync`} element={<SyncPage />} />
-                      <Route path={`/${lang}/core-tools`} element={<CoreToolsPage />} />
+                      <Route path={`/${lang}/efficient-tools`} element={<EfficientToolsPage />} />
                       <Route path={`/${lang}/experiment`} element={<ExperimentPage />} />
-                      <Route path={`/${lang}/experiment/strategy-simulator`} element={<SemanticStrategySystem />} />
-                      <Route path={`/${lang}/tools/fba-calculator`} element={<FbaCalculator />} />
+                      <Route path={`/${lang}/efficient-tools/strategy-simulator`} element={<StrategySimulator />} />
+                      <Route path={`/${lang}/efficient-tools/fba-calculator`} element={<FbaCalculator />} />
                     </React.Fragment>
                   ))}
                 </Routes>
