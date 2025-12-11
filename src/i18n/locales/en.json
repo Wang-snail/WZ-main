@@ -1,11 +1,16 @@
 {
   "nav": {
     "home": "Home",
+    "tools": "Tools",
+    "coreTools": "Core Tools",
+    "experiment": "Experiment",
+    "workflows": "Workflows",
+    "forum": "Forum",
+    "sync": "Sync",
     "aiTools": "AI Tools",
     "analyzer": "Analyzer",
     "divination": "AI Divination",
     "games": "AI Games",
-    "workflows": "Workflows",
     "toolReviews": "Tool Reviews",
     "salesTracking": "Sales Tracking",
     "platformNews": "Platform News",

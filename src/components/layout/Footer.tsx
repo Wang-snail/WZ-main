@@ -7,8 +7,8 @@ export default function Footer() {
   const { t } = useTranslation();
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-2">
@@ -62,12 +62,7 @@ export default function Footer() {
                 <Mail className="w-4 h-4 text-gray-400" />
                 <span className="text-gray-300">support@wsnail.com</span>
               </li>
-              <li className="flex items-center space-x-2">
-                <Github className="w-4 h-4 text-gray-400" />
-                <a href="https://github.com/Wang-snail/WZ-main" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
-                  GitHub
-                </a>
-              </li>
+              {/* GitHub链接已移除 */}
               <li className="flex items-center space-x-2">
                 {/* Twitter hidden as per request */}
               </li>

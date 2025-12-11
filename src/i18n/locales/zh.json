@@ -1,11 +1,16 @@
 {
   "nav": {
     "home": "首页",
+    "tools": "工具",
+    "coreTools": "核心工具",
+    "experiment": "试验田",
+    "workflows": "实战指南",
+    "forum": "讨论区",
+    "sync": "更新同步",
     "aiTools": "AI工具库",
     "analyzer": "关系分析器",
     "divination": "AI占卜",
     "games": "AI游戏",
-    "workflows": "工作流程",
     "toolReviews": "工具评测",
     "salesTracking": "销售追踪",
     "platformNews": "平台情报",
