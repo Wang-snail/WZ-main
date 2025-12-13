@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Filter, Grid3X3, List, Sparkles, Clock, Zap, Shield, BookOpen, Target, Calculator, FileText, ArrowRight } from 'lucide-react';
+import { Search, Filter, Grid3X3, List, Sparkles, Clock, Zap, Shield, BookOpen, Target, Calculator, FileText, ArrowRight, BarChart3 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/ui/button';
 import { Link } from 'react-router-dom';
@@ -37,6 +37,14 @@ const coreTools = [
   },
   {
     id: 3,
+    title: '市场分析战略决策系统',
+    description: '基于产品、用户、市场、竞品、供应链五维分析，智能推荐最优竞争战略。',
+    icon: <BarChart3 className="w-8 h-8 text-indigo-600" />,
+    link: '/tools/market-analysis',
+    color: 'bg-indigo-50'
+  },
+  {
+    id: 4,
     title: '亚马逊新品导入流程 SOP',
     description: '标准化的新品导入流程文档，涵盖从产品规划到上架销售的全过程。',
     icon: <FileText className="w-8 h-8 text-purple-600" />,
@@ -75,7 +83,7 @@ export default function ToolsPage() {
       const categoryTools = tools.filter(tool =>
         tool && tool.category && tool.category === category.id &&
         (tool.name && tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-         (tool.description && tool.description.toLowerCase().includes(searchQuery.toLowerCase())))
+          (tool.description && tool.description.toLowerCase().includes(searchQuery.toLowerCase())))
       );
       acc[category.id] = categoryTools;
       return acc;

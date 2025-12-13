@@ -24,6 +24,7 @@ import SyncPage from '@/pages/sync/SyncPage';
 import ExperimentPage from '@/pages/experiment/ExperimentPage';
 import TestUIPage from '@/pages/test-ui/TestUIPage';
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
+const MarketAnalysis = React.lazy(() => import('./pages/tools/MarketAnalysis'));
 const AmazonNewProductProcess = React.lazy(() => import('./pages/processes/AmazonNewProductProcess'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 
@@ -90,6 +91,7 @@ function App() {
                   <Route path="/sync" element={<SyncPage />} />
                   <Route path="/experiment" element={<ExperimentPage />} />
                   <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
+                  <Route path="/tools/market-analysis" element={<MarketAnalysis />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/test-ui" element={<TestUIPage />} />
