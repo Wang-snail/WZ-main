@@ -174,7 +174,7 @@ export default function ToolsPage() {
               <span className="ml-2 text-gray-600">加载中...</span>
             </div>
           ) : viewMode === 'kanban' ? (
-            <div className="flex overflow-x-auto pb-4" style={{ height: 'calc(100vh - 400px)' }}>
+            <div className="flex overflow-x-auto pb-4" style={{ maxHeight: 'calc(100vh - 400px)' }}>
               {toolCategories.map((category) => {
                 const IconComponent = category.icon;
                 const toolsInCategory = groupedTools[category.id] || [];
@@ -183,7 +183,7 @@ export default function ToolsPage() {
                   <div
                     key={category.id}
                     className="kanban-column bg-white border border-gray-200 rounded-lg mr-4 flex-shrink-0"
-                    style={{ width: '280px', height: 'calc(100vh - 480px)' }}
+                    style={{ width: '280px', maxHeight: 'calc(100vh - 480px)' }}
                   >
                     <div className="kanban-title border-b border-gray-200 p-4">
                       <div className="flex items-center">
@@ -195,7 +195,7 @@ export default function ToolsPage() {
                       </div>
                     </div>
                     <div className="kanban-list flex-1 overflow-y-auto p-3 space-y-3">
-                      {toolsInCategory.length > 0 ? (
+                      {toolsInCategory && toolsInCategory.length > 0 ? (
                         toolsInCategory.map((tool, index) => (
                           <div key={tool.id || index} className="tool-card p-3 hover:bg-gray-50 transition-colors">
                             <div>
@@ -221,12 +221,12 @@ export default function ToolsPage() {
             <div>
               {toolCategories.map((category) => {
                 const toolsInCategory = groupedTools[category.id] || [];
-                if (toolsInCategory.length === 0) return null;
+                if (!toolsInCategory || toolsInCategory.length === 0) return null;
 
                 return (
                   <div key={category.id} className="mb-8">
                     <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                      <category.icon className="w-5 h-5 mr-2 text-blue-600" />
+                      {category.icon ? <category.icon className="w-5 h-5 mr-2 text-blue-600" /> : <BookOpen className="w-5 h-5 mr-2 text-blue-600" />}
                       {category.name} ({toolsInCategory.length})
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
