@@ -85,13 +85,11 @@ function App() {
                   <Route path="/sales-target" element={<SalesTargetTracking />} />
                   <Route path="/email-contact" element={<EmailContactPage />} />
                   <Route path="/discussion" element={<DiscussionBoard />} />
-                  <Route path="/tools" element={<ToolsPage />} />
                   <Route path="/workflows" element={<WorkflowsPage />} />
                   <Route path="/forum" element={<ForumPage />} />
                   <Route path="/sync" element={<SyncPage />} />
-                  <Route path="/efficient-tools" element={<EfficientToolsPage />} />
                   <Route path="/experiment" element={<ExperimentPage />} />
-                  <Route path="/efficient-tools/fba-calculator" element={<FbaCalculator />} />
+                  <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/test-ui" element={<TestUIPage />} />
@@ -101,12 +99,11 @@ function App() {
                   {/* 英文 */}
                   <Route path="/en" element={<HomePage />} />
                   <Route path="/en/tools" element={<ToolsPage />} />
-                  <Route path="/en/efficient-tools" element={<EfficientToolsPage />} />
                   <Route path="/en/workflows" element={<WorkflowsPage />} />
                   <Route path="/en/forum" element={<ForumPage />} />
                   <Route path="/en/sync" element={<SyncPage />} />
                   <Route path="/en/experiment" element={<ExperimentPage />} />
-                  <Route path="/en/efficient-tools/fba-calculator" element={<FbaCalculator />} />
+                  <Route path="/en/tools/fba-calculator" element={<FbaCalculator />} />
 
 
                   {/* 其他语言路由占位，暂定都指向 Home 或具体工具 */}
@@ -117,9 +114,8 @@ function App() {
                       <Route path={`/${lang}/workflows`} element={<WorkflowsPage />} />
                       <Route path={`/${lang}/forum`} element={<ForumPage />} />
                       <Route path={`/${lang}/sync`} element={<SyncPage />} />
-                      <Route path={`/${lang}/efficient-tools`} element={<EfficientToolsPage />} />
                       <Route path={`/${lang}/experiment`} element={<ExperimentPage />} />
-                      <Route path={`/${lang}/efficient-tools/fba-calculator`} element={<FbaCalculator />} />
+                      <Route path={`/${lang}/tools/fba-calculator`} element={<FbaCalculator />} />
                     </React.Fragment>
                   ))}
                 </Routes>

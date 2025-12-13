@@ -49,7 +49,6 @@ export default function Header() {
 
   const navigation = [
     { name: t('nav.tools'), href: localizedLink('/tools'), current: cleanPath.startsWith('/tools') },
-    { name: '高效工具', href: localizedLink('/efficient-tools'), current: cleanPath.startsWith('/efficient-tools') },
     { name: t('nav.experiment'), href: localizedLink('/experiment'), current: cleanPath.startsWith('/experiment') },
     { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath.startsWith('/workflows') },
     { name: t('nav.forum'), href: localizedLink('/forum'), current: cleanPath.startsWith('/forum') },
