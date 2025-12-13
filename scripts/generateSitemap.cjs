@@ -11,13 +11,14 @@ function generateSimpleSitemap() {
   // 主要页面
   const mainPages = [
     { loc: 'https://wsnail.com/', priority: '1.0', changefreq: 'daily' },
-    { loc: 'https://wsnail.com/ai-tools', priority: '0.9', changefreq: 'daily' },
-    { loc: 'https://wsnail.com/analyzer', priority: '0.9', changefreq: 'weekly' },
-    { loc: 'https://wsnail.com/divination', priority: '0.9', changefreq: 'weekly' },
-    { loc: 'https://wsnail.com/games', priority: '0.8', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/tools', priority: '0.9', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/tools/market-analysis', priority: '0.9', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/tools/fba-calculator', priority: '0.9', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/sales-target', priority: '0.9', changefreq: 'weekly' },
+    { loc: 'https://wsnail.com/processes/amazon-new-product-import', priority: '0.8', changefreq: 'monthly' },
     { loc: 'https://wsnail.com/workflows', priority: '0.7', changefreq: 'weekly' },
-    { loc: 'https://wsnail.com/tool-reviews', priority: '0.7', changefreq: 'weekly' },
-    { loc: 'https://wsnail.com/sales-tracking', priority: '0.6', changefreq: 'monthly' },
+    { loc: 'https://wsnail.com/forum', priority: '0.7', changefreq: 'daily' },
+    { loc: 'https://wsnail.com/about', priority: '0.5', changefreq: 'monthly' },
   ];
 
   // 游戏页面
@@ -69,7 +70,7 @@ function generateSimpleSitemap() {
   }));
 
   // 合并所有页面
-  const allPages = [...mainPages, ...gamePages, ...categoryPages, ...divinationTypes, ...landingPages];
+  const allPages = [...mainPages];
 
   // 生成XML
   const urls = allPages.map(page => `  <url>
