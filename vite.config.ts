@@ -49,13 +49,23 @@ export default defineConfig(({ mode }) => {
             forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
             // 工具库
             utils: ['date-fns', 'clsx', 'tailwind-merge', 'class-variance-authority'],
+            // 图标库单独分离
+            icons: ['lucide-react'],
           },
         },
       },
       // 降低chunk大小警告阈值
       chunkSizeWarningLimit: 500,
-      // 添加 sourcemap 便于调试
-      sourcemap: true,
+      // 生产环境关闭 sourcemap 以减小文件大小
+      sourcemap: false,
+      // 启用 CSS 代码分割
+      cssCodeSplit: true,
+      // 使用 esbuild 压缩（默认，更快）
+      minify: 'esbuild',
+      // esbuild 压缩选项
+      esbuild: {
+        drop: ['console', 'debugger'], // 移除 console 和 debugger
+      },
     },
     server: {
       port: 3000,
