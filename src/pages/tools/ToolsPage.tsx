@@ -57,9 +57,10 @@ export default function ToolsPage() {
       try {
         setLoading(true);
         const allTools = await dataService.loadAITools('normal');
-        setTools(allTools);
+        setTools(allTools || []); // 确保始终设置数组
       } catch (error) {
         console.error('Failed to load tools:', error);
+        setTools([]); // 出错时设置为空数组
       } finally {
         setLoading(false);
       }
@@ -69,15 +70,17 @@ export default function ToolsPage() {
   }, []);
 
   // 按分类分组工具
-  const groupedTools = toolCategories.reduce((acc, category) => {
-    const categoryTools = tools.filter(tool =>
-      tool.category === category.id &&
-      (tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-       tool.description.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-    acc[category.id] = categoryTools;
-    return acc;
-  }, {} as Record<string, AITool[]>);
+  const groupedTools = React.useMemo(() => {
+    return toolCategories.reduce((acc, category) => {
+      const categoryTools = tools.filter(tool =>
+        tool && tool.category && tool.category === category.id &&
+        (tool.name && tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         (tool.description && tool.description.toLowerCase().includes(searchQuery.toLowerCase())))
+      );
+      acc[category.id] = categoryTools;
+      return acc;
+    }, {} as Record<string, AITool[]>);
+  }, [tools, searchQuery]);
 
   return (
     <div className="min-h-screen bg-gray-50/50">
@@ -104,7 +107,7 @@ export default function ToolsPage() {
               type="text"
               placeholder="搜索工具..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => setSearchQuery(e.target.value || '')}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -176,7 +179,6 @@ export default function ToolsPage() {
           ) : viewMode === 'kanban' ? (
             <div className="flex overflow-x-auto pb-4" style={{ maxHeight: 'calc(100vh - 400px)' }}>
               {toolCategories.map((category) => {
-                const IconComponent = category.icon;
                 const toolsInCategory = groupedTools[category.id] || [];
 
                 return (
@@ -187,7 +189,11 @@ export default function ToolsPage() {
                   >
                     <div className="kanban-title border-b border-gray-200 p-4">
                       <div className="flex items-center">
-                        <IconComponent className="w-5 h-5 mr-2 text-blue-600" />
+                        {category.icon ? (
+                          <category.icon className="w-5 h-5 mr-2 text-blue-600" />
+                        ) : (
+                          <BookOpen className="w-5 h-5 mr-2 text-blue-600" />
+                        )}
                         <h3 className="font-semibold text-gray-900">{category.name}</h3>
                         <span className="ml-2 text-xs text-gray-500 bg-gray-100 rounded-full px-2 py-0.5">
                           {toolsInCategory.length}
@@ -195,12 +201,12 @@ export default function ToolsPage() {
                       </div>
                     </div>
                     <div className="kanban-list flex-1 overflow-y-auto p-3 space-y-3">
-                      {toolsInCategory && toolsInCategory.length > 0 ? (
+                      {(toolsInCategory && toolsInCategory.length > 0) ? (
                         toolsInCategory.map((tool, index) => (
-                          <div key={tool.id || index} className="tool-card p-3 hover:bg-gray-50 transition-colors">
+                          <div key={tool?.id || index} className="tool-card p-3 hover:bg-gray-50 transition-colors">
                             <div>
-                              <h4 className="font-medium text-gray-900 text-sm mb-1 truncate">{tool.name}</h4>
-                              <p className="text-xs text-gray-600 line-clamp-2">{tool.description}</p>
+                              <h4 className="font-medium text-gray-900 text-sm mb-1 truncate">{tool?.name}</h4>
+                              <p className="text-xs text-gray-600 line-clamp-2">{tool?.description}</p>
                             </div>
                             <Button variant="outline" size="sm" className="mt-2 w-full text-xs">
                               使用
@@ -231,11 +237,11 @@ export default function ToolsPage() {
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {toolsInCategory.map((tool, index) => (
-                        <div key={tool.id || index} className="bg-gray-50 rounded-lg p-4 border">
+                        <div key={tool?.id || index} className="bg-gray-50 rounded-lg p-4 border">
                           <div className="flex justify-between items-start">
                             <div>
-                              <h4 className="font-medium text-gray-900">{tool.name}</h4>
-                              <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
+                              <h4 className="font-medium text-gray-900">{tool?.name}</h4>
+                              <p className="text-sm text-gray-600 mt-1">{tool?.description}</p>
                             </div>
                             <Button variant="outline" size="sm">
                               使用
