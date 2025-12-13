@@ -23,7 +23,6 @@ import ForumPage from '@/pages/forum/ForumPage';
 import SyncPage from '@/pages/sync/SyncPage';
 import EfficientToolsPage from '@/pages/efficient-tools/EfficientToolsPage';
 import ExperimentPage from '@/pages/experiment/ExperimentPage';
-import StrategySimulator from '@/pages/core-tools/StrategySimulator';
 import TestUIPage from '@/pages/test-ui/TestUIPage';
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
 const AmazonNewProductProcess = React.lazy(() => import('./pages/processes/AmazonNewProductProcess'));
@@ -91,7 +90,6 @@ function App() {
                   <Route path="/forum" element={<ForumPage />} />
                   <Route path="/sync" element={<SyncPage />} />
                   <Route path="/efficient-tools" element={<EfficientToolsPage />} />
-                  <Route path="/efficient-tools/strategy-simulator" element={<StrategySimulator />} />
                   <Route path="/experiment" element={<ExperimentPage />} />
                   <Route path="/efficient-tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
@@ -107,7 +105,6 @@ function App() {
                   <Route path="/en/workflows" element={<WorkflowsPage />} />
                   <Route path="/en/forum" element={<ForumPage />} />
                   <Route path="/en/sync" element={<SyncPage />} />
-                  <Route path="/en/efficient-tools/strategy-simulator" element={<StrategySimulator />} />
                   <Route path="/en/experiment" element={<ExperimentPage />} />
                   <Route path="/en/efficient-tools/fba-calculator" element={<FbaCalculator />} />
 
@@ -122,7 +119,6 @@ function App() {
                       <Route path={`/${lang}/sync`} element={<SyncPage />} />
                       <Route path={`/${lang}/efficient-tools`} element={<EfficientToolsPage />} />
                       <Route path={`/${lang}/experiment`} element={<ExperimentPage />} />
-                      <Route path={`/${lang}/efficient-tools/strategy-simulator`} element={<StrategySimulator />} />
                       <Route path={`/${lang}/efficient-tools/fba-calculator`} element={<FbaCalculator />} />
                     </React.Fragment>
                   ))}

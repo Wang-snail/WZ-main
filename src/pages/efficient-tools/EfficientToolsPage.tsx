@@ -43,14 +43,6 @@ const coreTools = [
     link: '/processes/amazon-new-product-import',
     color: 'bg-purple-50'
   },
-  {
-    id: 4,
-    title: '战略推演沙盘',
-    description: '基于思维导图的商业战略分析工具，帮助企业制定最合适的市场策略。',
-    icon: <Target className="w-8 h-8 text-indigo-600" />,
-    link: '/efficient-tools/strategy-simulator',
-    color: 'bg-indigo-50'
-  }
 ];
 
 export default function EfficientToolsPage() {
