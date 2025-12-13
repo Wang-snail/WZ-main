@@ -21,7 +21,6 @@ import ToolsPage from '@/pages/tools/ToolsPage';
 import WorkflowsPage from '@/pages/workflows/WorkflowsPage';
 import ForumPage from '@/pages/forum/ForumPage';
 import SyncPage from '@/pages/sync/SyncPage';
-import EfficientToolsPage from '@/pages/efficient-tools/EfficientToolsPage';
 import ExperimentPage from '@/pages/experiment/ExperimentPage';
 import TestUIPage from '@/pages/test-ui/TestUIPage';
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
@@ -82,6 +81,7 @@ function App() {
                 <Routes>
                   {/* 主要路由 */}
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/tools" element={<ToolsPage />} />
                   <Route path="/sales-target" element={<SalesTargetTracking />} />
                   <Route path="/email-contact" element={<EmailContactPage />} />
                   <Route path="/discussion" element={<DiscussionBoard />} />
