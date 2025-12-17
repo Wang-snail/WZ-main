@@ -62,13 +62,6 @@ export default function HomePageOptimized() {
             <Button
               variant="outline"
               className="px-8 py-4 rounded-xl text-lg h-auto min-w-[200px] border-blue-200 text-blue-600 hover:bg-blue-50"
-              onClick={() => window.location.href = '/experiment'}
-            >
-              试验田
-            </Button>
-            <Button
-              variant="outline"
-              className="px-8 py-4 rounded-xl text-lg h-auto min-w-[200px] border-blue-200 text-blue-600 hover:bg-blue-50"
               onClick={() => window.location.href = '/forum'}
             >
               讨论区

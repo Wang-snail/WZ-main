@@ -49,7 +49,6 @@ export default function Header() {
 
   const navigation = [
     { name: t('nav.tools'), href: localizedLink('/tools'), current: cleanPath.startsWith('/tools') },
-    { name: t('nav.experiment'), href: localizedLink('/experiment'), current: cleanPath.startsWith('/experiment') },
     { name: t('nav.workflows'), href: localizedLink('/workflows'), current: cleanPath.startsWith('/workflows') },
     { name: t('nav.forum'), href: localizedLink('/forum'), current: cleanPath.startsWith('/forum') },
     { name: t('nav.sync'), href: localizedLink('/sync'), current: cleanPath.startsWith('/sync') },
@@ -65,9 +64,8 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed w-full bg-white/90 backdrop-blur-sm shadow-sm border-b z-50 top-0 left-0 h-16 transition-transform duration-300 ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}
+      className={`fixed w-full bg-white/90 backdrop-blur-sm shadow-sm border-b z-50 top-0 left-0 h-16 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">

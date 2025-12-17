@@ -21,8 +21,7 @@ import ToolsPage from '@/pages/tools/ToolsPage';
 import WorkflowsPage from '@/pages/workflows/WorkflowsPage';
 import ForumPage from '@/pages/forum/ForumPage';
 import SyncPage from '@/pages/sync/SyncPage';
-import ExperimentPage from '@/pages/experiment/ExperimentPage';
-import TestUIPage from '@/pages/test-ui/TestUIPage';
+
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
 const MarketAnalysis = React.lazy(() => import('./pages/tools/MarketAnalysis'));
 const AmazonNewProductProcess = React.lazy(() => import('./pages/processes/AmazonNewProductProcess'));
@@ -89,13 +88,10 @@ function App() {
                   <Route path="/workflows" element={<WorkflowsPage />} />
                   <Route path="/forum" element={<ForumPage />} />
                   <Route path="/sync" element={<SyncPage />} />
-                  <Route path="/experiment" element={<ExperimentPage />} />
                   <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/tools/market-analysis" element={<MarketAnalysis />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
                   <Route path="/about" element={<AboutPage />} />
-                  <Route path="/test-ui" element={<TestUIPage />} />
-
 
                   {/* 多语言路由 - 只有 FBA 计算器 是保留工具 */}
                   {/* 英文 */}
@@ -104,7 +100,7 @@ function App() {
                   <Route path="/en/workflows" element={<WorkflowsPage />} />
                   <Route path="/en/forum" element={<ForumPage />} />
                   <Route path="/en/sync" element={<SyncPage />} />
-                  <Route path="/en/experiment" element={<ExperimentPage />} />
+
                   <Route path="/en/tools/fba-calculator" element={<FbaCalculator />} />
 
 
@@ -116,7 +112,7 @@ function App() {
                       <Route path={`/${lang}/workflows`} element={<WorkflowsPage />} />
                       <Route path={`/${lang}/forum`} element={<ForumPage />} />
                       <Route path={`/${lang}/sync`} element={<SyncPage />} />
-                      <Route path={`/${lang}/experiment`} element={<ExperimentPage />} />
+
                       <Route path={`/${lang}/tools/fba-calculator`} element={<FbaCalculator />} />
                     </React.Fragment>
                   ))}
@@ -128,8 +124,6 @@ function App() {
             {isSyncPage && <Footer />}
           </div>
           <Analytics />
-
-
         </Router>
       </ErrorBoundary>
     </HelmetProvider>
