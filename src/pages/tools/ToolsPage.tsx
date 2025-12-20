@@ -45,6 +45,14 @@ const coreTools = [
   },
   {
     id: 4,
+    title: 'Kano 评论分析工具',
+    description: '基于观点片段的 Kano 模型分析，从用户评论中提取功能需求和情感洞察。',
+    icon: <BarChart3 className="w-8 h-8 text-orange-600" />,
+    link: '/tools/kano-analysis',
+    color: 'bg-orange-50'
+  },
+  {
+    id: 5,
     title: '亚马逊新品导入流程 SOP',
     description: '标准化的新品导入流程文档，涵盖从产品规划到上架销售的全过程。',
     icon: <FileText className="w-8 h-8 text-purple-600" />,
@@ -129,7 +137,7 @@ export default function ToolsPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">核心管理工具</h2>
             <p className="text-gray-600">关键业务环节的必备工具套件</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {coreTools.map((tool, index) => (
               <motion.div
                 key={tool.id}

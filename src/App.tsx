@@ -24,6 +24,7 @@ import SyncPage from '@/pages/sync/SyncPage';
 
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
 const MarketAnalysis = React.lazy(() => import('./pages/tools/MarketAnalysis'));
+const KanoAnalysisToolPage = React.lazy(() => import('./pages/tools/kano-analysis/KanoAnalysisToolPage'));
 const AmazonNewProductProcess = React.lazy(() => import('./pages/processes/AmazonNewProductProcess'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 
@@ -90,6 +91,7 @@ function App() {
                   <Route path="/sync" element={<SyncPage />} />
                   <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/tools/market-analysis" element={<MarketAnalysis />} />
+                  <Route path="/tools/kano-analysis" element={<KanoAnalysisToolPage />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
                   <Route path="/about" element={<AboutPage />} />
 
@@ -102,6 +104,7 @@ function App() {
                   <Route path="/en/sync" element={<SyncPage />} />
 
                   <Route path="/en/tools/fba-calculator" element={<FbaCalculator />} />
+                  <Route path="/en/tools/kano-analysis" element={<KanoAnalysisToolPage />} />
 
 
                   {/* 其他语言路由占位，暂定都指向 Home 或具体工具 */}
@@ -114,6 +117,7 @@ function App() {
                       <Route path={`/${lang}/sync`} element={<SyncPage />} />
 
                       <Route path={`/${lang}/tools/fba-calculator`} element={<FbaCalculator />} />
+                      <Route path={`/${lang}/tools/kano-analysis`} element={<KanoAnalysisToolPage />} />
                     </React.Fragment>
                   ))}
                 </Routes>
