@@ -1,12 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TargetOverview from '@/components/sales/TargetOverview';
 import CostAnalysis, { CostStructure } from '@/components/sales/CostAnalysis';
 import ProductLineAnalysis, { ProductLineData } from '@/components/sales/ProductLineAnalysis';
-import { useTranslation } from 'react-i18next';
+
+// 生成唯一ID
+const generateId = () => `line-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 const SalesTargetTracking: React.FC = () => {
-    const { t } = useTranslation();
     // --- State Configuration ---
 
     // 1. Overview State
@@ -29,40 +30,17 @@ const SalesTargetTracking: React.FC = () => {
         profit: 23,
     });
 
-    // 3. Product Line State
+    // 3. Product Line State - 默认只有"宠物家具"一个品线
     const [productLines, setProductLines] = useState<ProductLineData[]>([
         {
-            id: 'steel',
-            name: '🏗️ 钢木品线',
-            forecast: { price: 65, spu: 8, monthlySales: 500 },
-            actual: { price: 60, spu: 5, monthlySales: 350 },
-        },
-        {
-            id: 'bracket',
-            name: '📺 支架品线',
-            forecast: { price: 35, spu: 12, monthlySales: 800 },
-            actual: { price: 32, spu: 9, monthlySales: 650 },
-        },
-        {
-            id: 'plastic',
-            name: '🔧 注塑品线',
-            forecast: { price: 25, spu: 15, monthlySales: 1200 },
-            actual: { price: 23, spu: 11, monthlySales: 900 },
-        },
-        {
-            id: 'plant',
-            name: '🌿 仿真植物品线',
-            forecast: { price: 18, spu: 20, monthlySales: 1500 },
-            actual: { price: 16, spu: 15, monthlySales: 1100 },
+            id: generateId(),
+            name: '🐾 宠物家具',
+            forecast: { price: 50, spu: 10, monthlySales: 500 },
+            actual: { price: 48, spu: 8, monthlySales: 400 },
         },
     ]);
 
     // --- Calculations & Event Handlers ---
-
-    // Sync Direction Logic - similar to original JS
-    // Instead of complex cycle detection, we use specific setters that trigger downstream updates
-    // But React state updates are scheduled, so we need to be careful.
-    // We will perform calculations immediately in handlers.
 
     const handleCnyTargetSalesChange = (val: number) => {
         setCnyTargetSales(val);
@@ -112,8 +90,6 @@ const SalesTargetTracking: React.FC = () => {
 
     const handleExchangeRateChange = (val: number) => {
         setExchangeRate(val);
-        // When rate changes, generally we keep CNY stable and update USD, or vice versa?
-        // Project rule: "Re-calculate all from CNY" usually.
         if (val > 0) {
             setUsdTargetSales(parseFloat((cnyTargetSales / val).toFixed(2)));
             setUsdTargetProfit(parseFloat((cnyTargetProfit / val).toFixed(2)));
@@ -123,8 +99,6 @@ const SalesTargetTracking: React.FC = () => {
     const handleCostStructureChange = (newCosts: CostStructure) => {
         setCostStructure(newCosts);
 
-        // Profit Rate changed, so Profit Amount should change (Sales stays constant)
-        // Rule from JS: "Profit Rate Change -> Adjust Profit"
         const newProfitRate = newCosts.profit;
         const newCnyProfit = cnyTargetSales * (newProfitRate / 100);
 
@@ -147,10 +121,33 @@ const SalesTargetTracking: React.FC = () => {
         }));
     };
 
+    // 添加新品线
+    const handleAddProductLine = () => {
+        const newLine: ProductLineData = {
+            id: generateId(),
+            name: '📦 新品线',
+            forecast: { price: 50, spu: 5, monthlySales: 300 },
+            actual: { price: 48, spu: 4, monthlySales: 250 },
+        };
+        setProductLines(prev => [...prev, newLine]);
+    };
+
+    // 删除品线
+    const handleDeleteProductLine = (id: string) => {
+        setProductLines(prev => prev.filter(line => line.id !== id));
+    };
+
+    // 修改品线名称
+    const handleProductLineNameChange = (id: string, newName: string) => {
+        setProductLines(prev => prev.map(line =>
+            line.id === id ? { ...line, name: newName } : line
+        ));
+    };
+
     return (
         <div className="container mx-auto p-4 max-w-7xl animate-in fade-in duration-500">
             <h1 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                {t('salesTarget.title')}
+                销售目标跟踪
             </h1>
 
             {/* 1. Overview */}
@@ -178,10 +175,13 @@ const SalesTargetTracking: React.FC = () => {
 
             {/* 3. Product Line Analysis */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-500 pl-4">{t('salesTarget.productLine.title')}</h2>
+                <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-500 pl-4">产品线分析</h2>
                 <ProductLineAnalysis
                     productLines={productLines}
                     onProductLineChange={handleProductLineChange}
+                    onProductLineNameChange={handleProductLineNameChange}
+                    onAddProductLine={handleAddProductLine}
+                    onDeleteProductLine={handleDeleteProductLine}
                     targetSalesUsd={usdTargetSales}
                 />
             </div>
