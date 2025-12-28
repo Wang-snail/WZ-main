@@ -1,3 +1,9 @@
+/* 拖拽系统样式 */
+@import './styles/drag-drop.css';
+
+/* N8N工作流界面主题样式 */
+@import './styles/n8n-theme.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

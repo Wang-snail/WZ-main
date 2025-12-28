@@ -20,18 +20,26 @@ import {
   Minus
 } from 'lucide-react';
 import { Button } from '../../../../../components/ui/button';
-import { useKanoToolStore, KanoAnalysisResult, KanoFeature } from '../../store/kanoToolStore';
+import {
+  useKanoToolStore,
+  useShallow,
+  selectToolData,
+  selectUIState,
+  selectConfig,
+  selectDataActions,
+  selectUIActions,
+  KanoAnalysisResult,
+  KanoFeature
+} from '../../store/kanoToolStore';
 import { KanoAnalysisService, KanoAnalysisResult as ServiceResult, KANO_CATEGORIES } from '../../services/KanoAnalysisService';
 
 export function OutputStep() {
-  const {
-    data,
-    ui,
-    config,
-    setAnalysis,
-    setLoading,
-    setError
-  } = useKanoToolStore();
+  const data = useKanoToolStore(useShallow(selectToolData));
+  const ui = useKanoToolStore(useShallow(selectUIState));
+  const config = useKanoToolStore(useShallow(selectConfig));
+
+  const { setAnalysis } = useKanoToolStore(useShallow(selectDataActions));
+  const { setLoading, setError } = useKanoToolStore(useShallow(selectUIActions));
 
   const [generating, setGenerating] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<KanoAnalysisResult | null>(null);

@@ -1,0 +1,319 @@
+# Activepieces 生产环境 Docker Compose 配置
+version: '3.8'
+
+services:
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: activepieces-postgres-prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-activepieces}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    networks:
+      - activepieces-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: activepieces-redis-prod
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    networks:
+      - activepieces-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+
+  # Activepieces 主服务
+  activepieces:
+    image: activepieces/activepieces:latest
+    container_name: activepieces-main-prod
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # 数据库配置
+      AP_POSTGRES_DATABASE: ${POSTGRES_DB:-activepieces}
+      AP_POSTGRES_HOST: postgres
+      AP_POSTGRES_PORT: 5432
+      AP_POSTGRES_USERNAME: ${POSTGRES_USER:-postgres}
+      AP_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      AP_POSTGRES_USE_SSL: "false"
+      
+      # Redis 配置
+      AP_REDIS_HOST: redis
+      AP_REDIS_PORT: 6379
+      AP_REDIS_PASSWORD: ${REDIS_PASSWORD}
+      
+      # 应用配置
+      AP_API_KEY: ${AP_API_KEY}
+      AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}
+      AP_JWT_SECRET: ${AP_JWT_SECRET}
+      AP_ENVIRONMENT: production
+      AP_FRONTEND_URL: ${AP_FRONTEND_URL:-https://app.yourdomain.com}
+      AP_WEBHOOK_TIMEOUT_SECONDS: 30
+      
+      # 文件存储配置
+      AP_FILE_STORAGE_LOCATION: /app/storage
+      
+      # 执行配置
+      AP_EXECUTION_MODE: UNSANDBOXED
+      AP_SANDBOX_RUN_TIME_SECONDS: 600
+      
+      # 日志配置
+      AP_LOG_LEVEL: info
+      AP_LOG_PRETTY: "false"
+      
+      # 安全配置
+      AP_SIGN_UP_ENABLED: "false"
+      AP_TELEMETRY_ENABLED: "false"
+      
+    volumes:
+      - activepieces_storage:/app/storage
+    networks:
+      - activepieces-network
+    ports:
+      - "${AP_PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/v1/admin/pieces"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+        reservations:
+          memory: 2G
+          cpus: '1.0'
+
+  # 蜗牛桥接服务
+  bridge-service:
+    build:
+      context: ./activepieces-bridge
+      dockerfile: Dockerfile.production
+    container_name: activepieces-bridge-prod
+    restart: unless-stopped
+    depends_on:
+      activepieces:
+        condition: service_healthy
+    environment:
+      # Activepieces 连接配置
+      ACTIVEPIECES_URL: http://activepieces:3000
+      ACTIVEPIECES_API_KEY: ${AP_API_KEY}
+      ACTIVEPIECES_PROJECT_ID: ${AP_PROJECT_ID}
+      
+      # 服务配置
+      NODE_ENV: production
+      PORT: 4000
+      
+      # 数据库配置（共享）
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-activepieces}
+      
+      # Redis 配置（共享）
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      
+      # 安全配置
+      JWT_SECRET: ${BRIDGE_JWT_SECRET}
+      API_KEY: ${BRIDGE_API_KEY}
+      CORS_ORIGIN: ${CORS_ORIGIN:-https://yourdomain.com}
+      
+      # 监控配置
+      ENABLE_METRICS: "true"
+      METRICS_PORT: 9090
+      
+    volumes:
+      - bridge_logs:/app/logs
+      - bridge_storage:/app/storage
+    networks:
+      - activepieces-network
+    ports:
+      - "${BRIDGE_PORT:-4000}:4000"
+      - "${METRICS_PORT:-9090}:9090"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+
+  # Nginx 反向代理
+  nginx:
+    image: nginx:alpine
+    container_name: activepieces-nginx-prod
+    restart: unless-stopped
+    depends_on:
+      - activepieces
+      - bridge-service
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - activepieces-network
+    ports:
+      - "80:80"
+      - "443:443"
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+
+  # Prometheus 监控
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: activepieces-prometheus-prod
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - activepieces-network
+    ports:
+      - "${PROMETHEUS_PORT:-9091}:9090"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+
+  # Grafana 仪表板
+  grafana:
+    image: grafana/grafana:latest
+    container_name: activepieces-grafana-prod
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - activepieces-network
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+
+  # 日志收集器
+  fluentd:
+    image: fluent/fluentd:v1.16-debian-1
+    container_name: activepieces-fluentd-prod
+    restart: unless-stopped
+    volumes:
+      - ./logging/fluentd.conf:/fluentd/etc/fluent.conf:ro
+      - bridge_logs:/var/log/bridge:ro
+      - nginx_logs:/var/log/nginx:ro
+      - fluentd_logs:/var/log/fluentd
+    networks:
+      - activepieces-network
+    ports:
+      - "${FLUENTD_PORT:-24224}:24224"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+        reservations:
+          memory: 256M
+          cpus: '0.125'
+
+networks:
+  activepieces-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  activepieces_storage:
+    driver: local
+  bridge_logs:
+    driver: local
+  bridge_storage:
+    driver: local
+  nginx_logs:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  fluentd_logs:
+    driver: local

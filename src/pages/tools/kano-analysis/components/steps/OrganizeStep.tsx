@@ -12,26 +12,37 @@ import {
   Copy
 } from 'lucide-react';
 import { Button } from '../../../../../components/ui/button';
-import { useKanoToolStore, WorkflowStep, ProcessedComment, OrganizeStepResult } from '../../store/kanoToolStore';
+
+import {
+  useKanoToolStore,
+  useShallow,
+  selectToolData,
+  selectUIState,
+  selectConfig,
+  selectStepResults,
+  selectDataActions,
+  selectUIActions,
+  selectActionActions,
+  selectConfigActions,
+  WorkflowStep,
+  ProcessedComment,
+  OrganizeStepResult
+} from '../../store/kanoToolStore';
 import { DataCleaningService } from '../../services/DataCleaningService';
 
 export function OrganizeStep() {
-  const {
-    data,
-    ui,
-    config,
-    stepResults,
-    setProcessedComments,
-    setLoading,
-    setError,
-    setProgress,
-    setStepStatus,
-    setOrganizeResult,
-    updateProcessingOptions
-  } = useKanoToolStore();
+  const data = useKanoToolStore(useShallow(selectToolData));
+  const ui = useKanoToolStore(useShallow(selectUIState));
+  const config = useKanoToolStore(useShallow(selectConfig));
+  const stepResults = useKanoToolStore(useShallow(selectStepResults));
+
+  const { setProcessedComments, setOrganizeResult } = useKanoToolStore(useShallow(selectDataActions));
+  const { setLoading, setError, setProgress } = useKanoToolStore(useShallow(selectUIActions));
+  const { setStepStatus } = useKanoToolStore(useShallow(selectActionActions));
+  const { updateProcessingOptions } = useKanoToolStore(useShallow(selectConfigActions));
 
   const [processing, setProcessing] = useState(false);
-  
+
   // 使用保存的结果或当前状态
   const preview = stepResults.organize;
 

@@ -1,0 +1,250 @@
+[
+    {
+        "id": "logistics_flow_z",
+        "type": "tab",
+        "label": "物流成本计算工作流",
+        "disabled": false,
+        "info": "输入长、宽、高、重量，根据亚马逊 FBA 2024/2025 逻辑计算物流费用"
+    },
+    {
+        "id": "logistics_trigger",
+        "type": "inject",
+        "z": "logistics_flow_z",
+        "name": "开始计算物流费",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "var_length"
+            ]
+        ]
+    },
+    {
+        "id": "var_length",
+        "type": "change",
+        "z": "logistics_flow_z",
+        "name": "长 (L)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.length",
+                "pt": "msg",
+                "to": "10",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "var_width"
+            ]
+        ]
+    },
+    {
+        "id": "var_width",
+        "type": "change",
+        "z": "logistics_flow_z",
+        "name": "宽 (W)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.width",
+                "pt": "msg",
+                "to": "8",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "var_height"
+            ]
+        ]
+    },
+    {
+        "id": "var_height",
+        "type": "change",
+        "z": "logistics_flow_z",
+        "name": "高 (H)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.height",
+                "pt": "msg",
+                "to": "5",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "var_weight"
+            ]
+        ]
+    },
+    {
+        "id": "var_weight",
+        "type": "change",
+        "z": "logistics_flow_z",
+        "name": "重量 (Weight)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.weight",
+                "pt": "msg",
+                "to": "2",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "var_unit_config"
+            ]
+        ]
+    },
+    {
+        "id": "var_unit_config",
+        "type": "change",
+        "z": "logistics_flow_z",
+        "name": "单位配置",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.dimUnit",
+                "pt": "msg",
+                "to": "cm",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.weightUnit",
+                "pt": "msg",
+                "to": "kg",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "logic_unit_conversion"
+            ]
+        ]
+    },
+    {
+        "id": "logic_unit_conversion",
+        "type": "function",
+        "z": "logistics_flow_z",
+        "name": "1. 单位统一换算 (-> 英寸, 磅)",
+        "func": "const p = msg.payload;\n\n// 长度转换\nconst toInches = (v, unit) => (unit === 'cm' ? v / 2.54 : v);\np.l_in = typeof p.length === 'number' ? toInches(p.length, p.dimUnit) : 0;\np.w_in = typeof p.width === 'number' ? toInches(p.width, p.dimUnit) : 0;\np.h_in = typeof p.height === 'number' ? toInches(p.height, p.dimUnit) : 0;\n\n// 重量转换\nconst toPounds = (v, unit) => {\n    if (unit === 'kg') return v * 2.20462;\n    if (unit === 'oz') return v / 16;\n    if (unit === 'g') return v * 0.00220462;\n    return v;\n};\np.weight_lb = typeof p.weight === 'number' ? toPounds(p.weight, p.weightUnit) : 0;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "logic_tier_calculation"
+            ]
+        ]
+    },
+    {
+        "id": "logic_tier_calculation",
+        "type": "function",
+        "z": "logistics_flow_z",
+        "name": "2. 尺寸分段与体积重判定",
+        "func": "const p = msg.payload;\n\n// 尺寸排序\nconst sorted = [p.l_in, p.w_in, p.h_in].sort((a, b) => a - b);\nconst shortest = sorted[0];\nconst median = sorted[1];\nconst longest = sorted[2];\nconst girth = (shortest + median) * 2;\nconst lengthPlusGirth = longest + girth;\n\n// 1. 判定分段\nlet tier = \"UNDEFINED\";\n\nif (p.weight_lb <= 1 && longest <= 15 && median <= 6 && shortest <= 0.75) {\n    tier = \"SMALL_STANDARD\";\n} else if (p.weight_lb <= 20 && longest <= 18 && median <= 14 && shortest <= 8) {\n    tier = \"LARGE_STANDARD\";\n} else if (p.weight_lb <= 50 && longest <= 59 && median <= 33 && lengthPlusGirth <= 130) {\n    tier = \"LARGE_BULKY\";\n} else {\n    tier = \"EXTRA_LARGE\";\n}\n\n// 2. 计算体积重 (除以 139)\nconst dimWeight = (p.l_in * p.w_in * p.h_in) / 139;\n\n// 3. 计费重量判定\n// 标准小号仅按实重。其他取实重与体积重最大值。\nlet shippingWeight = p.weight_lb;\nif (tier !== \"SMALL_STANDARD\") {\n    shippingWeight = Math.max(p.weight_lb, dimWeight);\n}\n\np.calc = {\n    longest, median, shortest, girth, lengthPlusGirth,\n    tier, dimWeight, shippingWeight\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "logic_fee_lookup"
+            ]
+        ]
+    },
+    {
+        "id": "logic_fee_lookup",
+        "type": "function",
+        "z": "logistics_flow_z",
+        "name": "3. 费用查找计算 (2024/2025)",
+        "func": "const { tier, shippingWeight } = msg.payload.calc;\nlet fee = 0;\nconst w = shippingWeight;\n\nswitch (tier) {\n    case \"SMALL_STANDARD\":\n        if (w <= 0.25) fee = 3.22;\n        else if (w <= 0.50) fee = 3.40;\n        else if (w <= 0.75) fee = 3.58;\n        else fee = 3.77;\n        break;\n\n    case \"LARGE_STANDARD\":\n        if (w <= 0.25) fee = 3.86;\n        else if (w <= 0.5) fee = 4.08;\n        else if (w <= 0.75) fee = 4.42;\n        else if (w <= 1.0) fee = 4.75;\n        else if (w <= 1.5) fee = 5.40;\n        else if (w <= 2.0) fee = 5.76;\n        else if (w <= 2.5) fee = 6.13;\n        else if (w <= 3.0) fee = 6.44;\n        else {\n            const weightAbove = Math.ceil((w - 3) * 2) / 2;\n            fee = 6.44 + (weightAbove / 0.5) * 0.16;\n        }\n        break;\n\n    case \"LARGE_BULKY\":\n        fee = 9.73 + Math.max(0, Math.ceil(w - 1)) * 0.42;\n        break;\n\n    case \"EXTRA_LARGE\":\n        if (w <= 50) fee = 26.33 + Math.max(0, Math.ceil(w - 1)) * 0.38;\n        else if (w <= 70) fee = 40.12 + Math.max(0, Math.ceil(w - 51)) * 0.38;\n        else fee = 54.81 + Math.max(0, Math.ceil(w - 71)) * 0.38;\n        break;\n}\n\nmsg.payload.finalFee = fee;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 480,
+        "wires": [
+            [
+                "logistics_result"
+            ]
+        ]
+    },
+    {
+        "id": "logistics_result",
+        "type": "debug",
+        "z": "logistics_flow_z",
+        "name": "物流费计算结果",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "{\n    \"尺寸分段\": payload.calc.tier,\n    \"实重 (lb)\": payload.weight_lb.toFixed(2),\n    \"体积重 (lb)\": payload.calc.dimWeight.toFixed(2),\n    \"计费重量 (lb)\": payload.calc.shippingWeight.toFixed(2),\n    \"最终物流费 (USD)\": finalFee.toFixed(2)\n}",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 480,
+        "wires": []
+    }
+]

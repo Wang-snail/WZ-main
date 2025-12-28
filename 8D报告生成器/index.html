@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能8D报告生成器 - Auto8D Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #3B82F6;
+            --secondary: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --border: #E2E8F0;
+            --border-focus: #93C5FD;
+            --success: #10B981;
+            --success-bg: #ECFDF5;
+            --warning: #F59E0B;
+            --warning-bg: #FFFBEB;
+            --error: #EF4444;
+            --error-bg: #FEF2F2;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            border-color: var(--text-muted);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background: var(--secondary);
+            color: var(--text-primary);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 24px;
+            min-height: calc(100vh - 73px);
+        }
+
+        /* Left Panel - Input */
+        .input-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 97px;
+            height: fit-content;
+            max-height: calc(100vh - 125px);
+            overflow-y: auto;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-body {
+            padding: 20px 24px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--surface);
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        /* Problem Input Section */
+        .problem-input-section {
+            flex: 1;
+        }
+
+        .problem-input-section textarea {
+            min-height: 180px;
+        }
+
+        /* Config Section */
+        .config-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .config-toggle svg {
+            transition: transform 0.2s ease;
+        }
+
+        .config-toggle.active svg {
+            transform: rotate(180deg);
+        }
+
+        .config-content {
+            display: none;
+            padding-top: 20px;
+        }
+
+        .config-content.show {
+            display: block;
+        }
+
+        /* Generate Button */
+        .generate-section {
+            margin-top: auto;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Right Panel - Report */
+        .report-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .report-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Report Content */
+        .report-content {
+            flex: 1;
+        }
+
+        .report-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .placeholder-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .placeholder-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--text-muted);
+        }
+
+        .placeholder-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .placeholder-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 400px;
+        }
+
+        /* 8D Steps */
+        .step-card {
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .step-header:hover {
+            background: var(--secondary);
+        }
+
+        .step-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-badge {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .step-summary {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .step-actions {
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .step-card:hover .step-actions {
+            opacity: 1;
+        }
+
+        .step-body {
+            display: none;
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+        }
+
+        .step-card.expanded .step-body {
+            display: block;
+        }
+
+        .step-card.expanded .step-header {
+            background: var(--secondary);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .editor {
+            width: 100%;
+            min-height: 200px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--surface);
+            resize: vertical;
+        }
+
+        .editor:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--secondary);
+            color: var(--text-primary);
+        }
+
+        /* Info Tags */
+        .info-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .info-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--secondary);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .info-tag svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--secondary) 25%, #F1F5F9 50%, var(--secondary) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton-line {
+            height: 16px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-line:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            animation: slideIn 0.3s ease;
+            min-width: 300px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast-error {
+            border-left: 4px solid var(--error);
+        }
+
+        .toast-info {
+            border-left: 4px solid var(--primary);
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .toast-message {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .input-panel {
+                position: static;
+                max-height: none;
+            }
+
+            .report-panel {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .main-container {
+                padding: 16px;
+            }
+
+            .report-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .report-actions {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .report-actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        /* PDF Export Styles */
+        .pdf-content {
+            display: none;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header,
+            .input-panel,
+            .report-header,
+            .step-actions,
+            .editor-toolbar {
+                display: none !important;
+            }
+
+            .main-container {
+                display: block;
+                padding: 0;
+            }
+
+            .report-panel {
+                display: block;
+            }
+
+            .step-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+            }
+
+            .step-body {
+                display: block !important;
+            }
+        }
+
+        /* Quality Indicator */
+        .quality-score {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .quality-high {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .quality-medium {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
+
+        .quality-low {
+            background: var(--error-bg);
+            color: var(--error);
+        }
+
+        /* Accordion Arrow */
+        .accordion-arrow {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s ease;
+            color: var(--text-muted);
+        }
+
+        .step-card.expanded .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        /* Helper Text */
+        .helper-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">8D</div>
+                <div class="logo-text">智能<span>8D报告</span>生成器</div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-ghost" onclick="loadSampleData()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                    </svg>
+                    加载示例
+                </button>
+                <button class="btn btn-secondary" onclick="clearAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    清空
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Left Panel - Input -->
+        <aside class="input-panel">
+            <!-- Problem Description -->
+            <div class="card problem-input-section">
+                <div class="card-header">
+                    <h2 class="card-title">问题描述</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">问题标题</label>
+                        <input type="text" id="problemTitle" class="form-input" placeholder="例如：产品外观缺陷问题">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">详细描述</label>
+                        <textarea id="problemDescription" class="form-textarea" placeholder="请详细描述问题的具体情况，包括：&#10;- 问题现象&#10;- 发生时间&#10;- 发生地点/工序&#10;- 影响范围&#10;- 严重程度等"></textarea>
+                        <p class="helper-text">描述越详细，生成的报告越准确。建议包含5W2H要素。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="card">
+                <div class="card-header config-toggle" onclick="toggleConfig()">
+                    <h2 class="card-title">高级设置</h2>
+                    <svg class="accordion-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div class="card-body config-content" id="configContent">
+                    <div class="form-group">
+                        <label class="form-label">AI模型选择</label>
+                        <select id="aiModel" class="form-input form-select">
+                            <option value="gpt-4">GPT-4 (推荐)</option>
+                            <option value="gpt-3.5">GPT-3.5</option>
+                            <option value="claude">Claude 3.5</option>
+                        </select>
+                        <p class="form-hint">不同模型生成质量略有差异</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">报告详细程度</label>
+                        <select id="detailLevel" class="form-input form-select">
+                            <option value="standard">标准 (推荐)</option>
+                            <option value="brief">简要</option>
+                            <option value="detailed">详细</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">语气风格</label>
+                        <select id="toneStyle" class="form-input form-select">
+                            <option value="professional">专业严谨</option>
+                            <option value="objective">客观陈述</option>
+                            <option value="constructive">建设性建议</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <div class="generate-section">
+                <button class="btn btn-primary generate-btn" id="generateBtn" onclick="generateReport()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    生成8D报告
+                </button>
+            </div>
+        </aside>
+
+        <!-- Right Panel - Report -->
+        <section class="report-panel">
+            <!-- Report Header -->
+            <div class="card report-header" id="reportHeader" style="display: none;">
+                <div>
+                    <h1 class="report-title">8D问题分析报告</h1>
+                    <p class="helper-text" id="reportDate"></p>
+                </div>
+                <div class="report-actions">
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        复制
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportMarkdown()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Markdown
+                    </button>
+                    <button class="btn btn-primary" onclick="exportPDF()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        导出PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Report Content -->
+            <div class="report-content" id="reportContent">
+                <div class="card report-placeholder" id="placeholder">
+                    <div class="placeholder-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="placeholder-title">等待生成报告</h3>
+                    <p class="placeholder-text">请在左侧输入问题描述，点击"生成8D报告"按钮，系统将自动为您生成完整的8D问题分析报告。</p>
+                </div>
+
+                <!-- Loading State -->
+                <div class="card" id="loadingState" style="display: none;">
+                    <div class="card-body">
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="spinner" style="border-color: var(--primary); border-top-color: transparent;"></div>
+                                <span style="font-weight: 500;">正在生成8D报告...</span>
+                            </div>
+                            <p style="font-size: 14px; color: var(--text-muted);">AI正在分析问题并生成结构化报告，请稍候...</p>
+                            <div style="margin-top: 8px;">
+                                <div class="skeleton skeleton-line" style="height: 12px; width: 60%;"></div>
+                                <div class="skeleton skeleton-line" style="height: 12px; width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8D Report Container -->
+                <div id="reportContainer" style="display: none;"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- PDF Export Template -->
+    <div class="pdf-content" id="pdfContent"></div>
+
+    <script>
+        // 8D Report Data
+        let reportData = {
+            D0: null,
+            D1: null,
+            D2: null,
+            D3: null,
+            D4: null,
+            D5: null,
+            D6: null,
+            D7: null,
+            D8: null
+        };
+
+        // Step configurations
+        const stepsConfig = [
+            {
+                id: 'D0',
+                title: 'D0 - 准备与预防措施',
+                description: '问题识别、紧急程度评估及初步响应',
+                placeholder: '请描述问题的紧急程度、初步判断及采取的预防措施...'
+            },
+            {
+                id: 'D1',
+                title: 'D1 - 团队组建',
+                description: '组建跨职能问题解决团队',
+                placeholder: '列出团队成员及其职责分工...'
+            },
+            {
+                id: 'D2',
+                title: 'D2 - 问题描述',
+                description: '使用5W2H方法详细描述问题',
+                placeholder: 'What（什么）、Who（谁）、Where（在哪里）、When（何时）、Why（为什么）、How（如何）、How much（多少）...'
+            },
+            {
+                id: 'D3',
+                title: 'D3 - 立即措施（临时措施）',
+                description: '防止问题扩散的围堵措施',
+                placeholder: '描述为防止问题扩大而采取的临时措施...'
+            },
+            {
+                id: 'D4',
+                title: 'D4 - 根本原因分析',
+                description: '使用5Why或鱼骨图分析根本原因',
+                placeholder: '深入分析问题的根本原因...'
+            },
+            {
+                id: 'D5',
+                title: 'D5 - 永久措施（纠正措施）',
+                description: '消除根本原因的永久性解决方案',
+                placeholder: '描述消除根本原因的具体措施...'
+            },
+            {
+                id: 'D6',
+                title: 'D6 - 措施实施与验证',
+                description: '措施的执行计划和效果验证',
+                placeholder: '措施实施计划和验证方法...'
+            },
+            {
+                id: 'D7',
+                title: 'D7 - 预防措施',
+                description: '防止问题再次发生的系统性措施',
+                placeholder: '描述防止类似问题再次发生的预防措施...'
+            },
+            {
+                id: 'D8',
+                title: 'D8 - 团队认可与总结',
+                description: '团队贡献认可和经验教训总结',
+                placeholder: '团队成员贡献和经验教训总结...'
+            }
+        ];
+
+        // Toggle configuration panel
+        function toggleConfig() {
+            const configContent = document.getElementById('configContent');
+            const toggle = document.querySelector('.config-toggle');
+            configContent.classList.toggle('show');
+            toggle.classList.toggle('active');
+        }
+
+        // Generate report
+        async function generateReport() {
+            const title = document.getElementById('problemTitle').value.trim();
+            const description = document.getElementById('problemDescription').value.trim();
+            const generateBtn = document.getElementById('generateBtn');
+
+            if (!title || !description) {
+                showToast('warning', '输入不完整', '请填写问题标题和详细描述');
+                return;
+            }
+
+            // Show loading state
+            document.getElementById('placeholder').style.display = 'none';
+            document.getElementById('loadingState').style.display = 'block';
+            document.getElementById('reportHeader').style.display = 'none';
+            document.getElementById('reportContainer').style.display = 'none';
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<div class="spinner"></div>生成中...';
+
+            // Simulate AI generation delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Generate report data (simulated AI response)
+            reportData = generateReportData(title, description);
+
+            // Render report
+            renderReport();
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>重新生成';
+        }
+
+        // Generate report data (simulated AI generation)
+        function generateReportData(title, description) {
+            const timestamp = new Date().toLocaleString('zh-CN');
+            const keywords = extractKeywords(description);
+
+            return {
+                D0: {
+                    content: `## D0 准备与预防措施
+
+### 问题识别
+- **问题类型**: ${keywords.type || '质量缺陷问题'}
+- **紧急程度**: ${keywords.severity || '高'} - 需要立即关注
+- **发生频次**: ${keywords.frequency || '偶发'}性
+
+### 初步评估
+1. **客户影响**: 确认问题对最终用户的影响范围和程度
+2. **生产影响**: 评估对生产线的影响，决定是否需要停产
+3. **库存影响**: 检查在制品和成品库存，确定是否需要隔离
+
+### 预防措施
+- 立即通知相关人员停止可疑批次产品的发货
+- 对可疑批次进行标识和隔离
+- 通知供应商和客户相关信息
+
+**记录时间**: ${timestamp}`,
+                    quality: 'high'
+                },
+                D1: {
+                    content: `## D1 团队组建
+
+### 团队成员
+
+| 角色 | 姓名 | 部门 | 职责 |
+|------|------|------|------|
+| 团队负责人 | [填写姓名] | 质量部 | 统筹协调整个8D项目 |
+| 问题专家 | [填写姓名] | 技术部 | 提供技术支持 |
+| 生产代表 | [填写姓名] | 生产部 | 执行生产相关措施 |
+| 质量工程师 | [填写姓名] | 质量部 | 数据收集和验证 |
+| 供应商代表 | [填写姓名] | 采购部 | 供应商沟通协调 |
+
+### 团队职责
+1. 定期召开会议讨论进展
+2. 及时更新问题状态
+3. 确保措施按时执行
+4. 记录所有决策和行动项
+
+**团队成立时间**: ${timestamp}`,
+                    quality: 'medium'
+                },
+                D2: {
+                    content: `## D2 问题描述 (5W2H分析)
+
+### What（什么）
+- 问题现象: ${title}
+- 具体表现: ${description.substring(0, 100)}...
+
+### Who（谁）
+- 发现人: [填写姓名]
+- 影响客户: [填写客户名称]
+
+### Where（在哪里）
+- 发生工序: ${keywords.location || '生产线A'}
+- 发生工位: [填写具体工位]
+- 产品型号: [填写产品型号]
+
+### When（何时）
+- 发现时间: ${new Date().toLocaleDateString('zh-CN')}
+- 开始时间: [估计开始时间]
+- 持续时间: [估计持续时间]
+
+### Why（为什么） - 初步分析
+- 为什么被发现: ${keywords.why || '抽检过程中发现'}
+- 为什么现在才发现: [分析原因]
+
+### How（如何）
+- 发现方式: ${keywords.method || '来料检验/过程检验/成品检验'}
+- 发生条件: [描述发生条件]
+
+### How much（多少）
+- 不良数量: ${keywords.quantity || '待统计'}
+- 不良率: ${keywords.rate || '待计算'}%
+- 批次: [受影响批次]
+
+---
+**问题描述补充**: ${description}`,
+                    quality: 'high'
+                },
+                D3: {
+                    content: `## D3 立即措施（临时措施/围堵措施）
+
+### 隔离措施
+1. **物料隔离**
+   - 对可疑批次进行全数标识
+   - 暂停可疑批次产品的发货
+   - 隔离存放于指定区域
+
+2. **库存排查**
+   - 检查成品仓库存
+   - 检查在制品库存
+   - 检查供应商处库存
+
+### 围堵措施
+1. **客户现场**
+   - 联系客户确认是否已使用
+   - 如有必要，安排现场排查
+
+2. **生产现场**
+   - 增加检验频次
+   - 实施100%全检
+   - 暂停可疑设备/工位的生产
+
+### 临时替代方案
+- 启用备用供应商
+- 调整生产计划
+- 优先使用合格库存
+
+### 措施验证
+- 隔离标识100%覆盖
+- 围堵范围确认
+- 客户反馈收集`,
+                    quality: 'high'
+                },
+                D4: {
+                    content: `## D4 根本原因分析
+
+### 分析方法
+使用5Why分析法层层追问，找出根本原因。
+
+### 5Why分析
+
+**第一层: 为什么出现这个问题？**
+- 回答: ${keywords.rootCause1 || '材料/工艺/设备等方面存在异常'}
+
+**第二层: 为什么材料/工艺/设备会出现异常？**
+- 回答: ${keywords.rootCause2 || '供应商来料质量波动/参数设置不当/设备老化'}
+
+**第三层: 为什么供应商来料质量波动/参数设置不当/设备老化？**
+- 回答: ${keywords.rootCause3 || '检验标准不完善/维护计划执行不到位'}
+
+**第四层: 为什么检验标准不完善/维护计划执行不到位？**
+- 回答: ${keywords.rootCause4 || '流程文件未及时更新/人员培训不足'}
+
+**第五层: 为什么流程文件未及时更新/人员培训不足？**
+- 回答: ${keywords.rootCause5 || '管理体系存在漏洞，缺少定期审查机制'}
+
+### 根本原因
+${keywords.finalRootCause || '管理体系中缺少对关键过程参数的定期审查和更新机制，导致标准与实际生产脱节。'}
+
+### 鱼骨图分析要点
+- 人员: 培训、经验、态度
+- 设备: 精度、维护、校准
+- 材料: 供应商、来料检验、储存
+- 方法: 流程、标准、操作指导
+- 环境: 温湿度、清洁度、光线
+- 测量: 仪器、方法、人员`,
+                    quality: 'high'
+                },
+                D5: {
+                    content: `## D5 永久措施（纠正措施）
+
+### 针对根本原因的纠正措施
+
+#### 1. 流程优化
+- 修订${keywords.process || '相关作业指导书'}
+- 更新${keywords.standard || '检验标准'}
+- 完善${keywords.document || '过程控制文件'}
+
+#### 2. 设备改进
+- 调整${keywords.equipment || '关键设备参数'}
+- 升级${keywords.machine || '检测设备'}
+- 增加${keywords.device || '监控装置'}
+
+#### 3. 供应商管理
+- 加强${keywords.supplier || '供应商质量管理'}
+- 增加${keywords.incoming || '来料检验频次'}
+- 完善${keywords.sqm || '供应商评估体系'}
+
+#### 4. 人员培训
+- 开展${keywords.training || '专项技能培训'}
+- 强化${keywords.knowledge || '质量意识教育'}
+- 完善${keywords.operater || '操作技能考核'}
+
+### 措施验证标准
+1. 措施实施后不良率降至目标值以下
+2. 持续稳定生产至少3个月
+3. 客户投诉为零`,
+                    quality: 'high'
+                },
+                D6: {
+                    content: `## D6 措施实施与验证
+
+### 实施计划
+
+| 序号 | 措施内容 | 责任人 | 完成时间 | 状态 |
+|------|----------|--------|----------|------|
+| 1 | [填写具体措施1] | [姓名] | [日期] | 待执行 |
+| 2 | [填写具体措施2] | [姓名] | [日期] | 待执行 |
+| 3 | [填写具体措施3] | [姓名] | [日期] | 待执行 |
+| 4 | [填写具体措施4] | [姓名] | [日期] | 待执行 |
+| 5 | [填写具体措施5] | [姓名] | [日期] | 待执行 |
+
+### 验证方法
+1. **数据验证**
+   - 收集措施实施后的质量数据
+   - 对比实施前后的不良率变化
+   - 使用SPC控制图监控过程稳定性
+
+2. **现场验证**
+   - 现场检查措施执行情况
+   - 确认文件和设备更新到位
+   - 审核人员培训记录
+
+3. **持续时间**
+   - 验证周期: ${keywords.verificationPeriod || '4周'}
+   - 确认稳定后方可关闭8D
+
+### 效果评估
+- 目标不良率: ≤${keywords.targetRate || '0.1'}%
+- 实际达成: [待统计]
+- 客户反馈: [待收集]`,
+                    quality: 'high'
+                },
+                D7: {
+                    content: `## D7 - 预防措施
+
+### 系统性预防措施
+
+#### 1. 设计预防
+- 将根本原因纳入设计FMEA分析
+- 在设计阶段增加防错设计
+- 建立${keywords.design || '设计评审'}检查清单
+
+#### 2. 过程预防
+- 完善${keywords.processControl || '过程控制计划'}
+- 建立${keywords.earlyWarning || '预警机制'}
+- 实施${keywords.pokeYoke || '防错装置'}
+
+#### 3. 管理预防
+- 完善${keywords.management || '质量管理体系'}
+- 建立${keywords.audit || '定期审查机制'}
+- 强化${keywords.escalation || '异常升级流程'}
+
+#### 4. 知识管理
+- 更新${keywords.lessonLearned || '经验教训库'}
+- 完善${keywords.standardSample || '标准样品库'}
+- 建立${keywords.bestPractice || '最佳实践分享'}
+
+### 横向展开
+- 推广到${keywords.similarProcess || '类似工序'}
+- 检查${keywords.similarProduct || '同类产品'}
+- 评估${keywords.similarSupplier || '类似供应商'}
+
+### 预防措施验证
+- 定期审核预防措施执行情况
+- 监控相关指标的趋势变化
+- 确认预防措施的有效性`,
+                    quality: 'high'
+                },
+                D8: {
+                    content: `## D8 - 团队认可与总结
+
+### 团队贡献
+
+感谢以下团队成员在本次8D项目中的贡献：
+
+| 姓名 | 部门 | 角色 | 贡献说明 |
+|------|------|------|----------|
+| [姓名] | 质量部 | 团队负责人 | 项目统筹与协调 |
+| [姓名] | 技术部 | 问题专家 | 技术方案制定 |
+| [姓名] | 生产部 | 生产代表 | 措施执行落地 |
+| [姓名] | 质量部 | 质量工程师 | 数据收集与分析 |
+| [姓名] | 采购部 | 供应商代表 | 供应商沟通协调 |
+
+### 经验教训
+
+#### 学到的经验
+1. ${keywords.lesson1 || '及时的问题识别和响应机制至关重要'}
+2. ${keywords.lesson2 || '跨部门协作能够更有效地解决问题'}
+3. ${keywords.lesson3 || '数据驱动的决策更加科学和有效'}
+
+#### 需要改进的方面
+1. ${keywords.improvement1 || '加强过程监控，减少问题发现延迟'}
+2. ${keywords.improvement2 || '完善供应商质量管理'}
+3. ${keywords.improvement3 || '强化一线员工的质量意识'}
+
+### 建议的改进项目
+1. [填写改进项目1]
+2. [填写改进项目2]
+3. [填写改进项目3]
+
+### 关闭确认
+- 8D报告关闭日期: [填写日期]
+- 关闭审批人: [签字]
+- 客户确认: [签字]
+
+---
+**报告创建时间**: ${timestamp}
+**报告版本**: V1.0`,
+                    quality: 'medium'
+                }
+            };
+        }
+
+        // Extract keywords from description
+        function extractKeywords(description) {
+            const lowerDesc = description.toLowerCase();
+            const keywords = {};
+
+            // Detect severity
+            if (lowerDesc.includes('严重') || lowerDesc.includes('致命') || lowerDesc.includes('危急')) {
+                keywords.severity = '严重';
+            } else if (lowerDesc.includes('轻微') || lowerDesc.includes('一般')) {
+                keywords.severity = '低';
+            } else {
+                keywords.severity = '中等';
+            }
+
+            // Detect location
+            if (lowerDesc.includes('装配') || lowerDesc.includes('组装')) {
+                keywords.location = '装配工序';
+            } else if (lowerDesc.includes('焊接')) {
+                keywords.location = '焊接工序';
+            } else if (lowerDesc.includes('注塑')) {
+                keywords.location = '注塑工序';
+            } else if (lowerDesc.includes('涂装') || lowerDesc.includes('喷涂')) {
+                keywords.location = '涂装工序';
+            } else if (lowerDesc.includes('来料') || lowerDesc.includes('采购')) {
+                keywords.location = '来料检验';
+            }
+
+            // Detect frequency
+            if (lowerDesc.includes('持续') || lowerDesc.includes('批量') || lowerDesc.includes('大量')) {
+                keywords.frequency = '持续';
+            } else if (lowerDesc.includes('偶尔') || lowerDesc.includes('偶尔')) {
+                keywords.frequency = '偶发';
+            } else {
+                keywords.frequency = '间歇';
+            }
+
+            // Detect quantity
+            const quantityMatch = description.match(/(\d+)\s*(个|件|台|批|%)/);
+            if (quantityMatch) {
+                keywords.quantity = quantityMatch[1] + quantityMatch[2];
+            }
+
+            // Detect method
+            if (lowerDesc.includes('外观') || lowerDesc.includes('目视')) {
+                keywords.method = '外观检验';
+            } else if (lowerDesc.includes('功能') || lowerDesc.includes('测试')) {
+                keywords.method = '功能测试';
+            } else if (lowerDesc.includes('尺寸') || lowerDesc.includes('测量')) {
+                keywords.method = '尺寸检验';
+            }
+
+            // Detect type
+            if (lowerDesc.includes('外观') || lowerDesc.includes('划痕') || lowerDesc.includes('脏污')) {
+                keywords.type = '外观缺陷';
+            } else if (lowerDesc.includes('尺寸') || lowerDesc.includes('规格')) {
+                keywords.type = '尺寸超差';
+            } else if (lowerDesc.includes('功能') || lowerDesc.includes('不工作') || lowerDesc.includes('失效')) {
+                keywords.type = '功能失效';
+            } else if (lowerDesc.includes('材料') || lowerDesc.includes('材质')) {
+                keywords.type = '材料问题';
+            }
+
+            return keywords;
+        }
+
+        // Render report
+        function renderReport() {
+            const container = document.getElementById('reportContainer');
+            const reportHeader = document.getElementById('reportHeader');
+
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('reportContainer').style.display = 'block';
+            reportHeader.style.display = 'flex';
+
+            document.getElementById('reportDate').textContent = `生成时间: ${new Date().toLocaleString('zh-CN')}`;
+
+            container.innerHTML = stepsConfig.map(step => {
+                const data = reportData[step.id];
+                return `
+                    <div class="step-card" id="step-${step.id}">
+                        <div class="step-header" onclick="toggleStep('${step.id}')">
+                            <div class="step-header-left">
+                                <div class="step-badge">${step.id}</div>
+                                <div>
+                                    <div class="step-title">${step.title}</div>
+                                    <div class="step-summary">${step.description}</div>
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <span class="quality-score ${data?.quality === 'high' ? 'quality-high' : 'quality-medium'}">
+                                    ${data?.quality === 'high' ? '✓ 完整' : '⚠ 需补充'}
+                                </span>
+                                <svg class="accordion-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step-body">
+                            <div class="editor-toolbar">
+                                <button class="toolbar-btn" onclick="formatText('bold')"><strong>B</strong></button>
+                                <button class="toolbar-btn" onclick="formatText('italic')"><em>I</em></button>
+                                <button class="toolbar-btn" onclick="formatText('list')">列表</button>
+                                <button class="toolbar-btn" onclick="formatText('table')">表格</button>
+                                <button class="toolbar-btn" onclick="copyStep('${step.id}')">复制本节</button>
+                            </div>
+                            <textarea class="editor" id="editor-${step.id}" oninput="updateReportData('${step.id}', this.value)">${data?.content || step.placeholder}</textarea>
+                            <div class="info-tags">
+                                <span class="info-tag">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    字数: ${data?.content?.length || 0}
+                                </span>
+                                <span class="info-tag">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    可编辑
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Auto-expand first step
+            toggleStep('D0');
+
+            showToast('success', '报告生成成功', '8D报告已生成，请查看右侧内容');
+        }
+
+        // Toggle step expansion
+        function toggleStep(stepId) {
+            const stepCard = document.getElementById(`step-${stepId}`);
+            stepCard.classList.toggle('expanded');
+        }
+
+        // Update report data
+        function updateReportData(stepId, content) {
+            reportData[stepId] = {
+                ...reportData[stepId],
+                content: content
+            };
+        }
+
+        // Format text (basic formatting)
+        function formatText(format) {
+            const textarea = document.querySelector('.step-card.expanded .editor');
+            if (!textarea) return;
+
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            const selected = text.substring(start, end);
+
+            let newText = '';
+            let cursorPos = start;
+
+            switch (format) {
+                case 'bold':
+                    newText = `**${selected || '粗体文本'}**`;
+                    cursorPos = start + 2;
+                    break;
+                case 'italic':
+                    newText = `*${selected || '斜体文本'}*`;
+                    cursorPos = start + 1;
+                    break;
+                case 'list':
+                    newText = `\n- ${selected || '列表项'}`;
+                    cursorPos = start + newText.length;
+                    break;
+                case 'table':
+                    newText = `\n| 列1 | 列2 | 列3 |\n|------|------|------|\n| 内容 | 内容 | 内容 |`;
+                    cursorPos = start + newText.length;
+                    break;
+            }
+
+            textarea.value = text.substring(0, start) + newText + text.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(cursorPos, cursorPos);
+            updateReportData(textarea.id.replace('editor-', ''), textarea.value);
+        }
+
+        // Copy step content
+        function copyStep(stepId) {
+            const content = reportData[stepId]?.content || '';
+            navigator.clipboard.writeText(content).then(() => {
+                showToast('success', '复制成功', `${stepId}内容已复制到剪贴板`);
+            });
+        }
+
+        // Copy all to clipboard
+        async function copyToClipboard() {
+            const content = generateMarkdown();
+            try {
+                await navigator.clipboard.writeText(content);
+                showToast('success', '复制成功', '完整报告已复制到剪贴板');
+            } catch (err) {
+                showToast('error', '复制失败', '请手动选择复制');
+            }
+        }
+
+        // Generate markdown
+        function generateMarkdown() {
+            const title = document.getElementById('problemTitle').value;
+            const timestamp = new Date().toLocaleString('zh-CN');
+
+            let markdown = `# 8D问题分析报告\n`;
+            markdown += `**问题标题**: ${title}\n`;
+            markdown += `**生成时间**: ${timestamp}\n\n`;
+            markdown += `---\n\n`;
+
+            stepsConfig.forEach(step => {
+                const data = reportData[step.id];
+                if (data) {
+                    markdown += `${data.content}\n\n`;
+                }
+            });
+
+            return markdown;
+        }
+
+        // Export to markdown file
+        function exportMarkdown() {
+            const markdown = generateMarkdown();
+            const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `8D报告_${new Date().toISOString().slice(0, 10)}.md`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('success', '导出成功', 'Markdown文件已下载');
+        }
+
+        // Export to PDF
+        function exportPDF() {
+            const title = document.getElementById('problemTitle').value;
+
+            // Create PDF content
+            let pdfContent = `
+                <div style="font-family: 'Microsoft YaHei', Arial, sans-serif; padding: 40px;">
+                    <h1 style="text-align: center; font-size: 28px; margin-bottom: 10px; color: #1E293B;">8D问题分析报告</h1>
+                    <p style="text-align: center; color: #64748B; margin-bottom: 30px;">问题: ${title}</p>
+                    <p style="text-align: center; color: #94A3B8; font-size: 12px; margin-bottom: 40px;">生成时间: ${new Date().toLocaleString('zh-CN')}</p>
+                    <hr style="margin-bottom: 30px;">
+            `;
+
+            stepsConfig.forEach(step => {
+                const data = reportData[step.id];
+                if (data && data.content) {
+                    pdfContent += `
+                        <div style="margin-bottom: 25px; page-break-inside: avoid;">
+                            <h2 style="font-size: 18px; color: #2563EB; margin-bottom: 12px; padding: 8px 12px; background: #EFF6FF; border-radius: 6px;">${step.title}</h2>
+                            <div style="font-size: 13px; line-height: 1.8; color: #374151; white-space: pre-wrap;">${data.content.replace(/\n/g, '<br>')}</div>
+                        </div>
+                        <hr style="margin: 20px 0; border: none; border-top: 1px solid #E5E7EB;">
+                    `;
+                }
+            });
+
+            pdfContent += `
+                    <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #E5E7EB;">
+                        <p style="color: #94A3B8; font-size: 11px;">-- 报告结束 --</p>
+                    </div>
+                </div>
+            `;
+
+            const element = document.createElement('div');
+            element.innerHTML = pdfContent;
+            element.style.position = 'absolute';
+            element.style.left = '-9999px';
+            element.style.width = '210mm';
+            document.body.appendChild(element);
+
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: `8D报告_${new Date().toISOString().slice(0, 10)}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.removeChild(element);
+                showToast('success', '导出成功', 'PDF文件已下载');
+            }).catch(err => {
+                document.body.removeChild(element);
+                showToast('error', '导出失败', 'PDF生成过程中出现错误');
+            });
+        }
+
+        // Load sample data
+        function loadSampleData() {
+            document.getElementById('problemTitle').value = '产品外观缺陷问题';
+            document.getElementById('problemDescription').value = `问题描述：
+
+产品型号：ABC-1234
+问题现象：产品表面出现划痕和凹坑
+发现时间：2024年1月15日
+发现工序：成品检验工位
+发现方式：目视检验
+不良数量：50件/批次
+不良率：5%
+影响范围：1月10日至1月15日生产的全部批次
+
+具体表现：
+- 产品外壳表面有明显的横向划痕
+- 部分产品表面有小的凹坑缺陷
+- 划痕主要分布在产品正面和侧面
+- 凹坑缺陷随机分布，无明显规律
+
+影响分析：
+- 客户投诉风险：高
+- 交期影响：需要全检，可能延迟发货
+- 经济损失：预计返工成本约5000元`;
+
+            showToast('info', '示例已加载', '已填入示例问题描述');
+        }
+
+        // Clear all
+        function clearAll() {
+            document.getElementById('problemTitle').value = '';
+            document.getElementById('problemDescription').value = '';
+            document.getElementById('reportContainer').style.display = 'none';
+            document.getElementById('reportHeader').style.display = 'none';
+            document.getElementById('placeholder').style.display = 'flex';
+            document.getElementById('generateBtn').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>生成8D报告';
+            reportData = { D0: null, D1: null, D2: null, D3: null, D4: null, D5: null, D6: null, D7: null, D8: null };
+            showToast('info', '已清空', '所有输入已清除');
+        }
+
+        // Show toast notification
+        function showToast(type, title, message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+
+            const icons = {
+                success: '<svg class="toast-icon" style="color: #10B981;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+                error: '<svg class="toast-icon" style="color: #EF4444;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+                warning: '<svg class="toast-icon" style="color: #F59E0B;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>',
+                info: '<svg class="toast-icon" style="color: #2563EB;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+            };
+
+            toast.innerHTML = `
+                ${icons[type]}
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Auto-resize textareas
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.max(200, this.scrollHeight) + 'px';
+            });
+        });
+    </script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+</body>
+</html>

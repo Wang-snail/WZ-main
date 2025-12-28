@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Brain, 
-  Eye, 
-  Play, 
-  CheckCircle, 
+import {
+  Brain,
+  Eye,
+  Play,
+  CheckCircle,
   AlertCircle,
   Settings,
   Tag,
@@ -13,26 +13,37 @@ import {
   Edit3
 } from 'lucide-react';
 import { Button } from '../../../../../components/ui/button';
-import { useKanoToolStore, WorkflowStep, OpinionFragment, ExtractStepResult } from '../../store/kanoToolStore';
+
+
+import {
+  useKanoToolStore,
+  useShallow,
+  selectToolData,
+  selectUIState,
+  selectConfig,
+  selectStepResults,
+  selectDataActions,
+  selectUIActions,
+  selectActionActions,
+  WorkflowStep,
+  OpinionFragment,
+  ExtractStepResult
+} from '../../store/kanoToolStore';
 import { AIService, AIConfig } from '../../services/AIService';
 
 export function ExtractStep() {
-  const { 
-    data, 
-    ui, 
-    config,
-    stepResults,
-    setFragments,
-    setLoading, 
-    setError, 
-    setProgress,
-    setStepStatus,
-    setExtractResult
-  } = useKanoToolStore();
+  const data = useKanoToolStore(useShallow(selectToolData));
+  const ui = useKanoToolStore(useShallow(selectUIState));
+  const config = useKanoToolStore(useShallow(selectConfig));
+  const stepResults = useKanoToolStore(useShallow(selectStepResults));
+
+  const { setFragments, setExtractResult } = useKanoToolStore(useShallow(selectDataActions));
+  const { setLoading, setError, setProgress } = useKanoToolStore(useShallow(selectUIActions));
+  const { setStepStatus } = useKanoToolStore(useShallow(selectActionActions));
 
   const [extracting, setExtracting] = useState(false);
   const [aiConfig, setAiConfig] = useState<AIConfig>(AIService.getDefaultConfig());
-  
+
   // 使用保存的结果
   const extractResults = stepResults.extract;
 
@@ -77,7 +88,7 @@ export function ExtractStep() {
       });
 
       const topFeatures = Object.entries(featureCounts)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 10)
         .map(([name, count]) => ({ name, count }));
 
@@ -106,27 +117,27 @@ export function ExtractStep() {
   const simulateAIExtraction = async (content: string, commentId: string): Promise<OpinionFragment[]> => {
     // 模拟的功能词典
     const features = [
-      '电池', '屏幕', '外观', '手感', '价格', '性能', '摄像头', '音质', 
+      '电池', '屏幕', '外观', '手感', '价格', '性能', '摄像头', '音质',
       '续航', '充电', '系统', '操作', '重量', '尺寸', '材质', '颜色'
     ];
-    
+
     const sentiments = [
       'strong_praise', 'weak_praise', 'neutral', 'weak_complaint', 'strong_complaint', 'suggestion'
     ];
 
     const fragments: OpinionFragment[] = [];
     const words = content.split(/[，。！？；、\s]+/).filter(w => w.length > 0);
-    
+
     // 随机生成1-3个观点片段
     const fragmentCount = Math.min(Math.floor(Math.random() * 3) + 1, aiConfig.maxFragmentsPerComment);
-    
+
     for (let i = 0; i < fragmentCount; i++) {
       const feature = features[Math.floor(Math.random() * features.length)];
       const sentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
       const startPos = Math.floor(Math.random() * Math.max(1, words.length - 3));
       const endPos = Math.min(startPos + 3, words.length);
       const rawText = words.slice(startPos, endPos).join('');
-      
+
       if (rawText.length > 2) {
         fragments.push({
           id: `fragment_${commentId}_${i}`,
@@ -160,7 +171,7 @@ export function ExtractStep() {
           <Settings className="w-5 h-5 mr-2" />
           AI提取配置
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
@@ -172,9 +183,9 @@ export function ExtractStep() {
                 min="1"
                 max="20"
                 value={aiConfig.maxFragmentsPerComment}
-                onChange={(e) => setAiConfig(prev => ({ 
-                  ...prev, 
-                  maxFragmentsPerComment: parseInt(e.target.value) || 10 
+                onChange={(e) => setAiConfig(prev => ({
+                  ...prev,
+                  maxFragmentsPerComment: parseInt(e.target.value) || 10
                 }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -190,9 +201,9 @@ export function ExtractStep() {
                 max="1.0"
                 step="0.1"
                 value={aiConfig.confidenceThreshold}
-                onChange={(e) => setAiConfig(prev => ({ 
-                  ...prev, 
-                  confidenceThreshold: parseFloat(e.target.value) 
+                onChange={(e) => setAiConfig(prev => ({
+                  ...prev,
+                  confidenceThreshold: parseFloat(e.target.value)
                 }))}
                 className="w-full"
               />
@@ -207,9 +218,9 @@ export function ExtractStep() {
               <input
                 type="checkbox"
                 checked={aiConfig.enableContextAnalysis}
-                onChange={(e) => setAiConfig(prev => ({ 
-                  ...prev, 
-                  enableContextAnalysis: e.target.checked 
+                onChange={(e) => setAiConfig(prev => ({
+                  ...prev,
+                  enableContextAnalysis: e.target.checked
                 }))}
                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
@@ -292,7 +303,7 @@ export function ExtractStep() {
             <span className="text-sm text-gray-500">{ui.progress}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-purple-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${ui.progress}%` }}
             ></div>

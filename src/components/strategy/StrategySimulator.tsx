@@ -15,7 +15,7 @@ const calculateStrategies = (inputs) => {
   // 1. 成本领先策略 (Cost Leadership)
   // 逻辑：如果大家没钱(收入低) + 市场已经是红海 + 我有强力供应链 = 只能拼价格
   // 修正：如果对手价格已经很低(competitorPrice低)，做成本领先会很难，除非我供应链极强
-  let costScore =
+  const costScore =
     ((10 - userIncome) * 1.5) +      // 越穷越看重价格 (权重高)
     (supplyChainReady * 2.0) +       // 供应链是核心支撑 (权重最高)
     (marketSaturation * 0.5) +       // 市场越饱和，越容易陷入价格战
@@ -23,14 +23,14 @@ const calculateStrategies = (inputs) => {
 
   // 2. 差异化策略 (Differentiation)
   // 逻辑：大家有钱(收入高) + 我有产品创新能力 + 对手虽然强但价格高(有溢价空间)
-  let diffScore =
+  const diffScore =
     (userIncome * 1.5) +             // 越富越愿意为特色买单
     (productInnovate * 2.5) +        // 自身的创新能力是决定性因素
     (marketSaturation * 0.5);        // 市场饱和度高时，必须做差异化才能突围
 
   // 3. 集中/细分战略 (Focus Strategy)
   // 逻辑：市场被巨头垄断(饱和度极高) + 我供应链一般 + 但我有一定创新力 = 躲开巨头做细分
-  let focusScore =
+  const focusScore =
     (marketSaturation * 3.0) +       // 只要是垄断市场，首选集中战略 (权重极大)
     ((10 - supplyChainReady) * 1.0) +// 供应链拼不过别人，被迫做细分
     (productInnovate * 1.0);         // 需要一点点特色来切入

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Calculator, 
-  Eye, 
-  Play, 
-  CheckCircle, 
+import {
+  Calculator,
+  Eye,
+  Play,
+  CheckCircle,
   AlertCircle,
   BarChart3,
   TrendingUp,
@@ -12,25 +12,34 @@ import {
   Minus,
   Download
 } from 'lucide-react';
+
 import { Button } from '../../../../../components/ui/button';
-import { useKanoToolStore, WorkflowStep, KanoFeature, ScoreStepResult } from '../../store/kanoToolStore';
+import {
+  useKanoToolStore,
+  useShallow,
+  selectToolData,
+  selectUIState,
+  selectStepResults,
+  selectDataActions,
+  selectUIActions,
+  selectActionActions,
+  WorkflowStep,
+  KanoFeature,
+  ScoreStepResult
+} from '../../store/kanoToolStore';
 import { KanoAnalysisService, KanoAnalysisResult, KANO_CATEGORIES } from '../../services/KanoAnalysisService';
 
 export function ScoreStep() {
-  const { 
-    data, 
-    ui, 
-    stepResults,
-    setFeatures,
-    setLoading, 
-    setError, 
-    setProgress,
-    setStepStatus,
-    setScoreResult
-  } = useKanoToolStore();
+  const data = useKanoToolStore(useShallow(selectToolData));
+  const ui = useKanoToolStore(useShallow(selectUIState));
+  const stepResults = useKanoToolStore(useShallow(selectStepResults));
+
+  const { setFeatures, setScoreResult } = useKanoToolStore(useShallow(selectDataActions));
+  const { setLoading, setError, setProgress } = useKanoToolStore(useShallow(selectUIActions));
+  const { setStepStatus } = useKanoToolStore(useShallow(selectActionActions));
 
   const [scoring, setScoring] = useState(false);
-  
+
   // 使用保存的结果
   const scoreResults = stepResults.score;
 
@@ -51,12 +60,12 @@ export function ScoreStep() {
 
       // 使用Kano分析服务进行分析
       const analysisResults = KanoAnalysisService.analyzeFragments(data.fragments);
-      
+
       setProgress(60);
 
       // 生成表格数据
       const tableData = KanoAnalysisService.generateKanoTable(analysisResults);
-      
+
       setProgress(80);
 
       // 计算统计信息
@@ -106,7 +115,7 @@ export function ScoreStep() {
   // 导出Kano分析表格
   const handleExportTable = () => {
     if (!scoreResults) return;
-    
+
     const csvContent = [
       ['产品功能', 'A(魅力特性)%', 'O(期望特性)%', 'M(必备特性)%', 'I(无差异特性)%', 'R(反向特性)%', 'Q(可疑结果)%', 'Kano定位', 'Better系数%', 'Worse系数%'].join(','),
       ...scoreResults.tableData.map(row => [
@@ -199,7 +208,7 @@ export function ScoreStep() {
             <span className="text-sm text-gray-500">{ui.progress}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${ui.progress}%` }}
             ></div>
@@ -298,12 +307,12 @@ export function ScoreStep() {
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-medium text-gray-700 border-r">产品功能</th>
-                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">A<br/>(魅力特性)</th>
-                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">O<br/>(期望特性)</th>
-                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">M<br/>(必备特性)</th>
-                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">I<br/>(无差异特性)</th>
-                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">R<br/>(反向特性)</th>
-                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">Q<br/>(可疑结果)</th>
+                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">A<br />(魅力特性)</th>
+                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">O<br />(期望特性)</th>
+                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">M<br />(必备特性)</th>
+                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">I<br />(无差异特性)</th>
+                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">R<br />(反向特性)</th>
+                        <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">Q<br />(可疑结果)</th>
                         <th className="px-3 py-2 text-center font-medium text-gray-700 border-r">Kano定位</th>
                         <th className="px-2 py-2 text-center font-medium text-gray-700 border-r">Better系数</th>
                         <th className="px-2 py-2 text-center font-medium text-gray-700">Worse系数</th>
@@ -320,9 +329,8 @@ export function ScoreStep() {
                           <td className="px-2 py-2 text-center text-gray-700 border-r">{row.percentages.R.toFixed(1)}%</td>
                           <td className="px-2 py-2 text-center text-gray-700 border-r">{row.percentages.Q.toFixed(1)}%</td>
                           <td className="px-3 py-2 text-center border-r">
-                            <span className={`px-2 py-1 rounded text-xs font-medium ${
-                              KANO_CATEGORIES[row.finalCategory as keyof typeof KANO_CATEGORIES]?.color || 'bg-gray-100 text-gray-800'
-                            }`}>
+                            <span className={`px-2 py-1 rounded text-xs font-medium ${KANO_CATEGORIES[row.finalCategory as keyof typeof KANO_CATEGORIES]?.color || 'bg-gray-100 text-gray-800'
+                              }`}>
                               {row.finalCategory}({KANO_CATEGORIES[row.finalCategory as keyof typeof KANO_CATEGORIES]?.name || '未知'})
                             </span>
                           </td>

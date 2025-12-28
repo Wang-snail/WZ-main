@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../../Downloads/n8n-clone"
+		}
+	],
+	"settings": {
+		"kiroAgent.configureMCP": "Disabled"
+	}
+}

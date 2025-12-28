@@ -11,22 +11,28 @@ import {
     Play,
     Zap
 } from 'lucide-react';
+
 import { Button } from '../../../../../components/ui/button';
-import { useKanoToolStore, WorkflowStep } from '../../store/kanoToolStore';
+import {
+    useKanoToolStore,
+    useShallow,
+    selectFileActions,
+    selectUIState,
+    selectActionActions,
+    selectDataActions,
+    WorkflowStep
+} from '../../store/kanoToolStore';
 import { FileParserService } from '../../services/FileParserService';
 import { saveAs } from 'file-saver';
 
 export function ConversionStep() {
-    const {
-        currentFile,
-        ui,
-        setLoading,
-        setError,
-        setStepStatus,
-        nextStep,
-        setRawComments,
-        startAutoAnalysis
-    } = useKanoToolStore();
+    const { isAutoRunning, loading, error } = useKanoToolStore(useShallow(selectUIState));
+    const { currentFile, setCurrentFile } = useKanoToolStore(useShallow(s => ({ currentFile: s.currentFile, setCurrentFile: s.setCurrentFile })));
+    const { setLoading: setStoreLoading, setError: setStoreError } = useKanoToolStore(useShallow(selectUIActions));
+    const { setStepStatus, nextStep, startAutoAnalysis } = useKanoToolStore(useShallow(selectActionActions));
+    const { setRawComments } = useKanoToolStore(useShallow(selectDataActions));
+
+    const ui = { isAutoRunning, loading, error }; // Compatibility
 
     const [convertedFiles, setConvertedFiles] = useState<{ name: string; content: string }[]>([]);
     const [converting, setConverting] = useState(false);
@@ -41,7 +47,7 @@ export function ConversionStep() {
         if (!currentFile) {
             // 如果不是自动运行模式且没有文件，显示错误
             if (!ui.isAutoRunning) {
-                setError('未找到可转换的文件，请返回导入步骤重新上传');
+                setStoreError('未找到可转换的文件，请返回导入步骤重新上传');
             }
             return;
         }
@@ -54,8 +60,8 @@ export function ConversionStep() {
         if (!currentFile) return;
 
         setConverting(true);
-        setLoading(true);
-        setError(null);
+        setStoreLoading(true);
+        setStoreError(null);
 
         try {
             let result: { name: string; content: string }[] = [];
@@ -75,11 +81,11 @@ export function ConversionStep() {
             setConvertedFiles(result);
             setStepStatus(WorkflowStep.CONVERT, 'completed');
         } catch (error) {
-            setError(error instanceof Error ? error.message : '转换失败');
+            setStoreError(error instanceof Error ? error.message : '转换失败');
             setStepStatus(WorkflowStep.CONVERT, 'error');
         } finally {
             setConverting(false);
-            setLoading(false);
+            setStoreLoading(false);
         }
     };
 

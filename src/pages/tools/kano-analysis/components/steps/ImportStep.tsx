@@ -13,23 +13,28 @@ import {
   Zap
 } from 'lucide-react';
 import { Button } from '../../../../../components/ui/button';
-import { useKanoToolStore, CommentData, WorkflowStep } from '../../store/kanoToolStore';
+import {
+  useKanoToolStore,
+  useShallow,
+  selectToolData,
+  selectUIState,
+  selectActionActions,
+  selectDataActions,
+  selectUIActions,
+  selectFileActions,
+  CommentData,
+  WorkflowStep
+} from '../../store/kanoToolStore';
 import { FileParserService } from '../../services/FileParserService';
 
 export function ImportStep() {
-  const {
-    data,
-    ui,
-    setRawComments,
-    setLoading,
-    setError,
-    setStepStatus,
-    setCurrentFile,
-    nextStep,
-    startAutoAnalysis
-  } = useKanoToolStore();
+  const { isAutoRunning, loading, error, progress } = useKanoToolStore(useShallow(selectUIState));
+  const { setCurrentFile } = useKanoToolStore(useShallow(selectFileActions));
+  const { setRawComments } = useKanoToolStore(useShallow(selectDataActions));
+  const { setLoading, setError } = useKanoToolStore(useShallow(selectUIActions));
+  const { setStepStatus, nextStep, startAutoAnalysis } = useKanoToolStore(useShallow(selectActionActions));
 
-  const { isAutoRunning } = ui;
+  const ui = { loading, error, progress, isAutoRunning }; // Compatibility for existing code
 
   const [uploadMethod, setUploadMethod] = useState<'file' | 'paste'>('file');
   const [textInput, setTextInput] = useState('');
@@ -383,7 +388,7 @@ export function ImportStep() {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* 自动分析按钮 */}
                 <div className="flex flex-col space-y-3">
                   <Button
@@ -394,7 +399,7 @@ export function ImportStep() {
                   >
                     {isAutoRunning ? (
                       <>
-                        <motion.div 
+                        <motion.div
                           className="rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-3"
                           animate={{ rotate: 360 }}
                           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -408,7 +413,7 @@ export function ImportStep() {
                       </>
                     )}
                   </Button>
-                  
+
                   {/* 进度条 */}
                   {isAutoRunning && (
                     <motion.div
@@ -430,7 +435,7 @@ export function ImportStep() {
                       </div>
                     </motion.div>
                   )}
-                  
+
                   {/* 或者手动进行 */}
                   <div className="text-center">
                     <span className="text-gray-500 text-sm">或者</span>

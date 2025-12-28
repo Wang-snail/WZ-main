@@ -2,7 +2,6 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
-import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import LanguageRedirect from './components/common/LanguageRedirect';
 import LanguageSynchronizer from './components/common/LanguageSynchronizer';
@@ -15,16 +14,18 @@ import './App.css';
 // 路由组件
 import SalesTargetTracking from '@/pages/SalesTargetTracking';
 import EmailContactPage from '@/pages/EmailContactPage';
-import DiscussionBoard from '@/pages/DiscussionBoard';
 import HomePage from './pages/HomePageOptimized';
 import ToolsPage from '@/pages/tools/ToolsPage';
-import WorkflowsPage from '@/pages/workflows/WorkflowsPage';
-import ForumPage from '@/pages/forum/ForumPage';
 import SyncPage from '@/pages/sync/SyncPage';
+
+const CommunityPage = React.lazy(() => import('./pages/community/CommunityPage'));
+
+const GuidePage = React.lazy(() => import('./pages/guide/GuidePage'));
 
 const FbaCalculator = React.lazy(() => import('./pages/tools/fba-calculator/FbaCalculator'));
 const MarketAnalysis = React.lazy(() => import('./pages/tools/MarketAnalysis'));
 const KanoAnalysisToolPage = React.lazy(() => import('./pages/tools/kano-analysis/KanoAnalysisToolPage'));
+const CompetitorAnalysisPage = React.lazy(() => import('./pages/tools/competitor-analysis/CompetitorAnalysisPage'));
 const AmazonNewProductProcess = React.lazy(() => import('./pages/processes/AmazonNewProductProcess'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 
@@ -75,36 +76,37 @@ function App() {
             {/* 语言同步组件 */}
             <LanguageSynchronizer />
 
-            <Header />
-
-            <main className="flex-1 pt-16">
+            <main className="flex-1">
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   {/* 主要路由 */}
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/wiki" element={<GuidePage />} />
                   <Route path="/tools" element={<ToolsPage />} />
                   <Route path="/sales-target" element={<SalesTargetTracking />} />
                   <Route path="/email-contact" element={<EmailContactPage />} />
-                  <Route path="/discussion" element={<DiscussionBoard />} />
-                  <Route path="/workflows" element={<WorkflowsPage />} />
-                  <Route path="/forum" element={<ForumPage />} />
+                  <Route path="/community" element={<CommunityPage />} />
+                  <Route path="/workflows" element={<CommunityPage />} />
+                  <Route path="/forum" element={<CommunityPage />} />
+                  <Route path="/discussion" element={<CommunityPage />} />
                   <Route path="/sync" element={<SyncPage />} />
                   <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/tools/market-analysis" element={<MarketAnalysis />} />
                   <Route path="/tools/kano-analysis" element={<KanoAnalysisToolPage />} />
+                  <Route path="/tools/competitor-analysis" element={<CompetitorAnalysisPage />} />
                   <Route path="/processes/amazon-new-product-import" element={<AmazonNewProductProcess />} />
                   <Route path="/about" element={<AboutPage />} />
 
-                  {/* 多语言路由 - 只有 FBA 计算器 是保留工具 */}
+                  {/* 多语言路由 */}
                   {/* 英文 */}
                   <Route path="/en" element={<HomePage />} />
                   <Route path="/en/tools" element={<ToolsPage />} />
-                  <Route path="/en/workflows" element={<WorkflowsPage />} />
-                  <Route path="/en/forum" element={<ForumPage />} />
+                  <Route path="/en/community" element={<CommunityPage />} />
                   <Route path="/en/sync" element={<SyncPage />} />
 
                   <Route path="/en/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/en/tools/kano-analysis" element={<KanoAnalysisToolPage />} />
+                  <Route path="/en/tools/competitor-analysis" element={<CompetitorAnalysisPage />} />
 
 
                   {/* 其他语言路由占位，暂定都指向 Home 或具体工具 */}
@@ -112,12 +114,12 @@ function App() {
                     <React.Fragment key={lang}>
                       <Route path={`/${lang}`} element={<HomePage />} />
                       <Route path={`/${lang}/tools`} element={<ToolsPage />} />
-                      <Route path={`/${lang}/workflows`} element={<WorkflowsPage />} />
-                      <Route path={`/${lang}/forum`} element={<ForumPage />} />
+                      <Route path={`/${lang}/community`} element={<CommunityPage />} />
                       <Route path={`/${lang}/sync`} element={<SyncPage />} />
 
                       <Route path={`/${lang}/tools/fba-calculator`} element={<FbaCalculator />} />
                       <Route path={`/${lang}/tools/kano-analysis`} element={<KanoAnalysisToolPage />} />
+                      <Route path={`/${lang}/tools/competitor-analysis`} element={<CompetitorAnalysisPage />} />
                     </React.Fragment>
                   ))}
                 </Routes>

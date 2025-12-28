@@ -97,7 +97,7 @@ const getFee = (tier: SizeTier, shippingWeight: number, category: ProductCategor
       if (shippingWeight <= 0.75) return (isApparel ? 3.86 : 3.58) * dgMultiplier;
       return (isApparel ? 4.08 : 3.77) * dgMultiplier;
 
-    case SizeTier.LARGE_STANDARD:
+    case SizeTier.LARGE_STANDARD: {
       let fee = 0;
       if (shippingWeight <= 0.25) fee = isApparel ? 4.49 : 3.86;
       else if (shippingWeight <= 0.5) fee = isApparel ? 4.70 : 4.08;
@@ -115,11 +115,13 @@ const getFee = (tier: SizeTier, shippingWeight: number, category: ProductCategor
         fee = base + (intervals * 0.16); 
       }
       return fee * dgMultiplier;
+    }
 
-    case SizeTier.LARGE_BULKY:
+    case SizeTier.LARGE_BULKY: {
       const lbBase = isApparel ? 10.73 : 9.73;
       const lbExcess = Math.ceil(shippingWeight - 1);
       return (lbBase + (Math.max(0, lbExcess) * 0.42)) * dgMultiplier;
+    }
 
     case SizeTier.EXTRA_LARGE_0_50:
       return (26.33 + (Math.max(0, Math.ceil(shippingWeight - 1)) * 0.38)) * dgMultiplier;

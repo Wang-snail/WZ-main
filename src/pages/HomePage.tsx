@@ -92,8 +92,8 @@ export default function HomePage() {
       gradient: 'from-blue-400 to-cyan-400'
     },
     {
-      title: '实战经验库',
-      description: '真实案例分享，避免踩坑，快速成长',
+      title: '数据实验室',
+      description: '专业分析工具，数据驱动决策，快速成长',
       icon: <BookOpen className="w-8 h-8" />,
       gradient: 'from-green-400 to-emerald-400'
     },

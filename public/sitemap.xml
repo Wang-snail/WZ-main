@@ -1,193 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-        
+
   <!-- 主页 -->
   <url>
     <loc>https://wsnail.com/</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- AI工具库主页 -->
+
+  <!-- 工具中心 -->
   <url>
-    <loc>https://wsnail.com/ai-tools</loc>
-    <lastmod>2025-09-16</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://wsnail.com/tools</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- AI占卜页面 -->
+  <!-- 讨论社区 -->
   <url>
-    <loc>https://wsnail.com/divination</loc>
-    <lastmod>2025-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://wsnail.com/community</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <!-- 分析器页面 -->
+  <!-- 行业信息 / 维基百科风格页面 -->
   <url>
-    <loc>https://wsnail.com/analyzer</loc>
-    <lastmod>2025-09-16</lastmod>
+    <loc>https://wsnail.com/wiki</loc>
+    <lastmod>2025-12-27</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
-  <!-- AI游戏中心 -->
+  <!-- 销售目标追踪 -->
   <url>
-    <loc>https://wsnail.com/games</loc>
-    <lastmod>2025-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- 工具统计页面 -->
-  <url>
-    <loc>https://wsnail.com/tools/statistics</loc>
-    <lastmod>2025-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- 情感分析页面 -->
-  <url>
-    <loc>https://wsnail.com/analyzer</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- AI工具分类页面 -->
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=chatbot</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=search</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=social</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=image</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=video</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?category=image-processing</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- AI工具标签页面 -->
-  <url>
-    <loc>https://wsnail.com/ai-tools?tab=featured</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/ai-tools?tab=popular</loc>
-    <lastmod>2025-06-27</lastmod>
+    <loc>https://wsnail.com/sales-target</loc>
+    <lastmod>2025-12-27</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.6</priority>
+    <priority>0.85</priority>
   </url>
-  
+
+  <!-- FBA计算器 -->
   <url>
-    <loc>https://wsnail.com/ai-tools?tab=latest</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- 占卜服务子页面 -->
-  <url>
-    <loc>https://wsnail.com/divination/tarot</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/zodiac</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/bagua</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/palm</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/divination/word</loc>
-    <lastmod>2025-06-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <!-- AI游戏页面 -->
-  <url>
-    <loc>https://wsnail.com/games</loc>
-    <lastmod>2025-08-14</lastmod>
+    <loc>https://wsnail.com/tools/fba-calculator</loc>
+    <lastmod>2025-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
+  <!-- 市场分析 -->
   <url>
-    <loc>https://wsnail.com/games/ai-quiz</loc>
-    <lastmod>2025-08-14</lastmod>
+    <loc>https://wsnail.com/tools/market-analysis</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kano分析 -->
+  <url>
+    <loc>https://wsnail.com/tools/kano-analysis</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 竞品分析 -->
+  <url>
+    <loc>https://wsnail.com/tools/competitor-analysis</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 新品导入SOP -->
+  <url>
+    <loc>https://wsnail.com/processes/amazon-new-product-import</loc>
+    <lastmod>2025-12-27</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- 关于我们 -->
+  <url>
+    <loc>https://wsnail.com/about</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 联系方式 -->
+  <url>
+    <loc>https://wsnail.com/email-contact</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 更新日志 -->
+  <url>
+    <loc>https://wsnail.com/sync</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <url>
-    <loc>https://wsnail.com/games/ai-tic-tac-toe</loc>
-    <lastmod>2025-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://wsnail.com/games/ai-memory</loc>
-    <lastmod>2025-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
+
 </urlset>

@@ -1,0 +1,313 @@
+[
+    {
+        "id": "profit_flow_z",
+        "type": "tab",
+        "label": "利润计算工作流",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "trigger_node",
+        "type": "inject",
+        "z": "profit_flow_z",
+        "name": "开始计算",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "var_sales"
+            ]
+        ]
+    },
+    {
+        "id": "var_sales",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "人民币目标销售额",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cnySales",
+                "pt": "msg",
+                "to": "50000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "var_rate"
+            ]
+        ]
+    },
+    {
+        "id": "var_rate",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "汇率 (USD/CNY)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.rate",
+                "pt": "msg",
+                "to": "7.23",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "var_cost_product"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_product",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "产品成本 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_product",
+                "pt": "msg",
+                "to": "22",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "var_cost_logistics"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_logistics",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "物流成本 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_logistics",
+                "pt": "msg",
+                "to": "20",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "var_cost_ads"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_ads",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "广告成本 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_ads",
+                "pt": "msg",
+                "to": "10",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "var_cost_shipping"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_shipping",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "尾程配送 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_shipping",
+                "pt": "msg",
+                "to": "8",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 480,
+        "wires": [
+            [
+                "var_cost_commission"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_commission",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "平台佣金 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_commission",
+                "pt": "msg",
+                "to": "15",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 540,
+        "wires": [
+            [
+                "var_cost_returns"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_returns",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "退货预留 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_returns",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 600,
+        "wires": [
+            [
+                "var_cost_other"
+            ]
+        ]
+    },
+    {
+        "id": "var_cost_other",
+        "type": "change",
+        "z": "profit_flow_z",
+        "name": "其他成本 %",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.cost_other",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 660,
+        "wires": [
+            [
+                "calc_profit"
+            ]
+        ]
+    },
+    {
+        "id": "calc_profit",
+        "type": "function",
+        "z": "profit_flow_z",
+        "name": "综合利润计算逻辑",
+        "func": "const p = msg.payload;\n\n// 1. 计算总成本比例\nconst totalCosts = p.cost_product + p.cost_logistics + p.cost_ads + \n                 p.cost_shipping + p.cost_commission + p.cost_returns + p.cost_other;\n\n// 2. 计算净利润率\nmsg.payload.profitRate = 100 - totalCosts;\n\n// 3. 计算各币种利润\nmsg.payload.cnyProfit = p.cnySales * (msg.payload.profitRate / 100);\nmsg.payload.usdSales = p.cnySales / p.rate;\nmsg.payload.usdProfit = msg.payload.cnyProfit / p.rate;\n\n// 结果格式化\nmsg.payload.summary = {\n    \"人民币目标销售额\": p.cnySales,\n    \"人民币目标利润\": msg.payload.cnyProfit.toFixed(2),\n    \"美金目标销售额\": msg.payload.usdSales.toFixed(2),\n    \"美金目标利润\": msg.payload.usdProfit.toFixed(2),\n    \"净利润率\": msg.payload.profitRate.toFixed(2) + \"%\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "debug_node"
+            ]
+        ]
+    },
+    {
+        "id": "debug_node",
+        "type": "debug",
+        "z": "profit_flow_z",
+        "name": "计算结果输出",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.summary",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 380,
+        "wires": []
+    }
+]

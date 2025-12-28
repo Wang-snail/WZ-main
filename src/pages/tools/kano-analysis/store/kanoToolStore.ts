@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { useShallow } from 'zustand/react/shallow';
 import { DataCleaningService } from '../services/DataCleaningService';
 import { AIService } from '../services/AIService';
 import { KanoAnalysisService, KANO_CATEGORIES } from '../services/KanoAnalysisService';
@@ -513,14 +514,14 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
           // 0. 格式转换 (Convert) - 显示处理动画
           setCurrentStep(WorkflowStep.CONVERT);
           setStepStatus(WorkflowStep.CONVERT, 'processing');
-          
+
           // 模拟格式转换过程
           for (let i = 0; i <= 100; i += 20) {
             if (!get().ui.isAutoRunning) return;
             set((state) => ({ ui: { ...state.ui, progress: i } }));
             await delay(200);
           }
-          
+
           setStepStatus(WorkflowStep.CONVERT, 'completed');
           await delay(800); // 让用户看到完成状态
 
@@ -543,7 +544,7 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
           );
 
           setProcessedComments(cleaningResult.cleaned);
-          
+
           // 保存数据整理结果
           const organizeResult: OrganizeStepResult = {
             beforeSamples: data.rawComments.slice(0, 3).map(c => c.content),
@@ -551,7 +552,7 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
             stats: cleaningResult.stats
           };
           setOrganizeResult(organizeResult);
-          
+
           setStepStatus(WorkflowStep.ORGANIZE, 'completed');
           await delay(1500); // 让用户看到完成状态和结果
 
@@ -574,7 +575,7 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
           );
 
           setFragments(fragments);
-          
+
           // 保存功能提取结果
           const featureCounts: Record<string, number> = {};
           fragments.forEach(fragment => {
@@ -582,7 +583,7 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
           });
 
           const topFeatures = Object.entries(featureCounts)
-            .sort(([,a], [,b]) => b - a)
+            .sort(([, a], [, b]) => b - a)
             .slice(0, 10)
             .map(([name, count]) => ({ name, count }));
 
@@ -593,7 +594,7 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
             sampleFragments: fragments.slice(0, 5)
           };
           setExtractResult(extractResult);
-          
+
           setStepStatus(WorkflowStep.EXTRACT, 'completed');
           await delay(1500); // 让用户看到完成状态和结果
 
@@ -688,3 +689,63 @@ export const useKanoToolStore = create<KanoToolState & KanoToolActions>()(
     }
   )
 );
+
+// ------------------------------------------------------------------
+// Selectors for optimized re-renders
+// ------------------------------------------------------------------
+
+export const selectWorkflowState = (state: KanoToolState) => ({
+  currentStep: state.currentStep,
+  stepStatus: state.stepStatus,
+});
+
+export const selectToolData = (state: KanoToolState) => state.data;
+
+export const selectUIState = (state: KanoToolState) => state.ui;
+
+export const selectConfig = (state: KanoToolState) => state.config;
+
+export const selectStepResults = (state: KanoToolState) => state.stepResults;
+
+export const selectActionActions = (actions: KanoToolActions) => ({
+  setCurrentStep: actions.setCurrentStep,
+  setStepStatus: actions.setStepStatus,
+  nextStep: actions.nextStep,
+  previousStep: actions.previousStep,
+  jumpToStep: actions.jumpToStep,
+  resetTool: actions.resetTool,
+  resetFromStep: actions.resetFromStep,
+  startAutoAnalysis: actions.startAutoAnalysis,
+  stopAutoAnalysis: actions.stopAutoAnalysis,
+});
+
+export const selectFileActions = (actions: KanoToolActions) => ({
+  setCurrentFile: actions.setCurrentFile,
+});
+
+export const selectDataActions = (actions: KanoToolActions) => ({
+  setRawComments: actions.setRawComments,
+  setProcessedComments: actions.setProcessedComments,
+  setFragments: actions.setFragments,
+  setFeatures: actions.setFeatures,
+  setAnalysis: actions.setAnalysis,
+  updateData: actions.updateData,
+  setOrganizeResult: actions.setOrganizeResult,
+  setExtractResult: actions.setExtractResult,
+  setScoreResult: actions.setScoreResult,
+});
+
+export const selectUIActions = (actions: KanoToolActions) => ({
+  setLoading: actions.setLoading,
+  setError: actions.setError,
+  setProgress: actions.setProgress,
+  setSelectedFeature: actions.setSelectedFeature,
+});
+
+export const selectConfigActions = (actions: KanoToolActions) => ({
+  updateProcessingOptions: actions.updateProcessingOptions,
+  updateAnalysisParams: actions.updateAnalysisParams,
+  updateExportSettings: actions.updateExportSettings,
+});
+
+export { useShallow };

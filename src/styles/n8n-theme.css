@@ -1,0 +1,352 @@
+/**
+ * N8N 工作流界面主题样式
+ * 适配数据实验室的设计系统
+ */
+
+/* 自定义滚动条样式 */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 侧边栏过渡动画 */
+.sidebar-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 禁用文本选择 */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* 节点拖拽状态 */
+.node-dragging {
+  cursor: grabbing !important;
+  transform: rotate(2deg) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+}
+
+/* 连接线动画 */
+.connection-animated {
+  stroke-dasharray: 5;
+  animation: dash 1s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* 节点状态指示器 */
+.node-status-indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 10;
+}
+
+.node-status-idle {
+  background-color: #94a3b8;
+}
+
+.node-status-running {
+  background-color: #3b82f6;
+  animation: pulse 2s infinite;
+}
+
+.node-status-success {
+  background-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.node-status-error {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+/* 节点悬停效果 */
+.node-hover-effect {
+  transition: all 0.2s ease;
+}
+
+.node-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* 端口高亮效果 */
+.port-highlight {
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.4);
+  transform: scale(1.2);
+  transition: all 0.2s ease;
+}
+
+/* 属性面板滑入动画 */
+.property-panel-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.property-panel-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.3s ease-out;
+}
+
+.property-panel-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.property-panel-exit-active {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+
+/* 节点库面板动画 */
+.node-library-enter {
+  transform: scale(0.9) translateY(-20px);
+  opacity: 0;
+}
+
+.node-library-enter-active {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  transition: all 0.2s ease-out;
+}
+
+/* 工作流执行进度条 */
+.workflow-progress {
+  position: relative;
+  overflow: hidden;
+  background-color: #f1f5f9;
+  border-radius: 9999px;
+  height: 4px;
+}
+
+.workflow-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f97316, #ea580c);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.workflow-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .node-sidebar {
+    width: 280px !important;
+    max-width: 90vw;
+  }
+  
+  .property-panel {
+    width: 100vw !important;
+    height: 50vh !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 16px 16px 0 0 !important;
+  }
+  
+  .workflow-canvas {
+    padding: 8px !important;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .n8n-dark-theme {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --border-color: #334155;
+    --accent-color: #f97316;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .node-border {
+    border-width: 3px !important;
+  }
+  
+  .connection-line {
+    stroke-width: 6px !important;
+  }
+  
+  .text-contrast {
+    font-weight: 700 !important;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-transition,
+  .node-hover-effect,
+  .property-panel-enter-active,
+  .property-panel-exit-active,
+  .node-library-enter-active {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .connection-animated {
+    animation: none !important;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .workflow-header,
+  .node-sidebar,
+  .property-panel {
+    display: none !important;
+  }
+  
+  .workflow-canvas {
+    width: 100% !important;
+    height: auto !important;
+    background: white !important;
+  }
+  
+  .workflow-node {
+    box-shadow: none !important;
+    border: 2px solid #000 !important;
+  }
+}
+
+/* 工具提示样式 */
+.tooltip {
+  position: absolute;
+  z-index: 9999;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.9);
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  transform: translateY(-100%);
+  margin-top: -8px;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: rgba(15, 23, 42, 0.9);
+}
+
+/* 键盘导航支持 */
+.keyboard-focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* 加载状态 */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 错误状态样式 */
+.error-boundary {
+  padding: 24px;
+  text-align: center;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #991b1b;
+}
+
+.error-boundary h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.error-boundary p {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.error-boundary button {
+  background: #dc2626;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.error-boundary button:hover {
+  background: #b91c1c;
+}

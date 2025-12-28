@@ -1,318 +1,384 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Filter, Grid3X3, List, Sparkles, Clock, Zap, Shield, BookOpen, Target, Calculator, FileText, ArrowRight, BarChart3 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { Button } from '../../components/ui/button';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ToolCard from '../../components/common/ToolCard';
-import { dataService } from '../../services/dataService';
-import { AITool } from '../../types';
+import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
+import {
+  Search,
+  Globe,
+  CheckCircle,
+  Server,
+  Zap,
+  Database
+} from 'lucide-react';
 
-// 工具分类数据
-const toolCategories = [
-  { id: 'data', name: '数据采集', icon: BookOpen },
-  { id: 'automation', name: '自动化', icon: Zap },
-  { id: 'content', name: '内容生成', icon: Sparkles },
-  { id: 'image', name: '图片处理', icon: Clock },
-  { id: 'utility', name: '实用工具', icon: Shield },
+// 侧边栏筛选配置
+const sidebarFilters = {
+  all: {
+    title: '全部',
+    options: [
+      { id: 'all', label: '所有工具', count: 6 },
+      { id: 'featured', label: '⭐ 星标', count: 2 },
+      { id: 'new', label: '🆕 上新', count: 1 }
+    ]
+  }
+};
+
+// 工具卡片数据
+const toolCards = [
+  {
+    id: 'sales-target',
+    title: '销售额目标追踪',
+    shortDesc: '多币种、多品线业绩实时监控',
+    description: '支持多币种、多品线业绩实时监控，提供销售目标设定、进度追踪、业绩对比分析等功能，帮助您全面掌控业务表现。',
+    category: 'ai',
+    location: 'cloud',
+    status: 'official',
+    icon: Server,
+    color: '#3b82f6',
+    usageCount: 12580,
+    tags: ['🌐 偏僻的', '🔐 认证'],
+    features: ['多币种支持', '品线管理', '进度追踪']
+  },
+  {
+    id: 'fba-calculator',
+    title: 'FBA 费用计算器',
+    shortDesc: '精确计算亚马逊各项费用',
+    description: '精确计算亚马逊 FBA 各项费用，包括仓储费、物流费、佣金等，提供利润分析和定价建议。',
+    category: 'devtools',
+    location: 'global',
+    status: 'verified',
+    icon: CalculatorIcon,
+    color: '#10b981',
+    usageCount: 15890,
+    tags: ['🌐 偏僻的'],
+    features: ['费用计算', '利润分析', '定价建议']
+  },
+  {
+    id: 'market-analysis',
+    title: '市场分析决策',
+    shortDesc: '五维分析 + 智能战略推荐',
+    description: '从市场趋势、竞品分析、价格策略、流量来源、客户画像五个维度进行深度分析，AI 智能推荐最优策略。',
+    category: 'ai',
+    location: 'cloud',
+    status: 'community',
+    icon: Globe,
+    color: '#8b5cf6',
+    usageCount: 8930,
+    tags: ['☁️ 云端'],
+    features: ['五维分析', '趋势预测', '竞品监测']
+  },
+  {
+    id: 'kano-analysis',
+    title: 'Kano 评论分析',
+    shortDesc: '用户需求智能情感洞察',
+    description: '运用 Kano 模型分析用户评论，自动识别基本需求、期望需求和兴奋需求，指导产品迭代优化方向。',
+    category: 'ai',
+    location: 'local',
+    status: 'official',
+    icon: Zap,
+    color: '#f59e0b',
+    usageCount: 6420,
+    tags: ['📍 当地的'],
+    features: ['情感分析', '需求分类', '优先级排序']
+  },
+  {
+    id: 'competitor-analysis',
+    title: '竞品智能分析',
+    shortDesc: 'AI 驱动的竞品情报提取',
+    description: 'AI 自动提取竞品信息，生成竞品情报报告，包括价格、评价、排名、流量等多维度对比分析。',
+    category: 'ai',
+    location: 'cloud',
+    status: 'verified',
+    icon: Server,
+    color: '#6366f1',
+    usageCount: 5890,
+    tags: ['☁️ 云端', '🔐 认证'],
+    features: ['竞品监控', '多维对比', '情报报告']
+  },
+  {
+    id: 'new-product-sop',
+    title: '新品导入 SOP',
+    shortDesc: '标准化流程文档与指导',
+    description: '提供从选品到上架的完整 SOP 流程，包括市场调研、Listing 优化、广告策略等标准化操作指南。',
+    category: 'database',
+    location: 'global',
+    status: 'community',
+    icon: Database,
+    color: '#ec4899',
+    usageCount: 4280,
+    tags: ['🌐 偏僻的'],
+    features: ['流程模板', '检查清单', '操作指南']
+  }
 ];
 
-// 核心工具数据
-const coreTools = [
-  {
-    id: 1,
-    title: '销售额目标追踪系统',
-    description: '专业的销售目标管理工具，支持币种自动换算、成本结构分析和多品线业绩追踪。',
-    icon: <Target className="w-8 h-8 text-blue-600" />,
-    link: '/sales-target',
-    color: 'bg-blue-50'
-  },
-  {
-    id: 2,
-    title: '亚马逊 FBA 费用计算器',
-    description: '精确计算亚马逊 FBA 各项费用，帮助您制定合理的定价策略和利润预期。',
-    icon: <Calculator className="w-8 h-8 text-green-600" />,
-    link: '/tools/fba-calculator',
-    color: 'bg-green-50'
-  },
-  {
-    id: 3,
-    title: '市场分析战略决策系统',
-    description: '基于产品、用户、市场、竞品、供应链五维分析，智能推荐最优竞争战略。',
-    icon: <BarChart3 className="w-8 h-8 text-indigo-600" />,
-    link: '/tools/market-analysis',
-    color: 'bg-indigo-50'
-  },
-  {
-    id: 4,
-    title: 'Kano 评论分析工具',
-    description: '基于观点片段的 Kano 模型分析，从用户评论中提取功能需求和情感洞察。',
-    icon: <BarChart3 className="w-8 h-8 text-orange-600" />,
-    link: '/tools/kano-analysis',
-    color: 'bg-orange-50'
-  },
-  {
-    id: 5,
-    title: '亚马逊新品导入流程 SOP',
-    description: '标准化的新品导入流程文档，涵盖从产品规划到上架销售的全过程。',
-    icon: <FileText className="w-8 h-8 text-purple-600" />,
-    link: '/processes/amazon-new-product-import',
-    color: 'bg-purple-50'
-  },
-];
+// 自定义计算器图标
+function CalculatorIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2" />
+      <line x1="8" y1="6" x2="16" y2="6" />
+      <line x1="8" y1="10" x2="10" y2="10" />
+      <line x1="14" y1="10" x2="16" y2="10" />
+      <line x1="8" y1="14" x2="10" y2="14" />
+      <line x1="14" y1="14" x2="16" y2="14" />
+      <line x1="8" y1="18" x2="16" y2="18" />
+    </svg>
+  );
+}
 
 export default function ToolsPage() {
-  const { t } = useTranslation();
-  const [tools, setTools] = useState<AITool[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban'); // Kanban or list view
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({
+    all: 'all'
+  });
 
-  useEffect(() => {
-    const fetchTools = async () => {
-      try {
-        setLoading(true);
-        const allTools = await dataService.loadAITools('normal');
-        setTools(allTools || []); // 确保始终设置数组
-      } catch (error) {
-        console.error('Failed to load tools:', error);
-        setTools([]); // 出错时设置为空数组
-      } finally {
-        setLoading(false);
-      }
-    };
+  // 过滤工具
+  const filteredTools = toolCards.filter(tool => {
+    const matchesSearch = tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         tool.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const filterType = selectedFilters.all;
+    const matchesFilter = filterType === 'all' ||
+                         (filterType === 'featured' && tool.status === 'verified') ||
+                         (filterType === 'new' && tool.category === 'database');
+    return matchesSearch && matchesFilter;
+  });
 
-    fetchTools();
-  }, []);
+  const handleFilterChange = (group: string, id: string) => {
+    setSelectedFilters(prev => ({
+      ...prev,
+      [group]: prev[group] === id ? 'all' : id
+    }));
+  };
 
-  // 按分类分组工具
-  const groupedTools = React.useMemo(() => {
-    return toolCategories.reduce((acc, category) => {
-      const categoryTools = tools.filter(tool =>
-        tool && tool.category && tool.category === category.id &&
-        (tool.name && tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (tool.description && tool.description.toLowerCase().includes(searchQuery.toLowerCase())))
-      );
-      acc[category.id] = categoryTools;
-      return acc;
-    }, {} as Record<string, AITool[]>);
-  }, [tools, searchQuery]);
+  const formatNumber = (num: number) => {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      {/* 工具页面头部 */}
-      <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
-          >
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {t('nav.tools')}
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              为电商从业者精心打造的综合工具平台，涵盖核心管理工具和智能辅助工具
-            </p>
-          </motion.div>
+    <div className="min-h-screen bg-[#0a0a0a] text-gray-300">
+      {/* SEO Helmet */}
+      <Helmet>
+        <title>工具中心 - 跨境智能平台 | 亚马逊FBA计算器、市场分析、竞品分析等电商工具</title>
+        <meta name="description" content="专业的跨境电商工具平台，提供FBA费用计算器、市场分析决策系统、Kano评论分析、竞品智能分析等核心工具，助您提升运营效率。" />
+        <meta name="keywords" content="电商工具,FBA计算器,市场分析,竞品分析,Kano分析,亚马逊工具,跨境电商工具" />
+        <meta property="og:title" content="工具中心 - 跨境智能平台" />
+        <meta property="og:description" content="专业的跨境电商工具平台，提供6大核心工具" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://wsnail.com/tools" />
+      </Helmet>
 
-          {/* 搜索栏 */}
-          <div className="relative max-w-lg mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <input
-              type="text"
-              placeholder="搜索工具..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value || '')}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+      {/* Navigation Header */}
+      <header className="fixed w-full top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+              <Globe className="w-6 h-6 text-black" />
+            </div>
+            <div>
+              <div className="font-bold text-white text-lg">跨境智能平台</div>
+              <div className="text-xs text-gray-500">Cross-Border Intelligence</div>
+            </div>
+          </Link>
+          <nav className="hidden md:flex gap-8 text-sm">
+            <Link to="/" className="text-gray-500 hover:text-white transition">首页</Link>
+            <Link to="/tools" className="text-white font-medium">工具</Link>
+            <Link to="/community" className="text-gray-500 hover:text-white transition">讨论</Link>
+            <Link to="/wiki" className="text-gray-500 hover:text-white transition">行业信息</Link>
+          </nav>
         </div>
-      </section>
+      </header>
 
-      {/* 核心工具区域 */}
-      <section className="py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">核心管理工具</h2>
-            <p className="text-gray-600">关键业务环节的必备工具套件</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {coreTools.map((tool, index) => (
-              <motion.div
-                key={tool.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow"
-              >
-                <div className={`${tool.color} w-16 h-16 rounded-lg flex items-center justify-center mb-4`}>
-                  {tool.icon}
+      <div className="pt-20">
+        <div className="max-w-[1600px] mx-auto px-6">
+          <div className="flex gap-8">
+            {/* Left Sidebar - Filters */}
+            <aside className="w-64 flex-shrink-0 hidden lg:block">
+              <div className="sticky top-24 space-y-6">
+                {/* Search */}
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="搜索工具..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#161616] border border-white/10 rounded-lg text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-orange-500/50 transition"
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{tool.title}</h3>
-                <p className="text-gray-600 mb-4 text-sm">{tool.description}</p>
-                <Link to={tool.link}>
-                  <Button className="w-full">
-                    立即使用
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* 智能辅助工具区域 */}
-      <section className="py-8 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">智能辅助工具</h2>
-              <p className="text-gray-600">提升工作效率的半自动化工具集合</p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setViewMode('kanban')}
-                className={`p-2 rounded-lg ${viewMode === 'kanban' ? 'bg-blue-100 text-blue-600' : 'text-gray-500 hover:bg-gray-100'}`}
-              >
-                <Grid3X3 className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-500 hover:bg-gray-100'}`}
-              >
-                <List className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {loading ? (
-            <div className="flex justify-center py-20">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              <span className="ml-2 text-gray-600">加载中...</span>
-            </div>
-          ) : viewMode === 'kanban' ? (
-            <div className="flex overflow-x-auto pb-4" style={{ maxHeight: 'calc(100vh - 400px)' }}>
-              {toolCategories.map((category) => {
-                const toolsInCategory = groupedTools[category.id] || [];
-
-                return (
-                  <div
-                    key={category.id}
-                    className="kanban-column bg-white border border-gray-200 rounded-lg mr-4 flex-shrink-0"
-                    style={{ width: '280px', maxHeight: 'calc(100vh - 480px)' }}
-                  >
-                    <div className="kanban-title border-b border-gray-200 p-4">
-                      <div className="flex items-center">
-                        {category.icon ? (
-                          <category.icon className="w-5 h-5 mr-2 text-blue-600" />
-                        ) : (
-                          <BookOpen className="w-5 h-5 mr-2 text-blue-600" />
-                        )}
-                        <h3 className="font-semibold text-gray-900">{category.name}</h3>
-                        <span className="ml-2 text-xs text-gray-500 bg-gray-100 rounded-full px-2 py-0.5">
-                          {toolsInCategory.length}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="kanban-list flex-1 overflow-y-auto p-3 space-y-3">
-                      {(toolsInCategory && toolsInCategory.length > 0) ? (
-                        toolsInCategory.map((tool, index) => (
-                          <div key={tool?.id || index} className="tool-card p-3 hover:bg-gray-50 transition-colors">
-                            <div>
-                              <h4 className="font-medium text-gray-900 text-sm mb-1 truncate">{tool?.name}</h4>
-                              <p className="text-xs text-gray-600 line-clamp-2">{tool?.description}</p>
-                            </div>
-                            <Button variant="outline" size="sm" className="mt-2 w-full text-xs">
-                              使用
-                            </Button>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="flex items-center justify-center h-full text-gray-500">
-                          <p className="text-sm">暂无工具</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div>
-              {toolCategories.map((category) => {
-                const toolsInCategory = groupedTools[category.id] || [];
-                if (!toolsInCategory || toolsInCategory.length === 0) return null;
-
-                return (
-                  <div key={category.id} className="mb-8">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                      {category.icon ? <category.icon className="w-5 h-5 mr-2 text-blue-600" /> : <BookOpen className="w-5 h-5 mr-2 text-blue-600" />}
-                      {category.name} ({toolsInCategory.length})
+                {/* Filter Groups */}
+                {Object.entries(sidebarFilters).map(([key, group]) => (
+                  <div key={key}>
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                      {group.title}
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {toolsInCategory.map((tool, index) => (
-                        <div key={tool?.id || index} className="bg-gray-50 rounded-lg p-4 border">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h4 className="font-medium text-gray-900">{tool?.name}</h4>
-                              <p className="text-sm text-gray-600 mt-1">{tool?.description}</p>
-                            </div>
-                            <Button variant="outline" size="sm">
-                              使用
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="space-y-1">
+                      {group.options.map((option) => {
+                        const Icon = option.icon;
+                        const isSelected = selectedFilters[key as keyof typeof sidebarFilters] === option.id;
+
+                        return (
+                          <button
+                            key={option.id}
+                            onClick={() => handleFilterChange(key, option.id)}
+                            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all ${
+                              isSelected
+                                ? 'bg-[#1a1a1a] text-white'
+                                : 'text-gray-500 hover:text-gray-300 hover:bg-[#161616]'
+                            }`}
+                          >
+                            {option.icon ? (
+                              <Icon className={`w-4 h-4 ${isSelected ? 'text-orange-500' : ''}`} />
+                            ) : (
+                              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                                isSelected ? 'border-orange-500 bg-orange-500' : 'border-gray-600'
+                              }`}>
+                                {isSelected && <div className="w-2 h-2 bg-black rounded-full" />}
+                              </div>
+                            )}
+                            <span className="flex-1 text-left">{option.label}</span>
+                            {option.count && (
+                              <span className="text-xs text-gray-600">{option.count}</span>
+                            )}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </section>
+                ))}
+              </div>
+            </aside>
 
-      {/* 整合优势说明 */}
-      <section className="py-12 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">为什么选择我们的工具？</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">专为电商从业者设计，集成管理与辅助功能，提高工作效率</p>
+            {/* Main Content - Card Grid */}
+            <main className="flex-1 min-w-0">
+              {/* Mobile Search */}
+              <div className="lg:hidden mb-6">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="搜索工具..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#161616] border border-white/10 rounded-lg text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-orange-500/50 transition"
+                  />
+                </div>
+              </div>
+
+              {/* Results Count */}
+              <div className="flex items-center gap-2 mb-6 text-sm">
+                <span className="text-gray-500">找到</span>
+                <span className="text-white font-medium">{filteredTools.length}</span>
+                <span className="text-gray-500">个工具</span>
+              </div>
+
+              {/* Card Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {filteredTools.map((tool) => {
+                  const Icon = tool.icon;
+
+                  return (
+                    <motion.div
+                      key={tool.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      whileHover={{ y: -4 }}
+                      className="group bg-[#161616] border border-white/5 rounded-xl overflow-hidden hover:border-orange-500/30 transition-all duration-300"
+                    >
+                      <Link to={tool.link} className="block">
+                        {/* Card Header */}
+                        <div className="p-5">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                              <div
+                                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                style={{ backgroundColor: `${tool.color}20` }}
+                              >
+                                <Icon className="w-6 h-6" style={{ color: tool.color }} />
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <h3 className="text-white font-semibold">{tool.title}</h3>
+                                  {tool.status === 'verified' && (
+                                    <CheckCircle className="w-4 h-4 text-orange-500" />
+                                  )}
+                                </div>
+                                <span className="text-xs text-gray-600">@{tool.id}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Card Body */}
+                          <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4">
+                            {tool.description}
+                          </p>
+
+                          {/* Card Footer */}
+                          <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                            <div className="flex gap-2">
+                              {tool.tags.slice(0, 2).map((tag, idx) => (
+                                <span
+                                  key={idx}
+                                  className="text-xs px-2 py-1 bg-[#1a1a1a] rounded text-gray-500"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="flex items-center gap-1 text-gray-500">
+                              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M3 3v18h18" />
+                                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                              </svg>
+                              <span className="text-xs">{formatNumber(tool.usageCount)}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {filteredTools.length === 0 && (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-700 mx-auto mb-4" />
+                  <p className="text-gray-500">未找到相关工具</p>
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedFilters({ all: 'all' });
+                    }}
+                    className="mt-4 text-orange-500 hover:text-orange-400 text-sm"
+                  >
+                    清除筛选
+                  </button>
+                </div>
+              )}
+            </main>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 bg-white rounded-xl shadow-sm text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Target className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">核心管理</h3>
-              <p className="text-gray-600 text-sm">关键业务管理工具，助力业务决策</p>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-white/5 py-8 px-6 mt-12">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="flex flex-wrap justify-between items-center gap-4 text-sm text-gray-600">
+            <div>
+              © 2025 跨境智能平台. All rights reserved.
             </div>
-            <div className="p-6 bg-white rounded-xl shadow-sm text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Zap className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">效率提升</h3>
-              <p className="text-gray-600 text-sm">智能化辅助工具，大幅提升工作效率</p>
-            </div>
-            <div className="p-6 bg-white rounded-xl shadow-sm text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <BookOpen className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">流程规范</h3>
-              <p className="text-gray-600 text-sm">标准化工作流程，提升团队协作效率</p>
-            </div>
-            <div className="p-6 bg-white rounded-xl shadow-sm text-center">
-              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Sparkles className="w-6 h-6 text-indigo-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">智能辅助</h3>
-              <p className="text-gray-600 text-sm">AI赋能工具，帮助您更快更准地完成任务</p>
+            <div className="flex gap-4">
+              <Link to="/about" className="hover:text-gray-400 transition">关于我们</Link>
+              <Link to="/email-contact" className="hover:text-gray-400 transition">联系方式</Link>
+              <Link to="/sync" className="hover:text-gray-400 transition">更新日志</Link>
             </div>
           </div>
         </div>
-      </section>
+      </footer>
     </div>
   );
 }

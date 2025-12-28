@@ -3,13 +3,11 @@ import { createRoot } from 'react-dom/client'
 import { ErrorBoundary } from './components/common/ErrorBoundary.tsx'
 import './index.css'
 import App from './App.tsx'
-import { injectSpeedInsights } from '@vercel/speed-insights';
+
 // 导入浏览器扩展错误处理器
 import './utils/browserExtensionErrorHandler';
 // 导入i18n国际化配置
 import './i18n';
-
-injectSpeedInsights();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
