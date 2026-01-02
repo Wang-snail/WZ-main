@@ -261,6 +261,14 @@ function saveData(data) {
       fs.mkdirSync(publicDir, { recursive: true });
     }
     fs.writeFileSync(CONFIG.PUBLIC_OUTPUT_FILE, JSON.stringify(latestData, null, 2), 'utf-8');
+
+    // 设置文件权限为 644（可读）
+    try {
+      fs.chmodSync(CONFIG.PUBLIC_OUTPUT_FILE, 0o644);
+    } catch (e) {
+      // 忽略权限设置错误
+    }
+
     console.log('✅ 数据已保存');
     return true;
   } catch (error) {
