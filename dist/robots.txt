@@ -1,5 +1,5 @@
 # Robotstxt for WSNAIL.COM
-# Generated on 2025-12-30
+# Generated on 2026-01-02
 
 User-agent: *
 Allow: /
