@@ -1,42 +1,6 @@
 {
-  "lastUpdate": "2026-01-02T18:26:28.695Z",
+  "lastUpdate": "2026-01-02T18:24:24.540Z",
   "articles": [
-    {
-      "id": "amz-mjx7gkic-z7uy",
-      "title": "亚马逊宣布2026年对中国卖家新增三大扶持政策",
-      "url": "https://www.amazon.com",
-      "date": "2026-01-03",
-      "category": "亚马逊运营",
-      "hot": true,
-      "source": "雨果网",
-      "readTime": "8分钟",
-      "views": 29382,
-      "addedAt": "2026-01-02T18:26:28.692Z"
-    },
-    {
-      "id": "tt-mjx7gkic-t6nk",
-      "title": "TikTok Shop美国站推出新手卖家零佣金计划",
-      "url": "https://www.tiktok.com",
-      "date": "2026-01-03",
-      "category": "TikTok电商",
-      "hot": true,
-      "source": "雨果网",
-      "readTime": "6分钟",
-      "views": 17387,
-      "addedAt": "2026-01-02T18:26:28.692Z"
-    },
-    {
-      "id": "tax-mjx7gkic-v9jj",
-      "title": "欧盟跨境电商VAT新规将于2026年1月正式实施",
-      "url": "#",
-      "date": "2026-01-02",
-      "category": "税务合规",
-      "hot": true,
-      "source": "雨果网",
-      "readTime": "12分钟",
-      "views": 19379,
-      "addedAt": "2026-01-02T18:26:28.692Z"
-    },
     {
       "id": "tax-1",
       "title": "亚马逊报给税局的数据与卖家收入核对",
@@ -83,30 +47,6 @@
     }
   ],
   "aiNews": [
-    {
-      "id": "ai-mjx7gkic-nfxs",
-      "title": "OpenAI发布GPT-4.5版本，多模态能力大幅提升",
-      "url": "#",
-      "date": "2026-01-03",
-      "category": "AI新闻",
-      "hot": true,
-      "source": "TechCrunch",
-      "readTime": "8分钟",
-      "views": 27652,
-      "addedAt": "2026-01-02T18:26:28.692Z"
-    },
-    {
-      "id": "ai-mjx7gkic-123c",
-      "title": "谷歌Gemini 2.0发布，性能超越GPT-4",
-      "url": "#",
-      "date": "2026-01-02",
-      "category": "AI新闻",
-      "hot": true,
-      "source": "MIT Tech Review",
-      "readTime": "6分钟",
-      "views": 33073,
-      "addedAt": "2026-01-02T18:26:28.692Z"
-    },
     {
       "id": "ai-news-1",
       "title": "ChatGPT推出全新Agent模式，可自主完成复杂任务",

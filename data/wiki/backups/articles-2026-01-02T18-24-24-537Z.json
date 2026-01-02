@@ -1,0 +1,75 @@
+{
+  "lastUpdate": "2025-12-28T00:00:00.000Z",
+  "articles": [
+    {
+      "id": "amazon-1",
+      "title": "2025亚马逊全球开店跨境峰会精华内容回顾",
+      "readTime": "15分钟",
+      "views": 18200,
+      "date": "2025-12-26",
+      "hot": true,
+      "category": "亚马逊运营",
+      "source": "雨果网",
+      "addedAt": "2025-12-28T00:00:00.000Z"
+    },
+    {
+      "id": "amazon-2",
+      "title": "2026亚马逊加拿大站卖家资质审核KYC详解",
+      "readTime": "12分钟",
+      "views": 15600,
+      "date": "2025-12-26",
+      "hot": true,
+      "category": "亚马逊运营",
+      "source": "雨果网",
+      "addedAt": "2025-12-28T00:00:00.000Z"
+    },
+    {
+      "id": "tiktok-1",
+      "title": "周受资内部信曝光！TikTok美国方案定了",
+      "readTime": "8分钟",
+      "views": 22500,
+      "date": "2025-12-26",
+      "hot": true,
+      "category": "TikTok电商",
+      "source": "雨果网",
+      "addedAt": "2025-12-28T00:00:00.000Z"
+    },
+    {
+      "id": "tax-1",
+      "title": "亚马逊报给税局的数据与卖家收入核对",
+      "readTime": "12分钟",
+      "views": 21500,
+      "date": "2025-12-28",
+      "hot": true,
+      "category": "税务合规",
+      "source": "雨果网",
+      "addedAt": "2025-12-28T00:00:00.000Z"
+    }
+  ],
+  "aiNews": [
+    {
+      "id": "ai-news-1",
+      "title": "ChatGPT推出全新Agent模式，可自主完成复杂任务",
+      "readTime": "5分钟",
+      "views": 15000,
+      "date": "2025-12-28",
+      "hot": true,
+      "category": "AI新闻",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/chatgpt-agent-mode",
+      "addedAt": "2025-12-28T00:00:00.000Z"
+    },
+    {
+      "id": "ai-news-2",
+      "title": "亚马逊推出AI选品助手，助卖家快速找到爆款",
+      "readTime": "6分钟",
+      "views": 12800,
+      "date": "2025-12-27",
+      "hot": false,
+      "category": "AI新闻",
+      "source": "VentureBeat",
+      "url": "https://venturebeat.com/amazon-ai-product-finder",
+      "addedAt": "2025-12-28T00:00:00.000Z"
+    }
+  ]
+}

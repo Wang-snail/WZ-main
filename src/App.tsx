@@ -17,6 +17,7 @@ import EmailContactPage from '@/pages/EmailContactPage';
 import HomePage from './pages/HomePageOptimized';
 import ToolsPage from '@/pages/tools/ToolsPage';
 import SyncPage from '@/pages/sync/SyncPage';
+import DiscussionBoard from '@/pages/DiscussionBoard';
 
 const CommunityPage = React.lazy(() => import('./pages/community/CommunityPage'));
 
@@ -88,7 +89,7 @@ function App() {
                   <Route path="/community" element={<CommunityPage />} />
                   <Route path="/workflows" element={<CommunityPage />} />
                   <Route path="/forum" element={<CommunityPage />} />
-                  <Route path="/discussion" element={<CommunityPage />} />
+                  <Route path="/discussion" element={<DiscussionBoard />} />
                   <Route path="/sync" element={<SyncPage />} />
                   <Route path="/tools/fba-calculator" element={<FbaCalculator />} />
                   <Route path="/tools/market-analysis" element={<MarketAnalysis />} />
