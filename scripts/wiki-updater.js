@@ -23,6 +23,7 @@ const __dirname = path.dirname(__filename);
 const CONFIG = {
   DATA_FILE: path.join(__dirname, '../data/wiki/articles.json'),
   OUTPUT_FILE: path.join(__dirname, '../data/wiki/latest-news.json'),
+  PUBLIC_OUTPUT_FILE: path.join(__dirname, '../../public/data/wiki/latest-news.json'),
   BACKUP_DIR: path.join(__dirname, '../data/wiki/backups'),
   MAX_ARTICLES: 200,              // 最多保留200条资讯
   MAX_AI_NEWS: 100,               // AI新闻最多保留100条
@@ -253,6 +254,13 @@ function saveData(data) {
     });
 
     fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(latestData, null, 2), 'utf-8');
+
+    // 同时保存到 public 目录供前端使用
+    const publicDir = path.dirname(CONFIG.PUBLIC_OUTPUT_FILE);
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    fs.writeFileSync(CONFIG.PUBLIC_OUTPUT_FILE, JSON.stringify(latestData, null, 2), 'utf-8');
     console.log('✅ 数据已保存');
     return true;
   } catch (error) {
