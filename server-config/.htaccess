@@ -1,0 +1,164 @@
+# Apache 配置文件 (.htaccess) - WSNAIL 跨境电商 AI 工具平台
+# 用于正确服务 SVG 图标和静态资源
+
+# ============================================
+# 基础设置
+# ============================================
+
+# 启用重写引擎
+RewriteEngine On
+
+# 设置基础 URL（根据实际部署路径修改）
+# 如果部署在子目录，使用: RewriteBase /your-subdirectory/
+RewriteBase /
+
+# ============================================
+# MIME 类型配置（确保 SVG 和字体正确加载）
+# ============================================
+
+# SVG 图片
+AddType image/svg+xml svg svgz
+AddEncoding gzip svgz
+
+# 字体文件
+AddType application/font-woff2 woff2
+AddType application/font-woff woff
+AddType font/ttf ttf
+AddType font/otf otf
+AddType application/vnd.ms-fontobject eot
+
+# JavaScript 模块
+AddType application/javascript js mjs
+
+# JSON
+AddType application/json json
+
+# ============================================
+# Gzip 压缩（如果服务器支持 mod_deflate）
+# ============================================
+
+<IfModule mod_deflate.c>
+    # 压缩 HTML、CSS、JavaScript、XML、SVG
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml application/xml+rss image/svg+xml
+
+    # 压缩字体文件
+    AddOutputFilterByType DEFLATE application/font-woff2 application/font-woff font/ttf font/otf application/vnd.ms-fontobject
+</IfModule>
+
+# ============================================
+# 缓存配置（如果服务器支持 mod_expires）
+# ============================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # 默认缓存时间
+    ExpiresDefault "access plus 1 month"
+
+    # 按文件类型设置缓存
+    # 图片 - 1年
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # 字体 - 1年
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+
+    # CSS 和 JavaScript - 1个月（可更短用于开发）
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+</IfModule>
+
+# ============================================
+# SPA 路由支持（React Router）
+# ============================================
+
+# 如果请求的文件不存在，重定向到 index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# ============================================
+# 安全头
+# ============================================
+
+<IfModule mod_headers.c>
+    # 防止点击劫持
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # 防止 MIME 类型嗅探
+    Header always set X-Content-Type-Options "nosniff"
+
+    # XSS 保护
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # 引用策略
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # 内容安全策略（根据需要调整）
+    # Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.wsnail.com;"
+</IfModule>
+
+# ============================================
+# 禁止访问敏感文件
+# ============================================
+
+# 禁止访问隐藏文件
+<FilesMatch "^\.(?!well-known)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 禁止访问特定文件
+<FilesMatch "\.(env|log|ini|conf|sql|git|svn|hg)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 禁止访问目录列表
+Options -Indexes
+
+# ============================================
+# 性能优化
+# ============================================
+
+# 开启 KeepAlive
+<IfModule mod_headers.c>
+    Header always set Connection "keep-alive"
+</IfModule>
+
+# ============================================
+# HTTP 到 HTTPS 重定向（生产环境推荐）
+# ============================================
+
+# <IfModule mod_rewrite.c>
+#     RewriteEngine On
+#     RewriteCond %{HTTPS} off
+#     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# ============================================
+# 错误页面自定义（可选）
+# ============================================
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# ============================================
+# 跨域资源共享（如果需要）
+# ============================================
+
+# <IfModule mod_headers.c>
+#     # 允许特定域名跨域访问静态资源
+#     <FilesMatch "\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$">
+#         Header set Access-Control-Allow-Origin "*"
+#     </FilesMatch>
+# </IfModule>

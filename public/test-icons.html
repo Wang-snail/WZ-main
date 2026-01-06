@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图标显示测试 - WSNAIL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+                        'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* SVG 图标测试区 */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .icon-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .icon-item svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .icon-item span {
+            display: block;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .icon-item.success svg {
+            color: #10b981;
+        }
+
+        .icon-item.error svg {
+            color: #ef4444;
+        }
+
+        /* 状态显示 */
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .status.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.loading {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* 测试按钮 */
+        .test-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        /* 浏览器信息 */
+        .browser-info {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+
+        .browser-info pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .icon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图标显示测试</h1>
+        <p class="subtitle">测试 SVG 图标在不同浏览器和设备上的显示效果</p>
+
+        <div class="info-box">
+            <h3>测试说明</h3>
+            <p>本页面测试项目使用的 SVG 图标渲染效果，包括内联 SVG 和 Lucide 图标库。如果所有图标都能正常显示（绿色边框），说明图标系统工作正常。</p>
+        </div>
+
+        <div class="button-group">
+            <button class="test-btn" onclick="runTests()">运行全面测试</button>
+            <button class="test-btn" onclick="checkBrowser()">检查浏览器支持</button>
+            <button class="test-btn" onclick="testNetworkIcons()">测试网络图标</button>
+        </div>
+
+        <div id="testResults"></div>
+
+        <div class="section">
+            <h2>1. 内联 SVG 图标测试</h2>
+            <div class="icon-grid" id="inlineSvgTest">
+                <!-- 搜索图标 -->
+                <div class="icon-item" data-icon="search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>搜索图标</span>
+                </div>
+
+                <!-- 用户图标 -->
+                <div class="icon-item" data-icon="user">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>用户图标</span>
+                </div>
+
+                <!-- 菜单图标 -->
+                <div class="icon-item" data-icon="menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <span>菜单图标</span>
+                </div>
+
+                <!-- 主页图标 -->
+                <div class="icon-item" data-icon="home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>主页图标</span>
+                </div>
+
+                <!-- 设置图标 -->
+                <div class="icon-item" data-icon="settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span>设置图标</span>
+                </div>
+
+                <!-- 下载图标 -->
+                <div class="icon-item" data-icon="download">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>下载图标</span>
+                </div>
+
+                <!-- 上传图标 -->
+                <div class="icon-item" data-icon="upload">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span>上传图标</span>
+                </div>
+
+                <!-- 刷新图标 -->
+                <div class="icon-item" data-icon="refresh">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    <span>刷新图标</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. 彩色 SVG 图标测试</h2>
+            <div class="icon-grid" id="colorSvgTest">
+                <div class="icon-item">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <circle cx="12" cy="12" r="10" fill="#667eea"/>
+                        <path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span>成功图标</span>
+                </div>
+                <div class="icon-item">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+                        <line x1="15" y1="9" x2="9" y2="15" stroke="white" stroke-width="2"/>
+                        <line x1="9" y1="9" x2="15" y2="15" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <span>错误图标</span>
+                </div>
+                <div class="icon-item">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <circle cx="12" cy="12" r="10" fill="#f59e0b"/>
+                        <path d="M12 8v4M12 16h.01" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>警告图标</span>
+                </div>
+                <div class="icon-item">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <circle cx="12" cy="12" r="10" fill="#3b82f6"/>
+                        <path d="M12 16v-4M12 8h.01" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>信息图标</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. 浏览器和设备信息</h2>
+            <div class="browser-info" id="browserInfo">
+                <pre>正在获取浏览器信息...</pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>测试结果</h2>
+            <div id="finalResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // 获取浏览器和设备信息
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            const info = {
+                userAgent: ua,
+                platform: navigator.platform,
+                language: navigator.language,
+                languages: navigator.languages ? navigator.languages.join(', ') : navigator.language,
+                cookieEnabled: navigator.cookieEnabled,
+                onLine: navigator.onLine,
+                connection: navigator.connection ? navigator.connection.effectiveType : 'unknown',
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                windowSize: `${window.innerWidth}x${window.innerHeight}`,
+                devicePixelRatio: window.devicePixelRatio,
+                touchSupport: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+                svgSupport: !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect,
+            };
+
+            // 解析浏览器类型
+            let browser = 'Unknown';
+            if (ua.includes('Chrome')) browser = 'Chrome';
+            else if (ua.includes('Safari')) browser = 'Safari';
+            else if (ua.includes('Firefox')) browser = 'Firefox';
+            else if (ua.includes('Edge')) browser = 'Edge';
+
+            info.browser = browser;
+            return info;
+        }
+
+        // 检查浏览器支持
+        function checkBrowser() {
+            const info = getBrowserInfo();
+            const output = `
+浏览器: ${info.browser}
+用户代理: ${info.userAgent}
+平台: ${info.platform}
+语言: ${info.language}
+屏幕分辨率: ${info.screenResolution}
+窗口大小: ${info.windowSize}
+设备像素比: ${info.devicePixelRatio}
+SVG 支持: ${info.svgSupport ? '是' : '否'}
+触摸屏支持: ${info.touchSupport ? '是' : '否'}
+网络状态: ${info.onLine ? '在线' : '离线'}
+连接类型: ${info.connection}
+Cookie 启用: ${info.cookieEnabled ? '是' : '否'}
+            `.trim();
+
+            document.getElementById('browserInfo').innerHTML = `<pre>${output}</pre>`;
+            return info;
+        }
+
+        // 测试内联 SVG
+        function testInlineSvg() {
+            const icons = document.querySelectorAll('.icon-grid .icon-item');
+            let successCount = 0;
+            let failCount = 0;
+
+            icons.forEach(icon => {
+                const svg = icon.querySelector('svg');
+                if (svg) {
+                    // 检查 SVG 是否可见
+                    const rect = svg.getBoundingClientRect();
+                    const computedStyle = window.getComputedStyle(svg);
+
+                    if (rect.width > 0 && rect.height > 0 && computedStyle.display !== 'none') {
+                        icon.classList.add('success');
+                        icon.classList.remove('error');
+                        successCount++;
+                    } else {
+                        icon.classList.add('error');
+                        icon.classList.remove('success');
+                        failCount++;
+                    }
+                } else {
+                    icon.classList.add('error');
+                    icon.classList.remove('success');
+                    failCount++;
+                }
+            });
+
+            return { success: successCount, failed: failCount, total: icons.length };
+        }
+
+        // 测试网络资源加载
+        function testNetworkIcons() {
+            const resultDiv = document.getElementById('finalResult');
+            resultDiv.innerHTML = '<div class="status loading">正在测试资源加载...</div>';
+
+            // 检查页面中是否有失败的资源
+            const failedResources = performance.getEntriesByType('resource')
+                .filter(r => r.transferSize === 0 && r.duration > 0)
+                .map(r => r.name);
+
+            if (failedResources.length > 0) {
+                resultDiv.innerHTML = `
+                    <div class="status error">
+                        <strong>发现失败的资源：</strong><br>
+                        ${failedResources.slice(0, 5).map(r => `• ${r}`).join('<br>')}
+                        ${failedResources.length > 5 ? `<br>... 共 ${failedResources.length} 个失败` : ''}
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="status success">
+                        ✓ 所有静态资源加载正常
+                    </div>
+                `;
+            }
+
+            return failedResources.length === 0;
+        }
+
+        // 运行所有测试
+        function runTests() {
+            const resultsDiv = document.getElementById('testResults');
+
+            // 显示加载状态
+            resultsDiv.innerHTML = '<div class="status loading">正在运行测试...</div>';
+
+            setTimeout(() => {
+                const browserInfo = checkBrowser();
+                const svgResult = testInlineSvg();
+                const networkResult = testNetworkIcons();
+
+                let finalHtml = '<div class="status ' + (svgResult.failed === 0 && networkResult ? 'success' : 'error') + '">';
+                finalHtml += '<strong>测试完成！</strong><br>';
+                finalHtml += `SVG 图标: ${svgResult.success}/${svgResult.total} 正常<br>`;
+                finalHtml += `网络资源: ${networkResult ? '全部正常' : '存在问题'}<br>`;
+                finalHtml += `<strong>浏览器: ${browserInfo.browser}</strong> - `;
+                finalHtml += `${browserInfo.svgSupport ? 'SVG 支持' : 'SVG 不支持'}`;
+                finalHtml += '</div>';
+
+                resultsDiv.innerHTML = finalHtml;
+
+                // 如果 SVG 测试有问题，给出建议
+                if (svgResult.failed > 0) {
+                    resultsDiv.innerHTML += `
+                        <div class="status warning" style="margin-top: 10px;">
+                            <strong>可能的问题：</strong><br>
+                            • 检查浏览器是否完全加载<br>
+                            • 尝试刷新页面 (Ctrl+F5)<br>
+                            • 清除浏览器缓存<br>
+                            • 检查是否有广告拦截器阻止图标加载
+                        </div>
+                    `;
+                }
+            }, 500);
+        }
+
+        // 页面加载完成后自动运行测试
+        window.addEventListener('load', function() {
+            setTimeout(runTests, 500);
+        });
+
+        // 监听网络状态变化
+        window.addEventListener('online', function() {
+            document.getElementById('finalResult').innerHTML = `
+                <div class="status success">网络已连接</div>
+            `;
+        });
+
+        window.addEventListener('offline', function() {
+            document.getElementById('finalResult').innerHTML = `
+                <div class="status warning">网络已断开，但本地资源仍可使用</div>
+            `;
+        });
+    </script>
+</body>
+</html>
