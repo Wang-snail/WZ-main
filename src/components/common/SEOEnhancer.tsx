@@ -256,8 +256,7 @@ export default function SEOEnhancer({
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/manifest.json" />
 
-      {/* DNS预解析 */}
-      <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+      {/* DNS预解析 - 已移除fonts.googleapis.com，因为使用系统字体 */}
       <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
       <link rel="dns-prefetch" href="//vercel.com" />
 

@@ -17,9 +17,9 @@ module.exports = {
 		},
 		extend: {
 			fontFamily: {
+				// 使用系统自带字体栈，无需加载外部字体
+				// 优先级：macOS > Windows > Linux > 跨平台通用字体
 				sans: [
-					'Inter',
-					'system-ui',
 					'-apple-system',
 					'BlinkMacSystemFont',
 					'Segoe UI',
@@ -36,7 +36,8 @@ module.exports = {
 					// 中文字体
 					'PingFang SC',
 					'Microsoft YaHei',
-					'SimSun',
+					'WenQuanYi Micro Hei',
+					'SimHei',
 					'sans-serif'
 				],
 				mono: [
