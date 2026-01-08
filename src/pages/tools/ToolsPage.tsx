@@ -16,7 +16,7 @@ const sidebarFilters = {
   all: {
     title: '全部',
     options: [
-      { id: 'all', label: '所有工具', count: 6 },
+      { id: 'all', label: '所有工具', count: 5 },
       { id: 'featured', label: '⭐ 星标', count: 2 },
       { id: 'new', label: '🆕 上新', count: 1 }
     ]
@@ -34,6 +34,7 @@ const toolCards = [
     location: 'cloud',
     status: 'official',
     icon: Server,
+    link: '/sales-target',
     color: '#3b82f6',
     usageCount: 12580,
     tags: ['🌐 偏僻的', '🔐 认证'],
@@ -48,6 +49,7 @@ const toolCards = [
     location: 'global',
     status: 'verified',
     icon: CalculatorIcon,
+    link: '/tools/fba-calculator',
     color: '#10b981',
     usageCount: 15890,
     tags: ['🌐 偏僻的'],
@@ -62,6 +64,7 @@ const toolCards = [
     location: 'cloud',
     status: 'community',
     icon: Globe,
+    link: '/tools/market-analysis',
     color: '#8b5cf6',
     usageCount: 8930,
     tags: ['☁️ 云端'],
@@ -76,6 +79,7 @@ const toolCards = [
     location: 'local',
     status: 'official',
     icon: Zap,
+    link: '/tools/kano-analysis',
     color: '#f59e0b',
     usageCount: 6420,
     tags: ['📍 当地的'],
@@ -90,24 +94,11 @@ const toolCards = [
     location: 'cloud',
     status: 'verified',
     icon: Server,
+    link: '/tools/competitor-analysis',
     color: '#6366f1',
     usageCount: 5890,
     tags: ['☁️ 云端', '🔐 认证'],
     features: ['竞品监控', '多维对比', '情报报告']
-  },
-  {
-    id: 'new-product-sop',
-    title: '新品导入 SOP',
-    shortDesc: '标准化流程文档与指导',
-    description: '提供从选品到上架的完整 SOP 流程，包括市场调研、Listing 优化、广告策略等标准化操作指南。',
-    category: 'database',
-    location: 'global',
-    status: 'community',
-    icon: Database,
-    color: '#ec4899',
-    usageCount: 4280,
-    tags: ['🌐 偏僻的'],
-    features: ['流程模板', '检查清单', '操作指南']
   }
 ];
 

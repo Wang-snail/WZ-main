@@ -4076,6 +4076,48 @@
       "relevantPlatforms": [
         "Amazon"
       ]
+    },
+    {
+      "id": "news_2025_314",
+      "title": "2025年跨境电商行业新趋势：AI驱动、智能仓储与新兴市场崛起",
+      "date": "2025-01-09",
+      "platform": "跨平台",
+      "category": "industry_news",
+      "summary": "2025年跨境电商行业三大新趋势：AI技术深度整合、智能仓储物流升级、新兴市场加速开拓",
+      "content": "2025年跨境电商行业呈现三大新趋势：1）AI技术深度整合，从智能选品、listing优化到客服自动化，AI正在重塑电商运营全流程；2）智能仓储物流升级，自动化分拣、机器人搬运成为标配，物流时效进一步提升；3）新兴市场加速开拓，东南亚、中东、拉美等市场成为新增长点。卖家需提前布局，把握行业变革机遇。",
+      "impact": "卖家应关注AI工具应用，提升运营效率；优化物流合作伙伴；积极探索新兴市场机会",
+      "relevantPlatforms": [
+        "Amazon",
+        "Temu",
+        "TikTok Shop",
+        "AliExpress"
+      ]
+    },
+    {
+      "id": "news_2025_315",
+      "title": "亚马逊FBA物流新规：2025年仓储费用结构调整",
+      "date": "2025-01-09",
+      "platform": "Amazon",
+      "category": "platform_policy",
+      "summary": "亚马逊FBA将于2025年调整仓储费用结构，长期仓储费计算周期变更，部分类目仓储费下调",
+      "content": "亚马逊官方宣布，2025年FBA物流费用将进行结构调整。主要变化包括：1）长期仓储费计算周期从180天调整为270天，给予卖家更长的库存周转时间；2）标准尺寸商品仓储费下调5%-10%，大件商品仓储费保持不变；3）新增旺季仓储附加费，在Q4购物季期间实施。卖家需要重新评估库存策略，优化补货周期以降低成本。",
+      "impact": "卖家应重新计算仓储成本，优化库存周转，调整Q4备货策略以平衡时效和费用",
+      "relevantPlatforms": [
+        "Amazon"
+      ]
+    },
+    {
+      "id": "news_2025_316",
+      "title": "TikTok Shop美国市场GMV突破500亿美元，社交电商模式验证成功",
+      "date": "2025-01-09",
+      "platform": "TikTok Shop",
+      "category": "market_trends",
+      "summary": "TikTok Shop美国市场2024年GMV达500亿美元，同比增长150%，社交电商模式验证成功",
+      "content": "TikTok Shop官方数据显示，2024年美国市场GMV突破500亿美元，同比增长150%。这一成绩验证了社交电商模式在北美市场的可行性。平台流量转化率持续提升，直播带货和短视频带货成为重要销售渠道。美区卖家数量增长80%，越来越多的品牌开始重视TikTok内容营销和达人合作。2025年TikTok Shop将继续投入资源支持卖家成长，包括流量扶持、达人撮合和物流优化。",
+      "impact": "社交电商模式在北美市场潜力巨大，卖家应加强TikTok内容布局，建立达人合作网络",
+      "relevantPlatforms": [
+        "TikTok Shop"
+      ]
     }
   ],
   "categories": {
@@ -4083,6 +4125,7 @@
       "name": "平台政策",
       "description": "平台规则、政策更新、费用调整等",
       "items": [
+        "news_2025_315",
         "news_2025_006",
         "news_2025_021",
         "news_2025_008",
@@ -4229,6 +4272,7 @@
       "name": "市场趋势",
       "description": "市场数据、行业趋势、消费者洞察等",
       "items": [
+        "news_2025_316",
         "news_2025_002",
         "news_2025_005",
         "news_2025_022",
@@ -4402,6 +4446,7 @@
       "name": "行业资讯",
       "description": "行业动态、竞争分析、新兴机会等",
       "items": [
+        "news_2025_314",
         "news_2025_011",
         "news_2025_012",
         "news_2025_014",
@@ -4434,15 +4479,15 @@
       ]
     }
   },
-  "lastUpdate": "2025-10-16",
-  "totalCount": 313,
+  "lastUpdate": "2025-01-09",
+  "totalCount": 316,
   "year": 2025,
   "metadata": {
-    "manuallyReviewed": 19,
+    "manuallyReviewed": 22,
     "autoExtracted": 294,
-    "totalNews": 313,
+    "totalNews": 316,
     "dateRange": {
-      "earliest": "2025-03-06",
+      "earliest": "2025-01-09",
       "latest": "2025-10-14"
     }
   }
