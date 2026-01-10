@@ -1,0 +1,10 @@
+
+import { useAppStore } from './src/store/index';
+import { presetModules } from './src/modules/presets';
+
+// Since we are running in Node, we need to mock Zustand's create behavior if necessary, 
+// but since we are importing source directly, we might need a bundler or ts-node.
+// Simpler approach: Copy the relevant store logic into a standalone JS file for testing.
+
+// I will create a standalone JS file that replicates the store logic I am debugging.
+// This is safer than trying to import TS files in a raw Node environment without configuration.
