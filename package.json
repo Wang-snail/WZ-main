@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:flow && vite build && npm run generate:sitemap",
+    "build": "vite build && npm run build:flow && npm run generate:sitemap",
     "build:flow": "cd 代码可视化/dataflow-visualizer && CI=true pnpm run build",
     "lint": "eslint .",
     "preview": "vite preview",
