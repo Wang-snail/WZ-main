@@ -11,7 +11,9 @@
  *
  * 布局结构：
  * ┌─────────────────────────────────────────────────────┐
- * │  工具栏                                             │ <-- 顶部：工具栏
+ * │  导航栏（新增）                                     │ <-- 顶部：导航栏
+ * ├─────────────────────────────────────────────────────┤
+ * │  工具栏                                             │ <-- 工具栏
  * ├─────────────────────┬───────────────────────────────┤
  * │  侧边栏             │  画布区域                     │ <-- 中间：主要内容
  * │  (可收起)           │  ┌─────────────────────────┐  │
@@ -30,7 +32,7 @@
 import React, { useState, useEffect } from 'react';
 
 // 从 lucide-react 导入图标组件
-import { Menu } from 'lucide-react';
+import { Menu, ArrowLeft, Home, Sparkles, Bot } from 'lucide-react';
 
 // 导入工具栏组件
 import { 工具栏 } from './组件/工具栏';
@@ -52,6 +54,54 @@ import { useAppStore } from '@/store/index';
 
 // 从预设模块导入所有内置模块
 import { presetModules } from '@/presets/index';
+
+/**
+ * 顶部导航栏组件
+ */
+function 导航栏() {
+  return (
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div className="h-14 flex items-center justify-between px-4">
+        {/* 左侧：返回链接和标题 */}
+        <div className="flex items-center gap-3">
+          <a
+            href="/"
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-sm">返回</span>
+          </a>
+          <div className="w-px h-6 bg-gray-200" />
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Bot className="w-6 h-6 text-blue-600" />
+              <Sparkles className="w-3 h-3 text-yellow-500 absolute -top-1 -right-1" />
+            </div>
+            <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              数据流可视化
+            </span>
+          </div>
+        </div>
+
+        {/* 右侧：操作链接 */}
+        <div className="flex items-center gap-4">
+          <a
+            href="/tools"
+            className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            工具中心
+          </a>
+          <a
+            href="/wiki"
+            className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            行业信息
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
 
 /**
  * 应用根组件
@@ -138,76 +188,82 @@ function 应用() {
   // =========================================================================
 
   return (
-    // 整个应用容器：全屏、深色背景、flex 布局
-    <div className="h-screen bg-gray-900 flex flex-col overflow-hidden">
+    // 整个应用容器：flex 布局
+    <div className="min-h-screen bg-gray-900 flex flex-col">
+      {/* 导航栏 */}
+      <导航栏 />
+
       {/* Toast 通知组件（全局显示） */}
       <ToastComponent />
 
-      {/* 顶部工具栏 */}
-      <工具栏 onFullscreen={handleFullscreen} />
+      {/* 工作流内容区域 */}
+      <div className="flex-1 flex flex-col overflow-hidden" style={{ height: 'calc(100vh - 56px)' }}>
+        {/* 工具栏 */}
+        <工具栏 onFullscreen={handleFullscreen} />
 
-      {/* 主要内容区域：占据剩余空间，flex 布局 */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* 左侧侧边栏：根据 sidebarOpen 状态显示/隐藏 */}
-        <侧边栏 isOpen={sidebarOpen} />
+        {/* 主要内容区域：占据剩余空间，flex 布局 */}
+        <div className="flex-1 flex overflow-hidden">
+          {/* 左侧侧边栏：根据 sidebarOpen 状态显示/隐藏 */}
+          <侧边栏 isOpen={sidebarOpen} />
 
-        {/* 画布区域 */}
-        <div className="flex-1 flex">
-          {/* 画布容器 */}
-          <div className="flex-1 relative">
-            {/* 侧边栏切换按钮：当侧边栏收起时显示 */}
-            {!sidebarOpen && (
-              <button
-                onClick={toggleSidebar}
-                className="absolute top-4 left-4 z-10 p-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg shadow-lg transition-colors"
-                title="打开侧边栏"
-              >
-                <Menu className="w-5 h-5" />
-              </button>
-            )}
+          {/* 画布区域 */}
+          <div className="flex-1 flex">
+            {/* 画布容器 */}
+            <div className="flex-1 relative">
+              {/* 侧边栏切换按钮：当侧边栏收起时显示 */}
+              {!sidebarOpen && (
+                <button
+                  onClick={toggleSidebar}
+                  className="absolute top-4 left-4 z-10 p-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg shadow-lg transition-colors"
+                  title="打开侧边栏"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              )}
 
-            {/* 主画布：显示流程图 */}
-            <流程画布 />
+              {/* 主画布：显示流程图 */}
+              <流程画布 />
+            </div>
+
+            {/* 右侧属性面板：显示选中节点的详细信息 */}
+            <属性面板
+              nodeId={selectedNodeId}                    // 选中节点 ID
+              isOpen={propertiesPanelOpen}               // 是否展开
+              onClose={() => setPropertiesPanelOpen(false)}  // 关闭回调
+            />
           </div>
-
-          {/* 右侧属性面板：显示选中节点的详细信息 */}
-          <属性面板
-            nodeId={selectedNodeId}                    // 选中节点 ID
-            isOpen={propertiesPanelOpen}               // 是否展开
-            onClose={() => setPropertiesPanelOpen(false)}  // 关闭回调
-          />
         </div>
-      </div>
 
-      {/* 底部状态栏：显示项目信息 */}
-      <div className="bg-gray-800 border-t border-gray-700 px-4 py-2">
-        {/* 内容容器：flex 布局，两端对齐 */}
-        <div className="flex items-center justify-between text-sm text-gray-400">
-          {/* 左侧：项目统计信息 */}
-          <div className="flex items-center space-x-4">
-            {/* 节点数量 */}
-            <span>
-              {currentProject ? `${currentProject.nodes.length} 个节点` : '未创建项目'}
-            </span>
-            {/* 连线数量（如果有项目） */}
-            {currentProject && (
+        {/* 底部状态栏：显示项目信息 */}
+        <div className="bg-gray-800 border-t border-gray-700 px-4 py-2">
+          {/* 内容容器：flex 布局，两端对齐 */}
+          <div className="flex items-center justify-between text-sm text-gray-400">
+            {/* 左侧：项目统计信息 */}
+            <div className="flex items-center space-x-4">
+              {/* 节点数量 */}
               <span>
-                {currentProject.edges.length} 个连接
+                {currentProject ? `${currentProject.nodes.length} 个节点` : '未创建项目'}
               </span>
-            )}
-          </div>
+              {/* 连线数量（如果有项目） */}
+              {currentProject && (
+                <span>
+                  {currentProject.edges.length} 个连接
+                </span>
+              )}
+            </div>
 
-          {/* 右侧：状态信息 */}
-          <div className="flex items-center space-x-4">
-            {/* 最后保存时间 */}
-            <span>
-              最后保存: {currentProject ? new Date(currentProject.updatedAt).toLocaleTimeString() : '无'}
-            </span>
-            {/* 就绪状态指示器 */}
-            <span className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span>就绪</span>
-            </span>
+            {/* 右侧：状态信息 */}
+            <div className="flex items-center space-x-4">
+              {/* 最后保存时间 */}
+              <span>
+                最后保存: {currentProject ? new Date(currentProject.updatedAt).toLocaleTimeString() : '无'}
+              </span>
+              {/* 就绪状态指示器 */}
+              <span className="flex items-center space-x-1">
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <span>就绪</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
