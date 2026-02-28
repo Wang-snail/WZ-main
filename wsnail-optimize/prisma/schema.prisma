@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Tool {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  description String?
+  icon        String?
+  category    String
+  tags        Json?
+  usageCount  Int      @default(0)
+  rating      Decimal  @default(0)
+  reviewCount Int      @default(0)
+  isHot       Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ToolScene {
+  id         Int      @id @default(autoincrement())
+  name       String
+  slug       String   @unique
+  icon       String?
+  description String?
+  toolCount  Int      @default(0)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model MarketUpdate {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String?
+  type        String?
+  isUrgent    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  publishedAt DateTime @default(now())
+}
