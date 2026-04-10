@@ -1,7 +1,7 @@
-import { Sparkles, Zap, Mail, BarChart2, Shield, MoreVertical, Receipt, ArrowRight, Plus, Network } from 'lucide-react';
+import { Sparkles, Zap, Mail, BarChart2, Shield, MoreVertical, Receipt, ArrowRight, Plus, Network, Bot } from 'lucide-react';
 import TopNavBar from '../components/TopNavBar';
 
-export default function Dashboard({ currentPath, onNavigate }: { currentPath: string, onNavigate: (path: string) => void }) {
+export default function Dashboard({ currentPath, onNavigate, onOpenAIAssistant }: { currentPath: string, onNavigate: (path: string) => void, onOpenAIAssistant?: () => void }) {
   return (
     <div className="min-h-screen bg-surface text-on-surface font-body pb-24">
       <TopNavBar currentPath={currentPath} onNavigate={onNavigate} />
@@ -170,9 +170,18 @@ export default function Dashboard({ currentPath, onNavigate }: { currentPath: st
         </section>
       </main>
 
-      <button onClick={() => onNavigate('flow')} className="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary text-on-primary shadow-xl shadow-primary/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
-        <Plus size={24} strokeWidth={2.5} />
-      </button>
-    </div>
-  );
+<button onClick={() => onNavigate('flow')} className="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary text-on-primary shadow-xl shadow-primary/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<Plus size={24} strokeWidth={2.5} />
+</button>
+
+{onOpenAIAssistant && (
+<button
+onClick={onOpenAIAssistant}
+className="fixed bottom-8 right-24 w-14 h-14 rounded-full bg-tertiary text-on-tertiary shadow-xl shadow-tertiary/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50"
+>
+<Bot size={24} strokeWidth={2.5} />
+</button>
+)}
+</div>
+);
 }
