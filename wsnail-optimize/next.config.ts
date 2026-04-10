@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Turbopack 配置
+  turbopack: {
+    root: __dirname,
+  },
+  
   // 启用实验性功能
   experimental: {
     // 启用优化的包导入
