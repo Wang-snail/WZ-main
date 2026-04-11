@@ -253,7 +253,8 @@ export default function AIAssistant({ isOpen, onClose }: { isOpen: boolean; onCl
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3007/api/chat', {
+      const apiBase = import.meta.env.VITE_API_URL || 'https://api.wsnail.com';
+      const response = await fetch(`${apiBase}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -288,7 +289,7 @@ export default function AIAssistant({ isOpen, onClose }: { isOpen: boolean; onCl
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: '🐌 我连接不上服务器，请确认后端服务已启动在 http://localhost:3007',
+        content: '🐌 我连接不上服务器，请稍后再试试吧！',
         timestamp: new Date()
       };
       setMessages(prev => [...prev, assistantMessage]);
