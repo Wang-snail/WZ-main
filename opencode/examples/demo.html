@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCode Web Standalone - Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        
+        .demo-section {
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .query-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+        }
+        
+        .btn-secondary {
+            background: #2196F3;
+        }
+        
+        .btn-secondary:hover {
+            background: #0b7dda;
+        }
+        
+        .result-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom-color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OpenCode Web Standalone - Demo</h1>
+        <p>这是一个基于静态知识快照的轻量级 AI 助手演示页面。</p>
+        
+        <div class="demo-section">
+            <strong>功能说明：</strong>
+            <ul>
+                <li>✅ 静态知识快照（无需数据库）</li>
+                <li>✅ 知识库查询</li>
+                <li>✅ 市场分析规则检测</li>
+                <li>✅ 系统提示生成（LLM 注入）</li>
+                <li>✅ 零依赖，纯前端运行</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('query')">知识查询</div>
+            <div class="tab" onclick="switchTab('analyze')">内容分析</div>
+            <div class="tab" onclick="switchTab('prompt')">系统提示</div>
+        </div>
+        
+        <!-- Query Tab -->
+        <div id="query-tab" class="tab-content active">
+            <h2>🔍 知识库查询</h2>
+            <p>输入查询关键词，检索静态知识快照中的相关信息：</p>
+            
+            <input type="text" class="query-input" id="query-input" 
+                   placeholder="例如：CR规则、编码规范、理性框架、HHCI..." 
+                   value="CR规则">
+            
+            <button class="btn" onclick="performQuery()">查询</button>
+            <button class="btn btn-secondary" onclick="loadSampleQuery()">加载示例</button>
+            
+            <div id="query-status" class="status" style="display:none;"></div>
+            
+            <div id="query-result" class="result-box">
+                等待查询...
+            </div>
+        </div>
+        
+        <!-- Analyze Tab -->
+        <div id="analyze-tab" class="tab-content">
+            <h2>📊 内容分析</h2>
+            <p>输入待分析的文本，检测是否符合市场分析规则（CR 规则）：</p>
+            
+            <textarea class="query-input" id="analyze-input" rows="5" 
+                      placeholder="输入待分析的文本内容...">这是一个关于产品功能的描述，包含关键特性和用户价值。</textarea>
+            
+            <button class="btn" onclick="performAnalysis()">分析</button>
+            <button class="btn btn-secondary" onclick="loadSampleAnalysis()">加载示例</button>
+            
+            <div id="analyze-status" class="status" style="display:none;"></div>
+            
+            <div id="analyze-result" class="result-box">
+                等待分析...
+            </div>
+        </div>
+        
+        <!-- Prompt Tab -->
+        <div id="prompt-tab" class="tab-content">
+            <h2>💬 系统提示生成</h2>
+            <p>生成可直接注入 LLM 的系统提示，包含编码规范和分析框架：</p>
+            
+            <div style="margin: 15px 0;">
+                <label><input type="checkbox" id="include-coding" checked> 包含编码规范</label>
+                <label style="margin-left: 20px;"><input type="checkbox" id="include-cr" checked> 包含 CR 规则</label>
+                <label style="margin-left: 20px;"><input type="checkbox" id="include-rational" checked> 包含理性框架</label>
+            </div>
+            
+            <button class="btn" onclick="generatePrompt()">生成提示</button>
+            <button class="btn btn-secondary" onclick="copyPrompt()">复制到剪贴板</button>
+            
+            <div id="prompt-status" class="status" style="display:none;"></div>
+            
+            <div id="prompt-result" class="result-box" style="height: 500px;">
+                等待生成...
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>📝 集成代码示例</h2>
+        <div class="demo-section">
+            <strong>JavaScript 集成：</strong>
+            <pre><code>&lt;script src="opencode-sdk.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const sdk = new OpenCodeWebSDK({ mode: 'static' });
+  await sdk.loadKnowledge('./knowledge_snapshot.json');
+  const result = sdk.queryKnowledge('CR规则');
+  console.log(result);
+&lt;/script&gt;</code></pre>
+        </div>
+        
+        <div class="demo-section">
+            <strong>Python 集成：</strong>
+            <pre><code>from opencode_sdk import OpenCodePythonSDK
+
+sdk = OpenCodePythonSDK('./knowledge_snapshot.json')
+result = sdk.query_knowledge('CR规则')
+print(result)</code></pre>
+        </div>
+    </div>
+    
+    <!-- Load the SDK -->
+    <script src="../examples/opencode-sdk.js"></script>
+    
+    <!-- Demo App -->
+    <script>
+        let sdk;
+        
+        async function initSDK() {
+            try {
+                sdk = new OpenCodeWebSDK({ mode: 'static' });
+                await sdk.loadKnowledge('../knowledge_snapshot.json');
+                console.log('✓ SDK initialized successfully');
+            } catch (error) {
+                console.error('✗ SDK initialization failed:', error);
+                alert('Failed to load knowledge base. Make sure knowledge_snapshot.json exists.');
+            }
+        }
+        
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            
+            document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+        
+        function performQuery() {
+            const query = document.getElementById('query-input').value;
+            const statusEl = document.getElementById('query-status');
+            const resultEl = document.getElementById('query-result');
+            
+            try {
+                const result = sdk.queryKnowledge(query);
+                statusEl.className = 'status success';
+                statusEl.style.display = 'inline-block';
+                statusEl.textContent = '✓ 查询成功';
+                resultEl.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.style.display = 'inline-block';
+                statusEl.textContent = '✗ 查询失败';
+                resultEl.textContent = `错误: ${error.message}`;
+            }
+        }
+        
+        function performAnalysis() {
+            const content = document.getElementById('analyze-input').value;
+            const statusEl = document.getElementById('analyze-status');
+            const resultEl = document.getElementById('analyze-result');
+            
+            try {
+                const result = sdk.analyzeContent(content);
+                statusEl.className = 'status success';
+                statusEl.style.display = 'inline-block';
+                statusEl.textContent = '✓ 分析完成';
+                resultEl.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.style.display = 'inline-block';
+                statusEl.textContent = '✗ 分析失败';
+                resultEl.textContent = `错误: ${error.message}`;
+            }
+        }
+        
+        function generatePrompt() {
+            const includeCoding = document.getElementById('include-coding').checked;
+            const includeCR = document.getElementById('include-cr').checked;
+            const includeRational = document.getElementById('include-rational').checked;
+            
+            const statusEl = document.getElementById('prompt-status');
+            const resultEl = document.getElementById('prompt-result');
+            
+            try {
+                const prompt = sdk.generateSystemPrompt({
+                    includeCodingStandards: includeCoding,
+                    includeCRRules: includeCR,
+                    includeRationalFramework: includeRational
+                });
+                statusEl.className = 'status success';
+                statusEl.style.display = 'inline-block';
+                statusEl.textContent = '✓ 生成成功';
+                resultEl.textContent = prompt;
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.style.display = 'inline-block';
+                statusEl.textContent = '✗ 生成失败';
+                resultEl.textContent = `错误: ${error.message}`;
+            }
+        }
+        
+        function copyPrompt() {
+            const resultEl = document.getElementById('prompt-result');
+            const text = resultEl.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+        
+        function loadSampleQuery() {
+            const samples = ['CR规则', '编码规范', '理性框架', 'HHCI', '用户体验'];
+            const random = samples[Math.floor(Math.random() * samples.length)];
+            document.getElementById('query-input').value = random;
+        }
+        
+        function loadSampleAnalysis() {
+            const samples = [
+                '这是一个关于产品功能的描述，包含关键特性和用户价值。',
+                '我们的产品提供了最佳解决方案，可以帮助用户实现更好的效果。',
+                '通过优化算法，系统性能提升了50%，用户体验得到显著改善。'
+            ];
+            const random = samples[Math.floor(Math.random() * samples.length)];
+            document.getElementById('analyze-input').value = random;
+        }
+        
+        // Initialize SDK on page load
+        window.addEventListener('load', initSDK);
+    </script>
+</body>
+</html>

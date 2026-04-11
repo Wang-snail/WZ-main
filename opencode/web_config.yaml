@@ -1,0 +1,59 @@
+# OpenCode Web Standalone 配置文件
+
+# 部署配置
+deployment:
+  mode: "standalone"  # standalone, api, embedded
+  version: "1.0-web-standalone"
+  snapshot_date: "2026-04-10"
+
+# 知识库配置
+knowledge:
+  source: "knowledge_snapshot.json"
+  update_mode: "manual"  # manual, auto
+  max_size_mb: 10
+
+# API 配置（可选）
+api:
+  enabled: false
+  port: 8080
+  endpoints:
+    - /search
+    - /analyze
+    - /detect
+    - /check
+
+# 性能配置
+performance:
+  cache_enabled: true
+  cache_ttl_seconds: 3600
+  max_concurrent_queries: 100
+
+# 安全配置
+security:
+  rate_limit:
+    enabled: true
+    requests_per_minute: 60
+  input_validation:
+    max_query_length: 1000
+    max_code_length: 10000
+
+# 日志配置
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "json"
+  output: "stdout"
+
+# 功能开关
+features:
+  market_analysis: true
+  rhetoric_detection: true
+  code_checking: true
+  confidence_scoring: true
+  team_structure: true
+
+# 隔离保证
+isolation:
+  read_only: true
+  no_external_dependencies: true
+  no_file_system_access: true
+  no_code_execution: true
