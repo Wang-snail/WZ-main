@@ -1,0 +1,13 @@
+name = "wz-main"
+compatibility_date = "2024-04-01"
+pages_build_output_dir = "dist"
+
+# KV 命名空间绑定
+# 步骤一：运行 `npx wrangler kv namespace create NODES_KV`
+# 步骤二：把输出的 id 填到下面 id 字段
+# 步骤三：在 Cloudflare Pages 控制台 > Settings > Functions > KV namespace bindings
+#         添加变量名 NODES_KV，选择刚创建的命名空间
+[[kv_namespaces]]
+binding = "NODES_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_YOUR_KV_NAMESPACE_PREVIEW_ID"
