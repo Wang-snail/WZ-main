@@ -1,12 +1,14 @@
 import { Network, Bell, HelpCircle } from 'lucide-react';
 
-export default function TopNavBar({ 
-  currentPath, 
+const IS_ADMIN = (import.meta.env.VITE_APP_MODE ?? 'frontend') === 'admin';
+
+export default function TopNavBar({
+  currentPath,
   onNavigate,
   className = "fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/15 shadow-sm",
   rightContent
-}: { 
-  currentPath: string, 
+}: {
+  currentPath: string,
   onNavigate: (path: string) => void,
   className?: string,
   rightContent?: React.ReactNode
@@ -26,6 +28,7 @@ export default function TopNavBar({
             <button onClick={() => onNavigate('dashboard')} className={`px-4 h-full flex items-center text-sm tracking-wide transition-colors ${currentPath === 'dashboard' ? 'text-primary font-semibold border-b-2 border-primary bg-primary/5' : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'}`}>工作台</button>
             <button onClick={() => onNavigate('flow')} className={`px-4 h-full flex items-center text-sm tracking-wide transition-colors ${currentPath === 'flow' ? 'text-primary font-semibold border-b-2 border-primary bg-primary/5' : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'}`}>流程</button>
             <button onClick={() => onNavigate('template')} className={`px-4 h-full flex items-center text-sm tracking-wide transition-colors ${currentPath === 'template' ? 'text-primary font-semibold border-b-2 border-primary bg-primary/5' : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'}`}>模板</button>
+            <button onClick={() => onNavigate('calculator')} className={`px-4 h-full flex items-center text-sm tracking-wide transition-colors ${currentPath === 'calculator' ? 'text-primary font-semibold border-b-2 border-primary bg-primary/5' : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'}`}>计算器</button>
             <button onClick={() => onNavigate('report')} className={`px-4 h-full flex items-center text-sm tracking-wide transition-colors ${currentPath === 'report' ? 'text-primary font-semibold border-b-2 border-primary bg-primary/5' : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'}`}>报告</button>
             <button onClick={() => onNavigate('settings')} className={`px-4 h-full flex items-center text-sm tracking-wide transition-colors ${currentPath === 'settings' ? 'text-primary font-semibold border-b-2 border-primary bg-primary/5' : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'}`}>设置</button>
           </nav>
@@ -34,9 +37,16 @@ export default function TopNavBar({
         {rightContent || (
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <button onClick={() => onNavigate('admin/nodes')} className="text-sm font-medium text-primary hover:underline bg-primary/10 px-3 py-1.5 rounded-full mr-2">
-                后台管理
-              </button>
+              {IS_ADMIN ? (
+                <>
+                  <button onClick={() => onNavigate('admin/nodes')} className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${currentPath === 'admin/nodes' ? 'bg-primary text-on-primary' : 'text-primary bg-primary/10 hover:bg-primary/20'}`}>节点管理</button>
+                  <button onClick={() => onNavigate('admin/users')} className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${currentPath === 'admin/users' ? 'bg-primary text-on-primary' : 'text-primary bg-primary/10 hover:bg-primary/20'}`}>用户管理</button>
+                </>
+              ) : (
+                <button onClick={() => onNavigate('admin/nodes')} className="text-sm font-medium text-primary hover:underline bg-primary/10 px-3 py-1.5 rounded-full mr-2">
+                  后台管理
+                </button>
+              )}
               <button className="text-primary p-2 rounded-full hover:bg-surface-container-high transition-colors">
                 <Bell size={20} />
               </button>

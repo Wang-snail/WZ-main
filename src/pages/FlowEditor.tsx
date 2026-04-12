@@ -1,487 +1,824 @@
-import { useState, useRef, useEffect } from 'react';
-import { Network, Bell, HelpCircle, Save, Play, Search, Plus, History, Share2, Settings2, X, Send, ChevronDown, Edit3, Database, Calculator, DollarSign, Truck, Megaphone, Wallet, MoreVertical } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import {
+  Calculator, Search, ChevronDown, ChevronRight,
+  Edit2, Play, Save, X, PlusSquare, History, Share2,
+} from 'lucide-react';
 import TopNavBar from '../components/TopNavBar';
-import ResizableSidebar from '../components/ResizableSidebar';
+import { useNodes } from '../hooks/useNodes';
+import { AppNode } from '../data/nodes';
 
-export default function FlowEditor({ currentPath, onNavigate }: { currentPath: string, onNavigate: (path: string) => void }) {
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface CanvasNode {
+  instanceId: string;
+  nodeId: string;
+  x: number;
+  y: number;
+  width: number;
+  inputs: Record<string, number>;
+}
+
+interface CanvasEdge {
+  id: string;
+  fromInstanceId: string;
+  fromPortIdx: number;
+  toInstanceId: string;
+  toPortIdx: number;
+}
+
+// Port position measured from DOM: { instanceId -> { out: [y0,y1,...], in: [y0,y1,...] } }
+type PortPositions = Record<string, { out: number[]; in: number[] }>;
+
+// ─── Layout constants (keep in sync with JSX below) ──────────────────────────
+const PORT_R = 6;          // port circle radius (px)
+const DEFAULT_NODE_W = 260;
+const MIN_NODE_W = 200;
+
+// ─── SidebarNodeCard ──────────────────────────────────────────────────────────
+function SidebarNodeCard({ node }: { node: AppNode }) {
+  const handleDragStart = (e: React.DragEvent) => {
+    e.dataTransfer.setData('nodeId', node.id);
+    e.dataTransfer.effectAllowed = 'copy';
+  };
+
+  return (
+    <div
+      draggable
+      onDragStart={handleDragStart}
+      className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-grab active:cursor-grabbing hover:bg-primary/8 group transition-colors select-none"
+    >
+      <Calculator size={12} className="text-primary shrink-0" />
+      <span className="text-xs text-on-surface-variant group-hover:text-primary truncate">{node.name}</span>
+    </div>
+  );
+}
+
+// ─── CanvasNodeCard ───────────────────────────────────────────────────────────
+function CanvasNodeCard({
+  canvasNode,
+  appNode,
+  selected,
+  dragging,
+  onMouseDown,
+  onSelectClick,
+  onOutputPortMouseDown,
+  onInputPortMouseUp,
+  onResizeMouseDown,
+}: {
+  canvasNode: CanvasNode;
+  appNode: AppNode;
+  selected: boolean;
+  dragging: boolean;
+  onMouseDown: (e: React.MouseEvent) => void;
+  onSelectClick: () => void;
+  onOutputPortMouseDown: (e: React.MouseEvent, idx: number) => void;
+  onInputPortMouseUp: (e: React.MouseEvent, idx: number) => void;
+  onResizeMouseDown: (e: React.MouseEvent) => void;
+}) {
+  const [logicOpen, setLogicOpen] = useState(false);
+  const w = canvasNode.width;
+
+  return (
+    // px-[PORT_R] creates space so the port circles (which sit at the very edge) are not clipped
+    <div
+      className="node-element absolute"
+      style={{
+        left: canvasNode.x - PORT_R,
+        top: canvasNode.y,
+        width: w + PORT_R * 2,
+        paddingLeft: PORT_R,
+        paddingRight: PORT_R,
+        zIndex: dragging ? 100 : selected ? 20 : 10,
+      }}
+    >
+      <div
+        className={`bg-white rounded-xl shadow-lg border-2 transition-colors ${
+          selected ? 'border-primary' : 'border-slate-200'
+        }`}
+      >
+        {/* Header */}
+        <div
+          className="flex items-center justify-between px-2.5 bg-[#37474F] rounded-t-xl cursor-grab active:cursor-grabbing select-none"
+          style={{ height: 32 }}
+          onMouseDown={onMouseDown}
+        >
+          <div className="flex items-center gap-1.5 min-w-0">
+            <Calculator size={12} className="text-white shrink-0" />
+            <span className="text-white text-[11px] font-bold truncate">{appNode.name}</span>
+          </div>
+          <button
+            className="shrink-0 p-0.5 hover:bg-white/20 rounded transition-colors"
+            onMouseDown={e => e.stopPropagation()}
+            onClick={onSelectClick}
+          >
+            <Edit2 size={11} className="text-white" />
+          </button>
+        </div>
+
+        {/* Body — two columns */}
+        <div className="flex">
+          {/* Left: inputs */}
+          <div className="flex-1 bg-slate-50/50 border-r border-slate-100">
+            <div className="px-2 pt-1 pb-0.5">
+              <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">输入</span>
+            </div>
+            {appNode.inputs.map((inp, i) => {
+              const val = canvasNode.inputs[inp.key] ?? inp.defaultValue ?? 0;
+              return (
+                <div key={inp.key} className="relative flex items-center" style={{ height: 24, paddingLeft: 14, paddingRight: 6 }}>
+                  {/* Input port — sits at the left edge of the card (outside the border) */}
+                  <div
+                    data-port="in"
+                    data-instance={canvasNode.instanceId}
+                    data-idx={i}
+                    className="absolute flex items-center justify-center cursor-crosshair"
+                    style={{
+                      left: -PORT_R - 1,       // -PORT_R positions centre at card's left border
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: PORT_R * 2,
+                      height: PORT_R * 2,
+                      zIndex: 20,
+                    }}
+                    onMouseUp={e => onInputPortMouseUp(e, i)}
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-400 bg-white hover:border-primary hover:scale-125 transition-transform" />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[10px] text-slate-500 leading-none truncate">{inp.label}</span>
+                    <span className="text-[11px] font-bold text-slate-800 leading-none">{val}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right: outputs */}
+          <div className="flex-1 bg-white">
+            <div className="px-2 pt-1 pb-0.5 text-right">
+              <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">输出</span>
+            </div>
+            {appNode.outputs.map((out, i) => (
+              <div key={out.key} className="relative flex items-center justify-end" style={{ height: 24, paddingLeft: 6, paddingRight: 14 }}>
+                <div className="flex flex-col items-end min-w-0">
+                  <span className="text-[10px] text-slate-500 leading-none truncate">{out.label}</span>
+                  <span className="text-[11px] font-bold text-emerald-600 leading-none">—</span>
+                </div>
+                {/* Output port — sits at the right edge of the card (outside the border) */}
+                <div
+                  data-port="out"
+                  data-instance={canvasNode.instanceId}
+                  data-idx={i}
+                  className="absolute flex items-center justify-center cursor-crosshair"
+                  style={{
+                    right: -PORT_R - 1,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: PORT_R * 2,
+                    height: PORT_R * 2,
+                    zIndex: 20,
+                  }}
+                  onMouseDown={e => onOutputPortMouseDown(e, i)}
+                >
+                  <div className="w-2.5 h-2.5 rounded-full border-2 border-emerald-500 bg-white hover:border-emerald-400 hover:scale-125 transition-transform" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer: collapsible logic */}
+        <div className="bg-slate-50/80 border-t border-slate-100 rounded-b-xl">
+          <details onToggle={e => setLogicOpen((e.target as HTMLDetailsElement).open)}>
+            <summary className="flex items-center gap-1 px-2.5 py-1 cursor-pointer select-none list-none text-[10px] text-slate-500 hover:text-slate-700">
+              <ChevronRight
+                size={10}
+                className={`transition-transform shrink-0 ${logicOpen ? 'rotate-90' : ''}`}
+              />
+              逻辑
+            </summary>
+            <div className="px-2 pb-2">
+              <pre className="bg-slate-900 rounded-md p-2 font-mono text-[10px] text-slate-300 overflow-x-auto whitespace-pre-wrap break-all">
+                {appNode.logic}
+              </pre>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      {/* Resize handle */}
+      <div
+        className="absolute cursor-nw-resize z-20"
+        onMouseDown={onResizeMouseDown}
+        style={{
+          bottom: 0,
+          right: PORT_R,   // align with card's right border (not the outer wrapper)
+          width: 16,
+          height: 16,
+          background: 'linear-gradient(135deg, transparent 50%, #94a3b8 50%)',
+          borderBottomRightRadius: 8,
+        }}
+      />
+    </div>
+  );
+}
+
+// ─── RightPanel ───────────────────────────────────────────────────────────────
+function RightPanel({
+  canvasNode,
+  appNode,
+  onClose,
+  onInputChange,
+  onRefresh,
+  updateNode,
+}: {
+  canvasNode: CanvasNode;
+  appNode: AppNode;
+  onClose: () => void;
+  onInputChange: (key: string, value: number) => void;
+  onRefresh: () => void;
+  updateNode: (id: string, changes: Partial<AppNode>) => Promise<AppNode>;
+}) {
+  const [activeTab, setActiveTab] = useState<'params' | 'logic'>('params');
+  const [result, setResult] = useState<Record<string, number> | null>(null);
+  const [running, setRunning] = useState(false);
+  const [runError, setRunError] = useState<string | null>(null);
+  const [logicText, setLogicText] = useState(appNode.logic);
+  const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState<string | null>(null);
+  const handleRun = async () => {
+    setRunning(true);
+    setRunError(null);
+    try {
+      const res = await fetch('/api/calculate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nodeId: appNode.id,
+          inputs: canvasNode.inputs,
+          logic: appNode.logic,
+          outputKeys: appNode.outputs.map(o => o.key),
+        }),
+      });
+      const json = await res.json() as { success: boolean; data?: { outputs: Record<string, number> }; error?: string };
+      if (json.success && json.data) {
+        setResult(json.data.outputs);
+      } else {
+        setRunError(json.error ?? '计算失败');
+      }
+    } catch {
+      setRunError('网络错误');
+    } finally { setRunning(false); }
+  };
+  const handleSaveLogic = async () => {
+    setSaving(true);
+    setSaveMsg(null);
+    try {
+      await updateNode(appNode.id, { logic: logicText });
+      onRefresh();
+      setSaveMsg('保存成功');
+    } catch {
+      setSaveMsg('保存失败');
+    } finally { setSaving(false); }
+  };
+
+  return (
+    <div className="w-72 h-full border-l border-outline-variant/10 bg-white flex flex-col shrink-0">
+      <div className="px-4 py-3 border-b border-outline-variant/10 flex items-center justify-between">
+        <div className="min-w-0">
+          <p className="text-sm font-bold text-[#37474F] truncate">{appNode.name}</p>
+          <p className="text-xs text-slate-400 mt-0.5 leading-tight truncate">{appNode.description}</p>
+        </div>
+        <button onClick={onClose} className="p-1 hover:bg-slate-100 rounded ml-2 shrink-0">
+          <X size={15} className="text-slate-400" />
+        </button>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex border-b border-outline-variant/10 shrink-0">
+        {(['params', 'logic'] as const).map(tab => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`flex-1 py-2 text-xs font-medium transition-colors ${
+              activeTab === tab
+                ? 'text-primary border-b-2 border-primary'
+                : 'text-slate-400 hover:text-slate-600'
+            }`}
+          >
+            {tab === 'params' ? '参数配置' : '逻辑编辑'}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === 'params' && (
+        <>
+          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">输入参数</p>
+            {appNode.inputs.map(inp => (
+              <div key={inp.key}>
+                <label className="text-xs text-on-surface-variant mb-1 block">
+                  {inp.label}{inp.unit ? ` (${inp.unit})` : ''}
+                </label>
+                <input
+                  type="number"
+                  className="w-full border border-outline-variant/30 rounded-md px-2.5 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-primary bg-surface-container-low"
+                  value={canvasNode.inputs[inp.key] ?? inp.defaultValue ?? 0}
+                  onChange={e => onInputChange(inp.key, parseFloat(e.target.value) || 0)}
+                />
+              </div>
+            ))}
+
+            {result && (
+              <div className="mt-2 space-y-2">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">计算结果</p>
+                {appNode.outputs.map(out => (
+                  <div key={out.key} className="flex items-center justify-between bg-emerald-50 rounded-md px-2.5 py-1.5">
+                    <span className="text-xs text-slate-500">{out.label}</span>
+                    <span className="text-xs font-bold text-emerald-600 font-mono">
+                      {typeof result[out.key] === 'number' ? result[out.key].toFixed(2) : '—'}
+                      {out.unit ? ` ${out.unit}` : ''}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {runError && (
+              <p className="text-xs text-error bg-error/10 rounded-md px-2.5 py-1.5">{runError}</p>
+            )}
+          </div>
+
+          <div className="p-4 border-t border-outline-variant/10">
+            <button
+              onClick={handleRun}
+              disabled={running}
+              className="w-full flex items-center justify-center gap-2 py-2 bg-primary text-on-primary rounded-lg text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+            >
+              <Play size={14} fill="currentColor" />
+              {running ? '计算中…' : '运行'}
+            </button>
+          </div>
+        </>
+      )}
+
+      {activeTab === 'logic' && (
+        <>
+          <div className="flex-1 p-4 flex flex-col gap-3">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">逻辑脚本</p>
+            <textarea
+              className="flex-1 w-full bg-slate-900 text-emerald-400 font-mono text-xs rounded-md p-3 resize-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              value={logicText}
+              onChange={e => setLogicText(e.target.value)}
+              spellCheck={false}
+            />
+            {saveMsg && (
+              <p className={`text-xs rounded-md px-2.5 py-1.5 ${saveMsg.includes('成功') ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500'}`}>
+                {saveMsg}
+              </p>
+            )}
+          </div>
+          <div className="p-4 border-t border-outline-variant/10">
+            <button
+              onClick={handleSaveLogic}
+              disabled={saving}
+              className="w-full flex items-center justify-center gap-2 py-2 bg-[#37474F] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+            >
+              <Save size={14} />
+              {saving ? '保存中…' : '保存逻辑'}
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─── FlowEditor (main) ────────────────────────────────────────────────────────
+export default function FlowEditor({
+  currentPath,
+  onNavigate,
+}: {
+  currentPath: string;
+  onNavigate: (path: string) => void;
+}) {
+  const { publishedNodes, loading, refresh, updateNode } = useNodes();
+
+  // Canvas transform
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
-  
-  const [nodes, setNodes] = useState([
-    { id: 'node1', x: 100, y: 80 },
-    { id: 'node2', x: 470, y: 280 }
-  ]);
-  const [draggingNode, setDraggingNode] = useState<string | null>(null);
-  const [nodeDragOffset, setNodeDragOffset] = useState({ x: 0, y: 0 });
+  // Canvas data
+  const [canvasNodes, setCanvasNodes] = useState<CanvasNode[]>([]);
+  const [edges, setEdges] = useState<CanvasEdge[]>([]);
+  const [selectedInstanceId, setSelectedInstanceId] = useState<string | null>(null);
+  // Drag to reposition
+  const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const didDragRef = useRef(false);
+  // Resize
+  const [resizingInstanceId, setResizingInstanceId] = useState<string | null>(null);
+  const resizeStartRef = useRef({ mouseX: 0, startW: 0 });
+  // Edge drawing
+  const [drawingEdge, setDrawingEdge] = useState<{ fromInstanceId: string; fromPortIdx: number } | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Sidebar
+  const [search, setSearch] = useState('');
+  const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set());
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // ── Zoom (ctrl+wheel) and pan ─────────────────────────────────────────────
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      
       if (e.ctrlKey || e.metaKey) {
-        // Zoom
-        const zoomSensitivity = 0.005;
-        const delta = -e.deltaY * zoomSensitivity;
-        const newScale = Math.min(Math.max(0.2, scale + delta), 3);
-        
-        // Zoom towards cursor
-        const rect = container.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        const scaleRatio = newScale / scale;
-        const newX = mouseX - (mouseX - position.x) * scaleRatio;
-        const newY = mouseY - (mouseY - position.y) * scaleRatio;
-
-        setScale(newScale);
-        setPosition({ x: newX, y: newY });
+        const delta = -e.deltaY * 0.005;
+        setScale(prev => {
+          const next = Math.min(3, Math.max(0.2, prev + delta));
+          const rect = container.getBoundingClientRect();
+          const mx = e.clientX - rect.left;
+          const my = e.clientY - rect.top;
+          const ratio = next / prev;
+          setPosition(p => ({ x: mx - (mx - p.x) * ratio, y: my - (my - p.y) * ratio }));
+          return next;
+        });
       } else {
-        // Pan
-        setPosition(prev => ({
-          x: prev.x - e.deltaX,
-          y: prev.y - e.deltaY
-        }));
+        setPosition(prev => ({ x: prev.x - e.deltaX, y: prev.y - e.deltaY }));
       }
     };
 
     container.addEventListener('wheel', handleWheel, { passive: false });
     return () => container.removeEventListener('wheel', handleWheel);
-  }, [scale, position]);
-
+  }, []);
+  // ── Global mouse move / up ─────────────────────────────────────────────────
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (draggingNode) {
-        const container = containerRef.current;
-        if (!container) return;
-        const rect = container.getBoundingClientRect();
-        
-        const mouseX = (e.clientX - rect.left - position.x) / scale;
-        const mouseY = (e.clientY - rect.top - position.y) / scale;
+      const container = containerRef.current;
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const cx = (e.clientX - rect.left - position.x) / scale;
+      const cy = (e.clientY - rect.top - position.y) / scale;
+      setMousePos({ x: cx, y: cy });
 
-        let newX = mouseX - nodeDragOffset.x;
-        let newY = mouseY - nodeDragOffset.y;
+      if (resizingInstanceId) {
+        const dx = e.clientX - resizeStartRef.current.mouseX;
+        const newW = Math.max(MIN_NODE_W, resizeStartRef.current.startW + dx / scale);
+        setCanvasNodes(prev =>
+          prev.map(n => n.instanceId === resizingInstanceId ? { ...n, width: Math.round(newW) } : n)
+        );
+        return;
+      }
 
-        // Snapping to 20px grid
-        newX = Math.round(newX / 20) * 20;
-        newY = Math.round(newY / 20) * 20;
-
-        setNodes(prev => prev.map(n => n.id === draggingNode ? { ...n, x: newX, y: newY } : n));
+      if (draggingInstanceId) {
+        const nx = Math.round((cx - dragOffset.x) / 20) * 20;
+        const ny = Math.round((cy - dragOffset.y) / 20) * 20;
+        setCanvasNodes(prev =>
+          prev.map(n => {
+            if (n.instanceId !== draggingInstanceId) return n;
+            if (n.x !== nx || n.y !== ny) didDragRef.current = true;
+            return { ...n, x: nx, y: ny };
+          })
+        );
       } else if (isPanning) {
-        setPosition({
-          x: e.clientX - panStart.x,
-          y: e.clientY - panStart.y
-        });
+        setPosition({ x: e.clientX - panStart.x, y: e.clientY - panStart.y });
       }
     };
 
     const handleMouseUp = () => {
+      if (draggingInstanceId && !didDragRef.current) {
+        setSelectedInstanceId(draggingInstanceId);
+      }
       setIsPanning(false);
-      setDraggingNode(null);
+      setDraggingInstanceId(null);
+      setResizingInstanceId(null);
+      didDragRef.current = false;
     };
 
-    if (isPanning || draggingNode) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    }
-
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isPanning, draggingNode, panStart, nodeDragOffset, scale, position]);
-
+  }, [isPanning, draggingInstanceId, panStart, dragOffset, scale, position, resizingInstanceId]);
+  // ── Canvas mouse down ──────────────────────────────────────────────────────
   const handleCanvasMouseDown = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest('.node-element')) return;
+    if (drawingEdge) { setDrawingEdge(null); return; }
+    setSelectedInstanceId(null);
     setIsPanning(true);
     setPanStart({ x: e.clientX - position.x, y: e.clientY - position.y });
   };
-
-  const handleNodeMouseDown = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    const rect = (e.currentTarget as HTMLElement).closest('.node-element')?.getBoundingClientRect();
-    if (rect) {
-      setDraggingNode(id);
-      setNodeDragOffset({
-        x: (e.clientX - rect.left) / scale,
-        y: (e.clientY - rect.top) / scale
-      });
-    }
+  // ── Drop from sidebar ──────────────────────────────────────────────────────
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const nodeId = e.dataTransfer.getData('nodeId');
+    if (!nodeId) return;
+    const appNode = publishedNodes.find(n => n.id === nodeId);
+    if (!appNode) return;
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = Math.round(((e.clientX - rect.left - position.x) / scale) / 20) * 20;
+    const y = Math.round(((e.clientY - rect.top - position.y) / scale) / 20) * 20;
+    const defaultInputs: Record<string, number> = {};
+    appNode.inputs.forEach(inp => { defaultInputs[inp.key] = inp.defaultValue ?? 0; });
+    setCanvasNodes(prev => [...prev, {
+      instanceId: `${nodeId}-${Date.now()}`,
+      nodeId,
+      x,
+      y,
+      width: DEFAULT_NODE_W,
+      inputs: defaultInputs,
+    }]);
   };
+
+  // ── Node header / resize / port / delete / input handlers ─────────────────
+  const handleNodeHeaderMouseDown = (e: React.MouseEvent, instanceId: string, nx: number, ny: number) => {
+    e.stopPropagation();
+    if (drawingEdge) return;
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = (e.clientX - rect.left - position.x) / scale;
+    const cy = (e.clientY - rect.top - position.y) / scale;
+    didDragRef.current = false;
+    setDraggingInstanceId(instanceId);
+    setDragOffset({ x: cx - nx, y: cy - ny });
+  };
+  const handleResizeMouseDown = (e: React.MouseEvent, instanceId: string, currentW: number) => {
+    e.stopPropagation(); e.preventDefault();
+    resizeStartRef.current = { mouseX: e.clientX, startW: currentW };
+    setResizingInstanceId(instanceId);
+  };
+  const handleOutputPortMouseDown = (e: React.MouseEvent, instanceId: string, portIdx: number) => {
+    e.stopPropagation();
+    setDrawingEdge({ fromInstanceId: instanceId, fromPortIdx: portIdx });
+  };
+  const handleInputPortMouseUp = (e: React.MouseEvent, instanceId: string, portIdx: number) => {
+    e.stopPropagation();
+    if (!drawingEdge || drawingEdge.fromInstanceId === instanceId) { setDrawingEdge(null); return; }
+    setEdges(prev => [...prev, {
+      id: `e-${Date.now()}`,
+      fromInstanceId: drawingEdge.fromInstanceId,
+      fromPortIdx: drawingEdge.fromPortIdx,
+      toInstanceId: instanceId,
+      toPortIdx: portIdx,
+    }]);
+    setDrawingEdge(null);
+  };
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedInstanceId) {
+        setCanvasNodes(prev => prev.filter(n => n.instanceId !== selectedInstanceId));
+        setEdges(prev => prev.filter(ed =>
+          ed.fromInstanceId !== selectedInstanceId && ed.toInstanceId !== selectedInstanceId
+        ));
+        setSelectedInstanceId(null);
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [selectedInstanceId]);
+  const handleInputChange = useCallback((instanceId: string, key: string, value: number) => {
+    setCanvasNodes(prev =>
+      prev.map(n => n.instanceId === instanceId ? { ...n, inputs: { ...n.inputs, [key]: value } } : n)
+    );
+  }, []);
+  // ─── Port position measurement ────────────────────────────────────────────
+  // We read actual DOM positions of port elements (data-port="out"/"in") and
+  // convert them to canvas-space coordinates, so edge endpoints are pixel-exact.
+  const [portPositions, setPortPositions] = useState<PortPositions>({});
+
+  const measurePorts = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const containerRect = container.getBoundingClientRect();
+    const result: PortPositions = {};
+
+    const portEls = container.querySelectorAll<HTMLElement>('[data-port]');
+    portEls.forEach(el => {
+      const kind = el.dataset.port as 'in' | 'out';
+      const instanceId = el.dataset.instance!;
+      const idx = parseInt(el.dataset.idx!, 10);
+      const elRect = el.getBoundingClientRect();
+      // Port centre in screen coords → canvas-space coords
+      const cx = (elRect.left + elRect.width / 2 - containerRect.left - position.x) / scale;
+      const cy = (elRect.top + elRect.height / 2 - containerRect.top - position.y) / scale;
+      if (!result[instanceId]) result[instanceId] = { out: [], in: [] };
+      result[instanceId][kind][idx] = cy;  // store Y; X derived from canvasNode
+    });
+    setPortPositions(result);
+  }, [position, scale]);
+
+  // Re-measure whenever nodes move, resize, or the canvas transforms
+  useEffect(() => {
+    // rAF so the DOM has finished painting before we measure
+    const id = requestAnimationFrame(measurePorts);
+    return () => cancelAnimationFrame(id);
+  }, [canvasNodes, measurePorts]);
+
+  // Helper: get canvas-space port centre
+  const getPortXY = useCallback((
+    instanceId: string,
+    kind: 'in' | 'out',
+    portIdx: number
+  ): { x: number; y: number } | null => {
+    const cn = canvasNodes.find(n => n.instanceId === instanceId);
+    if (!cn) return null;
+    const py = portPositions[instanceId]?.[kind]?.[portIdx];
+    if (py === undefined) {
+      // Fallback: estimate from layout constants until DOM is measured
+      const HEADER = 32, LABEL = 20, ROW = 24;
+      return {
+        x: kind === 'out' ? cn.x + cn.width : cn.x,
+        y: cn.y + HEADER + LABEL + portIdx * ROW + ROW / 2,
+      };
+    }
+    return {
+      x: kind === 'out' ? cn.x + cn.width : cn.x,
+      y: py,
+    };
+  }, [canvasNodes, portPositions]);
+  const makeBezier = (x1: number, y1: number, x2: number, y2: number) => {
+    const dx = Math.max(Math.abs(x2 - x1) / 2, 60);
+    return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  };
+  const drawingStart = drawingEdge
+    ? getPortXY(drawingEdge.fromInstanceId, 'out', drawingEdge.fromPortIdx)
+    : null;
+  const categories = publishedNodes.map(n => n.category).filter((v, i, a) => a.indexOf(v) === i);
+  const filteredBySearch = publishedNodes.filter(n =>
+    !search || n.name.includes(search) || n.category.includes(search)
+  );
+  const toggleCategory = (cat: string) => {
+    setCollapsedCategories(prev => { const next = new Set(prev); next.has(cat) ? next.delete(cat) : next.add(cat); return next; });
+  };
+  const selectedCanvasNode = canvasNodes.find(n => n.instanceId === selectedInstanceId) ?? null;
+  const selectedAppNode = selectedCanvasNode
+    ? publishedNodes.find(n => n.id === selectedCanvasNode.nodeId) ?? null
+    : null;
 
   return (
     <div className="h-screen flex flex-col bg-surface font-body text-on-surface overflow-hidden">
-      {/* Top Nav */}
-      <TopNavBar 
-        currentPath={currentPath} 
-        onNavigate={onNavigate} 
+      <TopNavBar
+        currentPath={currentPath}
+        onNavigate={onNavigate}
         className="w-full z-50 bg-white border-b border-outline-variant/10 shadow-sm shrink-0"
         rightContent={
-          <div className="flex items-center gap-4">
-            <div className="flex items-center bg-surface-container-high rounded-lg px-3 py-1.5">
-              <Search size={16} className="text-outline" />
-              <input type="text" placeholder="搜索流程..." className="bg-transparent border-none focus:ring-0 text-sm w-40 text-on-surface placeholder-outline ml-2 outline-none" />
-            </div>
-            <button className="p-1.5 text-slate-500 hover:bg-slate-100 rounded-full transition-colors relative">
-              <Bell size={18} />
-              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-error rounded-full border border-white"></span>
+          <div className="flex items-center gap-3">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-on-primary rounded-md font-medium text-xs hover:opacity-90 transition-opacity">
+              <Save size={13} /> 保存
             </button>
-            <div className="w-7 h-7 rounded-full overflow-hidden border border-outline-variant/30 cursor-pointer" onClick={() => onNavigate('settings')}>
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGs0lyd1vo6e8klmbPQp9l0kdSLDHcMtpXNwjj83E7ghm5w5KHOE1yeBHHzDHiAKqGoi1bVq09DPByoX_vhRVZzdORdS_2TVKinEZwyKGrvsnwhdaBfUC4rvFHr2CxjufJhWjHBPf0w7YL4C8QcOupMAANA2tSfzQ33pHy_9afi4GvwCT8pwUZZDLQ0vuknsbW6-m5OgmxmMrDdKIYyG0rozmP54V70e_7ZZTJgVRRqZNBC62xw4dhqYpD9ByKhORuNbDMjI8s8jqC" alt="User Avatar" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-            </div>
           </div>
         }
       />
-
       <div className="flex-1 flex overflow-hidden">
         {/* Left Sidebar */}
-        <ResizableSidebar side="left" initialWidth={224} minWidth={180} maxWidth={400} className="h-full bg-[#f8fafb] border-r border-outline-variant/10">
-          <div className="p-3 flex flex-col h-full">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">节点库</h3>
-            </div>
-            <div className="flex-1 overflow-y-auto space-y-4 scrollbar-hide">
-              {/* Selection & Research */}
-              <div>
-                <button className="w-full flex items-center justify-between px-1 py-1.5 text-sm font-bold text-slate-700 hover:text-primary mb-1 transition-colors">
-                  <span className="flex items-center gap-1.5 uppercase tracking-wider">
-                    <Search size={14} /> 选品与市场调研
-                  </span>
-                  <ChevronDown size={12} />
-                </button>
-                <div className="space-y-1 ml-3 border-l border-outline-variant/20 pl-2">
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>关键词热度抓取</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>类目排名监控</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>竞品参数拆解</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>专利侵权初筛</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>市场容量测算</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>评论差评提取</div>
-                </div>
-              </div>
-              
-              {/* Listing & Content */}
-              <div>
-                <button className="w-full flex items-center justify-between px-1 py-1.5 text-sm font-bold text-slate-700 hover:text-primary mb-1 transition-colors">
-                  <span className="flex items-center gap-1.5 uppercase tracking-wider">
-                    <Edit3 size={14} /> 上架与内容生成
-                  </span>
-                  <ChevronDown size={12} />
-                </button>
-                <div className="space-y-1 ml-3 border-l border-outline-variant/20 pl-2">
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>标题生成器</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>卖点（五点）提取</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>文本翻译/本地化</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>图片格式校验</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>SKU编码生成</div>
-                </div>
-              </div>
-
-              {/* Sourcing & Cost */}
-              <div>
-                <button className="w-full flex items-center justify-between px-1 py-1.5 text-sm font-bold text-slate-700 hover:text-primary mb-1 transition-colors">
-                  <span className="flex items-center gap-1.5 uppercase tracking-wider">
-                    <DollarSign size={14} /> 供应链与成本
-                  </span>
-                  <ChevronDown size={12} />
-                </button>
-                <div className="space-y-1 ml-3 border-l border-outline-variant/20 pl-2">
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>采购价询价</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>头程运费估算</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>体积重转换</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>利润模型节点</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>盈亏临界点计算</div>
-                </div>
-              </div>
-
-              {/* Logistics & Inventory */}
-              <div>
-                <button className="w-full flex items-center justify-between px-1 py-1.5 text-sm font-bold text-slate-700 hover:text-primary mb-1 transition-colors">
-                  <span className="flex items-center gap-1.5 uppercase tracking-wider">
-                    <Truck size={14} /> 物流与库存管理
-                  </span>
-                  <ChevronDown size={12} />
-                </button>
-                <div className="space-y-1 ml-3 border-l border-outline-variant/20 pl-2">
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>FBA标签生成</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>装箱清单校验</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>库存周转计算</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>补货量建议</div>
-                </div>
-              </div>
-
-              {/* Ads & Operations */}
-              <div>
-                <button className="w-full flex items-center justify-between px-1 py-1.5 text-sm font-bold text-slate-700 hover:text-primary mb-1 transition-colors">
-                  <span className="flex items-center gap-1.5 uppercase tracking-wider">
-                    <Megaphone size={14} /> 广告与推广
-                  </span>
-                  <ChevronDown size={12} />
-                </button>
-                <div className="space-y-1 ml-3 border-l border-outline-variant/20 pl-2">
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>广告词库过滤</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>出价自动调整</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>广告位溢价计算</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>预算消耗预警</div>
-                </div>
-              </div>
-
-              {/* Finance & Service */}
-              <div>
-                <button className="w-full flex items-center justify-between px-1 py-1.5 text-sm font-bold text-slate-700 hover:text-primary mb-1 transition-colors">
-                  <span className="flex items-center gap-1.5 uppercase tracking-wider">
-                    <Wallet size={14} /> 财务与售后
-                  </span>
-                  <ChevronDown size={12} />
-                </button>
-                <div className="space-y-1 ml-3 border-l border-outline-variant/20 pl-2">
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>回款金额核算</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>退货率监控</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>评价自动分类</div>
-                  <div className="py-1 text-xs text-on-surface-variant hover:text-primary cursor-move flex items-center gap-1.5"><span className="w-1 h-1 rounded-full bg-slate-300"></span>VAT/税金计算</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-auto pt-3 border-t border-outline-variant/10">
-              <button className="flex items-center gap-2 px-2 py-1.5 text-slate-500 hover:text-primary hover:bg-slate-100 rounded-md transition-all w-full">
-                <HelpCircle size={14} />
-                <span className="font-medium text-xs">帮助中心</span>
-              </button>
+        <div className="w-56 shrink-0 h-full bg-[#f8fafb] border-r border-outline-variant/10 flex flex-col">
+          <div className="px-3 pt-3 pb-2">
+            <div className="flex items-center bg-white border border-outline-variant/20 rounded-lg px-2 py-1.5 gap-1.5">
+              <Search size={13} className="text-outline shrink-0" />
+              <input
+                type="text"
+                placeholder="搜索节点…"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                className="bg-transparent border-none focus:ring-0 text-xs w-full outline-none text-on-surface placeholder-outline"
+              />
             </div>
           </div>
-        </ResizableSidebar>
-
-        {/* Canvas Area */}
+          <div className="flex-1 overflow-y-auto px-2 pb-3 space-y-1 scrollbar-hide">
+            {loading && <p className="text-xs text-slate-400 px-2 py-4 text-center">加载中…</p>}
+            {!loading && categories.map(cat => {
+              const catNodes = filteredBySearch.filter(n => n.category === cat);
+              if (catNodes.length === 0) return null;
+              const collapsed = collapsedCategories.has(cat);
+              return (
+                <div key={cat}>
+                  <button
+                    className="w-full flex items-center justify-between px-1 py-1.5 text-xs font-bold text-slate-500 hover:text-primary uppercase tracking-wider transition-colors"
+                    onClick={() => toggleCategory(cat)}
+                  >
+                    <span>{cat}</span>
+                    <ChevronDown size={11} className={`transition-transform ${collapsed ? '-rotate-90' : ''}`} />
+                  </button>
+                  {!collapsed && (
+                    <div className="ml-1 space-y-0.5">
+                      {catNodes.map(node => <SidebarNodeCard key={node.id} node={node} />)}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        {/* Canvas */}
         <main className="flex-1 relative bg-surface-bright overflow-hidden">
-          <div className="absolute top-4 left-4 z-10 flex items-center gap-2 p-1.5 bg-white/80 backdrop-blur-md rounded-lg shadow-sm border border-outline-variant/10">
-            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-md font-medium text-xs hover:opacity-90 transition-opacity">
-              <Save size={14} /> 保存
-            </button>
-            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-tertiary text-white rounded-md font-medium text-xs hover:opacity-90 transition-opacity">
-              <Play size={14} fill="currentColor" /> 运行
-            </button>
-          </div>
-
-          <div 
+          <div
             ref={containerRef}
-            className={`absolute inset-0 ${isPanning ? 'cursor-grabbing' : 'cursor-grab'}`}
+            className={`absolute inset-0 ${isPanning ? 'cursor-grabbing' : drawingEdge ? 'cursor-crosshair' : 'cursor-grab'}`}
             onMouseDown={handleCanvasMouseDown}
+            onDragOver={e => e.preventDefault()}
+            onDrop={handleDrop}
             style={{
               backgroundImage: 'radial-gradient(#d9e4e8 1px, transparent 1px)',
               backgroundSize: `${20 * scale}px ${20 * scale}px`,
-              backgroundPosition: `${position.x}px ${position.y}px`
+              backgroundPosition: `${position.x}px ${position.y}px`,
             }}
           >
-            <div 
+            <div
               className="absolute top-0 left-0 origin-top-left"
-              style={{
-                transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-              }}
+              style={{ transform: `translate(${position.x}px, ${position.y}px) scale(${scale})` }}
             >
-              <style>{`
-                @keyframes flow {
-                  from { stroke-dashoffset: 40; }
-                  to { stroke-dashoffset: 0; }
-                }
-              `}</style>
-              
-              <svg className="absolute inset-0 w-[2000px] h-[2000px] pointer-events-none" style={{ overflow: 'visible' }}>
+              {/* SVG edges */}
+              <svg className="absolute inset-0 pointer-events-none overflow-visible" style={{ width: 1, height: 1 }}>
                 <defs>
-                  <linearGradient id="wireGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#146a65" />
                     <stop offset="100%" stopColor="#4e6073" />
                   </linearGradient>
                 </defs>
-                {(() => {
-                  const n1 = nodes.find(n => n.id === 'node1') || { x: 100, y: 80 };
-                  const n2 = nodes.find(n => n.id === 'node2') || { x: 470, y: 280 };
-                  const startX = n1.x + 230;
-                  const startY = n1.y + 65;
-                  const endX = n2.x;
-                  const endY = n2.y + 43;
-                  const cp1X = startX + Math.max(Math.abs(endX - startX) / 2, 50);
-                  const cp1Y = startY;
-                  const cp2X = endX - Math.max(Math.abs(endX - startX) / 2, 50);
-                  const cp2Y = endY;
-                  const pathD = `M ${startX} ${startY} C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${endX} ${endY}`;
+                {edges.map(edge => {
+                  const s = getPortXY(edge.fromInstanceId, 'out', edge.fromPortIdx);
+                  const t = getPortXY(edge.toInstanceId, 'in', edge.toPortIdx);
+                  if (!s || !t) return null;
+                  const d = makeBezier(s.x, s.y, t.x, t.y);
                   return (
-                    <>
-                      <path d={pathD} fill="none" stroke="#146a65" strokeWidth="4" opacity="0.15" style={{ filter: 'blur(2px)' }} />
-                      <path d={pathD} fill="none" stroke="url(#wireGradient)" strokeWidth="2" strokeLinecap="round" style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))' }} />
-                      <path d={pathD} fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeDasharray="8 12" opacity="0.5" style={{ animation: 'flow 3s linear infinite' }} />
-                    </>
+                    <g key={edge.id}>
+                      <path d={d} fill="none" stroke="#146a65" strokeWidth={5} opacity={0.12} style={{ filter: 'blur(2px)' }} />
+                      <path d={d} fill="none" stroke="url(#edgeGrad)" strokeWidth={2} strokeLinecap="round" />
+                    </g>
                   );
-                })()}
+                })}
+                {drawingEdge && drawingStart && (
+                  <path
+                    d={makeBezier(drawingStart.x, drawingStart.y, mousePos.x, mousePos.y)}
+                    fill="none"
+                    stroke="#146a65"
+                    strokeWidth={2}
+                    strokeDasharray="6 4"
+                    opacity={0.7}
+                  />
+                )}
               </svg>
-
-              {/* Node 1 */}
-              <div 
-                className="absolute w-[230px] bg-white border border-slate-200 shadow-lg rounded-xl overflow-hidden node-element cursor-default transition-shadow hover:shadow-xl"
-                style={{ top: nodes.find(n => n.id === 'node1')?.y, left: nodes.find(n => n.id === 'node1')?.x, zIndex: draggingNode === 'node1' ? 50 : 10 }}
-              >
-                <div 
-                  className="bg-[#37474F] px-2.5 py-1.5 flex items-center justify-between cursor-grab active:cursor-grabbing"
-                  onMouseDown={(e) => handleNodeMouseDown(e, 'node1')}
-                >
-                  <div className="flex items-center gap-2">
-                    <Calculator size={14} className="text-white" />
-                    <h4 className="text-white text-sm font-bold font-headline">利润计算器</h4>
-                  </div>
-                  <button className="p-0.5 text-white/60 hover:text-white transition-colors">
-                    <MoreVertical size={11} />
-                  </button>
-                </div>
-                <div className="flex">
-                  <div className="flex-1 p-2 border-r border-slate-50 relative">
-                    <div className="text-xs font-bold text-slate-400 uppercase tracking-tighter mb-1.5">输入</div>
-                    <div className="space-y-1.5">
-                      <div className="relative flex items-center justify-between">
-                        <div className="absolute w-2 h-2 bg-white border-[1.5px] border-current rounded-full top-1/2 -translate-y-1/2 z-10 shadow-[0_0_2px_rgba(0,0,0,0.1)] -left-[9px] text-slate-300"></div>
-                        <span className="text-xs text-slate-500">成本</span>
-                        <span className="text-xs font-mono font-semibold text-slate-700 bg-slate-100 px-1 rounded">1240.0</span>
-                      </div>
-                      <div className="relative flex items-center justify-between">
-                        <div className="absolute w-2 h-2 bg-white border-[1.5px] border-current rounded-full top-1/2 -translate-y-1/2 z-10 shadow-[0_0_2px_rgba(0,0,0,0.1)] -left-[9px] text-slate-300"></div>
-                        <span className="text-xs text-slate-500">售价</span>
-                        <span className="text-xs font-mono font-semibold text-slate-700 bg-slate-100 px-1 rounded">2800.0</span>
-                      </div>
-                      <div className="relative flex items-center justify-between">
-                        <div className="absolute w-2 h-2 bg-white border-[1.5px] border-current rounded-full top-1/2 -translate-y-1/2 z-10 shadow-[0_0_2px_rgba(0,0,0,0.1)] -left-[9px] text-slate-300"></div>
-                        <span className="text-xs text-slate-500">销量</span>
-                        <span className="text-xs font-mono font-semibold text-slate-700 bg-slate-100 px-1 rounded">450</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-1 p-2 relative text-right">
-                    <div className="text-xs font-bold text-slate-400 uppercase tracking-tighter mb-1.5">输出</div>
-                    <div className="space-y-1.5">
-                      <div className="relative flex items-center justify-between">
-                        <span className="text-xs font-mono font-semibold text-tertiary bg-tertiary/10 px-1 rounded">656k</span>
-                        <span className="text-xs text-slate-500">利润</span>
-                        <div className="absolute w-2 h-2 bg-white border-[1.5px] border-current rounded-full top-1/2 -translate-y-1/2 z-10 shadow-[0_0_2px_rgba(0,0,0,0.1)] -right-[9px] text-tertiary"></div>
-                      </div>
-                      <div className="relative flex items-center justify-between">
-                        <span className="text-xs font-mono font-semibold text-tertiary bg-tertiary/10 px-1 rounded">52.1%</span>
-                        <span className="text-xs text-slate-500">利润率</span>
-                        <div className="absolute w-2 h-2 bg-white border-[1.5px] border-current rounded-full top-1/2 -translate-y-1/2 z-10 shadow-[0_0_2px_rgba(0,0,0,0.1)] -right-[9px] text-tertiary"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-slate-50/80 border-t border-slate-100 p-2">
-                  <button className="flex items-center justify-between w-full text-xs font-bold text-slate-500 uppercase mb-1">
-                    <span>计算逻辑</span>
-                    <ChevronDown size={10} className="rotate-180" />
-                  </button>
-                  <div className="text-xs text-slate-400 leading-relaxed italic">
-                    利润 = (售价 - 成本) * 销售量
-                  </div>
-                </div>
-              </div>
-
-              {/* Node 2 */}
-              <div 
-                className="absolute w-[230px] bg-white border border-slate-200 shadow-lg rounded-xl overflow-hidden node-element cursor-default transition-shadow hover:shadow-xl"
-                style={{ top: nodes.find(n => n.id === 'node2')?.y, left: nodes.find(n => n.id === 'node2')?.x, zIndex: draggingNode === 'node2' ? 50 : 10 }}
-              >
-                <div 
-                  className="bg-[#37474F] px-2.5 py-1.5 flex items-center justify-between cursor-grab active:cursor-grabbing"
-                  onMouseDown={(e) => handleNodeMouseDown(e, 'node2')}
-                >
-                  <div className="flex items-center gap-2">
-                    <Database size={14} className="text-white" />
-                    <h4 className="text-white text-sm font-bold font-headline">数据持久化</h4>
-                  </div>
-                  <button className="p-0.5 text-white/60 hover:text-white transition-colors">
-                    <MoreVertical size={11} />
-                  </button>
-                </div>
-                <div className="p-2 space-y-2">
-                  <div className="relative flex items-center justify-between">
-                    <div className="absolute w-2 h-2 bg-white border-[1.5px] border-current rounded-full top-1/2 -translate-y-1/2 z-10 shadow-[0_0_2px_rgba(0,0,0,0.1)] -left-[9px] text-primary"></div>
-                    <span className="text-xs text-slate-500">输入数据</span>
-                    <span className="text-xs font-bold text-slate-800">Financial_Report</span>
-                  </div>
-                  <div className="flex items-center justify-between px-1">
-                    <span className="text-xs text-slate-400">存储引擎</span>
-                    <span className="text-xs font-medium text-slate-500">RDS / PostgreSQL</span>
-                  </div>
-                </div>
-                <div className="bg-slate-50/80 border-t border-slate-100 p-2">
-                  <div className="flex items-center justify-between w-full text-xs font-bold text-slate-500 uppercase mb-1">
-                    <span>处理脚本</span>
-                  </div>
-                  <div className="bg-slate-900 rounded p-1.5 font-mono text-xs text-emerald-400 shadow-inner">
-                    return 利润;
-                  </div>
-                </div>
-              </div>
+              {canvasNodes.map(cn => {
+                const appNode = publishedNodes.find(n => n.id === cn.nodeId);
+                if (!appNode) return null;
+                return (
+                  <CanvasNodeCard
+                    key={cn.instanceId}
+                    canvasNode={cn}
+                    appNode={appNode}
+                    selected={selectedInstanceId === cn.instanceId}
+                    dragging={draggingInstanceId === cn.instanceId}
+                    onMouseDown={e => handleNodeHeaderMouseDown(e, cn.instanceId, cn.x, cn.y)}
+                    onSelectClick={() => setSelectedInstanceId(cn.instanceId)}
+                    onOutputPortMouseDown={(e, idx) => handleOutputPortMouseDown(e, cn.instanceId, idx)}
+                    onInputPortMouseUp={(e, idx) => handleInputPortMouseUp(e, cn.instanceId, idx)}
+                    onResizeMouseDown={e => handleResizeMouseDown(e, cn.instanceId, cn.width)}
+                  />
+                );
+              })}
             </div>
           </div>
-
-          {/* Bottom Actions */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-[#37474F] text-white py-2.5 px-6 rounded-full shadow-2xl z-50">
-            <button className="flex items-center gap-2 hover:text-tertiary-fixed transition-colors">
-              <Plus size={18} /> <span className="text-sm font-medium">添加节点</span>
-            </button>
-            <div className="w-px h-4 bg-white/20"></div>
-            <button className="flex items-center gap-2 hover:text-tertiary-fixed transition-colors">
-              <History size={18} /> <span className="text-sm font-medium">版本记录</span>
-            </button>
-            <div className="w-px h-4 bg-white/20"></div>
-            <button className="flex items-center gap-2 hover:text-tertiary-fixed transition-colors">
-              <Share2 size={18} /> <span className="text-sm font-medium">协作分享</span>
-            </button>
+          {canvasNodes.length === 0 && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="text-center opacity-40">
+                <Calculator size={40} className="text-slate-400 mx-auto mb-3" />
+                <p className="text-sm text-slate-500">从左侧拖拽节点到画布</p>
+              </div>
+            </div>
+          )}
+          {/* Bottom floating bar */}
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
+            <div className="flex items-center gap-3 bg-[#37474F] rounded-full text-white shadow-2xl px-6 py-2.5 text-xs font-medium">
+              <button className="flex items-center gap-1.5 hover:opacity-80 transition-opacity whitespace-nowrap">
+                <PlusSquare size={14} /> 添加节点
+              </button>
+              <span className="text-white/30">|</span>
+              <button className="flex items-center gap-1.5 hover:opacity-80 transition-opacity whitespace-nowrap">
+                <History size={14} /> 版本
+              </button>
+              <span className="text-white/30">|</span>
+              <button className="flex items-center gap-1.5 hover:opacity-80 transition-opacity whitespace-nowrap">
+                <Share2 size={14} /> 协作
+              </button>
+            </div>
           </div>
         </main>
-
-        {/* Right Sidebar */}
-        <ResizableSidebar side="right" initialWidth={320} minWidth={250} maxWidth={500} className="h-full border-l border-outline-variant/10 bg-white">
-          <div className="p-4 border-b border-outline-variant/10 flex items-center justify-between">
-            <h3 className="text-base font-bold text-[#37474F] flex items-center gap-2">
-              <Settings2 size={18} /> 编辑节点
-            </h3>
-            <button className="p-1 hover:bg-slate-100 rounded">
-              <X size={16} className="text-slate-400" />
-            </button>
-          </div>
-          <div className="flex border-b border-outline-variant/10">
-            <button className="flex-1 py-3 text-sm font-bold text-[#37474F] border-b-2 border-[#37474F]">AI 编辑</button>
-            <button className="flex-1 py-3 text-sm font-medium text-slate-400 hover:text-slate-600 transition-colors">公式修改</button>
-          </div>
-          <div className="flex-1 p-5 space-y-6 overflow-y-auto">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-on-surface uppercase tracking-wider">AI 辅助描述</span>
-              </div>
-              <div className="bg-surface-container-low p-3 rounded-lg rounded-tl-none border border-outline-variant/10">
-                <p className="text-xs text-on-surface">帮我把利润计算公式改为：减去 10% 的人工费用。</p>
-              </div>
-              <div className="bg-[#37474F]/5 p-3 rounded-lg rounded-tr-none border border-[#37474F]/10">
-                <p className="text-xs text-[#37474F] leading-relaxed">
-                  已为您准备好公式更新：<br/>
-                  <strong className="font-bold">利润 = (售价 - 成本 - 人工) * 0.9</strong>
-                </p>
-              </div>
-              <div className="relative mt-2">
-                <textarea className="w-full bg-surface-container-high border-none rounded-lg text-sm py-2.5 px-3 focus:ring-1 focus:ring-[#37474F]/20 min-h-[80px] resize-none outline-none" placeholder="描述您想对节点做的修改..."></textarea>
-                <button className="absolute right-2 bottom-2 bg-[#37474F] text-white p-1.5 rounded-md transition-opacity hover:opacity-90">
-                  <Send size={14} />
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 border-t border-outline-variant/10">
-            <button className="w-full py-2.5 bg-[#37474F] text-white rounded-lg text-sm font-medium shadow-md hover:opacity-95 transition-opacity">
-              保存节点修改
-            </button>
-          </div>
-        </ResizableSidebar>
+        {selectedCanvasNode && selectedAppNode && (
+          <RightPanel
+            canvasNode={selectedCanvasNode}
+            appNode={selectedAppNode}
+            onClose={() => setSelectedInstanceId(null)}
+            onInputChange={(key, value) => handleInputChange(selectedCanvasNode.instanceId, key, value)}
+            onRefresh={refresh}
+            updateNode={updateNode}
+          />
+        )}
       </div>
     </div>
   );

@@ -13,10 +13,9 @@ export default defineConfig({
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',
     proxy: {
-      // 本地开发：代理到 EdgeOne Functions 本地模拟器
-      // 启动方式：npx @cloudflare/wrangler pages dev dist --port 8788
+      // 本地开发：/api 请求代理到后端 API 服务器（port 3000）
       '/api': {
-        target: 'http://localhost:8788',
+        target: 'http://localhost:3002',
         changeOrigin: true,
       },
     },
