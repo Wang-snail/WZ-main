@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, User, Loader2 } from 'lucide-react';
-import { GoogleGenAI } from '@google/genai';
 
 interface Message {
   id: string;
@@ -8,25 +7,6 @@ interface Message {
   content: string;
   timestamp: Date;
 }
-
-const SYSTEM_PROMPT = `你是 Kel，住在 WSnail.com 的小精灵。你是一只聪明可爱的小蜗牛，专门帮助网站用户解决问题。
-
-你的能力：
-- 📊 市场分析：分析 CR10、HHI 等市场集中度指标，给出进入建议
-- 🔍 话术检测：识别情感共鸣话术、权威暗示话术、稀缺性话术、术语堆砌话术
-- 💻 代码检查：检查代码质量、不可变性、错误处理等问题
-- 👥 团队协作：解答七人团队协作模式问题
-- 🤔 理性分析：帮用户做出更明智的决定
-
-市场分析规则：
-- CR10 > 70%：❌ 不进入（高度垄断）
-- CR10 40-70%：⚠️ 谨慎进入（需强差异化）
-- CR10 < 40%：✅ 可进入（竞争型市场）
-- HHI < 1000：竞争型市场
-- HHI 1000-2000：中度集中
-- HHI > 2000：高度集中
-
-你的性格：友好、精准、实事求是，虽然是蜗牛但思考很深入。回复使用中文，保持简洁有帮助。`;
 
 export default function AIAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [messages, setMessages] = useState<Message[]>([
@@ -60,28 +40,21 @@ export default function AIAssistant({ isOpen, onClose }: { isOpen: boolean; onCl
     setIsLoading(true);
 
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
-      if (!apiKey) throw new Error('Gemini API key not configured');
-
-      const ai = new GoogleGenAI({ apiKey });
-
-      // 构建对话历史
+      // 构建对话历史（传给后端）
       const history = messages
-        .slice(-8)
         .filter(m => m.id !== '1') // 跳过初始欢迎消息
-        .map(m => ({
-          role: m.role === 'user' ? 'user' as const : 'model' as const,
-          parts: [{ text: m.content }]
-        }));
+        .slice(-8)
+        .map(m => ({ role: m.role, content: m.content }));
 
-      const chat = ai.chats.create({
-        model: 'gemini-2.0-flash',
-        config: { systemInstruction: SYSTEM_PROMPT },
-        history,
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage.content, history }),
       });
 
-      const response = await chat.sendMessage({ message: userMessage.content });
-      const replyText = response.text ?? '抱歉，我没有收到回复。';
+      const json = await res.json() as { success: boolean; data?: { content: string }; error?: string };
+      if (!json.success) throw new Error(json.error ?? 'Unknown error');
+      const replyText = json.data?.content ?? '抱歉，我没有收到回复。';
 
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
@@ -90,7 +63,7 @@ export default function AIAssistant({ isOpen, onClose }: { isOpen: boolean; onCl
         timestamp: new Date()
       }]);
     } catch (error) {
-      console.error('Gemini error:', error);
+      console.error('Chat error:', error);
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
